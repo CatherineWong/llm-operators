@@ -1,6 +1,14 @@
 #### Experiments log.
-# Factorized plan loop, alfred.
-python main.py --experiment_name alfred_linearized_100_supervision_pddl_pick_place_clean_38354 --dataset_name alfred_linearized_100 --supervision_name supervision --pddl_domain_name alfred_linearized --dataset_fraction 1.0 --training_plans_fraction 1.0 --initial_plans_prefix pick_and_place_simple pick_clean_then_place_in_recep --initial_pddl_operators GotoLocation PickupObjectInReceptacle PickupObjectNotInReceptacle PutObjectInReceptacle PutReceptacleObjectInReceptacle CleanObject --verbose --train_iterations 1 --dataset_pddl_directory data/dataset/alfred_linearized_pddl --output_directory generated --debug_mock_propose_plans --debug_mock_propose_operators --debug_mock_propose_goals
+# 3-29. Tighter task planning / motion planning inner loop with motion planner.
+# With ground truth operators.
+python main.py --experiment_name alfred_linearized_100_supervision_pddl_pick_place_clean_38354 --dataset_name alfred_linearized_100 --supervision_name supervision --pddl_domain_name alfred_linearized --dataset_fraction 1.0 --training_plans_fraction 1.0 --initial_plans_prefix pick_and_place_simple pick_clean_then_place_in_recep --initial_pddl_operators GotoLocation PickupObjectInReceptacle PickupObjectNotInReceptacle PutObjectInReceptacle PutReceptacleObjectInReceptacle CleanObject --verbose --train_iterations 1 --dataset_pddl_directory data/dataset/alfred_linearized_pddl --output_directory generated --debug_mock_propose_plans --debug_ground_truth_operators --debug_mock_propose_goals
+# Running on problem 4 - /Users/catwong/Desktop/zyzzyva/code/llm-operators/data/dataset/alfred_linearized_pddl/train/pick_heat_then_place_in_recep-Egg-None-Fridge-17/trial_T20190909_130835_721326/problem_0.pddl - heating an egg.
+
+# Steps to install.
+1. conda create --name llm-operators-38 python=3.8
+3. pip install openai pddlgym
+4. pip install -r alfred/requirements_python3_8.txt # This requires a specific version of numpy that should be set to numpy==1.21.6 so that it works with scikitimage.
+5. pip install lark ipdb tabulate
 
 
 ### Supervision PDDL, alfred_linearized_100, with CleanObject

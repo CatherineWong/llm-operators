@@ -94,6 +94,7 @@ def attempt_motion_plan_for_problem(
                     pddl_domain,
                     verbose,
                     debug_skip=debug_skip,
+                    assume_alfred_teleportation=command_args.assume_alfred_teleportation,
                 )
             elif dataset_name == "crafting_world_20230204_minining_only":
                 motion_plan_result = evaluate_cw_20230204_motion_plans_and_costs_for_goal_plan(
@@ -236,7 +237,14 @@ def evaluate_alfred_motion_plans_and_costs_for_problems(
 
 
 def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
-    problem_id, problems, pddl_goal, pddl_plan, pddl_domain, verbose, debug_skip=False,
+    problem_id,
+    problems,
+    pddl_goal,
+    pddl_plan,
+    pddl_domain,
+    verbose,
+    debug_skip=False,
+    assume_alfred_teleportation=False,
 ):
     if verbose:
         print(f"Motion planning for: {problem_id}")
@@ -247,7 +255,10 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
 
     # Convert plan to sequential plan predicates.
     postcondition_predicates_json = pddl_plan.to_postcondition_predicates_json(
-        pddl_domain, remove_alfred_object_ids=True
+        pddl_domain,
+        remove_alfred_object_ids=True,
+        remove_alfred_agent=True,
+        assume_alfred_teleportation=assume_alfred_teleportation,
     )
     if debug_skip:
         return MotionPlanResult(
@@ -264,7 +275,9 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
         task_name = os.path.join(*os.path.split(problem_id)[1:])
         if verbose:
             print("Attempting to execute the following motion plan:")
-            print(postcondition_predicates_json)
+            for pred in postcondition_predicates_json:
+                print(pred)
+                print("\n")
 
             print("Ground truth PDDL plan is: ")
             print(problems[problem_id].ground_truth_pddl_plan.plan_string)

@@ -135,7 +135,7 @@
         (receptacleType ?r - receptacle ?t - rtype) ; the type of receptacle (Cabinet vs Cabinet|01|2...)
         (objectType ?o - object ?t - otype) ; the type of object (Apple vs Apple|01|2...)
         (holds ?a - agent ?o - object) ; object ?o is held by agent ?a
-        (holdsAny ?a - agent) ; agent ?a holds an object
+        (holdsAny ?a - agent) ; object ?o is held by agent ?a
         (holdsAnyReceptacleObject ?a - agent) ; agent ?a holds a receptacle object
         ;(full ?r - receptacle)                                    ; true if the receptacle has no remaining space
         (isClean ?o - object) ; true if the object has been clean in sink
@@ -157,7 +157,7 @@
 
     ;; agent goes to receptacle
     (:action GotoLocation
-        :parameters (?a - agent ?lStart - location ?lEnd - location)
+        :parameters (?a - agent ?lEnd - location ?lStart - location)
         :precondition (and
             (atLocation ?a ?lStart)
         )
@@ -210,7 +210,6 @@
         :effect (and
             (not (objectAtLocation ?o ?l))
             (holds ?a ?o)
-            (holdsAny ?a)
         )
     )
 
@@ -225,13 +224,12 @@
         :effect (and
             (not (objectAtLocation ?o ?l))
             (holds ?a ?o)
-            (holdsAny ?a)
         )
     )
 
     ;; agent puts down an object in a receptacle
     (:action PutObjectInReceptacle
-        :parameters (?a - agent ?l - location ?ot - otype ?o - object ?r - receptacle)
+        :parameters (?a - agent ?l - location ?o - object ?ot - otype ?r - receptacle)
         :precondition (and
             (atLocation ?a ?l)
             (receptacleAtLocation ?r ?l)
@@ -242,14 +240,13 @@
         :effect (and
             (inReceptacle ?o ?r)
             (not (holds ?a ?o))
-            (not (holdsAny ?a))
             (objectAtLocation ?o ?l)
         )
     )
 
     ;; agent puts down an object
     (:action PutObjectInReceptacleObject
-        :parameters (?a - agent ?l - location ?ot - otype ?o - object ?outerO - object ?outerR - receptacle)
+        :parameters (?a - agent ?l - location ?o - object ?outerO - object ?outerR - receptacle ?ot - otype)
         :precondition (and
             (atLocation ?a ?l)
             (objectAtLocation ?outerO ?l)
@@ -354,7 +351,7 @@
 
     ;; agent slices some object with a knife
     (:action SliceObject
-        :parameters (?a - agent ?l - location ?co - object ?ko - object)
+        :parameters (?a - agent ?co - object ?ko - object ?l - location)
         :precondition (and
             (or
                 (objectType ?ko KnifeType)

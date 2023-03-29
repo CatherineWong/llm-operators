@@ -1,0 +1,148 @@
+operator_name,gt_operator,final_operator,
+GotoLocation,"(:action GotoLocation
+        :parameters (?a - agent ?lEnd - location ?lStart - location)
+        :precondition (and
+            (atLocation ?a ?lStart)
+        )
+        :effect (and
+            (atLocation ?a ?lEnd)
+            (not (atLocation ?a ?lStart))
+        )
+    )","(:action GotoLocation
+        :parameters (?a - agent ?lEnd - location ?lStart - location)
+        :precondition (and
+            (atLocation ?a ?lStart)
+        )
+        :effect (and
+            (atLocation ?a ?lEnd)
+            (not (atLocation ?a ?lStart))
+        )
+    )",
+PickupObjectInReceptacle,"(:action PickupObjectInReceptacle
+        :parameters (?a - agent ?l - location ?o - object ?r - receptacle)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (inReceptacle ?o ?r)
+            (not (holdsAny ?a))
+        )
+        :effect (and
+            (not (objectAtLocation ?o ?l))
+            (holds ?a ?o)
+        )
+    )","(:action PickupObjectInReceptacle
+        :parameters (?a - agent ?l - location ?o - object ?r - receptacle)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (inReceptacle ?o ?r)
+            (not (holdsAny ?a))
+        )
+        :effect (and
+            (not (objectAtLocation ?o ?l))
+            (holds ?a ?o)
+        )
+    )",
+PickupObjectNotInReceptacle,"(:action PickupObjectNotInReceptacle
+        :parameters (?a - agent ?l - location ?o - object)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (not (holdsAny ?a))
+        )
+        :effect (and
+            (not (objectAtLocation ?o ?l))
+            (holds ?a ?o)
+        )
+    )","(:action PickupObjectNotInReceptacle
+        :parameters (?a - agent ?l - location ?o - object)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (not (holdsAny ?a))
+        )
+        :effect (and
+            (not (objectAtLocation ?o ?l))
+            (holds ?a ?o)
+        )
+    )",
+PutObjectInReceptacle,"(:action PutObjectInReceptacle
+        :parameters (?a - agent ?l - location ?o - object ?ot - otype ?r - receptacle)
+        :precondition (and
+            (atLocation ?a ?l)
+            (receptacleAtLocation ?r ?l)
+            (objectType ?o ?ot)
+            (holds ?a ?o)
+            (not (holdsAnyReceptacleObject ?a))
+        )
+        :effect (and
+            (inReceptacle ?o ?r)
+            (not (holds ?a ?o))
+            (objectAtLocation ?o ?l)
+        )
+    )","(:action PutObjectInReceptacle
+        :parameters (?a - agent ?l - location ?o - object ?ot - otype ?r - receptacle)
+        :precondition (and
+            (atLocation ?a ?l)
+            (receptacleAtLocation ?r ?l)
+            (objectType ?o ?ot)
+            (holds ?a ?o)
+            (not (holdsAnyReceptacleObject ?a))
+        )
+        :effect (and
+            (inReceptacle ?o ?r)
+            (not (holds ?a ?o))
+            (objectAtLocation ?o ?l)
+        )
+    )",
+CleanObject,"(:action CleanObject
+        :parameters (?a - agent ?l - location ?r - receptacle ?o - object)
+        :precondition (and
+            (receptacleType ?r SinkBasinType)
+            (atLocation ?a ?l)
+            (receptacleAtLocation ?r ?l)
+            (holds ?a ?o)
+        )
+        :effect (and
+            (isClean ?o)
+        )
+    )","(:action CleanObject
+        :parameters (?a - agent ?l - location ?r - receptacle ?o - object)
+        :precondition (and
+            (receptacleType ?r SinkBasinType)
+            (atLocation ?a ?l)
+            (receptacleAtLocation ?r ?l)
+            (holds ?a ?o)
+        )
+        :effect (and
+            (isClean ?o)
+        )
+    )",
+SliceObject,"(:action SliceObject
+        :parameters (?a - agent ?co - object ?ko - object ?l - location)
+        :precondition (and
+            (or
+                (objectType ?ko KnifeType)
+                (objectType ?ko ButterKnifeType)
+            )
+            (atLocation ?a ?l)
+            (objectAtLocation ?co ?l)
+            (sliceable ?co)
+            (holds ?a ?ko)
+        )
+        :effect (and
+            (isSliced ?co)
+        )
+    )","(:action SliceObject
+        :parameters (?ko - object ?l - location ?co - object ?a - agent)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(objectAtLocation ?co ?l)
+		(sliceable ?co)
+		(holds ?a ?ko)
+		)
+        :effect (and 
+		(isSliced ?co)
+		)
+)",

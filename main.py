@@ -171,6 +171,12 @@ parser.add_argument(
 )
 
 parser.add_argument(
+    "--assume_alfred_teleportation",
+    action="store_true",
+    help="debug: assume that we never need to directly go to any location..",
+)
+
+parser.add_argument(
     "--debug_ground_truth_operators",
     action="store_true",
     help="debug: use ground_truth_operators.",
@@ -287,44 +293,46 @@ def main():
 
         ###################### Refine operators.
         for problem_idx, problem_id in enumerate(planning_problems["train"]):
-            should_continue_attempts = True
-            for plan_attempt_idx in range(args.n_attempts_to_plan):
-                if should_continue_attempts:
-                    # Task plan. Attempts to generate a task plan for each problem.
-                    task_planner.attempt_task_plan_for_problem(
-                        pddl_domain=pddl_domain,
-                        problem_idx=problem_idx,
-                        problem_id=problem_id,
-                        problems=planning_problems["train"],
-                        verbose=args.verbose,
-                        command_args=args,
-                        output_directory=output_directory,
-                        debug_skip=args.debug_skip_task_plans,
-                        use_mock=args.debug_mock_task_plans,
-                        plan_attempt_idx=plan_attempt_idx,
-                    )
-                    # Motion plan. Attempts to generate a motion plan for a problem.
-                    motion_planner.attempt_motion_plan_for_problem(
-                        pddl_domain=pddl_domain,
-                        problem_idx=problem_idx,
-                        problem_id=problem_id,
-                        problems=planning_problems["train"],
-                        verbose=args.verbose,
-                        command_args=args,
-                        output_directory=output_directory,
-                        debug_skip=args.debug_skip_motion_plans,
-                        use_mock=args.debug_mock_motion_plans,
-                        plan_attempt_idx=plan_attempt_idx,
-                        dataset_name=args.dataset_name,
-                    )
-                    should_continue_attempts = pddl.update_pddl_domain_and_problem(
-                        pddl_domain=pddl_domain,
-                        problem_idx=problem_idx,
-                        problem_id=problem_id,
-                        problems=planning_problems["train"],
-                        verbose=args.verbose,
-                        command_args=args,
-                    )
+            if problem_idx == 1:  # TODO (LCW) REMOVE
+                should_continue_attempts = True
+                for plan_attempt_idx in range(args.n_attempts_to_plan):
+                    if should_continue_attempts:
+                        # Task plan. Attempts to generate a task plan for each problem.
+                        task_planner.attempt_task_plan_for_problem(
+                            pddl_domain=pddl_domain,
+                            problem_idx=problem_idx,
+                            problem_id=problem_id,
+                            problems=planning_problems["train"],
+                            verbose=args.verbose,
+                            command_args=args,
+                            output_directory=output_directory,
+                            debug_skip=args.debug_skip_task_plans,
+                            use_mock=args.debug_mock_task_plans,
+                            plan_attempt_idx=plan_attempt_idx,
+                        )
+                        # Motion plan. Attempts to generate a motion plan for a problem.
+                        motion_planner.attempt_motion_plan_for_problem(
+                            pddl_domain=pddl_domain,
+                            problem_idx=problem_idx,
+                            problem_id=problem_id,
+                            problems=planning_problems["train"],
+                            verbose=args.verbose,
+                            command_args=args,
+                            output_directory=output_directory,
+                            debug_skip=args.debug_skip_motion_plans,
+                            use_mock=args.debug_mock_motion_plans,
+                            plan_attempt_idx=plan_attempt_idx,
+                            dataset_name=args.dataset_name,
+                        )
+                        should_continue_attempts = pddl.update_pddl_domain_and_problem(
+                            pddl_domain=pddl_domain,
+                            problem_idx=problem_idx,
+                            problem_id=problem_id,
+                            problems=planning_problems["train"],
+                            verbose=args.verbose,
+                            command_args=args,
+                        )
+
         ###################### Finalize and checkpoint iteration.
         pddl.checkpoint_and_reset_operators(
             curr_iteration=curr_iteration,

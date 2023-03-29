@@ -765,7 +765,13 @@ class PDDLPlan:
                     action[PDDLPlan.PDDL_OPERATOR_BODY] = operator_body
         return actions
 
-    def to_postcondition_predicates_json(self, pddl_domain, remove_alfred_object_ids):
+    def to_postcondition_predicates_json(
+        self,
+        pddl_domain,
+        remove_alfred_object_ids=False,
+        remove_alfred_agent=False,
+        assume_alfred_teleportation=False,
+    ):
         """
         :ret: [
             {
@@ -781,8 +787,15 @@ class PDDLPlan:
         postcondition_predicates_json = []
         for action in self.plan:
             ground_postcondition_predicates = PDDLPlan.get_postcondition_predicates(
-                action, pddl_domain, remove_alfred_object_ids=remove_alfred_object_ids,
+                action,
+                pddl_domain,
+                remove_alfred_object_ids=remove_alfred_object_ids,
+                remove_alfred_agent=remove_alfred_agent,
+                assume_alfred_teleportation=assume_alfred_teleportation,
             )
+            # If we wound up removing all of them, then don't include this.
+            if len(ground_postcondition_predicates) == 0:
+                continue
             postcondition_predicates_json.append(
                 {
                     PDDLPlan.PDDL_ACTION: action[PDDLPlan.PDDL_ACTION],
@@ -796,24 +809,41 @@ class PDDLPlan:
 
     @classmethod
     def get_postcondition_predicates(
-        cls, action, pddl_domain, remove_alfred_object_ids=True
+        cls,
+        action,
+        pddl_domain,
+        remove_alfred_object_ids=True,
+        remove_alfred_agent=True,
+        assume_alfred_teleportation=False,
     ):
+        ALFRED_AGENT = "agent"
         operator_body = pddl_domain.get_operator_body(action[PDDLPlan.PDDL_ACTION])
         # There's a chance that this is a predefined operator, in which case we need to get it directly.
 
-        parameters, processed_preconds, processed_effects = parse_operator_components(
-            operator_body, pddl_domain
-        )
-        parameters_ordered = sorted(parameters.keys())
+        (
+            parameters,
+            processed_preconds,
+            processed_effects,
+            ordered_parameter_keys,
+        ) = parse_operator_components(operator_body, pddl_domain, return_order=True)
+
         ground_arguments_map = {
             argument: ground
-            for (argument, ground) in zip(parameters_ordered, action["args"])
+            for (argument, ground) in zip(ordered_parameter_keys, action["args"])
         }
         ground_postcondition_predicates = []
         for lifted_predicate in processed_effects:
+            if assume_alfred_teleportation:
+                if lifted_predicate.name in ["atLocation", "objectAtLocation"]:
+                    continue
             ground_arguments = [
                 ground_arguments_map[arg] for arg in lifted_predicate.argument_values
             ]
+            if remove_alfred_agent:
+                ground_arguments = [
+                    g for g in ground_arguments if ALFRED_AGENT not in g
+                ]
+            # ALFRED specific. Strips away the 'agent' argument which the motion planner does not accept.
             if remove_alfred_object_ids:
                 ground_arguments = [
                     PDDLPredicate.remove_alfred_object_ids(a) for a in ground_arguments
@@ -1219,7 +1249,15 @@ def log_preprocessed_operators(
                     )
 
 
-def parse_operator_components(operator_body, pddl_domain):
+def parse_parameter_keys(parameter_string):
+    # Returns an ordered list of the arguments to an operator.
+    parameter_string = parameter_string.strip()
+    parameter_string = parameter_string.replace("(", "").replace(")", "")
+    parameters = [p for p in parameter_string.split() if "?" in p]
+    return parameters
+
+
+def parse_operator_components(operator_body, pddl_domain, return_order=False):
     allow_partial_ground_predicates = pddl_domain.constants != ""
     preprocessed_operator = PDDLParser._purge_comments(operator_body)
 
@@ -1235,6 +1273,7 @@ def parse_operator_components(operator_body, pddl_domain):
         if op_match is None:
             return False, ""
         op_name, params, preconds, effects = op_match.groups()
+        original_ordered_parameters_keys = parse_parameter_keys(params)
         op_name = op_name.strip()
         (
             precond_parameters,
@@ -1270,8 +1309,15 @@ def parse_operator_components(operator_body, pddl_domain):
             parameters = {k: v for k, v in precond_parameters if k.startswith("?")}
         else:
             parameters = precond_parameters
-
-        return parameters, precondition_predicates, effect_predicates
+        if not return_order:
+            return parameters, precondition_predicates, effect_predicates
+        else:
+            return (
+                parameters,
+                precondition_predicates,
+                effect_predicates,
+                original_ordered_parameters_keys,
+            )
 
 
 def preprocess_operator(
