@@ -134,7 +134,7 @@ SliceObject,"(:action SliceObject
             (isSliced ?co)
         )
     )","(:action SliceObject
-        :parameters (?ko - object ?l - location ?co - object ?a - agent)
+        :parameters (?ko - object ?a - agent ?co - object ?l - location)
 
         :precondition (and 
 		(atLocation ?a ?l)

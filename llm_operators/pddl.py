@@ -831,6 +831,20 @@ class PDDLPlan:
             argument: ground
             for (argument, ground) in zip(ordered_parameter_keys, action["args"])
         }
+        # Get any permissible objects that were used in the ground arguments.
+        permissible_objects = [o for o in ground_arguments_map.items()]
+        if remove_alfred_object_ids:
+            permissible_objects = [
+                PDDLPredicate.remove_alfred_object_ids(a) for a in permissible_objects
+            ]
+        if remove_alfred_agent:
+            permissible_objects = [
+                    g for g in permissible_objects if ALFRED_AGENT not in g
+                ]
+            
+
+
+        # Get the grounded predicates.
         ground_postcondition_predicates = []
         for lifted_predicate in processed_effects:
             if assume_alfred_teleportation:

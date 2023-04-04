@@ -253,8 +253,11 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
         print(f"Ground truth oracle goal is: ")
         print(problems[problem_id].ground_truth_pddl_problem.ground_truth_goal)
 
-    # Convert plan to sequential plan predicates.
-    postcondition_predicates_json = pddl_plan.to_postcondition_predicates_json(
+    # Convert plan to sequential plan predicates and any permissible objects for manipulation.
+    (
+        postcondition_predicates_json,
+        permissible_objects,
+    ) = pddl_plan.to_postcondition_predicates_json(
         pddl_domain,
         remove_alfred_object_ids=True,
         remove_alfred_agent=True,
@@ -285,6 +288,8 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
             "task": task_name,
             "repeat_idx": 0,  # How do we know which one it is?
         }
+        # Search - should call permissible objects.
+        #
         raw_motion_plan_result = alfredplanner.run_motion_planner(
             task=alfred_motion_task,
             operator_sequence=postcondition_predicates_json,

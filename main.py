@@ -29,6 +29,7 @@ try:
     sys.path.insert(0, CONCEPTS_PATH)
 
 except:
+    print("Skipping Jacinle and Concepts. This means you cannot run the Minecraft domain.")
     pass
 
 try:

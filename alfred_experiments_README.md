@@ -9,6 +9,9 @@ python main.py --experiment_name alfred_linearized_100_supervision_pddl_pick_pla
 3. pip install openai pddlgym
 4. pip install -r alfred/requirements_python3_8.txt # This requires a specific version of numpy that should be set to numpy==1.21.6 so that it works with scikitimage.
 5. pip install lark ipdb tabulate
+6. conda install -c conda-forge pytorch==1.13.1
+7. Change the site packages installation of ai2thor/server.py so that the `return np.asscalar(obj)` is now `return obj.item()` -- this allows it to run to numpy > 1.16, as required by torch.
+8. pip install einops
 
 
 ### Supervision PDDL, alfred_linearized_100, with CleanObject
