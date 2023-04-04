@@ -68,24 +68,4 @@ The following describes how we add in the ALFRED domain, which comprises a groun
 These two steps should be enough to get the basic task planning + Codex portion running. To then add a domain-specific motion planner,
 3. Adding a motion planner: you'd add in another motion planner [here](https://github.com/CatherineWong/llm-operators/blob/main/motion_planner.py#L30).
 
---------------------------------------------
-### ALFRED experiments. This dev section contains details on experiments run at each portion of the ALFRED loop.
-##### ALFRED PDDL dataset.
-1. Planning domains and datasets are housed in `datasets.py`. This registers datasets and PDDL domains loaded with the `--dataset_name` and `--pddl_domain_name` flags. 
-- PDDL domains are in domains. We created a custom version of the ALFRED domain and files, since our task planner is just used to ensure faster search. This was initially done by running `prepare_alfred_pddl.py` on the dataset originally extracted from above.
-
-This script prepares a *subset* of the original dataset, and modifies both the PDDL domain (alfred_linearized.pddl) and the problem files (in alfred_linearized/pddl).
-
-It was also used to produced the `alfred_linearized_100` subset of the dataset.
-
-2. Codex. We use Codex to propose goal, initial plan, and operator definitions. This is housed in `codex.py`.
-- Proposing plans. This is 
-
-
---------------------------------------------
-#### AWS Experiments.
-
-##### AWS setup.
-1. Launch machines at https://889121882474.signin.aws.amazon.com/console
-- This only applies to MIT setup.
 
