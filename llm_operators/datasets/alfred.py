@@ -7,13 +7,13 @@ import json
 
 import numpy as np
 
-from llm_operators.datasets.core import (
+from datasets.core import (
     Problem,
     register_planning_pddl_domain,
     register_planning_domain_problems,
 )
-from llm_operators.datasets.dataset_utils import load_pddl_file_with_operators
-from llm_operators.pddl import PDDLProblem
+from datasets.dataset_utils import load_pddl_file_with_operators
+from pddl import PDDLProblem
 
 
 ALFRED_PDDL_DOMAIN_NAME = "alfred"

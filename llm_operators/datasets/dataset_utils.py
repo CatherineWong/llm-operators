@@ -1,7 +1,7 @@
 import os
 import copy
 
-from llm_operators.pddl import Domain
+from pddl import Domain
 
 
 def load_pddl_file_with_operators(domain_name, file_path, verbose=False):

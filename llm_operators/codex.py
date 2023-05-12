@@ -13,7 +13,7 @@ from collections import Counter, defaultdict
 import openai
 from openai.error import APIConnectionError, InvalidRequestError, RateLimitError
 
-from llm_operators.pddl import PDDLPlan
+from pddl import PDDLPlan
 
 # TODO(Jiayuan Mao @ 2023/02/04): use a principled way to control the random seed.
 random.seed(0)

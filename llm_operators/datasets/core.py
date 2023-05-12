@@ -1,10 +1,11 @@
 from collections import defaultdict
 import random
 import json
+import pddl
 from typing import Sequence, Dict
 
 import numpy as np
-from llm_operators.pddl import Domain, OtherDomain, PDDLPlan
+from pddl import Domain, OtherDomain, PDDLPlan
 
 PDDL_PLAN = "pddl_plan"
 PDDL_PLAN_OVERALL_COST = "pddl_plan_overall_cost"
@@ -128,6 +129,9 @@ class Problem:
             f"proposed_pddl_goals = {self.proposed_pddl_goals}\n"
             f"proposed_pddl_plans = {self.proposed_pddl_plans}\n)"
         )
+    
+    def get_preconditions(self):
+        return pddl.PDDLParser._parse_problem_predicates(self.ground_truth_pddl_problem.ground_truth_pddl_problem_string)
 
 
 def load_pddl_supervision(
