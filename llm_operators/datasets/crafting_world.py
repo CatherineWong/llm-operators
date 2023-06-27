@@ -5,11 +5,11 @@ import os.path as osp
 import itertools
 import json
 
-from llm_operators.datasets.core import register_planning_pddl_domain, register_planning_domain_problems
-from llm_operators.datasets.dataset_utils import load_pddl_file_with_operators
-from llm_operators.datasets.crafting_world_gen.cw_20230204_minining_only import problem_from_raw_record, gen_v20230204_solution
-from llm_operators.datasets.crafting_world_gen.utils import underline_to_pascal
-from llm_operators.datasets.crafting_world_gen.crafting_world_rules import MINING_RULES
+from datasets.core import register_planning_pddl_domain, register_planning_domain_problems
+from datasets.dataset_utils import load_pddl_file_with_operators
+from datasets.crafting_world_gen.cw_20230204_minining_only import problem_from_raw_record, gen_v20230204_solution
+from datasets.crafting_world_gen.utils import underline_to_pascal
+from datasets.crafting_world_gen.crafting_world_rules import MINING_RULES
 
 CRAFTING_WORLD_PDDL_DOMAIN_NAME = 'crafting_world'
 CRAFTING_WORLD_PDDL_DOMAIN_FILE = 'data/domains/crafting_world/domain.pddl'

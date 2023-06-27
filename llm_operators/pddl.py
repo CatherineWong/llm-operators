@@ -630,6 +630,20 @@ class PDDLParser:
             pred_object = cls._parse_predicate(pred, neg=False)
             predicate_names[pred_object.name] = pred_object
         return predicate_names
+    
+    @classmethod
+    def _parse_problem_predicates(cls, pddl_problem):
+        start_ind = re.search(r"\(:init", pddl_problem).start()
+        predicates = cls._find_balanced_expression(pddl_problem, start_ind)
+
+        predicates = predicates[12:-1].strip()
+        predicates = cls._find_all_balanced_expressions(predicates)
+
+        predicate_names = {}
+        for pred in predicates:
+            pred_object = cls._parse_predicate(pred, neg=False)
+            predicate_names[pred_object.name] = pred_object
+        return predicate_names
 
     @classmethod
     def _parse_predicate(cls, pred, allow_partial_ground_predicates=False, neg=False):
