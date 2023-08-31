@@ -56,8 +56,10 @@ class Domain:
     def add_additional_constants(self, additional_constant_string):
         self.ground_truth_constants.update(PDDLParser._parse_constants(additional_constant_string))
 
-    def init_operators_to_scores(self, operator_pseudocounts):
-        self.operators_to_scores = defaultdict(lambda: (operator_pseudocounts, operator_pseudocounts))
+    def init_operators_to_scores(self, operator_pseudocounts, operator_pseudocount_success):
+        self.operators_to_scores = defaultdict(
+            lambda: (operator_pseudocounts * operator_pseudocount_success, operator_pseudocounts)
+        )
 
     def init_pddl_domain(self, pddl_domain):
         if pddl_domain is not None:
@@ -287,6 +289,7 @@ def update_pddl_domain_and_problem(
                 ] = (n_operator_successes, n_operator_attempts)
 
     Which is used to estimate the Bernoulli probability p(n_operator_successes / n_operator_attempts) of whether an operator is 'working' and therefore should be included in the library. Operators are independent.
+
     """
     any_success = False
     for goal, plan in new_motion_plan_keys:
@@ -295,6 +298,8 @@ def update_pddl_domain_and_problem(
             any_success = True
 
         # These are the operators that were actually executed by the motion planner.
+
+        plan_length = len(motion_plan_result.pddl_plan.plan)
         for operator_idx, o in enumerate(motion_plan_result.pddl_plan.plan):
             (n_operator_successes, n_operator_attempts) = pddl_domain.operators_to_scores[
                 (o[PDDLPlan.PDDL_ACTION], o[PDDLPlan.PDDL_OPERATOR_BODY])
@@ -316,6 +321,12 @@ def update_pddl_domain_and_problem(
                 pddl_domain.operators_to_scores[(o[PDDLPlan.PDDL_ACTION], o[PDDLPlan.PDDL_OPERATOR_BODY])] = (
                     n_operator_successes,
                     n_operator_attempts + 1,
+                )
+            # We didn't succeed the end goal. This means the operators had subtle effects that undid the results of other operators. Penalize by 1/plan_length
+            if not (motion_plan_result.proposed_goal_satisfied) and motion_plan_result.last_failed_operator is None:
+                pddl_domain.operators_to_scores[(o[PDDLPlan.PDDL_ACTION], o[PDDLPlan.PDDL_OPERATOR_BODY])] = (
+                    n_operator_successes - float(1 / plan_length),
+                    n_operator_attempts,
                 )
 
     if verbose:
@@ -856,8 +867,8 @@ class PDDLPlan:
                 )
                 pruned_pddl_plan.append(action)
 
-        goal_ground_truth_predicates = PDDLPlan.get_goal_ground_truth_predicates(
-            problem, pddl_domain, ignore_predicates=ignore_predicates
+        goal_ground_truth_predicates = PDDLPlan.get_predicates_from_goal_string(
+            pddl_goal_string=problem.ground_truth_pddl_problem.ground_truth_goal, ignore_predicates=ignore_predicates
         )
         goal_ground_truth_predicates_json = [
             ground_predicate.to_json() for ground_predicate in goal_ground_truth_predicates
@@ -925,10 +936,9 @@ class PDDLPlan:
         return ground_predicates_list
 
     @classmethod
-    def get_goal_ground_truth_predicates(
+    def get_predicates_from_goal_string(
         cls,
-        problem,
-        pddl_domain,
+        pddl_goal_string,
         ignore_predicates=[
             "atLocation",
             "objectAtLocation",
@@ -957,10 +967,9 @@ class PDDLPlan:
             "isNeg": False
         }]
         """
-        # Build ground arguments map from the object types. These must be specified in a ground truth ALFRED goal.
-        ground_truth_goal_predicates_strings = problem.ground_truth_pddl_problem.ground_truth_goal_list
+        goal_predicates_strings = PDDLProblem.parse_goal_pddl_list(pddl_goal_string=pddl_goal_string)
         # PDDLPredicate list rather than list of strings.
-        ground_truth_goal_predicates = goal_predicates_string_to_predicates_list(ground_truth_goal_predicates_strings)
+        ground_truth_goal_predicates = goal_predicates_string_to_predicates_list(goal_predicates_strings)
         # Extract the ground truth goal map
         ground_arguments_map = get_goal_ground_arguments_map(
             ground_truth_goal_predicates, type_predicates=["objectType", "receptacleType"]
@@ -1128,7 +1137,8 @@ class PDDLProblem:
         pddl_problem = PDDLParser._purge_comments(pddl_problem)
         return PDDLParser._find_labelled_expression(pddl_problem, ":goal")
 
-    def parse_goal_pddl_list(self, pddl_goal_string):
+    @classmethod
+    def parse_goal_pddl_list(cls, pddl_goal_string):
         goal_conjunction = PDDLParser._find_labelled_expression(pddl_goal_string, "and")
         _, preprocessed_predicates, _ = preprocess_conjunction_predicates(
             goal_conjunction,

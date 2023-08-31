@@ -174,6 +174,51 @@
   )
 <END>
 
+;; Operator, PickupObjectInReceptacle
+;; PickupObjectInReceptacle takes an object to pick up and a receptacle that it was in.
+;; This is applicable to all objects and receptacles.
+;; Parameters: ?a - agent, ?l - location of object to be picked up; ?o - object to pick up, ?r - receptacle that object is in.
+;; Preconditions: The agent is at a location and the object to be picked up is at the same location, the object is in a receptacle, and the agent is not currently holding anything.
+;; Postconditions: The object is no longer at the original location, the object is no longer in the original receptacle, the agent is holding the object, and the agent is holding anything.
+(:action PickupObjectInReceptacle
+        :parameters (?a - agent ?l - location ?o - object ?r - receptacle)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (inReceptacle ?o ?r)
+            (not (holdsAny ?a))
+        )
+        :effect (and
+            (not (objectAtLocation ?o ?l))
+            (not (inReceptacle ?o ?r))
+            (holds ?a ?o)
+            (holdsAny ?a)
+        )
+    )
+
+;; Operator, PutObjectInReceptacle
+;; PutObjectInReceptacle takes an object to put down, an object type, and a receptacle to put it in.
+;; This is applicable to all objects and receptacles.
+;; Parameters: ?a - agent, ?l - location of object to be picked up; ?o - object to put down, ?ot- object type of object to put down, ?r - receptacle that object is in.
+;; Preconditions: The agent is at a location and the receptacle is at the same location, the object is of the correct type, the agent holds the object, and the receptacle is not holding any object.
+;; Postconditions: The object is in the receptacle, the agent is no longer holding the object, the agent is no longer holding anything, and the object is at the new location.
+    (:action PutObjectInReceptacle
+        :parameters (?a - agent ?l - location ?ot - otype ?o - object ?r - receptacle)
+        :precondition (and
+            (atLocation ?a ?l)
+            (receptacleAtLocation ?r ?l)
+            (objectType ?o ?ot)
+            (holds ?a ?o)
+            (not (holdsAnyReceptacleObject ?a))
+        )
+        :effect (and
+            (inReceptacle ?o ?r)
+            (not (holds ?a ?o))
+            (not (holdsAny ?a))
+            (objectAtLocation ?o ?l)
+        )
+    )
+
 ;; Operator, GrateObject.
 ;; GrateObject takes an object to grate and a specific tool of type GraterType.
 ;; GraterType is an otype. Therefore, the tool is an object.

@@ -310,15 +310,21 @@ parser.add_argument(
     help="Minimum number of operators we can sample in a proposed library at any point.",
 )
 parser.add_argument(
+    "--operator_pseudocount_success",
+    type=int,
+    default=0.5,
+    help="Assume each operator succeeded this percentage of the pseudocount times (MAP smoothing)",
+)
+parser.add_argument(
     "--operator_pseudocounts",
     type=int,
     default=0.1,
-    help="Assume each operator succeeded at least this many times (MAP smoothing)",
+    help="Assume we've tried each operator at least this many times (MAP smoothing)",
 )
 parser.add_argument(
     "--operator_acceptance_threshold",
     type=float,
-    default=0.1,
+    default=0.5,
     help="After each iteration, we prune out operators that have less than this probability of success.",
 )
 
@@ -344,7 +350,10 @@ def main():
     )
 
     pddl_domain = datasets.load_pddl_domain(args.pddl_domain_name, args.initial_pddl_operators, args.verbose)
-    pddl_domain.init_operators_to_scores(args.operator_pseudocounts)
+    pddl_domain.init_operators_to_scores(
+        operator_pseudocounts=args.operator_pseudocounts,
+        operator_pseudocount_success=args.operator_pseudocount_success,
+    )
 
     # Load any external supervision on PDDL domains.
     if args.supervision_name != "None":

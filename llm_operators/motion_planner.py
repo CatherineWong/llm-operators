@@ -20,6 +20,7 @@ class MotionPlanResult:
         last_failed_operator=None,
         max_satisfied_predicates=None,
         total_trajs_sampled=0,
+        proposed_goal_satisfied=None,
     ):
         """
         task_success: bool
@@ -27,18 +28,27 @@ class MotionPlanResult:
         max_satisfied_predicates: return last failed predicate in that operator.
         """
         self.pddl_plan = pddl_plan  # PDDLPlan
-        self.task_success = task_success
+        self.task_success = task_success  # Did we solve the oracle goal?
         self.last_failed_operator = last_failed_operator
         self.max_satisfied_predicates = max_satisfied_predicates
         self.total_trajs_sampled = total_trajs_sampled
+        if not proposed_goal_satisfied:
+            # Backwards compatibility: assume we failed if task success failed.
+            self.proposed_goal_satisfied = self.task_success
+        else:
+            self.proposed_goal_satisfied = (
+                proposed_goal_satisfied  # Did we solve the goal proposed by the task planner?
+            )
 
     def from_json(cls, json):
+        # Load anything we have from the JSON and none otherwise.
         return MotionPlanResult(
             pddl_plan=PDDLPlan(plan_string=json["plan"]),
             task_success=json["task_success"],
             last_failed_operator=json["last_failed_operator"],
             max_satisfied_predicates=json["max_satisfied_predicates"],
-            total_trajs_sampled=json["total_trajs_sampled"],
+            total_trajs_sampled=json.get("total_trajs_sampled", 0),
+            proposed_goal_satisfied=json.get("total_trajs_sampled", False),
         )
 
 
@@ -259,8 +269,16 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
         remove_alfred_agent=True,
     )
     operator_sequence = task_plan_json["operator_sequence"]
-    # This is the ground truth goal according to ALFRED.
+    # This is the ground truth goal according to ALFRED that we will be checkign in the motion planner oracle.
     goal_ground_truth_predicates = task_plan_json["goal_ground_truth_predicates"]
+    # This is the goal that we actually planned for.
+    proposed_goal_predicates = [
+        p.to_json()
+        for p in PDDLPlan.get_predicates_from_goal_string(
+            pddl_goal_string=pddl_goal,
+        )
+    ]
+
     if debug_skip:
         return MotionPlanResult(
             pddl_plan=pruned_pddl_plan,
@@ -283,6 +301,10 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
             print("Goal ground truth predicates that will be evaluated: ")
             for pred in goal_ground_truth_predicates:
                 print(f"{pred}\n")
+
+            print("Proposed goal predicates that we planned for: ")
+            for pred in proposed_goal_predicates:
+                print(f"{pred}\n")
         alfred_motion_task = {
             "task": task_name,
             "repeat_idx": 0,  # How do we know which one it is?
@@ -291,6 +313,7 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
             task=alfred_motion_task,
             operator_sequence=operator_sequence,
             goal_ground_predicates=goal_ground_truth_predicates,
+            proposed_goal_predicates=proposed_goal_predicates,
             robot_init=RANDOM_SEED,
             dataset_split=dataset_split,
             verbose=verbose,
@@ -302,6 +325,7 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
             last_failed_operator=raw_motion_plan_result["last_failed_operator"],
             max_satisfied_predicates=raw_motion_plan_result["max_satisfied_predicates"],
             total_trajs_sampled=raw_motion_plan_result["total_trajs_sampled"],
+            proposed_goal_satisfied=raw_motion_plan_result["proposed_goal_satisfied"],
         )
 
 
