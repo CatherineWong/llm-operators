@@ -1,5 +1,5 @@
 (define
- (domain crafting-world-v20230404)
+ (domain crafting-world-v20230404-teleport)
  (:requirements :strips)
  (:types
    tile

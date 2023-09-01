@@ -305,12 +305,14 @@ def load_planning_problems_dataset(
     initial_plan_supervision_fraction,
     initial_plan_supervision_prefix,
     initial_pddl_operators,
+    domain=None,
     verbose=False,
 ):
-    planning_domain_loader = PLANNING_PROBLEMS_REGISTRY[dataset_name]
+    planning_problem_loader = PLANNING_PROBLEMS_REGISTRY[dataset_name]
+    planning_problem_loader.domain = domain
     # Load some fraction of the dataset.
 
-    planning_dataset = planning_domain_loader(
+    planning_dataset = planning_problem_loader(
         dataset_pddl_directory=dataset_pddl_directory,
         dataset_fraction=dataset_fraction,
         verbose=verbose,

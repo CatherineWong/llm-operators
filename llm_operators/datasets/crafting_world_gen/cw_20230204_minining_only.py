@@ -126,7 +126,7 @@ def gen_v20230204_instance_record(problem_id: str, split: str, n: int = 15, inve
     )
 
 
-def gen_v20230204_solution(record: Dict[str, Any]) -> Optional[PDDLPlan]:
+def gen_v20230204_solution(record: Dict[str, Any], has_teleport: bool = False) -> Optional[PDDLPlan]:
     """Solve the problem with a human-written solution.
 
     .. warning::
@@ -136,6 +136,7 @@ def gen_v20230204_solution(record: Dict[str, Any]) -> Optional[PDDLPlan]:
 
     Args:
         record: the instance record, returned by :meth:`gen_v20230204_instance_record`.
+        has_teleport: whether the agent has teleportation ability (move-to operator).
 
     Returns:
         a PDDLPlan object.
@@ -152,6 +153,7 @@ def gen_v20230204_solution(record: Dict[str, Any]) -> Optional[PDDLPlan]:
 
     actions = list()
     tool_object_id = None
+    current_pos = 1
     if len(target_rule['holding']) == 0:
         pass
     else:
@@ -160,18 +162,26 @@ def gen_v20230204_solution(record: Dict[str, Any]) -> Optional[PDDLPlan]:
 
         assert location is not None
 
-        for i in range(location - 1):
-            actions.append('(move-right)')
+        if has_teleport:
+            actions.append(f'(move-to t{current_pos} t{location + 1})')
+        else:
+            for i in range(location - 1):
+                actions.append('(move-right)')
+        current_pos = location + 1
         actions.append(f'(pick-up i1 o{tool_object_id} t{location})')
-        for i in range(location - 1):
-            actions.append('(move-left)')
+        if not has_teleport:
+            for i in range(location - 1):
+                actions.append('(move-left)')
 
     location, loc_object_id = _find_location_on_the_map(record, target_rule['location'])
 
     assert location is not None
 
-    for i in range(location - 1):
-        actions.append('(move-right)')
+    if has_teleport:
+        actions.append(f'(move-to t{current_pos} t{location + 1})')
+    else:
+        for i in range(location - 1):
+            actions.append('(move-right)')
 
     # (?targetinv - inventory ?x - object ?target - object ?t - tile)
     # (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
@@ -205,12 +215,12 @@ def _find_object_on_the_map(record: Dict[str, Any], obj: str) -> Tuple[Optional[
     return None, None
 
 
-def problem_from_raw_record(record: Dict[str, Any]) -> Problem:
+def problem_from_raw_record(record: Dict[str, Any], has_teleport=False) -> Problem:
     return Problem(
         problem_id=record['problem_id'],
         dataset_split=record['split'],
         language=record['goal_nl'],
-        ground_truth_pddl_plan=gen_v20230204_solution(record),
+        ground_truth_pddl_plan=gen_v20230204_solution(record, has_teleport=has_teleport),
         ground_truth_pddl_problem=PDDLProblem(record['problem_pddl']),
         goal_prefix=f'mining_{record["goal"]}',
     )

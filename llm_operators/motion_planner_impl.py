@@ -222,11 +222,26 @@ def evaluate_cw_motion_plans_and_costs_for_goal_plan(
 
             ingredients = list(set(inventory_indices) - set([empty_inventory]))
 
+            # from llm_operators.experiment_utils import run_ipdb
+            # run_ipdb()
+            target_type = None
+            hypothetical_object_index = action_args.index(hypothetical_object)
+            hypothetical_object_varname = domain.operators[action_name].arguments[hypothetical_object_index].name
+            for effect in domain.operators[action_name].effects:
+                if (
+                    effect.assign_expr.predicate.function.name == 'object-of-type' and
+                    effect.assign_expr.predicate.arguments[0].name == hypothetical_object_varname and
+                    effect.assign_expr.predicate.arguments[1].__class__.__name__ == 'ObjectConstantExpression' and
+                    effect.assign_expr.value.__class__.__name__ == 'ConstantExpression' and
+                    effect.assign_expr.value.constant.item() == 1
+                ):
+                    print('  Found target type', effect.assign_expr)
+                    target_type = effect.assign_expr.predicate.arguments[1].name
+                    break
+
             if verbose:
-                print("  Crafting", empty_inventory, hypothetical_object, target_object, ingredients)
-            rv = simulator.craft(
-                target_object, empty_inventory, hypothetical_object, ingredients_inventory=ingredients
-            )
+                print("  Crafting", empty_inventory, hypothetical_object, target_object, ingredients, f'target_type={target_type}')
+            rv = simulator.craft(target_object, empty_inventory, hypothetical_object, ingredients_inventory=ingredients, target_type=target_type)
 
             if not rv:
                 last_failed_operator = i

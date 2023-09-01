@@ -66,7 +66,7 @@ def load_alfred_linearized_pddl_domain(verbose=False):
         file_path=ALFRED_LINEARIZED_PDDL_FILE_PATH,
         verbose=verbose,
     )
-    domain.operator_canonicalization = {
+    domain.operator_canonical_name_map = {
         "PickupObjectInReceptacle": "PickupObject",
         "PickupObjectNotInReceptacle": "PickupObject",
         "PutObjectInReceptacle": "PutObject",

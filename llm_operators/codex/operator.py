@@ -69,7 +69,7 @@ def propose_operators_for_problems(
     experiment_tag = "" if len(experiment_name) < 1 else f"{experiment_name}_"
 
     # What operators were proposed across the problems? Rank by usage.
-    operator_uses, operator_use_counts = _get_operator_uses(problems)
+    operator_uses, operator_use_counts = _get_operator_uses(problems, current_domain)
     # Propose definitions for any operators we haven't implemented.
     proposed_operators = _get_operators_to_propose(
         current_domain, operator_uses, operator_use_counts, minimum_usage, external_operator_names
@@ -156,21 +156,11 @@ def _get_operators_to_propose(
     existing_operators = set(
         [
             o.lower()
-            if o not in current_domain.operator_canonicalization
-            else current_domain.operator_canonicalization[o]
+            if o not in current_domain.operator_canonical_name_map
+            else current_domain.operator_canonical_name_map[o].lower()
             for o in current_domain.operators
         ]
     )
-
-    # TODO(Jiayuan Mao @ 2023/08/28): remove this hack. This is intended to handle multiple proposals for the same operator, in
-    # which case the operator name is appended with a number. This is a hack to handle this case.
-    # In the future, we shuold use a "canonical_operator_name" to handle this.
-    # Actually this is already implemented in the "canonicalize_operator_name" function, but we don't use it here.
-    for o in current_domain.operators:
-        if '_' in o:
-            parts = o.split('_')
-            canonical_name = '_'.join(parts[:-1])
-            existing_operators.add(canonical_name)
 
     # Don't match any that have the same characters.
     proposed_operators = [
@@ -181,7 +171,7 @@ def _get_operators_to_propose(
     return proposed_operators
 
 
-def _get_operator_uses(problems):
+def _get_operator_uses(problems, domain):
     operator_use_counts = Counter()
     existing_operator_uses = defaultdict(list)
     for problem in problems.values():
@@ -199,8 +189,14 @@ def _get_operator_uses(problems):
             plans += problem.proposed_pddl_plans
         for plan in plans:
             for action_usage in plan.plan:
-                existing_operator_uses[action_usage[PDDLPlan.PDDL_ACTION]].append(action_usage)
-                operator_use_counts[action_usage[PDDLPlan.PDDL_ACTION]] += 1
+                action_name = action_usage[PDDLPlan.PDDL_ACTION]
+                if action_name in domain.operator_canonical_name_map:
+                    action_name = domain.operator_canonical_name_map[action_name]
+                action_usage = action_usage.copy()
+                action_usage[PDDLPlan.PDDL_ACTION] = action_name
+
+                existing_operator_uses[action_name].append(action_usage)
+                operator_use_counts[action_name] += 1
     return existing_operator_uses, operator_use_counts
 
 
@@ -356,8 +352,14 @@ def _propose_operator_definition(
                 operator_str = f"{COT_OP_START}\n"
                 if o in COT_DICT:
                     operator_str += f";;{COT_DICT[o]}\n"
+            else:
+                operator_str = ''
 
-            operator_str += f"{current_domain.operators[o]}\n{STOP_TOKEN}\n"
+            operator_definition = current_domain.operators[o]
+            if o in current_domain.operator_canonical_name_map:
+                operator_definition = operator_definition.replace('(:action ' + o, '(:action ' + current_domain.operator_canonical_name_map[o])
+
+            operator_str += f"{operator_definition}\n{STOP_TOKEN}\n"
             codex_prompt.append({"role": "assistant", "content": operator_str})
 
         # Codex prompt for operator definition.
@@ -379,7 +381,7 @@ def _propose_operator_definition(
             if verbose:
                 print(f"propose_operator_definition:: completion for {operator_name_to_define}")
                 for i in range(len(completions)):
-                    print(f"[{i+1}/{len(completions)}]")
+                    print(f"[Operator {operator_name_to_define} {i+1}/{len(completions)}]")
                     print(completions[i])
             return codex_prompt, [o for o in completions]
         except Exception as e:

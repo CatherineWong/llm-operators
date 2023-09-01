@@ -84,7 +84,7 @@ def propose_plans_for_problems(
         # Resample a new prompt with new examples for each plan string.
         plan_strings = []
         for _ in range(n_samples):
-            codex_prompt = _build_plan_prompt(unsolved_problem, solved_problems, external_plan_supervision, max_solved_problem_examples=max_solved_problem_examples)
+            codex_prompt = _build_plan_prompt(unsolved_problem, solved_problems, external_plan_supervision, current_domain, max_solved_problem_examples=max_solved_problem_examples)
             plan_strings.append(get_completions(codex_prompt, temperature=temperature, stop=STOP_TOKEN, n_samples=1)[0])
 
         for i, plan_string in enumerate(plan_strings):
@@ -171,7 +171,7 @@ def _load_external_plan_supervision_strings(external_plan_file):
     return examples_strings
 
 
-def _build_plan_prompt(unsolved_problem, solved_problems, external_plan_file, max_solved_problem_examples=3):
+def _build_plan_prompt(unsolved_problem, solved_problems, external_plan_file, domain, max_solved_problem_examples=3):
     # Builds a prompt containing external plan examples and a sample set of solved problems.
     if external_plan_file is not None:
         external_plan_strings = _load_external_plan_supervision_strings(external_plan_file)
@@ -182,7 +182,7 @@ def _build_plan_prompt(unsolved_problem, solved_problems, external_plan_file, ma
         min(len(solved_problems), max_solved_problem_examples),
     )
     solved_plan_strings = [
-        (problem_example.language, _get_plan_string_from_solved_problem(problem_example))
+        (problem_example.language, _get_plan_string_from_solved_problem(problem_example, domain))
         for problem_example in solved_problem_examples
     ]
 
@@ -203,10 +203,10 @@ def _build_plan_prompt(unsolved_problem, solved_problems, external_plan_file, ma
 
 def _get_plan_string_from_supervision_pddl(supervision_pddl):
     plan = PDDLPlan(plan=supervision_pddl["operator_sequence"])
-    return plan.plan_to_string(plan.plan)
+    return plan.plan_to_string()
 
 
-def _get_plan_string_from_solved_problem(problem):
+def _get_plan_string_from_solved_problem(problem, domain):
     """
     problem:
         solved Problem object
@@ -215,6 +215,8 @@ def _get_plan_string_from_solved_problem(problem):
     """
     if problem.should_supervise_pddl_plan:
         plan = problem.ground_truth_pddl_plan
-        return plan.plan_to_string(plan.plan)
+        return plan.plan_to_string()
     else:
-        return problem.get_solved_pddl_plan_string()
+        string = problem.get_solved_pddl_plan_string()
+        plan = PDDLPlan(plan_string=string)
+        return plan.plan_to_string(domain.operator_canonical_name_map)
