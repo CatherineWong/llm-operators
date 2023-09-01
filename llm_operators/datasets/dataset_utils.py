@@ -12,8 +12,13 @@ def load_pddl_file_with_operators(domain_name, file_path, verbose=False):
         o: copy.deepcopy(domain.operators[o]) for o in domain.operators
     }
     if verbose:
-        print(f"\nload_pddl_file_with_operators: loaded {domain_name} from {file_path}")
-        print("\nGround truth operators: ")
+        print('')
+        print(f"Loaded PDDL file with operators")
+        print('=' * 80)
+        print(f'Domain: {domain_name}')
+        print(f'Filename: {file_path}')
+        print(f'Operators: {len(domain.operators)}')
+        print("Ground truth operators: ")
         for o in list(domain.ground_truth_operators.keys()):
-            print(o)
+            print('  ', o)
     return domain

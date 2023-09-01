@@ -19,10 +19,10 @@ class Problem:
         language=None,
         ground_truth_pddl_plan=None,
         ground_truth_pddl_problem=None,
-        should_supervise_pddl=False,
+        should_supervise_pddl_goal=False,
+        should_supervise_pddl_plan=False,
         goal_prefix=None,
         chain_of_thought=None,
-        supervise_goal=False,
     ):
         self.problem_id = problem_id
         self.dataset_split = dataset_split
@@ -45,11 +45,11 @@ class Problem:
             else:
                 self.ground_truth_pddl_plan = PDDLPlan(plan=ground_truth_pddl_plan)  # A ground truth PDDLPlan object.
 
-        self.supervise_goal = (
-            supervise_goal  # Whether to supervise specifically on ground truth information about the goal.
+        self.should_supervise_pddl_goal = (
+            should_supervise_pddl_goal  # Whether to supervise specifically on ground truth information about the goal.
         )
 
-        self.should_supervise_pddl = should_supervise_pddl  # Whether to include the PDDL in initial supervision
+        self.should_supervise_pddl_plan = should_supervise_pddl_plan  # Whether to include the PDDL in initial supervision
         # One or more proposed PDDL goals.
         self.codex_raw_goals = []
         self.proposed_pddl_goals = []
@@ -118,12 +118,20 @@ class Problem:
                 updated_pddl_plans = True
         return updated_pddl_plans
 
+    def get_solved_pddl_plan_string(self):
+        """Returns one of the solved PDDL plan, or None if no plans have been solved."""
+        for goal, pddl_plan in self.solved_motion_plan_results:
+            return pddl_plan  # already a string
+        raise RuntimeError('No solved PDDL plan found.')
+
     def get_highest_likelihood_evaluated_pddl_plan(self):
         """Returns the best evaluated PDDL plan, or None if no plans have been evaluated."""
+        # TODO(Jiayuan Mao @ 2023/08/30): I don't quite understand the purpose of this function. Maybe we should remove this todo note.
+        # Right now I think we are consider all proposed plans? Or should we?
         # TODO: right now we only propose one plan anyway, so just return it.
-        print("TODO: LCW - implement this for choosing plans.")
+        # print("TODO: LCW - implement this for choosing plans.")
         for goal in self.evaluated_pddl_plans:
-            return self.evaluated_pddl_plans[goal]
+            return self.evaluated_pddl_plans[goal][0]
 
     def __repr__(self):
         return (
@@ -132,7 +140,7 @@ class Problem:
             f'language="{self.language}",\n'
             f'goal_prefix="{self.goal_prefix}",\n'
             f"ground_truth_pddl_plan={self.ground_truth_pddl_plan},\n"
-            f"should_supervise_pddl={self.should_supervise_pddl}\n"
+            f"should_supervise_pddl_plan={self.should_supervise_pddl_plan}\n"
             f"proposed_pddl_goals = {self.proposed_pddl_goals}\n"
             f"proposed_pddl_plans = {self.proposed_pddl_plans}\n)"
         )
@@ -168,9 +176,12 @@ def load_pddl_supervision(supervision_name: str, verbose: bool = False) -> Dict[
         if "NL_goal" not in pddl_supervision[domain_file]:
             del pddl_supervision[domain_file]
     if verbose:
-        print("load_pddl_supervision from the following domain files:")
+        print('Loaded PDDL supervision')
+        print('=' * 80)
+        print("Loaded additional PDDL supervision from the following domain files:")
         for domain_file in pddl_supervision:
-            print(domain_file)
+            print(' ', domain_file)
+        print('')
 
     return pddl_supervision
 
@@ -200,9 +211,10 @@ def load_pddl_domain(pddl_domain_name: str, initial_pddl_operators: Sequence[str
         if o not in initial_pddl_operators:
             pddl_domain.remove_operator(o)
     if verbose:
-        print("\nInitializing with operators: ")
+        print("Initializing with operators: ")
         for o in list(pddl_domain.operators.keys()):
-            print(o)
+            print(' ', o)
+    print('')
     return pddl_domain
 
 
@@ -260,6 +272,8 @@ def build_problem_prefix_to_problem_ids(planning_dataset, initial_goal_supervisi
 
 
 def mark_goal_supervision_problems(planning_dataset, initial_goal_supervision_prefix, goal_supervision_fraction):
+    if initial_goal_supervision_prefix == ["SKIP"]:
+        return
     problem_prefix_to_problem_ids = build_problem_prefix_to_problem_ids(
         planning_dataset, initial_goal_supervision_prefix, split="train"
     )
@@ -276,7 +290,7 @@ def mark_goal_supervision_problems(planning_dataset, initial_goal_supervision_pr
             problem_prefix_to_problem_ids[goal_supervision_type], num_problems_to_supervise
         )
         for problem_id in problems_to_supervise:
-            planning_dataset["train"][problem_id].supervise_goal = True
+            planning_dataset["train"][problem_id].should_supervise_pddl_goal = True
         print(f"\t {goal_supervision_type} : {num_problems_to_supervise}")
         total_goal_supervision += num_problems_to_supervise
     print(f"Total goal supervision problems: {total_goal_supervision}")
@@ -284,12 +298,13 @@ def mark_goal_supervision_problems(planning_dataset, initial_goal_supervision_pr
 
 def load_planning_problems_dataset(
     dataset_name,
-    dataset_fraction,
-    goal_supervision_fraction,
-    initial_goal_supervision_prefix,
     dataset_pddl_directory,
+    dataset_fraction,
+    initial_goal_supervision_fraction,
+    initial_goal_supervision_prefix,
+    initial_plan_supervision_fraction,
+    initial_plan_supervision_prefix,
     initial_pddl_operators,
-    initial_plans_prefix=None,
     verbose=False,
 ):
     planning_domain_loader = PLANNING_PROBLEMS_REGISTRY[dataset_name]
@@ -300,9 +315,16 @@ def load_planning_problems_dataset(
         dataset_fraction=dataset_fraction,
         verbose=verbose,
     )
+
     print(f"Loaded initial dataset: {dataset_name}")
+    print('=' * 80)
     print(f"Initial train problems: {len(planning_dataset['train'])}")
 
-    mark_goal_supervision_problems(planning_dataset, initial_goal_supervision_prefix, goal_supervision_fraction)
+    print(f'Marking problems for goal supervision: fraction={initial_goal_supervision_fraction}, prefix={initial_goal_supervision_prefix}')
+    mark_goal_supervision_problems(planning_dataset, initial_goal_supervision_prefix, initial_goal_supervision_fraction)
+
+    print(f'Marking problems for plan supervision: fraction={initial_plan_supervision_fraction}, prefix={initial_plan_supervision_prefix}')
+    print('This is not implemented yet. (!!!)')
+    print('')
 
     return planning_dataset

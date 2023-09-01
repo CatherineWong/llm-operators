@@ -5,11 +5,10 @@ import os.path as osp
 import itertools
 import json
 
-from llm_operators.datasets.core import register_planning_pddl_domain, register_planning_domain_problems
+from llm_operators.datasets.dataset_core import register_planning_pddl_domain, register_planning_domain_problems
 from llm_operators.datasets.dataset_utils import load_pddl_file_with_operators
-from llm_operators.datasets.crafting_world_gen.cw_20230204_minining_only import problem_from_raw_record, gen_v20230204_solution
 from llm_operators.datasets.crafting_world_gen.utils import underline_to_pascal
-from llm_operators.datasets.crafting_world_gen.crafting_world_rules import MINING_RULES
+from llm_operators.datasets.crafting_world_gen.crafting_world_rules import MINING_RULES, CRAFTING_RULES
 
 CRAFTING_WORLD_PDDL_DOMAIN_NAME = 'crafting_world'
 CRAFTING_WORLD_PDDL_DOMAIN_FILE = 'data/domains/crafting_world/domain.pddl'
@@ -63,11 +62,13 @@ def load_crafting_world_20230204_minining_only(dataset_pddl_directory: str, data
         7. Instructions are generated with a single template: Mine X from the map.
 
     .. code::
-        python main.py --experiment_name cw_v20230204_mining_only_full --dataset_name crafting_world_20230204_minining_only --supervision_name supervision --pddl_domain_name crafting_world --dataset_fraction 1.0 --training_plans_fraction 1.0 --initial_plans_prefix mining --initial_pddl_operators move-up move-down move-left move-right pick-up place-down mine-iron-ore --verbose --train_iterations 1 --dataset_pddl_directory data/dataset/crafting_world_v202302024_mining_only --goal_propose_include_codex_types --operator_propose_minimum_usage 1 --output_directory generated --debug_stop_after_first_proposal
+        python main.py --experiment_name cw_v20230204_mining_only_full --dataset_name crafting_world_20230204_minining_only --supervision_name supervision --pddl_domain_name crafting_world --dataset_fraction 1.0 --training_plans_fraction 1.0 --initial_plans_prefix mining --initial_pddl_operators move-up move-down move-left move-right pick-up place-down mine-iron-ore --verbose --train_iterations 1 --dataset_pddl_directory data/dataset/crafting_world_v20230204_mining_only --goal_propose_include_codex_types --operator_propose_minimum_usage 1 --output_directory generated --debug_stop_after_first_proposal
 
     Note that since the task planner will timeout on this domain, we need to implement a new task planner (skipped for now, only testing for proposals).
     See generated/cw_v20230204_mining_only_full/0/cw_v20230204_mining_only_full_preprocessed_operators.csv for results.
     """
+    from llm_operators.datasets.crafting_world_gen.cw_20230204_minining_only import problem_from_raw_record
+
     with open(osp.join(dataset_pddl_directory, 'dataset.json')) as f:
         dataset = json.load(f)
 
@@ -79,7 +80,32 @@ def load_crafting_world_20230204_minining_only(dataset_pddl_directory: str, data
 
     assert len(dataset['train']) > 3
     for problem in itertools.islice(dataset['train'].values(), 3):
-        problem.should_supervise_pddl = True
+        problem.should_supervise_pddl_plan = True
+        problem.should_supervise_pddl_goal = True
+
+    return dataset
+
+
+CRAFTING_WORLD_20230829_DATASET_NAME = 'crafting_world_20230829_crafting_only'
+
+
+@register_planning_domain_problems(CRAFTING_WORLD_20230829_DATASET_NAME)
+def load_crafting_world_20230829_crafting_only(dataset_pddl_directory: str, dataset_fraction: float, verbose=False):
+    from llm_operators.datasets.crafting_world_gen.cw_20230829_crafting_only import problem_from_raw_record
+
+    with open(osp.join(dataset_pddl_directory, 'dataset.json')) as f:
+        dataset = json.load(f)
+
+    for split, split_problems in dataset.items():
+        dataset[split] = {
+            problem['problem_id']: problem_from_raw_record(problem)
+            for problem in split_problems[:int(len(split_problems) * dataset_fraction)]
+        }
+
+    assert len(dataset['train']) > 3
+    for problem in itertools.islice(dataset['train'].values(), 3):
+        problem.should_supervise_pddl_plan = True
+        problem.should_supervise_pddl_goal = True
 
     return dataset
 
@@ -180,6 +206,36 @@ class CraftingWorld20230204Simulator(object):
 
         return False
 
+    def craft(self, obj_name, inventory, hypothetical_object_name, ingredients_inventory):
+        if self.objects[obj_name][1] != self.agent_pos:
+            return False
+        if self.inventory[inventory] is not None:
+            return False
+        if hypothetical_object_name not in self.hypothetical:
+            return False
+        for ingredient_inventory in ingredients_inventory:
+             if self.inventory[ingredient_inventory] is None:
+                 return False
+
+        obj_type, _ = self.objects[obj_name]
+
+        for rule in CRAFTING_RULES:
+            if underline_to_pascal(rule['location']) == obj_type:
+                if len(rule['recipe']) == len(ingredients_inventory):
+                    current_holding_types = set()
+                    for ingredient_inventory in ingredients_inventory:
+                        ingredient_type, _ = self.inventory[ingredient_inventory]
+                        current_holding_types.add(ingredient_type)
+                    target_holding_types = set()
+                    for ingredient_type in rule['recipe']:
+                        target_holding_types.add(underline_to_pascal(ingredient_type))
+                    if current_holding_types == target_holding_types:
+                        new_obj_type = underline_to_pascal(rule['create'])
+                        self.inventory[inventory] = (new_obj_type, hypothetical_object_name)
+                        self.hypothetical.remove(hypothetical_object_name)
+                        return True
+        return False
+
     def goal_satisfied(self, goals):
         for goal in goals:
             parts = goal.split(' ')
@@ -206,7 +262,6 @@ class CraftingWorld20230204Simulator(object):
                 for inv in self.inventory.values():
                     if inv is not None:
                         obj_type2, obj_name2 = inv
-                        print(obj_name2, obj_type2, obj_name, obj_type)
                         if obj_name == obj_name2 and obj_type == obj_type2:
                             found = True
                             break

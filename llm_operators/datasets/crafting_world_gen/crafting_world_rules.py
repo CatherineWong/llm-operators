@@ -248,3 +248,36 @@ def get_all_mining_outcomes() -> List[str]:
         if rule['create'] not in outcomes:
             outcomes.append(rule['create'])
     return outcomes
+
+
+@lru_cache()
+def get_all_crafting_ingradients() -> List[str]:
+    """Return a list of tools that can be used in crafting actions."""
+
+    tools = list()
+    for rule in CRAFTING_RULES:
+        for holding in rule['recipe']:
+            if holding not in tools:
+                tools.append(holding)
+    return tools
+
+@lru_cache()
+def get_all_crafting_locations() -> List[str]:
+    """Return a list of locations that can be crafted."""
+
+    locations = list()
+    for rule in CRAFTING_RULES:
+        if rule['location'] not in locations:
+            locations.append(rule['location'])
+    return locations
+
+
+@lru_cache()
+def get_all_crafting_outcomes() -> List[str]:
+    """Return a list of outcomes that can be crafted."""
+
+    outcomes = list()
+    for rule in CRAFTING_RULES:
+        if rule['create'] not in outcomes:
+            outcomes.append(rule['create'])
+    return outcomes

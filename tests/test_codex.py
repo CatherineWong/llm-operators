@@ -71,7 +71,7 @@ def create_mock_unsolved_problem_list(dataset_pddl_directory = "data/dataset/alf
         language=languages[i],
         ground_truth_pddl_plan=ground_truth_pddl_plans[i],
         ground_truth_pddl_problem=ground_truth_pddl_problems[i],
-        should_supervise_pddl=True
+        should_supervise_pddl_plan=True
         )
         for i in range(len(problem_ids))]
 
@@ -97,7 +97,7 @@ def create_mock_solved_problem_list(dataset_pddl_directory = "data/dataset/alfre
         language=languages[i],
         ground_truth_pddl_plan=ground_truth_pddl_plans[i],
         ground_truth_pddl_problem=ground_truth_pddl_problems[i],
-        should_supervise_pddl=True
+        should_supervise_pddl_plan=True
         )
         for i in range(len(problem_ids))]
 

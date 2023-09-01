@@ -1,0 +1,532 @@
+operator_name,gt_operator,codex_raw_operator,codex_preprocessed_operator,
+move-right,,";; Parameter Reasoning: We do NOT need any specific parameters for the move-right operator as it is a simple movement action.
+(:action move-right
+  :parameters ()
+  :precondition (agent-at ?t)
+  :effect (agent-at ?t2) (tile-left ?t ?t2) (not (agent-at ?t))
+ )
+
+<END>",FAILED,
+move-right,,";; Parameter Reasoning: We do not need any specific parameters for the move-right operator, as it simply moves the agent to the tile on its right.
+(:action move-right
+  :parameters ()
+  :precondition (and (agent-at ?t1) (tile-right ?t1 ?t2))
+  :effect (and (agent-at ?t2) (not (agent-at ?t1)))
+)
+
+<END>","(:action move-right_1
+        :parameters (?t1 - tile ?t2 - tile)
+
+        :precondition (and 
+		(agent-at ?t1)
+		(tile-right ?t1 ?t2)
+		)
+        :effect (and 
+		(agent-at ?t2)
+		(not (agent-at ?t1))
+		)
+)",
+move-right,,";; Parameter Reasoning: No additional parameters are required for this operator as it only involves changing the agent's location.
+(:action move-right
+  :parameters ()
+  :precondition (and (agent-at ?t1) (tile-right ?t1 ?t2))
+  :effect (and (agent-at ?t2) (not (agent-at ?t1)))
+ )
+
+<END>","(:action move-right_2
+        :parameters (?t1 - tile ?t2 - tile)
+
+        :precondition (and 
+		(agent-at ?t1)
+		(tile-right ?t1 ?t2)
+		)
+        :effect (and 
+		(agent-at ?t2)
+		(not (agent-at ?t1))
+		)
+)",
+move-left,,";; Parameter Reasoning: We don't need any specific parameters for this operator as it only involves the movement of the agent.
+(:action move-left
+  :parameters ()
+  :precondition (and)
+  :effect 
+  (and
+    (agent-at ?t)
+    (not (agent-at ?t))
+    (tile-left ?t ?t2)
+    (agent-at ?t2)
+  )
+)
+
+<END>",FAILED,
+move-left,,";; Parameter Reasoning: We do not need any parameters for the move-left operator as it only requires the agent to perform the action.
+(:action move-left
+  :parameters ()
+  :precondition (and (agent-at ?t1) (tile-left ?t1 ?t2))
+  :effect (and (agent-at ?t2) (not (agent-at ?t1)))
+ )
+
+<END>","(:action move-left_1
+        :parameters (?t1 - tile ?t2 - tile)
+
+        :precondition (and 
+		(agent-at ?t1)
+		(tile-left ?t1 ?t2)
+		)
+        :effect (and 
+		(agent-at ?t2)
+		(not (agent-at ?t1))
+		)
+)",
+move-left,,";; Parameter Reasoning: The 'move-left' action does not require any parameters as it is a simple movement action in the environment.
+
+(:action move-left
+  :precondition (agent-at ?t)
+  :effect (agent-at (tile-left ?t) (not (agent-at ?t)))
+)
+
+<END>",FAILED,
+mine-feather,"(:action mine-feather
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Chicken)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Sword)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Feather)
+  )
+ )",";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-feather
+  :parameters (?toolinv1 - inventory ?targetinv1 - inventory ?targetinv2 - inventory ?target - object ?tool1 - object ?tool2 - object ?source - object ?t - tile)
+  :precondition (and 
+	(inventory-holding ?toolinv1 ?tool1)
+	(inventory-holding ?toolinv1 ?tool2)
+	(inventory-holding ?targetinv1 ?target)
+	(inventory-empty ?targetinv2)
+	(object-of-type ?tool1 Axe)
+	(object-of-type ?tool2 Sword)
+	(object-of-type ?target Chicken)
+	(object-of-type ?source Sheep)
+	(agent-at ?t)
+	(object-at ?source ?t)
+	(object-at ?target ?t)
+	)
+  :effect (and 
+	(not (object-at ?target ?t))
+	(object-at ?source ?t)
+	(inventory-holding ?targetinv2 ?target)
+	(object-of-type ?target Feather)
+	(not (object-of-type ?target Chicken))
+	)
+)
+
+<END>",FAILED,
+mine-feather,"(:action mine-feather
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Chicken)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Sword)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Feather)
+  )
+ )",";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-feather
+        :parameters (?toolinv - inventory ?targetinv - inventory ?target - object ?objinv - inventory ?obj - object ?t - tile)
+
+        :precondition (and 
+		(inventory-holding ?toolinv ?obj)
+		(inventory-holding ?targetinv ?target)
+		(inventory-empty ?objinv)
+		(object-of-type ?obj Chicken)
+		(object-of-type ?tool Axe)
+		(object-of-type ?target Hypothetical)
+		(agent-at ?t)
+		(object-at ?obj ?t)
+		)
+        :effect (and 
+		(not (inventory-empty ?objinv))
+		(inventory-holding ?objinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(not ( object-of-type ?obj Chicken ))
+		(object-of-type ?target Feather)
+		)
+)
+
+<END>","(:action mine-feather_1
+        :parameters (?toolinv - inventory ?obj - object ?targetinv - inventory ?target - object ?objinv - inventory ?tool - object ?t - tile)
+
+        :precondition (and 
+		(inventory-holding ?toolinv ?obj)
+		(inventory-holding ?targetinv ?target)
+		(inventory-empty ?objinv)
+		(object-of-type ?obj Chicken)
+		(object-of-type ?tool Axe)
+		(object-of-type ?target Hypothetical)
+		(agent-at ?t)
+		(object-at ?obj ?t)
+		)
+        :effect (and 
+		(not (inventory-empty ?objinv))
+		(inventory-holding ?objinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(not ( object-of-type ?obj Chicken ))
+		(object-of-type ?target Feather)
+		)
+)",
+mine-feather,"(:action mine-feather
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Chicken)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Sword)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Feather)
+  )
+ )",";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-feather
+        :parameters (?toolinv1 - inventory ?targetinv1 - inventory ?target1 - object ?toolinv2 - inventory ?targetinv2 - inventory ?target2 - object ?t - tile)
+
+        :precondition (and 
+		(agent-at ?t)
+		(inventory-holding ?toolinv1 ?target1)
+		(inventory-holding ?toolinv2 ?target2)
+		(not (object-of-type ?target1 Hypothetical))
+		(not (object-of-type ?target2 Hypothetical))
+		)
+        :effect (and 
+		(not (object-of-type ?target1 Feather))
+		(inventory-empty ?toolinv1)
+		(inventory-holding ?targetinv1 ?target1)
+		(not (object-of-type ?target2 Feather))
+		(inventory-empty ?toolinv2)
+		(inventory-holding ?targetinv2 ?target2)
+		)
+)
+
+<END>","(:action mine-feather_2
+        :parameters (?t - tile ?toolinv1 - inventory ?target1 - object ?toolinv2 - inventory ?target2 - object ?targetinv1 - inventory ?targetinv2 - inventory)
+
+        :precondition (and 
+		(agent-at ?t)
+		(inventory-holding ?toolinv1 ?target1)
+		(inventory-holding ?toolinv2 ?target2)
+		(not (object-of-type ?target1 Hypothetical))
+		(not (object-of-type ?target2 Hypothetical))
+		)
+        :effect (and 
+		(not (object-of-type ?target1 Feather))
+		(inventory-empty ?toolinv1)
+		(inventory-holding ?targetinv1 ?target1)
+		(not (object-of-type ?target2 Feather))
+		(inventory-empty ?toolinv2)
+		(inventory-holding ?targetinv2 ?target2)
+		)
+)",
+mine-feather3_1,,";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-feather3_1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Chicken)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Shears)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Feather)
+		)
+)
+
+<END>
+
+","(:action mine-feather3_1_0
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Chicken)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Shears)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Feather)
+		)
+)",
+mine-feather3_1,,";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-feather3_1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Chicken)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Shears)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Feather)
+		)
+)
+
+<END>","(:action mine-feather3_1_1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Chicken)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Shears)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Feather)
+		)
+)",
+mine-feather3_1,,";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-feather3_1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Chicken)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Sword)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Feather)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Feather))
+		(object-of-type ?target Hypothetical)
+		)
+)
+
+<END>
+
+","(:action mine-feather3_1_2
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Chicken)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Sword)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Feather)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Feather))
+		(object-of-type ?target Hypothetical)
+		)
+)",
+mine-feather_2,,"(:action mine-feather_2
+        :parameters (?t - tile ?toolinv1 - inventory ?target1 - object ?toolinv2 - inventory ?target2 - object ?targetinv1 - inventory ?targetinv2 - inventory)
+
+        :precondition (and 
+		(agent-at ?t)
+		(inventory-holding ?toolinv1 ?target1)
+		(inventory-holding ?toolinv2 ?target2)
+		(not (object-of-type ?target1 Hypothetical))
+		(not (object-of-type ?target2 Hypothetical))
+		)
+        :effect (and 
+		(not (object-of-type ?target1 Feather))
+		(inventory-empty ?toolinv1)
+		(inventory-holding ?targetinv1 ?target1)
+		(not (object-of-type ?target2 Feather))
+		(inventory-empty ?toolinv2)
+		(inventory-holding ?targetinv2 ?target2)
+		)
+)","(:action mine-feather_2_0
+        :parameters (?t - tile ?toolinv1 - inventory ?target1 - object ?toolinv2 - inventory ?target2 - object ?targetinv1 - inventory ?targetinv2 - inventory)
+
+        :precondition (and 
+		(agent-at ?t)
+		(inventory-holding ?toolinv1 ?target1)
+		(inventory-holding ?toolinv2 ?target2)
+		(not (object-of-type ?target1 Hypothetical))
+		(not (object-of-type ?target2 Hypothetical))
+		)
+        :effect (and 
+		(not (object-of-type ?target1 Feather))
+		(inventory-empty ?toolinv1)
+		(inventory-holding ?targetinv1 ?target1)
+		(not (object-of-type ?target2 Feather))
+		(inventory-empty ?toolinv2)
+		(inventory-holding ?targetinv2 ?target2)
+		)
+)",
+mine-feather_0,,";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-feather_0
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Chicken)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Sword)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Feather)
+		)
+)
+
+<END>","(:action mine-feather_0_0
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Chicken)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Sword)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Feather)
+		)
+)",
+mine-feather_0,,";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-feather_0
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Chicken)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Axe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Feather)
+		)
+)
+
+<END>
+
+","(:action mine-feather_0_1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Chicken)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Axe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Feather)
+		)
+)",
+mine-feather_0,,";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-feather_0
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Chicken)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Axe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Feather)
+		)
+)
+
+<END>","(:action mine-feather_0_2
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Chicken)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Axe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Feather)
+		)
+)",

@@ -1,0 +1,1 @@
+{"train_99": ["(:goal\n\t(and \n\t\t(inventory-holding i3 o17)\n\t\t(object-of-type o17 Feather))\n)"]}

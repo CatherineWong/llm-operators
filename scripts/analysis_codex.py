@@ -1,5 +1,6 @@
 # import llm_operators.codex as codex
 from llm_operators.datasets import load_planning_problems_dataset, load_pddl_domain
+from llm_operators.codex.goal import propose_goals_for_problems
 import pandas as pd
 import os
 import json
@@ -55,7 +56,7 @@ def collect_ground_truth_and_proposed_goals(solved_problems,unsolved_problems):
 
     ground_truth_vs_proposed_goals = []
 
-    codex.propose_goals_for_problems(unsolved_problems, solved_problems, pddl_domain)
+    propose_goals_for_problems(unsolved_problems, solved_problems, pddl_domain)
 
     for problem in unsolved_problems:
         problem_id = problem.problem_id

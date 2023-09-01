@@ -1,0 +1,845 @@
+problem,nl_goal,gt_pddl_goal,codex_raw_goals,codex_preprocessed_goal,correct_pddl_goal
+train_0,Craft a arrow.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Arrow)
+ ))",[],"(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Arrow))
+)",True
+train_1,Craft a beetroot soup.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 BeetrootSoup)
+ ))",[],"(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 BeetrootSoup))
+)",True
+train_2,Craft a bowl.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Bowl)
+ ))",[],"(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Bowl))
+)",True
+train_3,Craft a stick.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Stick)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))\n\n<END>']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Stick))
+)",True
+train_4,Craft a iron ingot.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 IronIngot)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 IronIngot))
+)",True
+train_5,Craft a beetroot soup.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 BeetrootSoup)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 BeetrootSoup))
+)",True
+train_6,Craft a gold ingot.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 GoldIngot)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))\n', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 GoldIngot))
+)",True
+train_7,Craft a gold ingot.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 GoldIngot)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 GoldIngot))
+)",True
+train_8,Craft a paper.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Paper)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Paper)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Paper)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Paper)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Paper)\n ))\n\n<END>']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Paper))
+)",True
+train_9,Craft a wood plank.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 WoodPlank)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 WoodPlank))
+)",True
+train_10,Craft a beetroot soup.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 BeetrootSoup)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 BeetrootSoup))
+)",True
+train_11,Craft a boat.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Boat)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Boat))
+)",True
+train_12,Craft a beetroot soup.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 BeetrootSoup)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 BeetrootSoup))
+)",True
+train_13,Craft a arrow.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Arrow)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Arrow))
+)",True
+train_14,Craft a boat.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Boat)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))\n<END>', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Boat))
+)",True
+train_15,Craft a gold ingot.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 GoldIngot)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 GoldIngot))
+)",True
+train_16,Craft a sword.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Sword)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Sword))
+)",True
+train_17,Craft a gold ingot.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 GoldIngot)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 GoldIngot))
+)",True
+train_18,Craft a arrow.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Arrow)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o23)\n   (object-of-type o23 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o23)
+		(object-of-type o23 Arrow))
+)",True
+train_18,Craft a arrow.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Arrow)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o23)\n   (object-of-type o23 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Arrow))
+)",True
+train_19,Craft a arrow.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Arrow)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Arrow))
+)",True
+train_20,Craft a boat.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Boat)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Boat))
+)",True
+train_21,Craft a wood plank.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 WoodPlank)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 WoodPlank))
+)",True
+train_22,Craft a wood plank.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 WoodPlank)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 WoodPlank))
+)",True
+train_23,Craft a wood plank.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 WoodPlank)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 WoodPlank))
+)",True
+train_24,Craft a stick.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Stick)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Stick))
+)",True
+train_25,Craft a boat.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Boat)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))', ';; PDDL Goal:\n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Boat))
+)",True
+train_26,Craft a cooked potato.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 CookedPotato)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 CookedPotato))
+)",True
+train_27,Craft a wood plank.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 WoodPlank)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 WoodPlank))
+)",True
+train_28,Craft a arrow.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Arrow)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Arrow))
+)",True
+train_29,Craft a sword.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Sword)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Sword))
+)",True
+train_30,Craft a bed.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Bed)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bed)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bed)\n ))\n\n<END>', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bed)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bed)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Bed))
+)",True
+train_31,Craft a arrow.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Arrow)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Arrow))
+)",True
+train_32,Craft a shears.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Shears)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Shears)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Shears)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Shears)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Shears)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Shears))
+)",True
+train_33,Craft a shears.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Shears)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Shears)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Shears)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Shears)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Shears)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Shears))
+)",True
+train_34,Craft a boat.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Boat)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o23)\n   (object-of-type o23 Boat)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Boat))
+)",True
+train_34,Craft a boat.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Boat)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o23)\n   (object-of-type o23 Boat)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o23)
+		(object-of-type o23 Boat))
+)",True
+train_35,Craft a bowl.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Bowl)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', 'PDDL Goal:\n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Bowl))
+)",True
+train_36,Craft a bowl.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Bowl)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))\n\n<END>', 'PDDL Goal:\n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Bowl))
+)",True
+train_37,Craft a cooked potato.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 CookedPotato)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 CookedPotato))
+)",True
+train_38,Craft a boat.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Boat)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Boat)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Boat))
+)",True
+train_39,Craft a cooked potato.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 CookedPotato)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 CookedPotato))
+)",True
+train_40,Craft a beetroot soup.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 BeetrootSoup)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal:\n(:goal (and\n   (inventory-holding i1 o2)\n   (inventory-holding i2 o5)\n   (inventory-holding i3 o24)\n   (object-of-type o2 Beetroot)\n   (object-of-type o5 Bowl)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))']","(:goal
+	(and 
+		(inventory-holding i1 o2)
+		(inventory-holding i2 o5)
+		(inventory-holding i3 o24)
+		(object-of-type o2 Beetroot)
+		(object-of-type o5 Bowl)
+		(object-of-type o24 BeetrootSoup))
+)",True
+train_40,Craft a beetroot soup.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 BeetrootSoup)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal:\n(:goal (and\n   (inventory-holding i1 o2)\n   (inventory-holding i2 o5)\n   (inventory-holding i3 o24)\n   (object-of-type o2 Beetroot)\n   (object-of-type o5 Bowl)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 BeetrootSoup))
+)",True
+train_41,Craft a bowl.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Bowl)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Bowl))
+)",True
+train_42,Craft a bowl.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Bowl)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Bowl))
+)",True
+train_43,Craft a gold ingot.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 GoldIngot)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))\n\n<END>', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 GoldIngot))
+)",True
+train_44,Craft a gold ingot.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 GoldIngot)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 GoldIngot))
+)",True
+train_45,Craft a iron ingot.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 IronIngot)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 IronIngot))
+)",True
+train_46,Craft a arrow.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Arrow)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Arrow))
+)",True
+train_47,Craft a beetroot soup.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 BeetrootSoup)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 BeetrootSoup))
+)",True
+train_48,Craft a gold ingot.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 GoldIngot)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 GoldIngot))
+)",True
+train_49,Craft a stick.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Stick)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Stick))
+)",True
+train_50,Craft a stick.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Stick)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Stick))
+)",True
+train_51,Craft a bed.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Bed)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bed)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bed)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bed)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bed)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Bed))
+)",True
+train_52,Craft a sword.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Sword)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Sword))
+)",True
+train_53,Craft a shears.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Shears)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Shears)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Shears)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Shears)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Shears)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Shears))
+)",True
+train_54,Craft a arrow.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Arrow)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Arrow))
+)",True
+train_55,Craft a cooked potato.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 CookedPotato)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 CookedPotato))
+)",True
+train_56,Craft a sword.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Sword)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal:\n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Sword))
+)",True
+train_57,Craft a sword.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Sword)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Sword))
+)",True
+train_58,Craft a bowl.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Bowl)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Bowl))
+)",True
+train_59,Craft a bed.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Bed)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bed)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bed)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bed)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bed)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Bed))
+)",True
+train_60,Craft a bowl.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Bowl)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o23)\n   (object-of-type o23 Bowl)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))\n\n<END>', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Bowl))
+)",True
+train_60,Craft a bowl.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Bowl)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o23)\n   (object-of-type o23 Bowl)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))\n\n<END>', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o23)
+		(object-of-type o23 Bowl))
+)",True
+train_61,Craft a stick.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Stick)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Stick))
+)",True
+train_62,Craft a arrow.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Arrow)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Arrow))
+)",True
+train_63,Craft a iron ingot.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 IronIngot)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal:\n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 IronIngot))
+)",True
+train_64,Craft a arrow.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Arrow)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Arrow))
+)",True
+train_65,Craft a wood plank.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 WoodPlank)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal:\n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 WoodPlank))
+)",True
+train_66,Craft a wood plank.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 WoodPlank)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 WoodPlank))
+)",True
+train_67,Craft a iron ingot.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 IronIngot)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))\n\n<END>']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 IronIngot))
+)",True
+train_68,Craft a gold ingot.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 GoldIngot)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 GoldIngot))
+)",True
+train_69,Craft a bed.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Bed)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bed)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bed)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bed)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bed)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Bed))
+)",True
+train_70,Craft a gold ingot.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 GoldIngot)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 GoldIngot))
+)",True
+train_71,Craft a stick.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Stick)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Stick))
+)",True
+train_72,Craft a shears.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Shears)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Shears)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Shears)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Shears)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Shears)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Shears))
+)",True
+train_73,Craft a beetroot soup.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 BeetrootSoup)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 BeetrootSoup))
+)",True
+train_74,Craft a iron ingot.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 IronIngot)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 IronIngot))
+)",True
+train_75,Craft a beetroot soup.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 BeetrootSoup)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 BeetrootSoup))
+)",True
+train_76,Craft a bed.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Bed)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bed)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bed)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bed)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bed)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Bed))
+)",True
+train_77,Craft a sword.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Sword)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Sword))
+)",True
+train_78,Craft a stick.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Stick)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i2 o23)\n   (object-of-type o23 Stick)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Stick))
+)",True
+train_78,Craft a stick.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Stick)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i2 o23)\n   (object-of-type o23 Stick)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))']","(:goal
+	(and 
+		(inventory-holding i2 o23)
+		(object-of-type o23 Stick))
+)",True
+train_79,Craft a arrow.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Arrow)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Arrow))
+)",True
+train_80,Craft a gold ingot.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 GoldIngot)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 GoldIngot))
+)",True
+train_81,Craft a bowl.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Bowl)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Bowl))
+)",True
+train_82,Craft a iron ingot.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 IronIngot)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))\n\n<END>']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 IronIngot))
+)",True
+train_83,Craft a bowl.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Bowl)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Bowl))
+)",True
+train_84,Craft a stick.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Stick)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))\n\n<END>', 'PDDL Goal: \n\n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Stick))
+)",True
+train_85,Craft a beetroot soup.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 BeetrootSoup)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 BeetrootSoup))
+)",True
+train_86,Craft a cooked potato.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 CookedPotato)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))\n', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))\n\n<END>']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 CookedPotato))
+)",True
+train_87,Craft a stick.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Stick)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Stick)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Stick))
+)",True
+train_88,Craft a sword.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Sword)
+ ))","['PDDL Goal:\n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Sword))
+)",True
+train_89,Craft a iron ingot.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 IronIngot)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal: \n\n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 IronIngot)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 IronIngot))
+)",True
+train_90,Craft a arrow.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Arrow)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))', ';; PDDL Goal:\n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Arrow)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Arrow))
+)",True
+train_91,Craft a wood plank.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 WoodPlank)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 WoodPlank))
+)",True
+train_92,Craft a wood plank.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 WoodPlank)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 WoodPlank)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 WoodPlank))
+)",True
+train_93,Craft a cooked potato.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 CookedPotato)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 CookedPotato))
+)",True
+train_94,Craft a bowl.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Bowl)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))\n', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Bowl)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Bowl))
+)",True
+train_95,Craft a cooked potato.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 CookedPotato)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 CookedPotato)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 CookedPotato))
+)",True
+train_96,Craft a beetroot soup.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 BeetrootSoup)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 BeetrootSoup)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 BeetrootSoup))
+)",True
+train_97,Craft a sword.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Sword)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', 'PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Sword))
+)",True
+train_98,Craft a sword.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 Sword)
+ ))","['PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 Sword)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 Sword))
+)",True
+train_99,Craft a gold ingot.,"(:goal (and
+   (inventory-holding i3 o24)
+   (object-of-type o24 GoldIngot)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o24)\n   (object-of-type o24 GoldIngot)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o24)
+		(object-of-type o24 GoldIngot))
+)",True

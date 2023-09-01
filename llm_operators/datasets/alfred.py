@@ -7,7 +7,7 @@ import json
 
 import numpy as np
 
-from llm_operators.datasets.core import (
+from llm_operators.datasets.dataset_core import (
     Problem,
     register_planning_pddl_domain,
     register_planning_domain_problems,

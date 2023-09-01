@@ -5,7 +5,7 @@ import numpy as np
 import numpy.random as npr
 from typing import Any, Optional, Tuple, Dict
 
-from llm_operators.datasets.core import Problem
+from llm_operators.datasets.dataset_core import Problem
 from llm_operators.datasets.crafting_world_gen.crafting_world_rules import get_all_mining_tools, get_all_mining_locations, get_all_mining_outcomes, MINING_RULES
 from llm_operators.datasets.crafting_world_gen.utils import underline_to_pascal, underline_to_space
 from llm_operators.pddl import PDDLProblem, PDDLPlan

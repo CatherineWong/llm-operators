@@ -8,7 +8,7 @@ train/pick_and_place_simple-AppleSliced-None-Fridge-30/trial_T20190907_105723_67
 		(inReceptacle ?o ?r)
 		(cleanable ?o)
 		(isClean ?o))))
-)",False,,"['HeatObject', 'CoolObject', 'ToggleObject', 'SliceObject', 'OpenObject', 'CloseObject']"
+)",False,,"['CloseObject', 'HeatObject', 'ToggleObject', 'CoolObject', 'SliceObject', 'OpenObject']"
 train/pick_and_place_simple-AppleSliced-None-Fridge-30/trial_T20190907_105723_672392,1,0.5,"(:goal
 	(exists (?r - receptacle)
 (exists (?o - object)
@@ -18,7 +18,7 @@ train/pick_and_place_simple-AppleSliced-None-Fridge-30/trial_T20190907_105723_67
 		(inReceptacle ?o ?r)
 		(cleanable ?o)
 		(isClean ?o))))
-)",False,,"['ToggleObject', 'CloseObject', 'CoolObject']"
+)",False,,"['ToggleObject', 'OpenObject', 'HeatObject']"
 train/pick_and_place_simple-AppleSliced-None-Fridge-30/trial_T20190907_105723_672392,2,0.5,"(:goal
 	(exists (?r - receptacle)
 (exists (?o - object)
@@ -28,7 +28,7 @@ train/pick_and_place_simple-AppleSliced-None-Fridge-30/trial_T20190907_105723_67
 		(inReceptacle ?o ?r)
 		(cleanable ?o)
 		(isClean ?o))))
-)",False,,"['HeatObject', 'SliceObject', 'OpenObject']"
+)",False,,"['CloseObject', 'CoolObject', 'SliceObject']"
 train/pick_and_place_simple-AppleSliced-None-Fridge-30/trial_T20190907_105723_672392,3,0.5,"(:goal
 	(exists (?r - receptacle)
 (exists (?o - object)
@@ -38,7 +38,7 @@ train/pick_and_place_simple-AppleSliced-None-Fridge-30/trial_T20190907_105723_67
 		(inReceptacle ?o ?r)
 		(cleanable ?o)
 		(isClean ?o))))
-)",False,,"['CloseObject', 'HeatObject', 'OpenObject']"
+)",False,,"['OpenObject', 'CloseObject', 'SliceObject']"
 train/pick_and_place_simple-TomatoSliced-None-CounterTop-25/trial_T20190908_233907_188674,0,1.0,"(:goal
 	(exists (?o1 - object)
 (and 
@@ -47,4 +47,4 @@ train/pick_and_place_simple-TomatoSliced-None-CounterTop-25/trial_T20190908_2339
 )",True,"(gotolocation agent1 loc_bar__minus_8_bar_7_bar_3_bar_30 loc_bar__minus_6_bar_4_bar_2_bar_60)
 (gotolocation agent1 loc_bar__minus_6_bar_4_bar_2_bar_60 loc_bar__minus_8_bar_4_bar_3_bar_45)
 (pickupobjectinreceptacle agent1 loc_bar__minus_8_bar_4_bar_3_bar_45 butterknife__minus_10_dot_63472652_comma__minus_10_dot_63472652_comma_3_dot_485373736_comma_3_dot_485373736_comma_3_dot_294568_comma_3_dot_294568 countertop__minus_6_dot_232_comma__minus_6_dot_232_comma_1_dot_112_comma_1_dot_112_comma_3_dot_4364_comma_3_dot_4364)
-(sliceobject agent1 loc_bar__minus_8_bar_4_bar_3_bar_45 tomato__minus_10_dot_63472652_comma__minus_10_dot_63472652_comma_2_dot_176296948_comma_2_dot_176296948_comma_3_dot_492494584_comma_3_dot_492494584 butterknife__minus_10_dot_63472652_comma__minus_10_dot_63472652_comma_3_dot_485373736_comma_3_dot_485373736_comma_3_dot_294568_comma_3_dot_294568)","['HeatObject', 'CoolObject', 'ToggleObject', 'SliceObject', 'OpenObject', 'CloseObject']"
+(sliceobject agent1 loc_bar__minus_8_bar_4_bar_3_bar_45 tomato__minus_10_dot_63472652_comma__minus_10_dot_63472652_comma_2_dot_176296948_comma_2_dot_176296948_comma_3_dot_492494584_comma_3_dot_492494584 butterknife__minus_10_dot_63472652_comma__minus_10_dot_63472652_comma_3_dot_485373736_comma_3_dot_485373736_comma_3_dot_294568_comma_3_dot_294568)","['CloseObject', 'HeatObject', 'ToggleObject', 'CoolObject', 'SliceObject', 'OpenObject']"
