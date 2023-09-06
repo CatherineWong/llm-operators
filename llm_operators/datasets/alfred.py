@@ -626,7 +626,6 @@ def load_alfred_filtered_planning_domain_problems(
         fraction_split = random.sample(list(alfred_json[dataset_split]), num_to_take)
         # fraction_split = list(alfred_json[dataset_split])[:num_to_take]
         for problem_json in fraction_split:
-            import pdb; pdb.set_trace()
             problem_id = problem_json["file_name"]
             goal_language = problem_json["goal"]
             ground_truth_pddl_plan = problem_json["operator_sequence"]
@@ -656,7 +655,7 @@ def load_alfred_filtered_planning_domain_problems(
 
     if verbose:
         print(
-            f"\nload_alfred_solvable_planning_domain_problems: loaded {ALFRED_COT_250_DATASET_FILTERED_NAME} from {ALFRED_COT_250_DATASET_FILTERED_PATH}"
+            f"\nload_alfred_filtered_planning_domain_problems: loaded {ALFRED_COT_250_DATASET_FILTERED_NAME} from {ALFRED_COT_250_DATASET_FILTERED_PATH}"
         )
         for dataset_split in dataset:
             print(

@@ -295,11 +295,14 @@ def run_planner(
 
     # Get domain strings. Pick the first one that parses
     current_domain_string = pddl_domain.to_string(
-        ground_truth_operators=False,
-        current_operators=True,
+        ground_truth_operators=True,
+        current_operators=False,
         proposed_operators=proposed_operators,
         show_constants=(not problem.constants_in_problem_file),
     )
+    with open('data/domains/alfred_linearized_pdsketch.pddl') as f:
+        current_domain_string = f.read()
+
 
     if debug_ground_truth_goals:
         sorted_goals = [problem.ground_truth_pddl_problem.ground_truth_goal]
@@ -335,6 +338,7 @@ def run_planner(
                 problem_str=current_problem_string,
                 verbose=verbose,
             )
+            import pdb; pdb.set_trace()
         elif planner_type == TASK_PLANNER_PDSKETCH_ONTHEFLY:
             success, plan_string = pdsketch_onthefly_plan_from_strings(
                 domain_str=current_domain_string, problem_str=current_problem_string

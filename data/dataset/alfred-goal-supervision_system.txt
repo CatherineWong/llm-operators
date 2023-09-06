@@ -1,0 +1,354 @@
+;; You are a software engineer who will be writing goal definitions for a robot in the PDDL planning language.
+;; These operators are based on the following PDDL domain definition. 
+;; Note that there are separate types for both objects (otype) and receptacles (rtype).
+(:requirements :adl)
+
+(:types 
+	agent location receptacle object rtype otype
+)
+
+;; otype: object types.
+(:otype
+        CandleType - otype
+        ShowerGlassType - otype
+        CDType - otype
+        TomatoType - otype
+        MirrorType - otype
+        ScrubBrushType - otype
+        MugType - otype
+        ToasterType - otype
+        PaintingType - otype
+        CellPhoneType - otype
+        LadleType - otype
+        BreadType - otype
+        PotType - otype
+        BookType - otype
+        TennisRacketType - otype
+        ButterKnifeType - otype
+        ShowerDoorType - otype
+        KeyChainType - otype
+        BaseballBatType - otype
+        EggType - otype
+        PenType - otype
+        ForkType - otype
+	    WhiskType - otype
+        VaseType - otype
+        ClothType - otype
+        WindowType - otype
+        PencilType - otype
+        StatueType - otype
+        LightSwitchType - otype
+        WatchType - otype
+        SpatulaType - otype
+        PaperTowelRollType - otype
+        FloorLampType - otype
+        KettleType - otype
+        SoapBottleType - otype
+        BootsType - otype
+        TowelType - otype
+        PillowType - otype
+        AlarmClockType - otype
+        PotatoType - otype
+        ChairType - otype
+        PlungerType - otype
+        SprayBottleType - otype
+        HandTowelType - otype
+        BathtubType - otype
+        RemoteControlType - otype
+        PepperShakerType - otype
+        PlateType - otype
+        BasketBallType - otype
+        DeskLampType - otype
+        FootstoolType - otype
+        GlassbottleType - otype
+        PaperTowelType - otype
+        CreditCardType - otype
+        PanType - otype
+        ToiletPaperType - otype
+        SaltShakerType - otype
+        PosterType - otype
+        ToiletPaperRollType - otype
+        LettuceType - otype
+        WineBottleType - otype
+        KnifeType - otype
+        LaundryHamperLidType - otype
+        SpoonType - otype
+        TissueBoxType - otype
+        BowlType - otype
+        BoxType - otype
+        SoapBarType - otype
+        HousePlantType - otype
+        NewspaperType - otype
+        CupType - otype
+        DishSpongeType - otype
+        LaptopType - otype
+        TelevisionType - otype
+        StoveKnobType - otype
+        CurtainsType - otype
+        BlindsType - otype
+        TeddyBearType - otype
+        AppleType - otype
+        WateringCanType - otype
+        SinkType - otype
+)
+;; rtype: receptacle types.
+(:rtype
+        ArmChairType - rtype
+        BedType - rtype
+        BathtubBasinType - rtype
+        DresserType - rtype
+        SafeType - rtype
+        DiningTableType - rtype
+        SofaType - rtype
+        HandTowelHolderType - rtype
+        StoveBurnerType - rtype
+        CartType - rtype
+        DeskType - rtype
+        CoffeeMachineType - rtype
+        MicrowaveType - rtype
+        ToiletType - rtype
+        CounterTopType - rtype
+        GarbageCanType - rtype
+        CoffeeTableType - rtype
+        CabinetType - rtype
+        SinkBasinType - rtype
+        OttomanType - rtype
+        ToiletPaperHangerType - rtype
+        TowelHolderType - rtype
+        FridgeType - rtype
+        DrawerType - rtype
+        SideTableType - rtype
+        ShelfType - rtype
+        LaundryHamperType - rtype
+)
+
+;; Predicates defined on this domain. Note the types for each predicate.
+(:predicates
+	(atLocation ?a - agent ?l - location) 
+        (receptacleAtLocation ?r - receptacle ?l - location) 
+        (objectAtLocation ?o - object ?l - location)
+        (inReceptacle ?o - object ?r - receptacle) 
+        (receptacleType ?r - receptacle ?t - rtype) 
+        (objectType ?o - object ?t - otype) 
+        (holds ?a - agent ?o - object) 
+        (holdsAny ?a - agent) 
+        (holdsAnyReceptacleObject ?a - agent) 
+        
+	(openable ?r - receptacle) 
+        (opened ?r - receptacle) 
+        (isClean ?o - object) 
+        (cleanable ?o - object) 
+        (isHot ?o - object) 
+        (heatable ?o - object) 
+        (isCool ?o - object) 
+        (coolable ?o - object) 
+        (toggleable ?o - object) 
+        (isOn ?o - object) 
+        (isToggled ?o - object) 
+        (sliceable ?o - object) 
+        (isSliced ?o - object) 
+ )
+
+;; Example translations from natural language to a simplified goal name, and then a PDDL goal. Notice that PDDL goals MUST only use predicates, object types, and receptacle types exactly as they appear in the domain above. People may also have been unclear about which stimulus they were talking about, so we list multiple possible guesses for goal if there is uncertainty over what they meant.
+
+;; Human written natural language goal.
+put a soup spoon on a table.
+
+<START>
+;; PDDL guess 1 for "put a soup spoon on a table."
+;; Official goal name: pick_and_place_simple-Spoon-None-DiningTableType
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o SpoonType) 
+                (receptacleType ?r DiningTableType)
+                (inReceptacle ?o ?r) 
+            )
+)))
+<END>
+
+<START>
+;; PDDL guess 2 for "put a soup spoon on a table."
+;; Official goal name: pick_and_place_simple-Ladle-None-DiningTableType
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o LadleType) 
+                (receptacleType ?r DiningTableType)
+                (inReceptacle ?o ?r) 
+            )
+)))
+<END>
+
+<START>
+;; PDDL guess 3 for "put a soup spoon on a table."
+;; Official goal name: pick_and_place_simple-Ladle-None-DeskType
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o LadleType) 
+                (receptacleType ?r DeskType)
+                (inReceptacle ?o ?r) 
+            )
+)))
+<END>
+
+<START>
+;; PDDL guess 4 for "put a soup spoon on a table."
+;; Official goal name: pick_and_place_simple-ForkType-None-SideTableType
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o ForkTypeType) 
+                (receptacleType ?r SideTableType)
+                (inReceptacle ?o ?r) 
+            )
+)))
+<END>
+
+;; Human written natural language goal.
+put a warmed up slice of pear in the cabinet.
+
+<START>
+;; PDDL guess 1 for "put a warmed up slice of pear in the cabinet."
+;; Official goal name: pick_heat_then_place_in_recep-AppleSliced-None-Cabinet
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o AppleType) 
+                (receptacleType ?r CabinetType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o)
+                (sliceable ?o)
+                (isSliced ?o)  
+            )
+    )))
+<END>
+
+<START>
+;; PDDL guess 2 for "put a warmed up slice of pear in the cabinet."
+;; Official goal name: pick_heat_then_place_in_recep-TomatoSliced-None-Cabinet
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o TomatoType) 
+                (receptacleType ?r CabinetType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o)
+                (sliceable ?o)
+                (isSliced ?o)  
+            )
+    )))
+<END>
+
+<START>
+;; PDDL guess 3 for "put a warmed up slice of pear in the cabinet."
+;; Official goal name: pick_heat_then_place_in_recep-AppleSliced-None-Cupboard
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o AppleType) 
+                (receptacleType ?r CupboardType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o)
+                (sliceable ?o)
+                (isSliced ?o)  
+            )
+    )))
+<END>
+
+<START>
+;; PDDL guess 4 for "put a warmed up slice of pear in the cabinet."
+;; Official goal name: pick_heat_then_place_in_recep-TomatoSliced-None-Cupboard
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o TomatoType) 
+                (receptacleType ?r CupboardType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o)
+                (sliceable ?o)
+                (isSliced ?o)  
+            )
+    )))
+<END>
+
+;; Human written natural language goal.
+put a hot potato in the refrigerator.
+<START>
+;; PDDL guess 1 for "put a hot potato in the refrigerator."
+;; Official goal name:
+pick_heat_then_place_in_recep-Potato-None-Fridge-12
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o PotatoType) 
+                (receptacleType ?r FridgeType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o) 
+            )
+    )))
+<END>
+<START>
+;; PDDL guess 2 for "put a hot potato in the refrigerator."
+;; Official goal name:
+pick_heat_then_place_in_recep-Potato-None-Fridge-12
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o PotatoType) 
+                (receptacleType ?r FridgeType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o) 
+            )
+    )))
+<END>
+<START>
+;; PDDL guess 3 for "put a hot potato in the refrigerator."
+;; Official goal name:
+pick_heat_then_place_in_recep-Potato-None-Fridge-12
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o PotatoType) 
+                (receptacleType ?r FridgeType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o) 
+            )
+    )))
+<END>
+<START>
+;; PDDL guess 4 for "put a hot potato in the refrigerator."
+;; Official goal name:
+pick_heat_then_place_in_recep-Potato-None-Fridge-12
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o PotatoType) 
+                (receptacleType ?r FridgeType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o) 
+            )
+    )))
+<END>
+

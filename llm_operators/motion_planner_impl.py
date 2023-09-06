@@ -67,6 +67,7 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
             dataset_split=dataset_split,
             verbose=verbose,
             motionplan_search_type=motionplan_search_type,
+            proposed_goal_predicates=goal_ground_truth_predicates,
         )
         return MotionPlanResult(
             pddl_plan=pruned_pddl_plan,

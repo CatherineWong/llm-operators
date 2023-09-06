@@ -84,6 +84,8 @@ parser.add_argument("--n_operator_samples", type=int, default=3, help="Number of
 parser.add_argument("--n_attempts_to_plan", type=int, default=4, help="Number of attempts to iterate over the task and motion planning loop. Starts by planning with all of the operators, from there downsamples.")
 
 # External supervision.
+parser.add_argument("--external_goal_sample_with_prompt", action="store_true", help="If provided, this assumes that instead of taking N discrete samples with the same prompt, we will 'sample' the LLM based on the user message, and attempt to parse out discrete operators from the prompt itself.")
+parser.add_argument("--external_goal_supervision", type=str, default=None, help="If provided, file HEADER path containing the supervision used for external goals. Assuming you are prompting GPT-3.5, this should be followed by two file suffices, one _system.txt and the other _user.txt.")
 parser.add_argument("--external_plan_supervision", type=str, default=None, help="If provided, file containing initial plans that will be provided as supervision.")
 parser.add_argument("--external_operator_supervision", type=str, default=None, help="If provided, file HEADER path containing the supervision used for external operators. Assuming you are prompting GPT-3.5, this should be followed by two file suffices, one _system.txt and the other _user.txt.")
 parser.add_argument("--external_operator_sample_with_prompt", action="store_true", help="If provided, this assumes that instead of taking N discrete samples with the same prompt, we will 'sample' the LLM based on the user message, and attempt to parse out discrete operators from the prompt itself.")
@@ -220,6 +222,8 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
             resume_from_iteration=args.resume_from_iteration,
             resume_from_problem_idx=args.resume_from_problem_idx,
             verbose=args.verbose,
+            external_goal_supervision=args.external_goal_supervision,
+            external_goal_sample_with_prompt=args.external_goal_sample_with_prompt,
         )
         pddl.preprocess_goals(
             problems=planning_problems["train"],
