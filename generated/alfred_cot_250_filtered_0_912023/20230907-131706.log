@@ -1,0 +1,645 @@
+Experiment Parameters
+================================================================================
+Timestamp: 2023-09-07 13:17:06.169814
+Command to replicate: python main.py --experiment_name alfred_cot_250_filtered_0_912023 --random_seed 0 --output_directory generated --train_iterations 2 --pddl_domain_name alfred_linearized --dataset_name alfred_cot_250_filtered --dataset_fraction 1.0 --dataset_pddl_directory data/dataset/alfred_linearized_pddl --supervision_name supervision --goal_supervision_fraction 0.1 --initial_goal_supervision_prefix ALL --plan_supervision_fraction 0.1 --initial_plans_prefix ALL --initial_pddl_predicates  --initial_pddl_operators GotoLocation PickupObjectInReceptacle PickupObjectNotInReceptacle PutObjectInReceptacle CleanObject HeatObject CoolObject ToggleObject SliceObject --operator_propose_minimum_usage 2 --operator_use_cot 1 --goal_propose_include_codex_types  --codex_goal_temperature 1.0 --codex_operator_temperature 1.0 --codex_plan_temperature 1.0 --maximum_operator_arity 4 --n_goal_samples 4 --n_plan_samples 5 --n_operator_samples 3 --n_attempts_to_plan 1 --external_goal_sample_with_prompt  --external_goal_supervision data/dataset/alfred-goal-supervision_ --external_plan_supervision data/dataset/alfred-grate-break-fill-restart-supervision.json --external_operator_supervision data/dataset/alfred-grate-break-fill-restart-operator-supervision_ --external_operator_sample_with_prompt  --external_operator_names GrateObject BakeObject FillObject RestartObject --planner task_planner_fd --planner_timeout None --planner_minimum_n_operators 7 --planner_run_second_pass 1 --motionplan_search_type counter --operator_pseudocounts 0.05 --operator_pseudocounts_denominator 0.5 --operator_acceptance_threshold 0.1 --checkpoint_every_n_problem_plans 2 --resume  --resume_from_iteration 0 --resume_from_problem_idx 0 --verbose  --debug_export_failed_pddl None --debug_no_propose_plans_operators_goals  --debug_mock_propose_goals  --debug_mock_propose_plans  --debug_mock_propose_operators  --debug_skip_propose_operators_after -1 --debug_skip_propose_plans_after -1 --debug_skip_task_plans  --debug_mock_task_plans  --debug_mock_motion_plans  --debug_skip_motion_plans  --debug_start_problem_idx 0 --debug_skip_problems None --debug_ground_truth_operators  --debug_ground_truth_goals  --debug_stop_after_first_proposal  --debug_cw_skip_location_check  
+
+
+Loaded PDDL file with operators
+================================================================================
+Domain: alfred_linearized
+Filename: data/domains/alfred_linearized.pddl
+Operators: 12
+Ground truth operators: 
+   GotoLocation
+   OpenObject
+   CloseObject
+   PickupObjectInReceptacle
+   PickupObjectNotInReceptacle
+   PutObjectInReceptacle
+   PutObjectInReceptacleObject
+   CleanObject
+   HeatObject
+   CoolObject
+   ToggleObject
+   SliceObject
+Initializing with operators: 
+  GotoLocation
+  PickupObjectInReceptacle
+  PickupObjectNotInReceptacle
+  PutObjectInReceptacle
+  CleanObject
+  HeatObject
+  CoolObject
+  ToggleObject
+  SliceObject
+
+
+load_alfred_filtered_planning_domain_problems: loaded alfred_cot_250_filtered from data/dataset/alfred-cot-250-filtered-NLgoals-operators.json
+train : 223 / original 223 problems
+valid_seen : 145 / original 145 problems
+valid_unseen : 155 / original 155 problems
+Loaded initial dataset: alfred_cot_250_filtered
+================================================================================
+Initial train problems: 223
+Marking problems for goal supervision: fraction=0.1, prefix=['ALL']
+Sampling problems for goal supervision: 
+	 look_at_obj_in_light : 3
+	 pick_cool_then_place_in_recep : 2
+	 pick_and_place_simple : 3
+	 pick_heat_then_place_in_recep : 3
+	 pick_and_place_simple_slice : 1
+	 pick_heat_then_place_in_recep_slice : 2
+	 pick_clean_then_place_in_recep : 2
+	 pick_cool_then_place_in_recep_slice : 2
+Total goal supervision problems: 18
+Marking problems for plan supervision: fraction=0.1, prefix=['ALL']
+This is not implemented yet. (!!!)
+
+Loaded PDDL supervision
+================================================================================
+Loaded additional PDDL supervision from the following domain files:
+  data/domains/supervision_domains/movie_domain.pddl
+  data/domains/supervision_domains/depot_domain.pddl
+  data/domains/supervision_domains/travel_domain.pddl
+
+
+Training started.
+================================================================================
+
+Using ground truth goals, skipping: propose_goals_for_problems
+preprocess_goals: preprocessing 205 unsolved problems.
+preprocess_goals: Preprocess goals top-K accuracy: 0 / 205 exact match to ground truth goal.
+Logging preprocessed goals: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_preprocessed_goals.csv
+
+mock_propose_plans_for_problems:: from generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_codex_plans.json
+
+
+mock_propose_plans_for_problems:: loaded a total of 223 plans for 223 unsolved problems.
+Logging proposed plans: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_codex_plans.csv
+
+propose_operators_for_problems:: proposing for 23 operators.
+['ExamineObject', 'TurnOnObject', 'TurnOnLight', 'ThrowObject', 'CutObject', 'InspectObject', 'CookObject', 'OpenObject', 'EmptyObject', 'PlaceObject', 'WashObject', 'TurnOffObject', 'ToastObject', 'DrainObject', 'ChillObject', 'MicrowaveObject', 'UseObject', 'WarmObject', 'CloseObject', 'LookAtObject', 'RinseObject', 'DiscardObject', 'PutdownObject']
+mock_propose_operators_for_problems:: from generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_codex_operators.json
+Loaded 23 mock operators:
+['ExamineObject', 'TurnOnObject', 'TurnOnLight', 'ThrowObject', 'CutObject', 'InspectObject', 'CookObject', 'OpenObject', 'EmptyObject', 'PlaceObject', 'WashObject', 'TurnOffObject', 'ToastObject', 'DrainObject', 'ChillObject', 'MicrowaveObject', 'UseObject', 'WarmObject', 'CloseObject', 'LookAtObject', 'RinseObject', 'DiscardObject', 'PutdownObject']
+preprocess_operators:: preprocessing 23 operators.
+['ExamineObject', 'TurnOnObject', 'TurnOnLight', 'ThrowObject', 'CutObject', 'InspectObject', 'CookObject', 'OpenObject', 'EmptyObject', 'PlaceObject', 'WashObject', 'TurnOffObject', 'ToastObject', 'DrainObject', 'ChillObject', 'MicrowaveObject', 'UseObject', 'WarmObject', 'CloseObject', 'LookAtObject', 'RinseObject', 'DiscardObject', 'PutdownObject']
+Logging preprocessed operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_preprocessed_operators.csv
+
+Attempting task and motion planning on all problems.
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 1 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 3 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 5 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 6 / 223 ID=train/pick_and_place_simple-AppleSliced-None-Fridge-30/trial_T20190907_105523_799331 AttemptIdx=0 GoalIdx=0
+  Using mock task plan result.
+  Plan success: False
+  Plan string:  (gotolocation agent1 loc_bar_8_bar_2_bar_2_bar_30 loc_bar_4_bar__minus_2_bar_0_bar_45) (pickupobjectinreceptacle agent1 loc_bar_4_bar__minus_2_bar_0_bar_45 knife_4_dot_39545632_comma_4_dot_39545632_comma_0_dot_721947668_comma_0_dot_721947668_comma_3_dot_7348736_comma_3_dot_7348736 countertop_4_dot_844_comma_4_dot_844_comma_1_dot_856_comma_1_dot_856_comma_3_dot_7488_comma_3_dot_7488) (gotolocation agent1 loc_bar_4_bar__minus_2_bar_0_bar_45 loc_bar_4_bar__minus_3_bar_2_bar_60) (sliceobject agent1 loc_bar_4_bar__minus_3_bar_2_bar_60 apple_4_dot_3444972_comma_4_dot_3444972_comma__minus_5_dot_6285138_comma__minus_5_dot_6285138_comma_3_dot_149359464_comma_3_dot_149359464 knife_4_dot_39545632_comma_4_dot_39545632_comma_0_dot_721947668_comma_0_dot_721947668_comma_3_dot_7348736_comma_3_dot_7348736)
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 7 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 9 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 11 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 13 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 14 / 223 ID=train/pick_heat_then_place_in_recep-TomatoSliced-None-Fridge-5/trial_T20190908_061406_498045 AttemptIdx=0 GoalIdx=0
+  Using mock task plan result.
+  Plan success: True
+  Plan string:  (gotolocation agent1 loc_bar__minus_4_bar_7_bar_1_bar_30 loc_bar_4_bar__minus_5_bar_1_bar_45) (gotolocation agent1 loc_bar_4_bar__minus_5_bar_1_bar_45 loc_bar_5_bar__minus_3_bar_1_bar_15) (pickupobjectinreceptacle agent1 loc_bar_5_bar__minus_3_bar_1_bar_15 tomato_7_dot_34517144_comma_7_dot_34517144_comma__minus_3_dot_3223968_comma__minus_3_dot_3223968_comma_5_dot_90939808_comma_5_dot_90939808 fridge_7_dot_9_comma_7_dot_9_comma__minus_2_dot_148_comma__minus_2_dot_148_comma_0_dot_0_comma_0_dot_0) (gotolocation agent1 loc_bar_5_bar__minus_3_bar_1_bar_15 loc_bar_4_bar__minus_5_bar_1_bar_45) (heatobject agent1 loc_bar_4_bar__minus_5_bar_1_bar_45 microwave_7_dot_308_comma_7_dot_308_comma__minus_5_dot_416_comma__minus_5_dot_416_comma_3_dot_600000144_comma_3_dot_600000144 tomato_7_dot_34517144_comma_7_dot_34517144_comma__minus_3_dot_3223968_comma__minus_3_dot_3223968_comma_5_dot_90939808_comma_5_dot_90939808) (gotolocation agent1 loc_bar_4_bar__minus_5_bar_1_bar_45 loc_bar_5_bar__minus_2_bar_1_bar_60) (putobjectinreceptacle agent1 loc_bar_5_bar__minus_2_bar_1_bar_60 tomatotype tomato_7_dot_34517144_comma_7_dot_34517144_comma__minus_3_dot_3223968_comma__minus_3_dot_3223968_comma_5_dot_90939808_comma_5_dot_90939808 fridge_7_dot_9_comma_7_dot_9_comma__minus_2_dot_148_comma__minus_2_dot_148_comma_0_dot_0_comma_0_dot_0) (gotolocation agent1 loc_bar_5_bar__minus_2_bar_1_bar_60 loc_bar__minus_2_bar__minus_1_bar_0_bar_60) (pickupobjectinreceptacle agent1 loc_bar__minus_2_bar__minus_1_bar_0_bar_60 knife__minus_2_dot_53843212_comma__minus_2_dot_53843212_comma_0_dot_543793796_comma_0_dot_543793796_comma_3_dot_7481108_comma_3_dot_7481108 countertop__minus_2_dot_662_comma__minus_2_dot_662_comma_0_dot_7552_comma_0_dot_7552_comma_3_dot_796_comma_3_dot_796) (gotolocation agent1 loc_bar__minus_2_bar__minus_1_bar_0_bar_60 loc_bar_5_bar__minus_2_bar_1_bar_60) (sliceobject agent1 loc_bar_5_bar__minus_2_bar_1_bar_60 tomato_7_dot_34517144_comma_7_dot_34517144_comma__minus_3_dot_3223968_comma__minus_3_dot_3223968_comma_5_dot_90939808_comma_5_dot_90939808 knife__minus_2_dot_53843212_comma__minus_2_dot_53843212_comma_0_dot_543793796_comma_0_dot_543793796_comma_3_dot_7481108_comma_3_dot_7481108)
+[Counter] Loaded counter tree from pickle.
+[Counter] Stored Goals: 926
+motion_planner.attempt_motion_plan_for_problem: attempt 14 / 223 ID=train/pick_heat_then_place_in_recep-TomatoSliced-None-Fridge-5/trial_T20190908_061406_498045 AttemptIdx=0
+  Using mock motion plan result.
+  Motion plan result: task_success: True
+  Total Actions Taken: 0
+  Total Time Taken: 0.000s
+> /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/main.py(409)_run_task_and_motion_plan()
+-> return any_motion_planner_success
+(Pdb) 
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 1 / 15 problems so far.
+Overall successful motion plans: 1 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 1 / 17 problems so far.
+Overall successful motion plans: 1 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 1 / 19 problems so far.
+Overall successful motion plans: 1 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 19 / 223 ID=train/look_at_obj_in_light-Statue-None-DeskLamp-218/trial_T20190909_085327_810149 AttemptIdx=0 GoalIdx=0
+  Using mock task plan result.
+  Plan success: True
+  Plan string:  (gotolocation agent1 loc_bar__minus_10_bar_22_bar_3_bar_30 loc_bar_3_bar_24_bar_0_bar_60) (gotolocation agent1 loc_bar_3_bar_24_bar_0_bar_60 loc_bar__minus_22_bar_14_bar_0_bar_45) (pickupobjectinreceptacle agent1 loc_bar__minus_22_bar_14_bar_0_bar_45 statue__minus_22_dot_06427_comma__minus_22_dot_06427_comma_16_dot_98593332_comma_16_dot_98593332_comma_3_dot_18713212_comma_3_dot_18713212 diningtable__minus_22_dot_55729104_comma__minus_22_dot_55729104_comma_19_dot_643744_comma_19_dot_643744_comma__minus_0_dot_01804161072_comma__minus_0_dot_01804161072) (gotolocation agent1 loc_bar__minus_22_bar_14_bar_0_bar_45 loc_bar_3_bar_24_bar_0_bar_60) (toggleobject agent1 loc_bar_3_bar_24_bar_0_bar_60 desklamp_3_dot_563956_comma_3_dot_563956_comma_27_dot_28801344_comma_27_dot_28801344_comma_2_dot_1785792_comma_2_dot_1785792)
+motion_planner.attempt_motion_plan_for_problem: attempt 19 / 223 ID=train/look_at_obj_in_light-Statue-None-DeskLamp-218/trial_T20190909_085327_810149 AttemptIdx=0
+  Using mock motion plan result.
+  Motion plan result: task_success: True
+  Total Actions Taken: 0
+  Total Time Taken: 0.000s
+> /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/main.py(409)_run_task_and_motion_plan()
+-> return any_motion_planner_success
+(Pdb) task_planner.attempt_task_plan_for_problem: attempt 20 / 223 ID=train/look_at_obj_in_light-RemoteControl-None-FloorLamp-202/trial_T20190909_014548_223224 AttemptIdx=0 GoalIdx=0
+  Using mock task plan result.
+  Plan success: True
+  Plan string:  (gotolocation agent1 loc_bar__minus_10_bar_6_bar_2_bar_30 loc_bar_4_bar_4_bar_2_bar_60) (pickupobjectinreceptacle agent1 loc_bar_4_bar_4_bar_2_bar_60 remotecontrol_3_dot_520442248_comma_3_dot_520442248_comma_2_dot_1829792_comma_2_dot_1829792_comma_0_dot_965454_comma_0_dot_965454 sidetable_2_dot_508_comma_2_dot_508_comma_1_dot_36_comma_1_dot_36_comma_0_dot_008_comma_0_dot_008) (gotolocation agent1 loc_bar_4_bar_4_bar_2_bar_60 loc_bar__minus_15_bar_14_bar_0_bar_0) (toggleobject agent1 loc_bar__minus_15_bar_14_bar_0_bar_0 floorlamp__minus_14_dot_748_comma__minus_14_dot_748_comma_16_dot_056_comma_16_dot_056_comma_0_dot_0001871585844_comma_0_dot_0001871585844)
+motion_planner.attempt_motion_plan_for_problem: attempt 20 / 223 ID=train/look_at_obj_in_light-RemoteControl-None-FloorLamp-202/trial_T20190909_014548_223224 AttemptIdx=0
+  Using mock motion plan result.
+  Motion plan result: task_success: True
+  Total Actions Taken: 0
+  Total Time Taken: 0.000s
+> /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/main.py(409)_run_task_and_motion_plan()
+-> return any_motion_planner_success
+(Pdb) 
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 21 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 23 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 25 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 27 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 29 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 31 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 33 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 35 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 37 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 39 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 41 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 43 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 45 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 47 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 49 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 51 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 53 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 55 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 57 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 59 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 61 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 3 / 63 problems so far.
+Overall successful motion plans: 3 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 63 / 223 ID=train/pick_clean_then_place_in_recep-Knife-None-SideTable-3/trial_T20190906_210539_903984 AttemptIdx=0 GoalIdx=0
+  Using mock task plan result.
+  Plan success: True
+  Plan string:  (gotolocation agent1 loc_bar__minus_2_bar__minus_1_bar_0_bar_30 loc_bar_1_bar_4_bar_1_bar_45) (gotolocation agent1 loc_bar_1_bar_4_bar_1_bar_45 loc_bar__minus_4_bar__minus_4_bar_3_bar_30) (pickupobjectnotinreceptacle agent1 loc_bar__minus_4_bar__minus_4_bar_3_bar_30 knife__minus_7_dot_30609704_comma__minus_7_dot_30609704_comma__minus_4_dot_47176076_comma__minus_4_dot_47176076_comma_5_dot_43474628_comma_5_dot_43474628) (gotolocation agent1 loc_bar__minus_4_bar__minus_4_bar_3_bar_30 loc_bar_1_bar_4_bar_1_bar_45) (gotolocation agent1 loc_bar_1_bar_4_bar_1_bar_45 loc_bar__minus_4_bar__minus_3_bar_3_bar_45) (cleanobject agent1 loc_bar__minus_4_bar__minus_3_bar_3_bar_45 sinkbasin__minus_7_dot_34220268_comma__minus_7_dot_34220268_comma__minus_2_dot_168930532_comma__minus_2_dot_168930532_comma_4_dot_16_comma_4_dot_16 knife__minus_7_dot_30609704_comma__minus_7_dot_30609704_comma__minus_4_dot_47176076_comma__minus_4_dot_47176076_comma_5_dot_43474628_comma_5_dot_43474628) (gotolocation agent1 loc_bar__minus_4_bar__minus_3_bar_3_bar_45 loc_bar_1_bar_4_bar_1_bar_45) (putobjectinreceptacle agent1 loc_bar_1_bar_4_bar_1_bar_45 knifetype knife__minus_7_dot_30609704_comma__minus_7_dot_30609704_comma__minus_4_dot_47176076_comma__minus_4_dot_47176076_comma_5_dot_43474628_comma_5_dot_43474628 sidetable_4_dot_088_comma_4_dot_088_comma_3_dot_4844_comma_3_dot_4844_comma_4_dot_9732_comma_4_dot_9732)
+motion_planner.attempt_motion_plan_for_problem: attempt 63 / 223 ID=train/pick_clean_then_place_in_recep-Knife-None-SideTable-3/trial_T20190906_210539_903984 AttemptIdx=0
+  Using mock motion plan result.
+  Motion plan result: task_success: True
+  Total Actions Taken: 0
+  Total Time Taken: 0.000s
+> /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/main.py(409)_run_task_and_motion_plan()
+-> return any_motion_planner_success
+(Pdb) 
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 4 / 65 problems so far.
+Overall successful motion plans: 4 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 4 / 67 problems so far.
+Overall successful motion plans: 4 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 4 / 69 problems so far.
+Overall successful motion plans: 4 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 4 / 71 problems so far.
+Overall successful motion plans: 4 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 4 / 73 problems so far.
+Overall successful motion plans: 4 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 4 / 75 problems so far.
+Overall successful motion plans: 4 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 76 / 223 ID=train/pick_heat_then_place_in_recep-Potato-None-GarbageCan-12/trial_T20190907_125521_042428 AttemptIdx=0 GoalIdx=0
+  Using mock task plan result.
+  Plan success: True
+  Plan string:  (gotolocation agent1 loc_bar_4_bar__minus_2_bar_2_bar_30 loc_bar_4_bar_11_bar_1_bar_60) (gotolocation agent1 loc_bar_4_bar_11_bar_1_bar_60 loc_bar__minus_1_bar_5_bar_3_bar_30) (pickupobjectinreceptacle agent1 loc_bar__minus_1_bar_5_bar_3_bar_30 potato__minus_4_dot_83762_comma__minus_4_dot_83762_comma_4_dot_61625768_comma_4_dot_61625768_comma_3_dot_8822288_comma_3_dot_8822288 countertop__minus_3_dot_888_comma__minus_3_dot_888_comma_3_dot_684_comma_3_dot_684_comma_3_dot_8936_comma_3_dot_8936) (gotolocation agent1 loc_bar__minus_1_bar_5_bar_3_bar_30 loc_bar_4_bar_11_bar_1_bar_60) (gotolocation agent1 loc_bar_4_bar_11_bar_1_bar_60 loc_bar_4_bar_6_bar_1_bar_15) (heatobject agent1 loc_bar_4_bar_6_bar_1_bar_15 microwave_6_dot_528_comma_6_dot_528_comma_6_dot_584_comma_6_dot_584_comma_5_dot_92407848_comma_5_dot_92407848 potato__minus_4_dot_83762_comma__minus_4_dot_83762_comma_4_dot_61625768_comma_4_dot_61625768_comma_3_dot_8822288_comma_3_dot_8822288) (gotolocation agent1 loc_bar_4_bar_6_bar_1_bar_15 loc_bar_4_bar_11_bar_1_bar_60) (putobjectinreceptacle agent1 loc_bar_4_bar_11_bar_1_bar_60 potatotype potato__minus_4_dot_83762_comma__minus_4_dot_83762_comma_4_dot_61625768_comma_4_dot_61625768_comma_3_dot_8822288_comma_3_dot_8822288 garbagecan_5_dot_80777024_comma_5_dot_80777024_comma_11_dot_65005396_comma_11_dot_65005396_comma_0_dot_0_comma_0_dot_0)
+motion_planner.attempt_motion_plan_for_problem: attempt 76 / 223 ID=train/pick_heat_then_place_in_recep-Potato-None-GarbageCan-12/trial_T20190907_125521_042428 AttemptIdx=0
+  Using mock motion plan result.
+  Motion plan result: task_success: True
+  Total Actions Taken: 0
+  Total Time Taken: 0.000s
+> /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/main.py(409)_run_task_and_motion_plan()
+-> return any_motion_planner_success
+(Pdb) 

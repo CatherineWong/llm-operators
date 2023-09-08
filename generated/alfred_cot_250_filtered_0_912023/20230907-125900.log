@@ -1,0 +1,1675 @@
+Experiment Parameters
+================================================================================
+Timestamp: 2023-09-07 12:59:00.911428
+Command to replicate: python main.py --experiment_name alfred_cot_250_filtered_0_912023 --random_seed 0 --output_directory generated --train_iterations 2 --pddl_domain_name alfred_linearized --dataset_name alfred_cot_250_filtered --dataset_fraction 1.0 --dataset_pddl_directory data/dataset/alfred_linearized_pddl --supervision_name supervision --goal_supervision_fraction 0.1 --initial_goal_supervision_prefix ALL --plan_supervision_fraction 0.1 --initial_plans_prefix ALL --initial_pddl_predicates  --initial_pddl_operators GotoLocation PickupObjectInReceptacle PickupObjectNotInReceptacle PutObjectInReceptacle --operator_propose_minimum_usage 2 --operator_use_cot 1 --goal_propose_include_codex_types  --codex_goal_temperature 1.0 --codex_operator_temperature 1.0 --codex_plan_temperature 1.0 --maximum_operator_arity 4 --n_goal_samples 4 --n_plan_samples 5 --n_operator_samples 3 --n_attempts_to_plan 1 --external_goal_sample_with_prompt  --external_goal_supervision data/dataset/alfred-goal-supervision_ --external_plan_supervision data/dataset/alfred-grate-break-fill-restart-supervision.json --external_operator_supervision data/dataset/alfred-grate-break-fill-restart-operator-supervision_ --external_operator_sample_with_prompt  --external_operator_names GrateObject BakeObject FillObject RestartObject --planner task_planner_fd --planner_timeout None --planner_minimum_n_operators 7 --planner_run_second_pass 1 --motionplan_search_type counter --operator_pseudocounts 0.05 --operator_pseudocounts_denominator 0.5 --operator_acceptance_threshold 0.1 --checkpoint_every_n_problem_plans 2 --resume  --resume_from_iteration 0 --resume_from_problem_idx 0 --verbose  --debug_export_failed_pddl None --debug_no_propose_plans_operators_goals  --debug_mock_propose_goals  --debug_mock_propose_plans  --debug_mock_propose_operators  --debug_skip_propose_operators_after -1 --debug_skip_propose_plans_after -1 --debug_skip_task_plans  --debug_mock_task_plans  --debug_mock_motion_plans  --debug_skip_motion_plans  --debug_start_problem_idx 0 --debug_skip_problems None --debug_ground_truth_operators  --debug_ground_truth_goals  --debug_stop_after_first_proposal  --debug_cw_skip_location_check  
+
+
+Loaded PDDL file with operators
+================================================================================
+Domain: alfred_linearized
+Filename: data/domains/alfred_linearized.pddl
+Operators: 12
+Ground truth operators: 
+   GotoLocation
+   OpenObject
+   CloseObject
+   PickupObjectInReceptacle
+   PickupObjectNotInReceptacle
+   PutObjectInReceptacle
+   PutObjectInReceptacleObject
+   CleanObject
+   HeatObject
+   CoolObject
+   ToggleObject
+   SliceObject
+Initializing with operators: 
+  GotoLocation
+  PickupObjectInReceptacle
+  PickupObjectNotInReceptacle
+  PutObjectInReceptacle
+
+
+load_alfred_filtered_planning_domain_problems: loaded alfred_cot_250_filtered from data/dataset/alfred-cot-250-filtered-NLgoals-operators.json
+train : 223 / original 223 problems
+valid_seen : 145 / original 145 problems
+valid_unseen : 155 / original 155 problems
+Loaded initial dataset: alfred_cot_250_filtered
+================================================================================
+Initial train problems: 223
+Marking problems for goal supervision: fraction=0.1, prefix=['ALL']
+Sampling problems for goal supervision: 
+	 look_at_obj_in_light : 3
+	 pick_cool_then_place_in_recep : 2
+	 pick_and_place_simple : 3
+	 pick_heat_then_place_in_recep : 3
+	 pick_and_place_simple_slice : 1
+	 pick_heat_then_place_in_recep_slice : 2
+	 pick_clean_then_place_in_recep : 2
+	 pick_cool_then_place_in_recep_slice : 2
+Total goal supervision problems: 18
+Marking problems for plan supervision: fraction=0.1, prefix=['ALL']
+This is not implemented yet. (!!!)
+
+Loaded PDDL supervision
+================================================================================
+Loaded additional PDDL supervision from the following domain files:
+  data/domains/supervision_domains/movie_domain.pddl
+  data/domains/supervision_domains/depot_domain.pddl
+  data/domains/supervision_domains/travel_domain.pddl
+
+
+Training started.
+================================================================================
+
+Using ground truth goals, skipping: propose_goals_for_problems
+preprocess_goals: preprocessing 205 unsolved problems.
+preprocess_goals: Preprocess goals top-K accuracy: 0 / 205 exact match to ground truth goal.
+Logging preprocessed goals: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_preprocessed_goals.csv
+
+mock_propose_plans_for_problems:: from generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_codex_plans.json
+
+
+mock_propose_plans_for_problems:: loaded a total of 223 plans for 223 unsolved problems.
+Logging proposed plans: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_codex_plans.csv
+
+propose_operators_for_problems:: proposing for 27 operators.
+['ExamineObject', 'TurnOnObject', 'TurnOnLight', 'ThrowObject', 'CutObject', 'SliceObject', 'InspectObject', 'HeatObject', 'CookObject', 'OpenObject', 'EmptyObject', 'PlaceObject', 'WashObject', 'TurnOffObject', 'ToastObject', 'CoolObject', 'DrainObject', 'ChillObject', 'CleanObject', 'MicrowaveObject', 'UseObject', 'WarmObject', 'CloseObject', 'LookAtObject', 'RinseObject', 'DiscardObject', 'PutdownObject']
+mock_propose_operators_for_problems:: from generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_codex_operators.json
+Loaded 27 mock operators:
+['ExamineObject', 'TurnOnObject', 'TurnOnLight', 'ThrowObject', 'CutObject', 'SliceObject', 'InspectObject', 'HeatObject', 'CookObject', 'OpenObject', 'EmptyObject', 'PlaceObject', 'WashObject', 'TurnOffObject', 'ToastObject', 'CoolObject', 'DrainObject', 'ChillObject', 'CleanObject', 'MicrowaveObject', 'UseObject', 'WarmObject', 'CloseObject', 'LookAtObject', 'RinseObject', 'DiscardObject', 'PutdownObject']
+preprocess_operators:: preprocessing 27 operators.
+['ExamineObject', 'TurnOnObject', 'TurnOnLight', 'ThrowObject', 'CutObject', 'SliceObject', 'InspectObject', 'HeatObject', 'CookObject', 'OpenObject', 'EmptyObject', 'PlaceObject', 'WashObject', 'TurnOffObject', 'ToastObject', 'CoolObject', 'DrainObject', 'ChillObject', 'CleanObject', 'MicrowaveObject', 'UseObject', 'WarmObject', 'CloseObject', 'LookAtObject', 'RinseObject', 'DiscardObject', 'PutdownObject']
+Logging preprocessed operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_preprocessed_operators.csv
+
+Attempting task and motion planning on all problems.
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 1 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 3 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 5 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 6 / 223 ID=train/pick_and_place_simple-AppleSliced-None-Fridge-30/trial_T20190907_105523_799331 AttemptIdx=0 GoalIdx=0
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 12 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'ChillObject_0', 'TurnOffObject_0', 'CoolObject_1', 'ThrowObject_0', 'DiscardObject_2', 'SliceObject_1', 'ChillObject_1', 'CleanObject_1', 'CleanObject_2', 'RinseObject_2', 'RinseObject_0', 'PutdownObject_0'}
+    Language: carry a knife to cut the yellow apple in the fridge.
+    Ground truth goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o AppleType) (receptacleType ?r FridgeType) (inReceptacle ?o ?r) (sliceable ?o) (isSliced ?o) ) )))
+    Proposed goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o AppleType) (receptacleType ?r FridgeType) (inReceptacle ?o ?r) (sliceable ?o) (isSliced ?o) ) )))
+Instantiating FD with --alias "lama-first" 
+    Plan success: True
+    Plan string:  (gotolocation agent1 loc_bar_8_bar_2_bar_2_bar_30 loc_bar_4_bar__minus_2_bar_0_bar_45) (pickupobjectinreceptacle agent1 loc_bar_4_bar__minus_2_bar_0_bar_45 knife_4_dot_39545632_comma_4_dot_39545632_comma_0_dot_721947668_comma_0_dot_721947668_comma_3_dot_7348736_comma_3_dot_7348736 countertop_4_dot_844_comma_4_dot_844_comma_1_dot_856_comma_1_dot_856_comma_3_dot_7488_comma_3_dot_7488) (gotolocation agent1 loc_bar_4_bar__minus_2_bar_0_bar_45 loc_bar_4_bar__minus_3_bar_2_bar_60) (sliceobject_1 agent1 loc_bar_4_bar__minus_3_bar_2_bar_60 apple_4_dot_3444972_comma_4_dot_3444972_comma__minus_5_dot_6285138_comma__minus_5_dot_6285138_comma_3_dot_149359464_comma_3_dot_149359464 knife_4_dot_39545632_comma_4_dot_39545632_comma_0_dot_721947668_comma_0_dot_721947668_comma_3_dot_7348736_comma_3_dot_7348736)
+    Plan time: 2.451s
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 7 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 9 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 11 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 13 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 14 / 223 ID=train/pick_heat_then_place_in_recep-TomatoSliced-None-Fridge-5/trial_T20190908_061406_498045 AttemptIdx=0 GoalIdx=0
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 8 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'TurnOnObject_0', 'TurnOffObject_2', 'ChillObject_2', 'TurnOnObject_1', 'TurnOnLight_0', 'SliceObject_1', 'PutdownObject_0', 'HeatObject_2'}
+    Language: place a cooked tomato slice in the refrigerator.
+    Ground truth goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o TomatoType) (receptacleType ?r FridgeType) (inReceptacle ?o ?r) (heatable ?o) (isHot ?o) (sliceable ?o) (isSliced ?o) ) )))
+    Proposed goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o TomatoType) (receptacleType ?r FridgeType) (inReceptacle ?o ?r) (heatable ?o) (isHot ?o) (sliceable ?o) (isSliced ?o) ) )))
+Instantiating FD with --alias "lama-first" 
+    Plan success: True
+    Plan string:  (gotolocation agent1 loc_bar__minus_4_bar_7_bar_1_bar_30 loc_bar_5_bar__minus_1_bar_1_bar_15) (heatobject_2 agent1 loc_bar_5_bar__minus_1_bar_1_bar_15 tomato_8_dot_00223064_comma_8_dot_00223064_comma__minus_1_dot_08792126_comma__minus_1_dot_08792126_comma_5_dot_90939808_comma_5_dot_90939808) (gotolocation agent1 loc_bar_5_bar__minus_1_bar_1_bar_15 loc_bar_5_bar__minus_3_bar_1_bar_15) (pickupobjectinreceptacle agent1 loc_bar_5_bar__minus_3_bar_1_bar_15 tomato_7_dot_34517144_comma_7_dot_34517144_comma__minus_3_dot_3223968_comma__minus_3_dot_3223968_comma_5_dot_90939808_comma_5_dot_90939808 fridge_7_dot_9_comma_7_dot_9_comma__minus_2_dot_148_comma__minus_2_dot_148_comma_0_dot_0_comma_0_dot_0) (gotolocation agent1 loc_bar_5_bar__minus_3_bar_1_bar_15 loc_bar_5_bar__minus_1_bar_1_bar_15) (sliceobject_1 agent1 loc_bar_5_bar__minus_1_bar_1_bar_15 tomato_8_dot_00223064_comma_8_dot_00223064_comma__minus_1_dot_08792126_comma__minus_1_dot_08792126_comma_5_dot_90939808_comma_5_dot_90939808 tomato_7_dot_34517144_comma_7_dot_34517144_comma__minus_3_dot_3223968_comma__minus_3_dot_3223968_comma_5_dot_90939808_comma_5_dot_90939808)
+    Plan time: 2.431s
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 15 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 17 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 19 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 19 / 223 ID=train/look_at_obj_in_light-Statue-None-DeskLamp-218/trial_T20190909_085327_810149 AttemptIdx=0 GoalIdx=0
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 7 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'TurnOffObject_2', 'TurnOnLight_1', 'WarmObject_1', 'CleanObject_1', 'PlaceObject_0', 'PutdownObject_2', 'WarmObject_2'}
+    Language: examine the figurine by the light.
+    Ground truth goal: (:goal (exists (?a - agent) (exists (?r - receptacle) (exists (?o - object) (exists (?ot - object) (exists (?l - location) (and (objectType ?ot DeskLampType) (toggleable ?ot) (isToggled ?ot) (objectAtLocation ?ot ?l) (atLocation ?a ?l) (objectType ?o StatueType) (holds ?a ?o) ) ))))))
+    Proposed goal: (:goal (exists (?a - agent) (exists (?r - receptacle) (exists (?o - object) (exists (?ot - object) (exists (?l - location) (and (objectType ?ot DeskLampType) (toggleable ?ot) (isToggled ?ot) (objectAtLocation ?ot ?l) (atLocation ?a ?l) (objectType ?o StatueType) (holds ?a ?o) ) ))))))
+Instantiating FD with --alias "lama-first" 
+    Plan success: False
+    Plan string:  Plan not found with FD! Error: INFO planner time limit: None INFO planner memory limit: None INFO Running translator. INFO translator stdin: None INFO translator time limit: None INFO translator memory limit: None INFO translator command line string: /Users/zyzzyva/miniconda3/envs/llm-operators-zs/bin/python3 /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/pddlgym_planners/FD/builds/release/bin/translate/translate.py /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpeusjbiz1 /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpewgfej0s --sas-file /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmp5aicetce Parsing... Parsing: [0.000s CPU, 0.001s wall-clock] Normalizing task... [0.000s CPU, 0.000s wall-clock] Instantiating... Generating Datalog program... [0.010s CPU, 0.001s wall-clock] Normalizing Datalog program... Normalizing Datalog program: [0.000s CPU, 0.002s wall-clock] Preparing model... [0.000s CPU, 0.002s wall-clock] Generated 104 rules. Computing model... [0.010s CPU, 0.012s wall-clock] 1754 relevant atoms 1195 auxiliary atoms 2949 final queue length 4472 total queue pushes Completing instantiation... [0.010s CPU, 0.010s wall-clock] Instantiating: [0.030s CPU, 0.027s wall-clock] No relaxed solution! Generating unsolvable task... Translator variables: 1 Translator derived variables: 0 Translator facts: 2 Translator goal facts: 1 Translator mutex groups: 0 Translator total mutex groups size: 0 Translator operators: 0 Translator axioms: 0 Translator task size: 4 warning: could not determine peak memory Writing output... [0.000s CPU, 0.000s wall-clock] Done! [0.030s CPU, 0.029s wall-clock] translate exit code: 0 INFO Running search (release). INFO search stdin: /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmp5aicetce INFO search time limit: None INFO search memory limit: None INFO search command line string: /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/pddlgym_planners/FD/builds/release/bin/downward --search 'let(hlm,landmark_sum(lm_factory=lm_reasonable_orders_hps(lm_rhw()),transform=adapt_costs(one),pref=false),let(hff,ff(transform=adapt_costs(one)),lazy_greedy([hff,hlm],preferred=[hff,hlm],cost_type=one,reopen_closed=false)))' --internal-plan-file sas_plan < /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmp5aicetce [t=0.000122016s, 408500464 KB] reading input... [t=0.000188026s, 408500464 KB] done reading input! [t=0.00393354s, 408500464 KB] Initializing landmark sum heuristic... [t=0.0039433s, 408500464 KB] Generating landmark graph... [t=0.00394793s, 408500464 KB] Building a landmark graph with reasonable orders. [t=0.00395088s, 408500464 KB] Initializing Exploration... [t=0.00395728s, 408500464 KB] Generating landmarks using the RPG/SAS+ approach [t=0.00397118s, 408500464 KB] Removed 0 reasonable or obedient reasonable orders [t=0.00397745s, 408500464 KB] Landmarks generation time: 2.8577e-05s [t=0.00397987s, 408500464 KB] Discovered 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00398217s, 408500464 KB] 1 edges [t=0.0039845s, 408500464 KB] approx. reasonable orders [t=0.00398684s, 408500464 KB] approx. obedient reasonable orders [t=0.00398922s, 408500464 KB] Removed 0 reasonable or obedient reasonable orders [t=0.00399119s, 408500464 KB] Landmarks generation time: 4.6904e-05s [t=0.00399598s, 408500464 KB] Discovered 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.0039984s, 408500464 KB] 1 edges [t=0.00400033s, 408500464 KB] Landmark graph generation time: 5.8302e-05s [t=0.00400246s, 408500464 KB] Landmark graph contains 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00400472s, 408500464 KB] Landmark graph contains 1 orderings. [t=0.00401378s, 408500464 KB] Simplifying 0 unary operators... done! [0 unary operators] [t=0.00401714s, 408500464 KB] time to simplify: 4.756e-06s [t=0.00402083s, 408500464 KB] Initializing additive heuristic... [t=0.00402247s, 408500464 KB] Initializing FF heuristic... [t=0.00404711s, 408500464 KB] Building successor generator...done! [t=0.004054s, 408500464 KB] peak memory difference for successor generator creation: 0 KB [t=0.00405621s, 408500464 KB] time for successor generation creation: 1.599e-06s [t=0.00405847s, 408500464 KB] Variables: 1 [t=0.00406121s, 408500464 KB] FactPairs: 2 [t=0.00406302s, 408500464 KB] Bytes per state: 4 [t=0.00408397s, 408500464 KB] Conducting lazy best first search, (real) bound = 2147483647 [t=0.00408934s, 408500464 KB] 1 initial landmarks, 1 goal landmarks [t=0.00409713s, 408500464 KB] Initial heuristic value for ff(transform=adapt_costs(one)): infinity [t=0.0041002s, 408500464 KB] Completely explored state space -- no solution! [t=0.00410291s, 408500464 KB] Actual search time: 1.23e-05s [t=0.00410496s, 408500464 KB] Expanded 0 state(s). [t=0.00410496s, 408500464 KB] Reopened 0 state(s). [t=0.00410496s, 408500464 KB] Evaluated 1 state(s). [t=0.00410496s, 408500464 KB] Evaluations: 1 [t=0.00410496s, 408500464 KB] Generated 0 state(s). [t=0.00410496s, 408500464 KB] Dead ends: 1 state(s). [t=0.00410496s, 408500464 KB] Number of registered states: 1 [t=0.00410496s, 408500464 KB] Int hash set load factor: 1/1 = 1 [t=0.00410496s, 408500464 KB] Int hash set resizes: 0 [t=0.00410496s, 408500464 KB] Search time: 2.1279e-05s [t=0.00410496s, 408500464 KB] Total time: 0.00410496s Search stopped without finding a solution. Peak memory: 408500464 KB search exit code: 12 Driver aborting after search INFO Planner time: 0.06s
+    Plan time: 0.135s
+task_planner.attempt_task_plan_for_problem: attempt 20 / 223 ID=train/look_at_obj_in_light-RemoteControl-None-FloorLamp-202/trial_T20190909_014548_223224 AttemptIdx=0 GoalIdx=0
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 11 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'WashObject_0', 'HeatObject_1', 'ThrowObject_1', 'TurnOnLight_1', 'DiscardObject_2', 'RinseObject_2', 'CleanObject_1', 'SliceObject_2', 'MicrowaveObject_0', 'PutdownObject_0', 'WashObject_1'}
+    Language: examine a remote control by the light of a tall lamp.
+    Ground truth goal: (:goal (exists (?a - agent) (exists (?r - receptacle) (exists (?o - object) (exists (?ot - object) (exists (?l - location) (and (objectType ?ot FloorLampType) (toggleable ?ot) (isToggled ?ot) (objectAtLocation ?ot ?l) (atLocation ?a ?l) (objectType ?o RemoteControlType) (holds ?a ?o) ) ))))))
+    Proposed goal: (:goal (exists (?a - agent) (exists (?r - receptacle) (exists (?o - object) (exists (?ot - object) (exists (?l - location) (and (objectType ?ot FloorLampType) (toggleable ?ot) (isToggled ?ot) (objectAtLocation ?ot ?l) (atLocation ?a ?l) (objectType ?o RemoteControlType) (holds ?a ?o) ) ))))))
+Instantiating FD with --alias "lama-first" 
+    Plan success: False
+    Plan string:  Plan not found with FD! Error: INFO planner time limit: None INFO planner memory limit: None INFO Running translator. INFO translator stdin: None INFO translator time limit: None INFO translator memory limit: None INFO translator command line string: /Users/zyzzyva/miniconda3/envs/llm-operators-zs/bin/python3 /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/pddlgym_planners/FD/builds/release/bin/translate/translate.py /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmp1jco0ubj /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpndtjs6sh --sas-file /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpm74od5oq Parsing... Parsing: [0.010s CPU, 0.002s wall-clock] Normalizing task... [0.000s CPU, 0.000s wall-clock] Instantiating... Generating Datalog program... [0.000s CPU, 0.001s wall-clock] Normalizing Datalog program... Normalizing Datalog program: [0.000s CPU, 0.002s wall-clock] Preparing model... [0.000s CPU, 0.002s wall-clock] Generated 133 rules. Computing model... [0.020s CPU, 0.015s wall-clock] 1766 relevant atoms 1868 auxiliary atoms 3634 final queue length 5054 total queue pushes Completing instantiation... [0.010s CPU, 0.010s wall-clock] Instantiating: [0.030s CPU, 0.031s wall-clock] No relaxed solution! Generating unsolvable task... Translator variables: 1 Translator derived variables: 0 Translator facts: 2 Translator goal facts: 1 Translator mutex groups: 0 Translator total mutex groups size: 0 Translator operators: 0 Translator axioms: 0 Translator task size: 4 warning: could not determine peak memory Writing output... [0.000s CPU, 0.000s wall-clock] Done! [0.040s CPU, 0.034s wall-clock] translate exit code: 0 INFO Running search (release). INFO search stdin: /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpm74od5oq INFO search time limit: None INFO search memory limit: None INFO search command line string: /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/pddlgym_planners/FD/builds/release/bin/downward --search 'let(hlm,landmark_sum(lm_factory=lm_reasonable_orders_hps(lm_rhw()),transform=adapt_costs(one),pref=false),let(hff,ff(transform=adapt_costs(one)),lazy_greedy([hff,hlm],preferred=[hff,hlm],cost_type=one,reopen_closed=false)))' --internal-plan-file sas_plan < /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpm74od5oq [t=9.8359e-05s, 408500464 KB] reading input... [t=0.000152397s, 408500464 KB] done reading input! [t=0.00368807s, 408500464 KB] Initializing landmark sum heuristic... [t=0.00369529s, 408500464 KB] Generating landmark graph... [t=0.00369902s, 408500464 KB] Building a landmark graph with reasonable orders. [t=0.0037014s, 408500464 KB] Initializing Exploration... [t=0.00370431s, 408500464 KB] Generating landmarks using the RPG/SAS+ approach [t=0.00371649s, 408500464 KB] Removed 0 reasonable or obedient reasonable orders [t=0.00371985s, 408500464 KB] Landmarks generation time: 2.0336e-05s [t=0.00372231s, 408500464 KB] Discovered 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.0037246s, 408500464 KB] 1 edges [t=0.00372711s, 408500464 KB] approx. reasonable orders [t=0.00373039s, 408500464 KB] approx. obedient reasonable orders [t=0.00373305s, 408500464 KB] Removed 0 reasonable or obedient reasonable orders [t=0.0037351s, 408500464 KB] Landmarks generation time: 3.8991e-05s [t=0.00373748s, 408500464 KB] Discovered 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00373969s, 408500464 KB] 1 edges [t=0.00374158s, 408500464 KB] Landmark graph generation time: 4.7519e-05s [t=0.00374404s, 408500464 KB] Landmark graph contains 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00374629s, 408500464 KB] Landmark graph contains 1 orderings. [t=0.00375531s, 408500464 KB] Simplifying 0 unary operators... done! [0 unary operators] [t=0.00375863s, 408500464 KB] time to simplify: 4.797e-06s [t=0.00376068s, 408500464 KB] Initializing additive heuristic... [t=0.00376224s, 408500464 KB] Initializing FF heuristic... [t=0.00378434s, 408500464 KB] Building successor generator...done! [t=0.00378992s, 408500464 KB] peak memory difference for successor generator creation: 0 KB [t=0.00379217s, 408500464 KB] time for successor generation creation: 1.476e-06s [t=0.0037948s, 408500464 KB] Variables: 1 [t=0.00379685s, 408500464 KB] FactPairs: 2 [t=0.00379869s, 408500464 KB] Bytes per state: 4 [t=0.00381755s, 408500464 KB] Conducting lazy best first search, (real) bound = 2147483647 [t=0.00382276s, 408500464 KB] 1 initial landmarks, 1 goal landmarks [t=0.00383219s, 408500464 KB] Initial heuristic value for ff(transform=adapt_costs(one)): infinity [t=0.00383453s, 408500464 KB] Completely explored state space -- no solution! [t=0.0038367s, 408500464 KB] Actual search time: 1.2669e-05s [t=0.00383871s, 408500464 KB] Expanded 0 state(s). [t=0.00383871s, 408500464 KB] Reopened 0 state(s). [t=0.00383871s, 408500464 KB] Evaluated 1 state(s). [t=0.00383871s, 408500464 KB] Evaluations: 1 [t=0.00383871s, 408500464 KB] Generated 0 state(s). [t=0.00383871s, 408500464 KB] Dead ends: 1 state(s). [t=0.00383871s, 408500464 KB] Number of registered states: 1 [t=0.00383871s, 408500464 KB] Int hash set load factor: 1/1 = 1 [t=0.00383871s, 408500464 KB] Int hash set resizes: 0 [t=0.00383871s, 408500464 KB] Search time: 2.1402e-05s [t=0.00383871s, 408500464 KB] Total time: 0.00383871s Search stopped without finding a solution. Peak memory: 408500464 KB search exit code: 12 Driver aborting after search INFO Planner time: 0.06s
+    Plan time: 0.134s
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 21 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 23 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 25 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 27 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 29 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 31 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 33 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 35 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 37 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 39 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 41 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 43 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 45 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 47 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 49 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 51 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 53 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 55 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 57 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 59 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 61 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 63 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 63 / 223 ID=train/pick_clean_then_place_in_recep-Knife-None-SideTable-3/trial_T20190906_210539_903984 AttemptIdx=0 GoalIdx=0
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 8 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'ChillObject_0', 'TurnOnObject_0', 'ChillObject_2', 'TurnOnObject_1', 'TurnOffObject_0', 'RinseObject_1', 'PlaceObject_0', 'TurnOffObject_1'}
+    Language: put a washed knife on a counter.
+    Ground truth goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o KnifeType) (receptacleType ?r SideTableType) (inReceptacle ?o ?r) (cleanable ?o) (isClean ?o) ) )))
+    Proposed goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o KnifeType) (receptacleType ?r SideTableType) (inReceptacle ?o ?r) (cleanable ?o) (isClean ?o) ) )))
+Instantiating FD with --alias "lama-first" 
+    Plan success: False
+    Plan string:  Plan not found with FD! Error: INFO planner time limit: None INFO planner memory limit: None INFO Running translator. INFO translator stdin: None INFO translator time limit: None INFO translator memory limit: None INFO translator command line string: /Users/zyzzyva/miniconda3/envs/llm-operators-zs/bin/python3 /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/pddlgym_planners/FD/builds/release/bin/translate/translate.py /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpoofjhw1n /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmphcsktni1 --sas-file /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpjtvjw0ij Parsing... Parsing: [0.010s CPU, 0.002s wall-clock] Normalizing task... [0.000s CPU, 0.000s wall-clock] Instantiating... Generating Datalog program... [0.000s CPU, 0.001s wall-clock] Normalizing Datalog program... Normalizing Datalog program: [0.000s CPU, 0.002s wall-clock] Preparing model... [0.000s CPU, 0.002s wall-clock] Generated 101 rules. Computing model... [0.020s CPU, 0.022s wall-clock] 4274 relevant atoms 2234 auxiliary atoms 6508 final queue length 11621 total queue pushes Completing instantiation... [0.040s CPU, 0.037s wall-clock] Instantiating: [0.060s CPU, 0.064s wall-clock] No relaxed solution! Generating unsolvable task... Translator variables: 1 Translator derived variables: 0 Translator facts: 2 Translator goal facts: 1 Translator mutex groups: 0 Translator total mutex groups size: 0 Translator operators: 0 Translator axioms: 0 Translator task size: 4 warning: could not determine peak memory Writing output... [0.000s CPU, 0.000s wall-clock] Done! [0.070s CPU, 0.067s wall-clock] translate exit code: 0 INFO Running search (release). INFO search stdin: /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpjtvjw0ij INFO search time limit: None INFO search memory limit: None INFO search command line string: /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/pddlgym_planners/FD/builds/release/bin/downward --search 'let(hlm,landmark_sum(lm_factory=lm_reasonable_orders_hps(lm_rhw()),transform=adapt_costs(one),pref=false),let(hff,ff(transform=adapt_costs(one)),lazy_greedy([hff,hlm],preferred=[hff,hlm],cost_type=one,reopen_closed=false)))' --internal-plan-file sas_plan < /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpjtvjw0ij [t=9.5448e-05s, 408500464 KB] reading input... [t=0.000154078s, 408500464 KB] done reading input! [t=0.00393206s, 408518896 KB] Initializing landmark sum heuristic... [t=0.00394223s, 408518896 KB] Generating landmark graph... [t=0.00394686s, 408518896 KB] Building a landmark graph with reasonable orders. [t=0.00394986s, 408518896 KB] Initializing Exploration... [t=0.00395297s, 408518896 KB] Generating landmarks using the RPG/SAS+ approach [t=0.00396642s, 408518896 KB] Removed 0 reasonable or obedient reasonable orders [t=0.00397044s, 408518896 KB] Landmarks generation time: 2.2509e-05s [t=0.00397843s, 408518896 KB] Discovered 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00398122s, 408518896 KB] 1 edges [t=0.00398356s, 408518896 KB] approx. reasonable orders [t=0.0039861s, 408518896 KB] approx. obedient reasonable orders [t=0.00398848s, 408518896 KB] Removed 0 reasonable or obedient reasonable orders [t=0.00399057s, 408518896 KB] Landmarks generation time: 4.6945e-05s [t=0.00399279s, 408518896 KB] Discovered 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00399602s, 408518896 KB] 1 edges [t=0.00399791s, 408518896 KB] Landmark graph generation time: 5.699e-05s [t=0.00400049s, 408518896 KB] Landmark graph contains 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00400283s, 408518896 KB] Landmark graph contains 1 orderings. [t=0.00401222s, 408518896 KB] Simplifying 0 unary operators... done! [0 unary operators] [t=0.00401628s, 408518896 KB] time to simplify: 5.617e-06s [t=0.00401866s, 408518896 KB] Initializing additive heuristic... [t=0.00402042s, 408518896 KB] Initializing FF heuristic... [t=0.00404469s, 408518896 KB] Building successor generator...done! [t=0.00405084s, 408518896 KB] peak memory difference for successor generator creation: 0 KB [t=0.00405359s, 408518896 KB] time for successor generation creation: 1.886e-06s [t=0.00405617s, 408518896 KB] Variables: 1 [t=0.0040581s, 408518896 KB] FactPairs: 2 [t=0.0040613s, 408518896 KB] Bytes per state: 4 [t=0.00408159s, 408518896 KB] Conducting lazy best first search, (real) bound = 2147483647 [t=0.00408692s, 408518896 KB] 1 initial landmarks, 1 goal landmarks [t=0.00409434s, 408518896 KB] Initial heuristic value for ff(transform=adapt_costs(one)): infinity [t=0.00409697s, 408518896 KB] Completely explored state space -- no solution! [t=0.00409893s, 408518896 KB] Actual search time: 1.0578e-05s [t=0.00410094s, 408518896 KB] Expanded 0 state(s). [t=0.00410094s, 408518896 KB] Reopened 0 state(s). [t=0.00410094s, 408518896 KB] Evaluated 1 state(s). [t=0.00410094s, 408518896 KB] Evaluations: 1 [t=0.00410094s, 408518896 KB] Generated 0 state(s). [t=0.00410094s, 408518896 KB] Dead ends: 1 state(s). [t=0.00410094s, 408518896 KB] Number of registered states: 1 [t=0.00410094s, 408518896 KB] Int hash set load factor: 1/1 = 1 [t=0.00410094s, 408518896 KB] Int hash set resizes: 0 [t=0.00410094s, 408518896 KB] Search time: 1.9598e-05s [t=0.00410094s, 408518896 KB] Total time: 0.00410094s Search stopped without finding a solution. Peak memory: 408518896 KB search exit code: 12 Driver aborting after search INFO Planner time: 0.11s
+    Plan time: 0.175s
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 65 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 67 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 69 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 71 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 73 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 75 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 76 / 223 ID=train/pick_heat_then_place_in_recep-Potato-None-GarbageCan-12/trial_T20190907_125521_042428 AttemptIdx=0 GoalIdx=0
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 7 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'WashObject_0', 'MicrowaveObject_2', 'ThrowObject_1', 'CleanObject_0', 'CoolObject_2', 'WarmObject_1', 'RinseObject_0'}
+    Language: put a cooked potato in the trash can.
+    Ground truth goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o PotatoType) (receptacleType ?r GarbageCanType) (inReceptacle ?o ?r) (heatable ?o) (isHot ?o) ) )))
+    Proposed goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o PotatoType) (receptacleType ?r GarbageCanType) (inReceptacle ?o ?r) (heatable ?o) (isHot ?o) ) )))
+Instantiating FD with --alias "lama-first" 
+    Plan success: True
+    Plan string:  (gotolocation agent1 loc_bar_4_bar__minus_2_bar_2_bar_30 loc_bar_4_bar_11_bar_1_bar_60) (gotolocation agent1 loc_bar_4_bar_11_bar_1_bar_60 loc_bar__minus_1_bar_5_bar_3_bar_30) (pickupobjectinreceptacle agent1 loc_bar__minus_1_bar_5_bar_3_bar_30 potato__minus_4_dot_83762_comma__minus_4_dot_83762_comma_4_dot_61625768_comma_4_dot_61625768_comma_3_dot_8822288_comma_3_dot_8822288 countertop__minus_3_dot_888_comma__minus_3_dot_888_comma_3_dot_684_comma_3_dot_684_comma_3_dot_8936_comma_3_dot_8936) (gotolocation agent1 loc_bar__minus_1_bar_5_bar_3_bar_30 loc_bar_4_bar_11_bar_1_bar_60) (putobjectinreceptacle agent1 loc_bar_4_bar_11_bar_1_bar_60 potatotype potato__minus_4_dot_83762_comma__minus_4_dot_83762_comma_4_dot_61625768_comma_4_dot_61625768_comma_3_dot_8822288_comma_3_dot_8822288 garbagecan_5_dot_80777024_comma_5_dot_80777024_comma_11_dot_65005396_comma_11_dot_65005396_comma_0_dot_0_comma_0_dot_0) (microwaveobject_2 agent1 loc_bar_4_bar_11_bar_1_bar_60 potato__minus_4_dot_83762_comma__minus_4_dot_83762_comma_4_dot_61625768_comma_4_dot_61625768_comma_3_dot_8822288_comma_3_dot_8822288)
+    Plan time: 0.521s
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 77 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 79 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 81 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 83 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 85 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 87 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 89 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 91 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 93 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 95 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 97 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 97 / 223 ID=train/pick_and_place_simple-Tomato-None-Microwave-8/trial_T20190907_205050_993517 AttemptIdx=0 GoalIdx=0
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 7 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'PutdownObject_1', 'ChillObject_1', 'WashObject_2', 'MicrowaveObject_0', 'RinseObject_1', 'MicrowaveObject_1', 'WarmObject_2'}
+    Language: put the tomato in the microwave.
+    Ground truth goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o TomatoType) (receptacleType ?r MicrowaveType) (inReceptacle ?o ?r) ) )))
+    Proposed goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o TomatoType) (receptacleType ?r MicrowaveType) (inReceptacle ?o ?r) ) )))
+Instantiating FD with --alias "lama-first" 
+    Plan success: True
+    Plan string:  (gotolocation agent1 loc_bar__minus_12_bar__minus_6_bar_0_bar_30 loc_bar_2_bar_0_bar_1_bar_30) (gotolocation agent1 loc_bar_2_bar_0_bar_1_bar_30 loc_bar_3_bar_8_bar_1_bar__minus_15) (pickupobjectinreceptacle agent1 loc_bar_3_bar_8_bar_1_bar__minus_15 tomato_5_dot_55385304_comma_5_dot_55385304_comma_7_dot_60457228_comma_7_dot_60457228_comma_7_dot_0413766_comma_7_dot_0413766 fridge_5_dot_668_comma_5_dot_668_comma_8_dot_404_comma_8_dot_404_comma_0_dot_0_comma_0_dot_0) (gotolocation agent1 loc_bar_3_bar_8_bar_1_bar__minus_15 loc_bar_2_bar_0_bar_1_bar_30) (putdownobject_1 agent1 tomato_5_dot_55385304_comma_5_dot_55385304_comma_7_dot_60457228_comma_7_dot_60457228_comma_7_dot_0413766_comma_7_dot_0413766 loc_bar_2_bar_0_bar_1_bar_30 microwave_5_dot_688_comma_5_dot_688_comma_0_dot_092_comma_0_dot_092_comma_4_dot_6_comma_4_dot_6)
+    Plan time: 0.611s
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 99 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 101 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 103 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 105 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 107 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 109 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 111 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 113 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 114 / 223 ID=train/pick_cool_then_place_in_recep-BreadSliced-None-GarbageCan-19/trial_T20190908_174425_766449 AttemptIdx=0 GoalIdx=0
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 8 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'ChillObject_0', 'WashObject_0', 'HeatObject_1', 'TurnOffObject_0', 'RinseObject_2', 'EmptyObject_2', 'TurnOnObject_2', 'HeatObject_2'}
+    Language: cool a bread slice plus place it in the trash can.
+    Ground truth goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o BreadType) (receptacleType ?r GarbageCanType) (inReceptacle ?o ?r) (coolable ?o) (isCool ?o) (sliceable ?o) (isSliced ?o) ) )))
+    Proposed goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o BreadType) (receptacleType ?r GarbageCanType) (inReceptacle ?o ?r) (coolable ?o) (isCool ?o) (sliceable ?o) (isSliced ?o) ) )))
+Instantiating FD with --alias "lama-first" 
+    Plan success: False
+    Plan string:  Plan not found with FD! Error: INFO planner time limit: None INFO planner memory limit: None INFO Running translator. INFO translator stdin: None INFO translator time limit: None INFO translator memory limit: None INFO translator command line string: /Users/zyzzyva/miniconda3/envs/llm-operators-zs/bin/python3 /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/pddlgym_planners/FD/builds/release/bin/translate/translate.py /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpbyc0tuj6 /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpqdpcqi8g --sas-file /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpj9jdjysk Parsing... Parsing: [0.010s CPU, 0.002s wall-clock] Normalizing task... [0.000s CPU, 0.000s wall-clock] Instantiating... Generating Datalog program... [0.000s CPU, 0.001s wall-clock] Normalizing Datalog program... Normalizing Datalog program: [0.000s CPU, 0.002s wall-clock] Preparing model... [0.000s CPU, 0.003s wall-clock] Generated 97 rules. Computing model... [0.260s CPU, 0.255s wall-clock] 45031 relevant atoms 46890 auxiliary atoms 91921 final queue length 145340 total queue pushes Completing instantiation... [0.580s CPU, 0.582s wall-clock] Instantiating: [0.850s CPU, 0.850s wall-clock] No relaxed solution! Generating unsolvable task... Translator variables: 1 Translator derived variables: 0 Translator facts: 2 Translator goal facts: 1 Translator mutex groups: 0 Translator total mutex groups size: 0 Translator operators: 0 Translator axioms: 0 Translator task size: 4 warning: could not determine peak memory Writing output... [0.000s CPU, 0.000s wall-clock] Done! [0.870s CPU, 0.870s wall-clock] translate exit code: 0 INFO Running search (release). INFO search stdin: /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpj9jdjysk INFO search time limit: None INFO search memory limit: None INFO search command line string: /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/pddlgym_planners/FD/builds/release/bin/downward --search 'let(hlm,landmark_sum(lm_factory=lm_reasonable_orders_hps(lm_rhw()),transform=adapt_costs(one),pref=false),let(hff,ff(transform=adapt_costs(one)),lazy_greedy([hff,hlm],preferred=[hff,hlm],cost_type=one,reopen_closed=false)))' --internal-plan-file sas_plan < /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpj9jdjysk [t=9.3439e-05s, 408509680 KB] reading input... [t=0.000150101s, 408509680 KB] done reading input! [t=0.00371981s, 408518896 KB] Initializing landmark sum heuristic... [t=0.00372899s, 408518896 KB] Generating landmark graph... [t=0.00373338s, 408518896 KB] Building a landmark graph with reasonable orders. [t=0.003736s, 408518896 KB] Initializing Exploration... [t=0.00373936s, 408518896 KB] Generating landmarks using the RPG/SAS+ approach [t=0.00375474s, 408518896 KB] Removed 0 reasonable or obedient reasonable orders [t=0.00375913s, 408518896 KB] Landmarks generation time: 2.4764e-05s [t=0.00376134s, 408518896 KB] Discovered 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00376355s, 408518896 KB] 1 edges [t=0.00376569s, 408518896 KB] approx. reasonable orders [t=0.00376782s, 408518896 KB] approx. obedient reasonable orders [t=0.00376979s, 408518896 KB] Removed 0 reasonable or obedient reasonable orders [t=0.00377175s, 408518896 KB] Landmarks generation time: 4.1205e-05s [t=0.00377434s, 408518896 KB] Discovered 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00377631s, 408518896 KB] 1 edges [t=0.00378102s, 408518896 KB] Landmark graph generation time: 5.3382e-05s [t=0.00378303s, 408518896 KB] Landmark graph contains 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00378512s, 408518896 KB] Landmark graph contains 1 orderings. [t=0.00379389s, 408518896 KB] Simplifying 0 unary operators... done! [0 unary operators] [t=0.00380103s, 408518896 KB] time to simplify: 8.569e-06s [t=0.00380349s, 408518896 KB] Initializing additive heuristic... [t=0.00380537s, 408518896 KB] Initializing FF heuristic... [t=0.00382719s, 408518896 KB] Building successor generator...done! [t=0.00383317s, 408518896 KB] peak memory difference for successor generator creation: 0 KB [t=0.00383559s, 408518896 KB] time for successor generation creation: 1.517e-06s [t=0.00383781s, 408518896 KB] Variables: 1 [t=0.0038399s, 408518896 KB] FactPairs: 2 [t=0.00384158s, 408518896 KB] Bytes per state: 4 [t=0.00386019s, 408518896 KB] Conducting lazy best first search, (real) bound = 2147483647 [t=0.00386491s, 408518896 KB] 1 initial landmarks, 1 goal landmarks [t=0.00387442s, 408518896 KB] Initial heuristic value for ff(transform=adapt_costs(one)): infinity [t=0.00387684s, 408518896 KB] Completely explored state space -- no solution! [t=0.00387864s, 408518896 KB] Actual search time: 1.2751e-05s [t=0.00388077s, 408518896 KB] Expanded 0 state(s). [t=0.00388077s, 408518896 KB] Reopened 0 state(s). [t=0.00388077s, 408518896 KB] Evaluated 1 state(s). [t=0.00388077s, 408518896 KB] Evaluations: 1 [t=0.00388077s, 408518896 KB] Generated 0 state(s). [t=0.00388077s, 408518896 KB] Dead ends: 1 state(s). [t=0.00388077s, 408518896 KB] Number of registered states: 1 [t=0.00388077s, 408518896 KB] Int hash set load factor: 1/1 = 1 [t=0.00388077s, 408518896 KB] Int hash set resizes: 0 [t=0.00388077s, 408518896 KB] Search time: 2.0828e-05s [t=0.00388077s, 408518896 KB] Total time: 0.00388077s Search stopped without finding a solution. Peak memory: 408518896 KB search exit code: 12 Driver aborting after search INFO Planner time: 0.90s
+    Plan time: 0.975s
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 115 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 117 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 119 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 121 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 123 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 125 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 127 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 129 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 131 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 133 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 134 / 223 ID=train/pick_heat_then_place_in_recep-Egg-None-SideTable-21/trial_T20190907_045036_700265 AttemptIdx=0 GoalIdx=0
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 7 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'HeatObject_1', 'TurnOnObject_1', 'CleanObject_0', 'SliceObject_1', 'HeatObject_0', 'CleanObject_2', 'RinseObject_2'}
+    Language: put a heated egg on the small black table.
+    Ground truth goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o EggType) (receptacleType ?r SideTableType) (inReceptacle ?o ?r) (heatable ?o) (isHot ?o) ) )))
+    Proposed goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o EggType) (receptacleType ?r SideTableType) (inReceptacle ?o ?r) (heatable ?o) (isHot ?o) ) )))
+Instantiating FD with --alias "lama-first" 
+    Plan success: True
+    Plan string:  (gotolocation agent1 loc_bar__minus_6_bar__minus_2_bar_1_bar_30 loc_bar_0_bar_1_bar_0_bar_60) (gotolocation agent1 loc_bar_0_bar_1_bar_0_bar_60 loc_bar_1_bar_1_bar_1_bar_60) (pickupobjectinreceptacle agent1 loc_bar_1_bar_1_bar_1_bar_60 egg_2_dot_4061796_comma_2_dot_4061796_comma_2_dot_035736_comma_2_dot_035736_comma_2_dot_804821016_comma_2_dot_804821016 sidetable_3_dot_0924_comma_3_dot_0924_comma_1_dot_7924_comma_1_dot_7924_comma_2_dot_8004_comma_2_dot_8004) (gotolocation agent1 loc_bar_1_bar_1_bar_1_bar_60 loc_bar__minus_1_bar_1_bar_1_bar_45) (heatobject_1 agent1 loc_bar__minus_1_bar_1_bar_1_bar_45 sidetable_3_dot_0924_comma_3_dot_0924_comma_1_dot_7924_comma_1_dot_7924_comma_2_dot_8004_comma_2_dot_8004 egg_2_dot_4061796_comma_2_dot_4061796_comma_2_dot_035736_comma_2_dot_035736_comma_2_dot_804821016_comma_2_dot_804821016) (putobjectinreceptacle agent1 loc_bar__minus_1_bar_1_bar_1_bar_45 eggtype egg_2_dot_4061796_comma_2_dot_4061796_comma_2_dot_035736_comma_2_dot_035736_comma_2_dot_804821016_comma_2_dot_804821016 sidetable_3_dot_0924_comma_3_dot_0924_comma_1_dot_7924_comma_1_dot_7924_comma_2_dot_8004_comma_2_dot_8004)
+    Plan time: 0.260s
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 135 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 137 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 139 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 141 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 142 / 223 ID=train/pick_and_place_simple-Pencil-None-Desk-309/trial_T20190918_231013_763397 AttemptIdx=0 GoalIdx=0
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 9 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'TurnOnObject_0', 'MicrowaveObject_2', 'CleanObject_0', 'HeatObject_0', 'CleanObject_1', 'PlaceObject_0', 'SliceObject_2', 'RinseObject_0', 'HeatObject_2'}
+    Language: move a pencil from the table to the counter.
+    Ground truth goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o PencilType) (receptacleType ?r DeskType) (inReceptacle ?o ?r) ) )))
+    Proposed goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o PencilType) (receptacleType ?r DeskType) (inReceptacle ?o ?r) ) )))
+Instantiating FD with --alias "lama-first" 
+    Plan success: True
+    Plan string:  (gotolocation agent1 loc_bar__minus_10_bar_8_bar_3_bar_30 loc_bar_7_bar_12_bar_2_bar_60) (pickupobjectinreceptacle agent1 loc_bar_7_bar_12_bar_2_bar_60 pencil_7_dot_22013044_comma_7_dot_22013044_comma_9_dot_0123148_comma_9_dot_0123148_comma_2_dot_225096_comma_2_dot_225096 sidetable_7_dot_104_comma_7_dot_104_comma_9_dot_512_comma_9_dot_512_comma_0_dot_08369936_comma_0_dot_08369936) (gotolocation agent1 loc_bar_7_bar_12_bar_2_bar_60 loc_bar__minus_4_bar__minus_9_bar_2_bar_30) (placeobject_0 agent1 loc_bar__minus_4_bar__minus_9_bar_2_bar_30 desk__minus_5_dot_088_comma__minus_5_dot_088_comma__minus_11_dot_952_comma__minus_11_dot_952_comma_4_dot_676_comma_4_dot_676 pencil_7_dot_22013044_comma_7_dot_22013044_comma_9_dot_0123148_comma_9_dot_0123148_comma_2_dot_225096_comma_2_dot_225096)
+    Plan time: 0.185s
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 143 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 145 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 147 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 149 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 151 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 153 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 153 / 223 ID=train/pick_heat_then_place_in_recep-BreadSliced-None-GarbageCan-30/trial_T20190907_044445_578004 AttemptIdx=0 GoalIdx=0
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 9 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'WashObject_0', 'TurnOnObject_0', 'CleanObject_0', 'SliceObject_1', 'RinseObject_2', 'WashObject_2', 'ThrowObject_2', 'WarmObject_2', 'WashObject_1'}
+    Language: slice bread , cook a slice , put it in the trash.
+    Ground truth goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o BreadType) (receptacleType ?r GarbageCanType) (inReceptacle ?o ?r) (heatable ?o) (isHot ?o) (sliceable ?o) (isSliced ?o) ) )))
+    Proposed goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o BreadType) (receptacleType ?r GarbageCanType) (inReceptacle ?o ?r) (heatable ?o) (isHot ?o) (sliceable ?o) (isSliced ?o) ) )))
+Instantiating FD with --alias "lama-first" 
+    Plan success: True
+    Plan string:  (gotolocation agent1 loc_bar_10_bar_3_bar_0_bar_30 loc_bar_10_bar_1_bar_1_bar_45) (gotolocation agent1 loc_bar_10_bar_1_bar_1_bar_45 loc_bar_8_bar_2_bar_3_bar_60) (warmobject_2 agent1 loc_bar_8_bar_2_bar_3_bar_60 bread_6_dot_13680268_comma_6_dot_13680268_comma_1_dot_947330236_comma_1_dot_947330236_comma_3_dot_8915676_comma_3_dot_8915676) (pickupobjectinreceptacle agent1 loc_bar_8_bar_2_bar_3_bar_60 bread_6_dot_13680268_comma_6_dot_13680268_comma_1_dot_947330236_comma_1_dot_947330236_comma_3_dot_8915676_comma_3_dot_8915676 countertop_4_dot_844_comma_4_dot_844_comma_1_dot_856_comma_1_dot_856_comma_3_dot_7488_comma_3_dot_7488) (gotolocation agent1 loc_bar_8_bar_2_bar_3_bar_60 loc_bar_0_bar_0_bar_3_bar_45) (gotolocation agent1 loc_bar_0_bar_0_bar_3_bar_45 loc_bar_11_bar_5_bar_1_bar_60) (putobjectinreceptacle agent1 loc_bar_11_bar_5_bar_1_bar_60 breadtype bread_6_dot_13680268_comma_6_dot_13680268_comma_1_dot_947330236_comma_1_dot_947330236_comma_3_dot_8915676_comma_3_dot_8915676 garbagecan_12_dot_728_comma_12_dot_728_comma_6_dot_4_comma_6_dot_4_comma_0_dot_1178724468_comma_0_dot_1178724468) (gotolocation agent1 loc_bar_11_bar_5_bar_1_bar_60 loc_bar_10_bar_1_bar_1_bar_45) (pickupobjectinreceptacle agent1 loc_bar_10_bar_1_bar_1_bar_45 knife_13_dot_41808128_comma_13_dot_41808128_comma_0_dot_931194188_comma_0_dot_931194188_comma_3_dot_7056732_comma_3_dot_7056732 countertop_12_dot_444_comma_12_dot_444_comma_0_dot_08_comma_0_dot_08_comma_3_dot_7452_comma_3_dot_7452) (gotolocation agent1 loc_bar_10_bar_1_bar_1_bar_45 loc_bar_11_bar_5_bar_1_bar_60) (sliceobject_1 agent1 loc_bar_11_bar_5_bar_1_bar_60 bread_6_dot_13680268_comma_6_dot_13680268_comma_1_dot_947330236_comma_1_dot_947330236_comma_3_dot_8915676_comma_3_dot_8915676 knife_13_dot_41808128_comma_13_dot_41808128_comma_0_dot_931194188_comma_0_dot_931194188_comma_3_dot_7056732_comma_3_dot_7056732)
+    Plan time: 0.994s
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 155 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 156 / 223 ID=train/pick_cool_then_place_in_recep-TomatoSliced-None-Microwave-18/trial_T20190911_190644_778748 AttemptIdx=0 GoalIdx=0
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 13 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'ChillObject_2', 'ThrowObject_1', 'RinseObject_1', 'CoolObject_0', 'TurnOnLight_1', 'WarmObject_1', 'CleanObject_2', 'SliceObject_0', 'CleanObject_1', 'HeatObject_0', 'PlaceObject_2', 'PutdownObject_0', 'PutdownObject_1'}
+    Language: cut a slice of tomato , chill it , then cook it in the microwave.
+    Ground truth goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o TomatoType) (receptacleType ?r MicrowaveType) (inReceptacle ?o ?r) (coolable ?o) (isCool ?o) (sliceable ?o) (isSliced ?o) ) )))
+    Proposed goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o TomatoType) (receptacleType ?r MicrowaveType) (inReceptacle ?o ?r) (coolable ?o) (isCool ?o) (sliceable ?o) (isSliced ?o) ) )))
+Instantiating FD with --alias "lama-first" 
+    Plan success: True
+    Plan string:  (gotolocation agent1 loc_bar__minus_4_bar_10_bar_1_bar_30 loc_bar_1_bar_6_bar_2_bar_30) (gotolocation agent1 loc_bar_1_bar_6_bar_2_bar_30 loc_bar__minus_5_bar_26_bar_1_bar_45) (chillobject_2 agent1 loc_bar__minus_5_bar_26_bar_1_bar_45 tomato__minus_1_dot_6066424_comma__minus_1_dot_6066424_comma_25_dot_82542612_comma_25_dot_82542612_comma_3_dot_23821616_comma_3_dot_23821616) (pickupobjectinreceptacle agent1 loc_bar__minus_5_bar_26_bar_1_bar_45 tomato__minus_1_dot_6066424_comma__minus_1_dot_6066424_comma_25_dot_82542612_comma_25_dot_82542612_comma_3_dot_23821616_comma_3_dot_23821616 diningtable__minus_0_dot_624711872_comma__minus_0_dot_624711872_comma_25_dot_896156_comma_25_dot_896156_comma_2_dot_673336984_comma_2_dot_673336984) (gotolocation agent1 loc_bar__minus_5_bar_26_bar_1_bar_45 loc_bar_1_bar_6_bar_2_bar_30) (putobjectinreceptacle agent1 loc_bar_1_bar_6_bar_2_bar_30 tomatotype tomato__minus_1_dot_6066424_comma__minus_1_dot_6066424_comma_25_dot_82542612_comma_25_dot_82542612_comma_3_dot_23821616_comma_3_dot_23821616 microwave_0_dot_434951068_comma_0_dot_434951068_comma_1_dot_052_comma_1_dot_052_comma_3_dot_926775456_comma_3_dot_926775456) (gotolocation agent1 loc_bar_1_bar_6_bar_2_bar_30 loc_bar_3_bar_13_bar_1_bar_45) (pickupobjectinreceptacle agent1 loc_bar_3_bar_13_bar_1_bar_45 knife_5_dot_97290612_comma_5_dot_97290612_comma_12_dot_92416_comma_12_dot_92416_comma_4_dot_08960152_comma_4_dot_08960152 countertop_5_dot_564_comma_5_dot_564_comma_3_dot_588_comma_3_dot_588_comma_4_dot_1128_comma_4_dot_1128) (gotolocation agent1 loc_bar_3_bar_13_bar_1_bar_45 loc_bar_1_bar_6_bar_2_bar_30) (sliceobject_0 knife_5_dot_97290612_comma_5_dot_97290612_comma_12_dot_92416_comma_12_dot_92416_comma_4_dot_08960152_comma_4_dot_08960152 agent1 loc_bar_1_bar_6_bar_2_bar_30 tomato__minus_1_dot_6066424_comma__minus_1_dot_6066424_comma_25_dot_82542612_comma_25_dot_82542612_comma_3_dot_23821616_comma_3_dot_23821616)
+    Plan time: 0.963s
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 157 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 159 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 161 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 163 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 165 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 167 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 169 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 171 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 173 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 173 / 223 ID=train/pick_and_place_simple-Pen-None-Desk-310/trial_T20190908_030223_620154 AttemptIdx=0 GoalIdx=0
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 7 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'HeatObject_1', 'TurnOnObject_1', 'MicrowaveObject_2', 'CoolObject_2', 'DiscardObject_2', 'EmptyObject_2', 'WarmObject_2'}
+    Language: pick a pencil in the dustbin and place it on the table.
+    Ground truth goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o PenType) (receptacleType ?r DeskType) (inReceptacle ?o ?r) ) )))
+    Proposed goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o PenType) (receptacleType ?r DeskType) (inReceptacle ?o ?r) ) )))
+Instantiating FD with --alias "lama-first" 
+    Plan success: True
+    Plan string:  (gotolocation agent1 loc_bar__minus_2_bar_2_bar_1_bar_30 loc_bar_2_bar__minus_8_bar_3_bar_45) (gotolocation agent1 loc_bar_2_bar__minus_8_bar_3_bar_45 loc_bar__minus_6_bar__minus_5_bar_2_bar_15) (emptyobject_2 agent1 loc_bar__minus_6_bar__minus_5_bar_2_bar_15 cabinet__minus_4_dot_329756_comma__minus_4_dot_329756_comma__minus_7_dot_674432_comma__minus_7_dot_674432_comma_6_dot_10477304_comma_6_dot_10477304 pen_0_dot_512000204_comma_0_dot_512000204_comma__minus_8_dot_78529548_comma__minus_8_dot_78529548_comma_0_dot_604482292_comma_0_dot_604482292) (gotolocation agent1 loc_bar__minus_6_bar__minus_5_bar_2_bar_15 loc_bar_2_bar__minus_8_bar_3_bar_45) (putobjectinreceptacle agent1 loc_bar_2_bar__minus_8_bar_3_bar_45 pentype pen_0_dot_512000204_comma_0_dot_512000204_comma__minus_8_dot_78529548_comma__minus_8_dot_78529548_comma_0_dot_604482292_comma_0_dot_604482292 desk__minus_3_dot_849575044_comma__minus_3_dot_849575044_comma__minus_8_dot_224_comma__minus_8_dot_224_comma__minus_0_dot_008_comma__minus_0_dot_008)
+    Plan time: 0.440s
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 175 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 177 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 177 / 223 ID=train/look_at_obj_in_light-Watch-None-FloorLamp-217/trial_T20190907_011607_273414 AttemptIdx=0 GoalIdx=0
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 14 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'TurnOffObject_2', 'TurnOnObject_1', 'TurnOffObject_0', 'CoolObject_1', 'CleanObject_0', 'DiscardObject_0', 'WarmObject_0', 'SliceObject_0', 'ChillObject_1', 'EmptyObject_2', 'PlaceObject_0', 'MicrowaveObject_0', 'HeatObject_2', 'WashObject_1'}
+    Language: grab the watch on the coffee table , turn on the floor lamp in the corner.
+    Ground truth goal: (:goal (exists (?a - agent) (exists (?r - receptacle) (exists (?o - object) (exists (?ot - object) (exists (?l - location) (and (objectType ?ot FloorLampType) (toggleable ?ot) (isToggled ?ot) (objectAtLocation ?ot ?l) (atLocation ?a ?l) (objectType ?o WatchType) (holds ?a ?o) ) ))))))
+    Proposed goal: (:goal (exists (?a - agent) (exists (?r - receptacle) (exists (?o - object) (exists (?ot - object) (exists (?l - location) (and (objectType ?ot FloorLampType) (toggleable ?ot) (isToggled ?ot) (objectAtLocation ?ot ?l) (atLocation ?a ?l) (objectType ?o WatchType) (holds ?a ?o) ) ))))))
+Instantiating FD with --alias "lama-first" 
+    Plan success: False
+    Plan string:  Plan not found with FD! Error: INFO planner time limit: None INFO planner memory limit: None INFO Running translator. INFO translator stdin: None INFO translator time limit: None INFO translator memory limit: None INFO translator command line string: /Users/zyzzyva/miniconda3/envs/llm-operators-zs/bin/python3 /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/pddlgym_planners/FD/builds/release/bin/translate/translate.py /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpyv10wd9x /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmp43d46ez5 --sas-file /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpykdp4mpz Parsing... Parsing: [0.000s CPU, 0.002s wall-clock] Normalizing task... [0.000s CPU, 0.000s wall-clock] Instantiating... Generating Datalog program... [0.000s CPU, 0.001s wall-clock] Normalizing Datalog program... Normalizing Datalog program: [0.000s CPU, 0.003s wall-clock] Preparing model... [0.000s CPU, 0.003s wall-clock] Generated 157 rules. Computing model... [0.210s CPU, 0.199s wall-clock] 19003 relevant atoms 47823 auxiliary atoms 66826 final queue length 81377 total queue pushes Completing instantiation... [0.130s CPU, 0.130s wall-clock] Instantiating: [0.340s CPU, 0.341s wall-clock] No relaxed solution! Generating unsolvable task... Translator variables: 1 Translator derived variables: 0 Translator facts: 2 Translator goal facts: 1 Translator mutex groups: 0 Translator total mutex groups size: 0 Translator operators: 0 Translator axioms: 0 Translator task size: 4 warning: could not determine peak memory Writing output... [0.000s CPU, 0.000s wall-clock] Done! [0.340s CPU, 0.348s wall-clock] translate exit code: 0 INFO Running search (release). INFO search stdin: /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpykdp4mpz INFO search time limit: None INFO search memory limit: None INFO search command line string: /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/pddlgym_planners/FD/builds/release/bin/downward --search 'let(hlm,landmark_sum(lm_factory=lm_reasonable_orders_hps(lm_rhw()),transform=adapt_costs(one),pref=false),let(hff,ff(transform=adapt_costs(one)),lazy_greedy([hff,hlm],preferred=[hff,hlm],cost_type=one,reopen_closed=false)))' --internal-plan-file sas_plan < /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpykdp4mpz [t=0.000101516s, 408500464 KB] reading input... [t=0.000165394s, 408500464 KB] done reading input! [t=0.00364256s, 408500464 KB] Initializing landmark sum heuristic... [t=0.0036474s, 408500464 KB] Generating landmark graph... [t=0.00365113s, 408500464 KB] Building a landmark graph with reasonable orders. [t=0.00365351s, 408500464 KB] Initializing Exploration... [t=0.00365638s, 408500464 KB] Generating landmarks using the RPG/SAS+ approach [t=0.00366798s, 408500464 KB] Removed 0 reasonable or obedient reasonable orders [t=0.00367122s, 408500464 KB] Landmarks generation time: 1.9475e-05s [t=0.00367344s, 408500464 KB] Discovered 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00367639s, 408500464 KB] 1 edges [t=0.00367909s, 408500464 KB] approx. reasonable orders [t=0.00368151s, 408500464 KB] approx. obedient reasonable orders [t=0.00368373s, 408500464 KB] Removed 0 reasonable or obedient reasonable orders [t=0.00368606s, 408500464 KB] Landmarks generation time: 3.7966e-05s [t=0.0036882s, 408500464 KB] Discovered 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00369082s, 408500464 KB] 1 edges [t=0.00369279s, 408500464 KB] Landmark graph generation time: 4.674e-05s [t=0.00369517s, 408500464 KB] Landmark graph contains 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00369763s, 408500464 KB] Landmark graph contains 1 orderings. [t=0.00370697s, 408500464 KB] Simplifying 0 unary operators... done! [0 unary operators] [t=0.00371025s, 408500464 KB] time to simplify: 4.715e-06s [t=0.00371239s, 408500464 KB] Initializing additive heuristic... [t=0.00371403s, 408500464 KB] Initializing FF heuristic... [t=0.00373629s, 408500464 KB] Building successor generator...done! [t=0.00374182s, 408500464 KB] peak memory difference for successor generator creation: 0 KB [t=0.00374404s, 408500464 KB] time for successor generation creation: 1.558e-06s [t=0.00374658s, 408500464 KB] Variables: 1 [t=0.00374855s, 408500464 KB] FactPairs: 2 [t=0.00375056s, 408500464 KB] Bytes per state: 4 [t=0.00377069s, 408500464 KB] Conducting lazy best first search, (real) bound = 2147483647 [t=0.0037754s, 408500464 KB] 1 initial landmarks, 1 goal landmarks [t=0.00378192s, 408500464 KB] Initial heuristic value for ff(transform=adapt_costs(one)): infinity [t=0.00378451s, 408500464 KB] Completely explored state space -- no solution! [t=0.00378688s, 408500464 KB] Actual search time: 1.025e-05s [t=0.00378881s, 408500464 KB] Expanded 0 state(s). [t=0.00378881s, 408500464 KB] Reopened 0 state(s). [t=0.00378881s, 408500464 KB] Evaluated 1 state(s). [t=0.00378881s, 408500464 KB] Evaluations: 1 [t=0.00378881s, 408500464 KB] Generated 0 state(s). [t=0.00378881s, 408500464 KB] Dead ends: 1 state(s). [t=0.00378881s, 408500464 KB] Number of registered states: 1 [t=0.00378881s, 408500464 KB] Int hash set load factor: 1/1 = 1 [t=0.00378881s, 408500464 KB] Int hash set resizes: 0 [t=0.00378881s, 408500464 KB] Search time: 1.8327e-05s [t=0.00378881s, 408500464 KB] Total time: 0.00378881s Search stopped without finding a solution. Peak memory: 408500464 KB search exit code: 12 Driver aborting after search INFO Planner time: 0.38s
+    Plan time: 0.455s
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 179 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 181 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 183 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 185 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 187 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 189 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 191 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 193 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 195 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 197 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 197 / 223 ID=train/pick_heat_then_place_in_recep-Egg-None-SinkBasin-8/trial_T20190907_001607_953024 AttemptIdx=0 GoalIdx=0
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 9 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'ChillObject_0', 'HeatObject_1', 'TurnOnObject_1', 'TurnOnLight_0', 'PlaceObject_0', 'ThrowObject_2', 'PutdownObject_0', 'MicrowaveObject_1', 'WashObject_1'}
+    Language: place a cooked egg in the sink.
+    Ground truth goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o EggType) (receptacleType ?r SinkBasinType) (inReceptacle ?o ?r) (heatable ?o) (isHot ?o) ) )))
+    Proposed goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o EggType) (receptacleType ?r SinkBasinType) (inReceptacle ?o ?r) (heatable ?o) (isHot ?o) ) )))
+Instantiating FD with --alias "lama-first" 
+    Plan success: True
+    Plan string:  (gotolocation agent1 loc_bar__minus_7_bar_8_bar_0_bar_30 loc_bar_0_bar_0_bar_1_bar_60) (gotolocation agent1 loc_bar_0_bar_0_bar_1_bar_60 loc_bar_1_bar__minus_4_bar_2_bar_45) (pickupobjectnotinreceptacle agent1 loc_bar_1_bar__minus_4_bar_2_bar_45 egg_1_dot_143761516_comma_1_dot_143761516_comma__minus_7_dot_03387976_comma__minus_7_dot_03387976_comma_3_dot_7955164_comma_3_dot_7955164) (gotolocation agent1 loc_bar_1_bar__minus_4_bar_2_bar_45 loc_bar__minus_1_bar__minus_4_bar_2_bar_45) (heatobject_1 agent1 loc_bar__minus_1_bar__minus_4_bar_2_bar_45 sinkbasin__minus_0_dot_25512844_comma__minus_0_dot_25512844_comma__minus_6_dot_85248328_comma__minus_6_dot_85248328_comma_3_dot_0634928_comma_3_dot_0634928 egg_1_dot_143761516_comma_1_dot_143761516_comma__minus_7_dot_03387976_comma__minus_7_dot_03387976_comma_3_dot_7955164_comma_3_dot_7955164) (placeobject_0 agent1 loc_bar__minus_1_bar__minus_4_bar_2_bar_45 sinkbasin__minus_0_dot_25512844_comma__minus_0_dot_25512844_comma__minus_6_dot_85248328_comma__minus_6_dot_85248328_comma_3_dot_0634928_comma_3_dot_0634928 egg_1_dot_143761516_comma_1_dot_143761516_comma__minus_7_dot_03387976_comma__minus_7_dot_03387976_comma_3_dot_7955164_comma_3_dot_7955164)
+    Plan time: 0.362s
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 199 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 199 / 223 ID=train/pick_clean_then_place_in_recep-Tomato-None-Fridge-20/trial_T20190909_091539_383661 AttemptIdx=0 GoalIdx=0
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 13 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'ChillObject_2', 'TurnOffObject_0', 'WarmObject_1', 'ThrowObject_0', 'DiscardObject_2', 'RinseObject_2', 'SliceObject_1', 'PlaceObject_0', 'SliceObject_2', 'RinseObject_0', 'TurnOffObject_1', 'MicrowaveObject_1', 'WashObject_1'}
+    Language: put washed tomato in fridge.
+    Ground truth goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o TomatoType) (receptacleType ?r FridgeType) (inReceptacle ?o ?r) (cleanable ?o) (isClean ?o) ) )))
+    Proposed goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o TomatoType) (receptacleType ?r FridgeType) (inReceptacle ?o ?r) (cleanable ?o) (isClean ?o) ) )))
+Instantiating FD with --alias "lama-first" 
+    Plan success: True
+    Plan string:  (gotolocation agent1 loc_bar_3_bar__minus_5_bar_2_bar_30 loc_bar__minus_2_bar_3_bar_0_bar_60) (pickupobjectinreceptacle agent1 loc_bar__minus_2_bar_3_bar_0_bar_60 tomato__minus_0_dot_643775104_comma__minus_0_dot_643775104_comma_4_dot_880556_comma_4_dot_880556_comma_3_dot_929794_comma_3_dot_929794 diningtable_1_dot_66_comma_1_dot_66_comma_2_dot_712_comma_2_dot_712_comma_0_dot_052_comma_0_dot_052) (gotolocation agent1 loc_bar__minus_2_bar_3_bar_0_bar_60 loc_bar__minus_3_bar__minus_3_bar_3_bar_60) (placeobject_0 agent1 loc_bar__minus_3_bar__minus_3_bar_3_bar_60 fridge__minus_5_dot_98224832_comma__minus_5_dot_98224832_comma__minus_2_dot_812_comma__minus_2_dot_812_comma_0_dot_0_comma_0_dot_0 tomato__minus_0_dot_643775104_comma__minus_0_dot_643775104_comma_4_dot_880556_comma_4_dot_880556_comma_3_dot_929794_comma_3_dot_929794) (putobjectinreceptacle agent1 loc_bar__minus_3_bar__minus_3_bar_3_bar_60 tomatotype tomato__minus_0_dot_643775104_comma__minus_0_dot_643775104_comma_4_dot_880556_comma_4_dot_880556_comma_3_dot_929794_comma_3_dot_929794 fridge__minus_5_dot_98224832_comma__minus_5_dot_98224832_comma__minus_2_dot_812_comma__minus_2_dot_812_comma_0_dot_0_comma_0_dot_0) (rinseobject_0 agent1 loc_bar__minus_3_bar__minus_3_bar_3_bar_60 tomato__minus_0_dot_643775104_comma__minus_0_dot_643775104_comma_4_dot_880556_comma_4_dot_880556_comma_3_dot_929794_comma_3_dot_929794)
+    Plan time: 0.400s
+task_planner.attempt_task_plan_for_problem: attempt 200 / 223 ID=train/pick_cool_then_place_in_recep-Potato-None-GarbageCan-18/trial_T20190909_044319_709757 AttemptIdx=0 GoalIdx=0
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 7 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'DiscardObject_1', 'WashObject_0', 'TurnOnLight_0', 'ThrowObject_0', 'WashObject_2', 'CleanObject_1', 'PutdownObject_2'}
+    Language: put a cold potato in the garbage.
+    Ground truth goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o PotatoType) (receptacleType ?r GarbageCanType) (inReceptacle ?o ?r) (coolable ?o) (isCool ?o) ) )))
+    Proposed goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o PotatoType) (receptacleType ?r GarbageCanType) (inReceptacle ?o ?r) (coolable ?o) (isCool ?o) ) )))
+Instantiating FD with --alias "lama-first" 
+    Plan success: False
+    Plan string:  Plan not found with FD! Error: INFO planner time limit: None INFO planner memory limit: None INFO Running translator. INFO translator stdin: None INFO translator time limit: None INFO translator memory limit: None INFO translator command line string: /Users/zyzzyva/miniconda3/envs/llm-operators-zs/bin/python3 /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/pddlgym_planners/FD/builds/release/bin/translate/translate.py /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpema_s9jy /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpwg9llquf --sas-file /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpuif5unkn Parsing... Parsing: [0.000s CPU, 0.002s wall-clock] Normalizing task... [0.000s CPU, 0.000s wall-clock] Instantiating... Generating Datalog program... [0.000s CPU, 0.001s wall-clock] Normalizing Datalog program... Normalizing Datalog program: [0.000s CPU, 0.001s wall-clock] Preparing model... [0.000s CPU, 0.003s wall-clock] Generated 92 rules. Computing model... [0.040s CPU, 0.036s wall-clock] 7965 relevant atoms 3463 auxiliary atoms 11428 final queue length 22868 total queue pushes Completing instantiation... [0.090s CPU, 0.088s wall-clock] Instantiating: [0.130s CPU, 0.130s wall-clock] No relaxed solution! Generating unsolvable task... Translator variables: 1 Translator derived variables: 0 Translator facts: 2 Translator goal facts: 1 Translator mutex groups: 0 Translator total mutex groups size: 0 Translator operators: 0 Translator axioms: 0 Translator task size: 4 warning: could not determine peak memory Writing output... [0.000s CPU, 0.000s wall-clock] Done! [0.140s CPU, 0.135s wall-clock] translate exit code: 0 INFO Running search (release). INFO search stdin: /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpuif5unkn INFO search time limit: None INFO search memory limit: None INFO search command line string: /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/pddlgym_planners/FD/builds/release/bin/downward --search 'let(hlm,landmark_sum(lm_factory=lm_reasonable_orders_hps(lm_rhw()),transform=adapt_costs(one),pref=false),let(hff,ff(transform=adapt_costs(one)),lazy_greedy([hff,hlm],preferred=[hff,hlm],cost_type=one,reopen_closed=false)))' --internal-plan-file sas_plan < /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpuif5unkn [t=9.7867e-05s, 408500464 KB] reading input... [t=0.000158096s, 408500464 KB] done reading input! [t=0.0036467s, 408500464 KB] Initializing landmark sum heuristic... [t=0.00365138s, 408500464 KB] Generating landmark graph... [t=0.00365564s, 408500464 KB] Building a landmark graph with reasonable orders. [t=0.00365806s, 408500464 KB] Initializing Exploration... [t=0.00366093s, 408500464 KB] Generating landmarks using the RPG/SAS+ approach [t=0.00367389s, 408500464 KB] Removed 0 reasonable or obedient reasonable orders [t=0.00367725s, 408500464 KB] Landmarks generation time: 2.0869e-05s [t=0.00367995s, 408500464 KB] Discovered 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00368315s, 408500464 KB] 1 edges [t=0.00368557s, 408500464 KB] approx. reasonable orders [t=0.00368799s, 408500464 KB] approx. obedient reasonable orders [t=0.00369025s, 408500464 KB] Removed 0 reasonable or obedient reasonable orders [t=0.00369209s, 408500464 KB] Landmarks generation time: 3.9606e-05s [t=0.00369402s, 408500464 KB] Discovered 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00369603s, 408500464 KB] 1 edges [t=0.00369775s, 408500464 KB] Landmark graph generation time: 4.756e-05s [t=0.00369972s, 408500464 KB] Landmark graph contains 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00370238s, 408500464 KB] Landmark graph contains 1 orderings. [t=0.00371161s, 408500464 KB] Simplifying 0 unary operators... done! [0 unary operators] [t=0.00371476s, 408500464 KB] time to simplify: 4.469e-06s [t=0.00371702s, 408500464 KB] Initializing additive heuristic... [t=0.00371866s, 408500464 KB] Initializing FF heuristic... [t=0.00374006s, 408500464 KB] Building successor generator...done! [t=0.00374785s, 408500464 KB] peak memory difference for successor generator creation: 0 KB [t=0.00375019s, 408500464 KB] time for successor generation creation: 1.558e-06s [t=0.00375236s, 408500464 KB] Variables: 1 [t=0.00375408s, 408500464 KB] FactPairs: 2 [t=0.00375593s, 408500464 KB] Bytes per state: 4 [t=0.00377466s, 408500464 KB] Conducting lazy best first search, (real) bound = 2147483647 [t=0.0037793s, 408500464 KB] 1 initial landmarks, 1 goal landmarks [t=0.0037868s, 408500464 KB] Initial heuristic value for ff(transform=adapt_costs(one)): infinity [t=0.00378947s, 408500464 KB] Completely explored state space -- no solution! [t=0.00379123s, 408500464 KB] Actual search time: 1.0291e-05s [t=0.00379324s, 408500464 KB] Expanded 0 state(s). [t=0.00379324s, 408500464 KB] Reopened 0 state(s). [t=0.00379324s, 408500464 KB] Evaluated 1 state(s). [t=0.00379324s, 408500464 KB] Evaluations: 1 [t=0.00379324s, 408500464 KB] Generated 0 state(s). [t=0.00379324s, 408500464 KB] Dead ends: 1 state(s). [t=0.00379324s, 408500464 KB] Number of registered states: 1 [t=0.00379324s, 408500464 KB] Int hash set load factor: 1/1 = 1 [t=0.00379324s, 408500464 KB] Int hash set resizes: 0 [t=0.00379324s, 408500464 KB] Search time: 1.8614e-05s [t=0.00379324s, 408500464 KB] Total time: 0.00379324s Search stopped without finding a solution. Peak memory: 408500464 KB search exit code: 12 Driver aborting after search INFO Planner time: 0.17s
+    Plan time: 0.243s
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 201 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 203 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 205 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 207 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 209 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 211 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 211 / 223 ID=train/pick_cool_then_place_in_recep-Lettuce-None-DiningTable-18/trial_T20190909_122629_020439 AttemptIdx=0 GoalIdx=0
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 9 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'ChillObject_0', 'TurnOnObject_1', 'CoolObject_1', 'CoolObject_0', 'TurnOnLight_1', 'HeatObject_0', 'RinseObject_1', 'PutdownObject_1', 'WashObject_1'}
+    Language: put a chilled head of lettuce on a black table.
+    Ground truth goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o LettuceType) (receptacleType ?r DiningTableType) (inReceptacle ?o ?r) (coolable ?o) (isCool ?o) ) )))
+    Proposed goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o LettuceType) (receptacleType ?r DiningTableType) (inReceptacle ?o ?r) (coolable ?o) (isCool ?o) ) )))
+Instantiating FD with --alias "lama-first" 

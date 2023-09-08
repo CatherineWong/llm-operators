@@ -1,0 +1,148 @@
+Experiment Parameters
+================================================================================
+Timestamp: 2023-09-07 13:49:45.570847
+Command to replicate: python main.py --experiment_name alfred_cot_250_filtered_0_912023 --random_seed 0 --output_directory generated --train_iterations 2 --pddl_domain_name alfred_linearized --dataset_name alfred_cot_250_filtered --dataset_fraction 1.0 --dataset_pddl_directory data/dataset/alfred_linearized_pddl --supervision_name supervision --goal_supervision_fraction 0.1 --initial_goal_supervision_prefix ALL --plan_supervision_fraction 0.1 --initial_plans_prefix ALL --initial_pddl_predicates  --initial_pddl_operators GotoLocation PickupObjectInReceptacle PickupObjectNotInReceptacle PutObjectInReceptacle --operator_propose_minimum_usage 2 --operator_use_cot 1 --goal_propose_include_codex_types  --codex_goal_temperature 1.0 --codex_operator_temperature 1.0 --codex_plan_temperature 1.0 --maximum_operator_arity 4 --n_goal_samples 4 --n_plan_samples 5 --n_operator_samples 3 --n_attempts_to_plan 1 --external_goal_sample_with_prompt  --external_goal_supervision data/dataset/alfred-goal-supervision_ --external_plan_supervision data/dataset/alfred-grate-break-fill-restart-supervision.json --external_operator_supervision data/dataset/alfred-grate-break-fill-restart-operator-supervision_ --external_operator_sample_with_prompt  --external_operator_names GrateObject BakeObject FillObject RestartObject --planner task_planner_fd --planner_timeout None --planner_minimum_n_operators 7 --planner_run_second_pass 1 --motionplan_search_type counter --operator_pseudocounts 0.05 --operator_pseudocounts_denominator 0.5 --operator_acceptance_threshold 0.5 --conservative_library_proposal  --checkpoint_every_n_problem_plans 2 --resume  --resume_from_iteration 0 --resume_from_problem_idx 0 --verbose  --debug_export_failed_pddl None --debug_no_propose_plans_operators_goals  --debug_mock_propose_goals  --debug_mock_propose_plans  --debug_mock_propose_operators  --debug_skip_propose_operators_after -1 --debug_skip_propose_plans_after -1 --debug_skip_task_plans  --debug_mock_task_plans  --debug_mock_motion_plans  --debug_skip_motion_plans  --debug_start_problem_idx 0 --debug_skip_problems None --debug_ground_truth_operators  --debug_ground_truth_goals  --debug_stop_after_first_proposal  --debug_cw_skip_location_check  
+
+
+Loaded PDDL file with operators
+================================================================================
+Domain: alfred_linearized
+Filename: data/domains/alfred_linearized.pddl
+Operators: 12
+Ground truth operators: 
+   GotoLocation
+   OpenObject
+   CloseObject
+   PickupObjectInReceptacle
+   PickupObjectNotInReceptacle
+   PutObjectInReceptacle
+   PutObjectInReceptacleObject
+   CleanObject
+   HeatObject
+   CoolObject
+   ToggleObject
+   SliceObject
+Initializing with operators: 
+  GotoLocation
+  PickupObjectInReceptacle
+  PickupObjectNotInReceptacle
+  PutObjectInReceptacle
+
+
+load_alfred_filtered_planning_domain_problems: loaded alfred_cot_250_filtered from data/dataset/alfred-cot-250-filtered-NLgoals-operators.json
+train : 223 / original 223 problems
+valid_seen : 145 / original 145 problems
+valid_unseen : 155 / original 155 problems
+Loaded initial dataset: alfred_cot_250_filtered
+================================================================================
+Initial train problems: 223
+Marking problems for goal supervision: fraction=0.1, prefix=['ALL']
+Sampling problems for goal supervision: 
+	 look_at_obj_in_light : 3
+	 pick_cool_then_place_in_recep : 2
+	 pick_and_place_simple : 3
+	 pick_heat_then_place_in_recep : 3
+	 pick_and_place_simple_slice : 1
+	 pick_heat_then_place_in_recep_slice : 2
+	 pick_clean_then_place_in_recep : 2
+	 pick_cool_then_place_in_recep_slice : 2
+Total goal supervision problems: 18
+Marking problems for plan supervision: fraction=0.1, prefix=['ALL']
+This is not implemented yet. (!!!)
+
+Loaded PDDL supervision
+================================================================================
+Loaded additional PDDL supervision from the following domain files:
+  data/domains/supervision_domains/movie_domain.pddl
+  data/domains/supervision_domains/depot_domain.pddl
+  data/domains/supervision_domains/travel_domain.pddl
+
+
+Training started.
+================================================================================
+
+Using ground truth goals, skipping: propose_goals_for_problems
+preprocess_goals: preprocessing 205 unsolved problems.
+preprocess_goals: Preprocess goals top-K accuracy: 0 / 205 exact match to ground truth goal.
+Logging preprocessed goals: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_preprocessed_goals.csv
+
+mock_propose_plans_for_problems:: from generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_codex_plans.json
+
+
+mock_propose_plans_for_problems:: loaded a total of 223 plans for 223 unsolved problems.
+Logging proposed plans: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_codex_plans.csv
+
+propose_operators_for_problems:: proposing for 27 operators.
+['ExamineObject', 'TurnOnObject', 'TurnOnLight', 'ThrowObject', 'CutObject', 'SliceObject', 'InspectObject', 'HeatObject', 'CookObject', 'OpenObject', 'EmptyObject', 'PlaceObject', 'WashObject', 'TurnOffObject', 'ToastObject', 'CoolObject', 'DrainObject', 'ChillObject', 'CleanObject', 'MicrowaveObject', 'UseObject', 'WarmObject', 'CloseObject', 'LookAtObject', 'RinseObject', 'DiscardObject', 'PutdownObject']
+mock_propose_operators_for_problems:: from generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_codex_operators.json
+Loaded 27 mock operators:
+['ExamineObject', 'TurnOnObject', 'TurnOnLight', 'ThrowObject', 'CutObject', 'SliceObject', 'InspectObject', 'HeatObject', 'CookObject', 'OpenObject', 'EmptyObject', 'PlaceObject', 'WashObject', 'TurnOffObject', 'ToastObject', 'CoolObject', 'DrainObject', 'ChillObject', 'CleanObject', 'MicrowaveObject', 'UseObject', 'WarmObject', 'CloseObject', 'LookAtObject', 'RinseObject', 'DiscardObject', 'PutdownObject']
+preprocess_operators:: preprocessing 27 operators.
+['ExamineObject', 'TurnOnObject', 'TurnOnLight', 'ThrowObject', 'CutObject', 'SliceObject', 'InspectObject', 'HeatObject', 'CookObject', 'OpenObject', 'EmptyObject', 'PlaceObject', 'WashObject', 'TurnOffObject', 'ToastObject', 'CoolObject', 'DrainObject', 'ChillObject', 'CleanObject', 'MicrowaveObject', 'UseObject', 'WarmObject', 'CloseObject', 'LookAtObject', 'RinseObject', 'DiscardObject', 'PutdownObject']
+Logging preprocessed operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_preprocessed_operators.csv
+
+Attempting task and motion planning on all problems.
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 1 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 3 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 5 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 6 / 223 ID=train/pick_and_place_simple-AppleSliced-None-Fridge-30/trial_T20190907_105523_799331 AttemptIdx=0 GoalIdx=0
+Conservative operator proposal; only returning operators above threshold.
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 0 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: set()
+    Language: carry a knife to cut the yellow apple in the fridge.
+    Ground truth goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o AppleType) (receptacleType ?r FridgeType) (inReceptacle ?o ?r) (sliceable ?o) (isSliced ?o) ) )))
+    Proposed goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o AppleType) (receptacleType ?r FridgeType) (inReceptacle ?o ?r) (sliceable ?o) (isSliced ?o) ) )))
+Instantiating FD with --alias "lama-first" 
+    Plan success: False
+    Plan string:  Plan not found with FD! Error: INFO planner time limit: None INFO planner memory limit: None INFO Running translator. INFO translator stdin: None INFO translator time limit: None INFO translator memory limit: None INFO translator command line string: /Users/zyzzyva/miniconda3/envs/llm-operators-zs/bin/python3 /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/pddlgym_planners/FD/builds/release/bin/translate/translate.py /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpptj8war2 /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpyqk_7p2y --sas-file /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpagxxu9j5 Parsing... Parsing: [0.000s CPU, 0.002s wall-clock] Normalizing task... [0.000s CPU, 0.000s wall-clock] Instantiating... Generating Datalog program... [0.000s CPU, 0.001s wall-clock] Normalizing Datalog program... Normalizing Datalog program: [0.000s CPU, 0.001s wall-clock] Preparing model... [0.000s CPU, 0.003s wall-clock] Generated 42 rules. Computing model... [0.090s CPU, 0.076s wall-clock] 22232 relevant atoms 3374 auxiliary atoms 25606 final queue length 62730 total queue pushes Completing instantiation... [0.330s CPU, 0.342s wall-clock] Instantiating: [0.420s CPU, 0.426s wall-clock] No relaxed solution! Generating unsolvable task... Translator variables: 1 Translator derived variables: 0 Translator facts: 2 Translator goal facts: 1 Translator mutex groups: 0 Translator total mutex groups size: 0 Translator operators: 0 Translator axioms: 0 Translator task size: 4 warning: could not determine peak memory Writing output... [0.000s CPU, 0.000s wall-clock] Done! [0.440s CPU, 0.440s wall-clock] translate exit code: 0 INFO Running search (release). INFO search stdin: /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpagxxu9j5 INFO search time limit: None INFO search memory limit: None INFO search command line string: /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/pddlgym_planners/FD/builds/release/bin/downward --search 'let(hlm,landmark_sum(lm_factory=lm_reasonable_orders_hps(lm_rhw()),transform=adapt_costs(one),pref=false),let(hff,ff(transform=adapt_costs(one)),lazy_greedy([hff,hlm],preferred=[hff,hlm],cost_type=one,reopen_closed=false)))' --internal-plan-file sas_plan < /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpagxxu9j5 [t=0.00178772s, 408509680 KB] reading input... [t=0.00196677s, 408509680 KB] done reading input! [t=0.00576767s, 408509680 KB] Initializing landmark sum heuristic... [t=0.00577296s, 408509680 KB] Generating landmark graph... [t=0.00578731s, 408509680 KB] Building a landmark graph with reasonable orders. [t=0.00578986s, 408509680 KB] Initializing Exploration... [t=0.00580236s, 408509680 KB] Generating landmarks using the RPG/SAS+ approach [t=0.00582991s, 408509680 KB] Removed 0 reasonable or obedient reasonable orders [t=0.00584369s, 408509680 KB] Landmarks generation time: 5.5268e-05s [t=0.00584639s, 408509680 KB] Discovered 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00584935s, 408509680 KB] 1 edges [t=0.00585136s, 408509680 KB] approx. reasonable orders [t=0.00585365s, 408509680 KB] approx. obedient reasonable orders [t=0.00585615s, 408509680 KB] Removed 0 reasonable or obedient reasonable orders [t=0.00585841s, 408509680 KB] Landmarks generation time: 8.3968e-05s [t=0.0058605s, 408509680 KB] Discovered 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00586316s, 408509680 KB] 1 edges [t=0.00586509s, 408509680 KB] Landmark graph generation time: 9.3357e-05s [t=0.00586718s, 408509680 KB] Landmark graph contains 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00586985s, 408509680 KB] Landmark graph contains 1 orderings. [t=0.00587751s, 408509680 KB] Simplifying 0 unary operators... done! [0 unary operators] [t=0.00588096s, 408509680 KB] time to simplify: 4.715e-06s [t=0.00588354s, 408509680 KB] Initializing additive heuristic... [t=0.00588535s, 408509680 KB] Initializing FF heuristic... [t=0.00592413s, 408509680 KB] Building successor generator...done! [t=0.00592934s, 408509680 KB] peak memory difference for successor generator creation: 0 KB [t=0.00593176s, 408509680 KB] time for successor generation creation: 5.33e-07s [t=0.00593414s, 408509680 KB] Variables: 1 [t=0.0059366s, 408509680 KB] FactPairs: 2 [t=0.00593856s, 408509680 KB] Bytes per state: 4 [t=0.00596472s, 408509680 KB] Conducting lazy best first search, (real) bound = 2147483647 [t=0.00596841s, 408509680 KB] 1 initial landmarks, 1 goal landmarks [t=0.00598354s, 408509680 KB] Initial heuristic value for ff(transform=adapt_costs(one)): infinity [t=0.00598616s, 408509680 KB] Completely explored state space -- no solution! [t=0.00598805s, 408509680 KB] Actual search time: 1.8122e-05s [t=0.00599063s, 408509680 KB] Expanded 0 state(s). [t=0.00599063s, 408509680 KB] Reopened 0 state(s). [t=0.00599063s, 408509680 KB] Evaluated 1 state(s). [t=0.00599063s, 408509680 KB] Evaluations: 1 [t=0.00599063s, 408509680 KB] Generated 0 state(s). [t=0.00599063s, 408509680 KB] Dead ends: 1 state(s). [t=0.00599063s, 408509680 KB] Number of registered states: 1 [t=0.00599063s, 408509680 KB] Int hash set load factor: 1/1 = 1 [t=0.00599063s, 408509680 KB] Int hash set resizes: 0 [t=0.00599063s, 408509680 KB] Search time: 2.6035e-05s [t=0.00599063s, 408509680 KB] Total time: 0.00599063s Search stopped without finding a solution. Peak memory: 408509680 KB search exit code: 12 Driver aborting after search INFO Planner time: 0.49s
+    Plan time: 0.569s
+Conservative operator proposal; attempting with new choice: CoolObject_1
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 1 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'CoolObject_1'}
+    Language: carry a knife to cut the yellow apple in the fridge.
+    Ground truth goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o AppleType) (receptacleType ?r FridgeType) (inReceptacle ?o ?r) (sliceable ?o) (isSliced ?o) ) )))
+    Proposed goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o AppleType) (receptacleType ?r FridgeType) (inReceptacle ?o ?r) (sliceable ?o) (isSliced ?o) ) )))
+Instantiating FD with --alias "lama-first" 
+    Plan success: False
+    Plan string:  Plan not found with FD! Error: INFO planner time limit: None INFO planner memory limit: None INFO Running translator. INFO translator stdin: None INFO translator time limit: None INFO translator memory limit: None INFO translator command line string: /Users/zyzzyva/miniconda3/envs/llm-operators-zs/bin/python3 /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/pddlgym_planners/FD/builds/release/bin/translate/translate.py /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpvsn8ooge /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmphyj8el2f --sas-file /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmplqpqymy5 Parsing... Parsing: [0.010s CPU, 0.002s wall-clock] Normalizing task... [0.000s CPU, 0.000s wall-clock] Instantiating... Generating Datalog program... [0.000s CPU, 0.001s wall-clock] Normalizing Datalog program... Normalizing Datalog program: [0.000s CPU, 0.001s wall-clock] Preparing model... [0.000s CPU, 0.003s wall-clock] Generated 51 rules. Computing model... [0.080s CPU, 0.076s wall-clock] 22243 relevant atoms 3863 auxiliary atoms 26106 final queue length 63237 total queue pushes Completing instantiation... [0.340s CPU, 0.343s wall-clock] Instantiating: [0.420s CPU, 0.426s wall-clock] No relaxed solution! Generating unsolvable task... Translator variables: 1 Translator derived variables: 0 Translator facts: 2 Translator goal facts: 1 Translator mutex groups: 0 Translator total mutex groups size: 0 Translator operators: 0 Translator axioms: 0 Translator task size: 4 warning: could not determine peak memory Writing output... [0.000s CPU, 0.000s wall-clock] Done! [0.440s CPU, 0.440s wall-clock] translate exit code: 0 INFO Running search (release). INFO search stdin: /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmplqpqymy5 INFO search time limit: None INFO search memory limit: None INFO search command line string: /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/pddlgym_planners/FD/builds/release/bin/downward --search 'let(hlm,landmark_sum(lm_factory=lm_reasonable_orders_hps(lm_rhw()),transform=adapt_costs(one),pref=false),let(hff,ff(transform=adapt_costs(one)),lazy_greedy([hff,hlm],preferred=[hff,hlm],cost_type=one,reopen_closed=false)))' --internal-plan-file sas_plan < /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmplqpqymy5 [t=8.8601e-05s, 408500464 KB] reading input... [t=0.000143705s, 408500464 KB] done reading input! [t=0.00362719s, 408500464 KB] Initializing landmark sum heuristic... [t=0.0036317s, 408500464 KB] Generating landmark graph... [t=0.00363555s, 408500464 KB] Building a landmark graph with reasonable orders. [t=0.00363793s, 408500464 KB] Initializing Exploration... [t=0.00364076s, 408500464 KB] Generating landmarks using the RPG/SAS+ approach [t=0.00365318s, 408500464 KB] Removed 0 reasonable or obedient reasonable orders [t=0.0036565s, 408500464 KB] Landmarks generation time: 2.0295e-05s [t=0.00365884s, 408500464 KB] Discovered 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00366138s, 408500464 KB] 1 edges [t=0.00366474s, 408500464 KB] approx. reasonable orders [t=0.0036779s, 408500464 KB] approx. obedient reasonable orders [t=0.00368582s, 408500464 KB] Removed 0 reasonable or obedient reasonable orders [t=0.00368877s, 408500464 KB] Landmarks generation time: 5.6375e-05s [t=0.00369107s, 408500464 KB] Discovered 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00369365s, 408500464 KB] 1 edges [t=0.00369549s, 408500464 KB] Landmark graph generation time: 6.5026e-05s [t=0.00369758s, 408500464 KB] Landmark graph contains 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00369988s, 408500464 KB] Landmark graph contains 1 orderings. [t=0.00372108s, 408501488 KB] Simplifying 0 unary operators... done! [0 unary operators] [t=0.00372481s, 408501488 KB] time to simplify: 5.289e-06s [t=0.00372698s, 408501488 KB] Initializing additive heuristic... [t=0.0037287s, 408501488 KB] Initializing FF heuristic... [t=0.00375556s, 408501488 KB] Building successor generator...done! [t=0.00376216s, 408501488 KB] peak memory difference for successor generator creation: 0 KB [t=0.00376454s, 408501488 KB] time for successor generation creation: 1.476e-06s [t=0.00376687s, 408501488 KB] Variables: 1 [t=0.00376905s, 408501488 KB] FactPairs: 2 [t=0.00377102s, 408501488 KB] Bytes per state: 4 [t=0.00379598s, 408509680 KB] Conducting lazy best first search, (real) bound = 2147483647 [t=0.0038014s, 408509680 KB] 1 initial landmarks, 1 goal landmarks [t=0.00380976s, 408509680 KB] Initial heuristic value for ff(transform=adapt_costs(one)): infinity [t=0.0038123s, 408509680 KB] Completely explored state space -- no solution! [t=0.00381443s, 408509680 KB] Actual search time: 1.1849e-05s [t=0.00381665s, 408509680 KB] Expanded 0 state(s). [t=0.00381665s, 408509680 KB] Reopened 0 state(s). [t=0.00381665s, 408509680 KB] Evaluated 1 state(s). [t=0.00381665s, 408509680 KB] Evaluations: 1 [t=0.00381665s, 408509680 KB] Generated 0 state(s). [t=0.00381665s, 408509680 KB] Dead ends: 1 state(s). [t=0.00381665s, 408509680 KB] Number of registered states: 1 [t=0.00381665s, 408509680 KB] Int hash set load factor: 1/1 = 1 [t=0.00381665s, 408509680 KB] Int hash set resizes: 0 [t=0.00381665s, 408509680 KB] Search time: 2.1033e-05s [t=0.00381665s, 408509680 KB] Total time: 0.00381665s Search stopped without finding a solution. Peak memory: 408509680 KB search exit code: 12 Driver aborting after search INFO Planner time: 0.48s
+    Plan time: 0.547s

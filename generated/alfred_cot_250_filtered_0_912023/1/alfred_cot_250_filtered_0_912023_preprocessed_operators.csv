@@ -1,0 +1,1069 @@
+operator_name,gt_operator,codex_raw_operator,codex_preprocessed_operator,
+ExamineObject,,"
+;; Operator, ExamineObject1.
+;; ExamineObject1 takes an object to examine and a specific tool of type MagnifyingGlassType.
+;; MagnifyingGlassType is an otype. Therefore, the tool is an object.
+;; Parameters: ?a - agent, ?l - location of object to be examined; ?o - object to be examined; ?toolobject - object to examine with.
+;; Preconditions: The toolobject is a MagnifyingGlassType, the agent is at a location and the object to be examined is at the same location, and the agent is holding the tool.
+;; Postconditions: The agent has examined the object.
+(:action ExamineObject1
+        :parameters (?a - agent ?l - location ?o - object ?toolobject - object)
+        :precondition (and
+            (objectType ?toolobject MagnifyingGlassType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (holds ?a ?toolobject)
+        )
+        :effect (and
+            (hasExamined ?a ?o)
+        )
+    )
+",FAILED,
+ExamineObject,,"
+;; Operator, ExamineObject2.
+;; ExamineObject2 takes an object to examine using a non-tool object.
+;; Parameters: ?a - agent, ?l - location of object to be examined; ?o - object to be examined; ?object - non-tool object to use for examination.
+;; Preconditions: The non-tool object is at the same location as the object to be examined, and the agent is at a location.
+;; Postconditions: The agent has examined the object.
+(:action ExamineObject2
+        :parameters (?a - agent ?l - location ?o - object ?object - object)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (objectAtLocation ?object ?l)
+        )
+        :effect (and
+            (hasExamined ?a ?o)
+        )
+    )
+",FAILED,
+ExamineObject,,"
+;; Operator, ExamineObject3.
+;; ExamineObject3 takes an object to examine using a tool receptacle.
+;; Parameters: ?a - agent, ?l - location of object to be examined; ?o - object to be examined; ?toolreceptacle - tool receptacle to use for examination.
+;; Preconditions: The tool receptacle is at the same location as the object to be examined, and the agent is at a location.
+;; Postconditions: The agent has examined the object.
+(:action ExamineObject3
+        :parameters (?a - agent ?l - location ?o - object ?toolreceptacle - receptacle)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (receptacleAtLocation ?toolreceptacle ?l)
+        )
+        :effect (and
+            (hasExamined ?a ?o)
+        )
+    )
+",FAILED,
+TurnOnObject,,"
+(:action TurnOnObjectWithSwitchTool
+        :parameters (?a - agent ?l - location ?o - object ?toolobject - object)
+        :precondition (and
+            (objectType ?toolobject SwitchType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (toggleable ?o)
+            (holds ?a ?toolobject)
+        )
+        :effect (and
+            (isOn ?o)
+        )
+    )
+","(:action TurnOnObject_0
+        :parameters (?a - agent ?l - location ?o - object ?toolobject - object)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		(toggleable ?o)
+		(holds ?a ?toolobject)
+		)
+        :effect (and 
+		(isOn ?o)
+		)
+)",
+TurnOnObject,,"
+(:action TurnOnObjectNoTool
+        :parameters (?a - agent ?l - location ?o - object)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (toggleable ?o)
+        )
+        :effect (and
+            (isOn ?o)
+        )
+    )
+","(:action TurnOnObject_1
+        :parameters (?a - agent ?l - location ?o - object)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		(toggleable ?o)
+		)
+        :effect (and 
+		(isOn ?o)
+		)
+)",
+TurnOnObject,,"
+(:action TurnOnObjectWithReceptacle
+        :parameters (?a - agent ?l - location ?o - object ?toolreceptacle - receptacle)
+        :precondition (and
+            (receptacleType ?toolreceptacle OvenType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (holds ?a ?object)
+        )
+        :effect (and
+            (isOn ?o)
+        )
+    )
+","(:action TurnOnObject_2
+        :parameters (?a - agent ?l - location ?o - object ?object - object)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		(holds ?a ?object)
+		)
+        :effect (and 
+		(isOn ?o)
+		)
+)",
+TurnOnLight,,"
+(:action TurnOnLightOption1
+        :parameters (?a - agent ?ls - object)
+        :precondition (and
+            (objectType ?ls LightSwitchType)
+            (isToggled ?ls)
+        )
+        :effect (and
+            (isOn ?ls)
+        )
+    )
+","(:action TurnOnLight_0
+        :parameters (?ls - object)
+
+        :precondition (and 
+		(objectType ?ls LightSwitchType)
+		(isToggled ?ls)
+		)
+        :effect (and 
+		(isOn ?ls)
+		)
+)",
+TurnOnLight,,"
+(:action TurnOnLightOption2
+        :parameters (?a - agent ?l - location ?to - object)
+        :precondition (and
+            (objectType ?to LightSwitchType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?to ?l)
+            (isToggled ?to)
+            (holds ?a ?to)
+        )
+        :effect (and
+            (isOn ?to)
+        )
+    )
+","(:action TurnOnLight_1
+        :parameters (?to - object ?a - agent ?l - location)
+
+        :precondition (and 
+		(objectType ?to LightSwitchType)
+		(atLocation ?a ?l)
+		(objectAtLocation ?to ?l)
+		(isToggled ?to)
+		(holds ?a ?to)
+		)
+        :effect (and 
+		(isOn ?to)
+		)
+)",
+TurnOnLight,,"
+(:action TurnOnLightOption3
+        :parameters (?a - agent ?ls - object ?hp - object)
+        :precondition (and
+            (objectType ?ls LightSwitchType)
+            (objectType ?hp HousePlantType)
+            (isToggled ?ls)
+            (holds ?a ?hp)
+        )
+        :effect (and
+            (isOn ?ls)
+        )
+    )
+","(:action TurnOnLight_2
+        :parameters (?ls - object ?hp - object ?a - agent)
+
+        :precondition (and 
+		(objectType ?ls LightSwitchType)
+		(objectType ?hp HousePlantType)
+		(isToggled ?ls)
+		(holds ?a ?hp)
+		)
+        :effect (and 
+		(isOn ?ls)
+		)
+)",
+SeeObject,,"
+(:action SeeObject1
+        :parameters (?a - agent ?l - location ?o - object ?toolobject - object)
+        :precondition (and
+            (objectType ?toolobject TelescopeType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (holds ?a ?toolobject)
+        )
+        :effect (and
+            (canSeeObject ?a ?o)
+        )
+    )
+",FAILED,
+SeeObject,,"
+(:action SeeObject2
+        :parameters (?a - agent ?l - location ?o - object ?toolreceptacle - receptacle)
+        :precondition (and
+            (receptacleType ?toolreceptacle BinocularsType)
+            (atLocation ?a ?l)
+            (receptacleAtLocation ?toolreceptacle ?l)
+            (holds ?a ?o)
+        )
+        :effect (and
+            (canSeeObject ?a ?o)
+        )
+    )
+",FAILED,
+SeeObject,,"
+(:action SeeObject3
+        :parameters (?a - agent ?l - location ?o - object)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+        )
+        :effect (and
+            (canSeeObject ?a ?o)
+        )
+    )
+",FAILED,
+ThrowObject,,"
+;; Operator, ThrowObject1.
+;; ThrowObject1 takes any object to throw.
+;; This action is applicable to any throwable object.
+;; Parameters: ?a - agent, ?l - location of the object; ?o - object to be thrown.
+;; Preconditions: The agent is at a location and the object is at the same location, and the object is throwable.
+;; Postconditions: the ?o object is removed from its current location.
+(:action ThrowObject1
+        :parameters (?a - agent ?l - location ?o - object)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (throwable ?o)
+        )
+        :effect (and
+            (not (objectAtLocation ?o ?l))
+        )
+)
+","(:action ThrowObject_0
+        :parameters (?a - agent ?l - location ?o - object)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		)
+        :effect (and 
+		(not (objectAtLocation ?o ?l))
+		)
+)",
+ThrowObject,," 
+;; Operator, ThrowObject2.
+;; ThrowObject2 takes any object to throw.
+;; This action is applicable to any throwable object.
+;; Parameters: ?a - agent, ?l - location of the object; ?o - object to be thrown.
+;; Preconditions: The agent is at a location and the object is at the same location, and the object is throwable.
+;; Postconditions: the ?o object is removed from its current location and it becomes dirty.
+(:action ThrowObject2
+        :parameters (?a - agent ?l - location ?o - object)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (throwable ?o)
+        )
+        :effect (and
+            (not (objectAtLocation ?o ?l))
+            (isDirty ?o)
+        )
+)
+","(:action ThrowObject_1
+        :parameters (?a - agent ?l - location ?o - object)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		)
+        :effect (and 
+		(not (objectAtLocation ?o ?l))
+		)
+)",
+ThrowObject,," 
+;; Operator, ThrowObject3.
+;; ThrowObject3 takes any object to throw.
+;; This action is applicable to any throwable object.
+;; Parameters: ?a - agent, ?l - location of the object; ?o - object to be thrown.
+;; Preconditions: The agent is at a location and the object is at the same location, and the object is throwable.
+;; Postconditions: the ?o object is removed from its current location and it becomes dirty, and the agent drops any object it is holding.
+(:action ThrowObject3
+        :parameters (?a - agent ?l - location ?o - object)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (throwable ?o)
+            (holdsAny ?a)
+        )
+        :effect (and
+            (not (objectAtLocation ?o ?l))
+            (isDirty ?o)
+            (not (holdsAny ?a))
+        )
+)
+","(:action ThrowObject_2
+        :parameters (?a - agent ?l - location ?o - object)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		(holdsAny ?a)
+		)
+        :effect (and 
+		(not (objectAtLocation ?o ?l))
+		(not (holdsAny ?a))
+		)
+)",
+CutObject,,"
+;; Operator, CutObject.
+;; CutObject takes an object to be cut, a specific tool of type KnifeType, and a specific receptacle of type cuttingBoardType.
+;; Parameters: ?a - agent, ?l - location of the object to be cut; ?o - object to be cut, ?toolobject - object to cut with, ?toolreceptacle - receptacle to cut the object on.
+;; Preconditions: The toolobject is a KnifeType, the toolreceptacle is a cuttingBoardType, the agent is at a location and the object to be cut is at the same location,
+;;               the object is cuttable, the receptacle is at the same location as the agent, and the agent is holding the toolobject and the toolreceptacle is empty.
+;; Postconditions: the ?o object is now cut and placed on the ?toolreceptacle.
+(:action CutObject
+        :parameters (?a - agent ?l - location ?o - object ?toolobject - object ?toolreceptacle - receptacle)
+        :precondition (and
+            (objectType ?toolobject KnifeType)
+            (receptacleType ?toolreceptacle CuttingBoardType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (cuttable ?o)
+            (receptacleAtLocation ?toolreceptacle ?l)
+            (holds ?a ?toolobject)
+            (not (inReceptacle ?o ?toolreceptacle))
+        )
+        :effect (and
+            (isCut ?o)
+            (inReceptacle ?o ?toolreceptacle)
+        )
+    )
+",FAILED,
+CutObject,,"
+;; Operator, CutObject.
+;; CutObject takes an object to be cut, only a specific tool of type KnifeType. 
+;; Parameters: ?a - agent, ?l - location of the object to be cut; ?o - object to be cut, ?toolobject - object to cut with.
+;; Preconditions: The toolobject is a KnifeType, the agent is at a location and the object to be cut is at the same location,
+;;               the object is cuttable, and the agent is holding the toolobject.
+;; Postconditions: the ?o object is now cut.
+(:action CutObject
+        :parameters (?a - agent ?l - location ?o - object ?toolobject - object)
+        :precondition (and
+            (objectType ?toolobject KnifeType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (cuttable ?o)
+            (holds ?a ?toolobject)
+        )
+        :effect (and
+            (isCut ?o)
+        )
+    )
+",FAILED,
+CutObject,,"
+;; Operator, CutObject.
+;; CutObject takes an object to be cut, only a specific receptacle of type cuttingBoardType.
+;; Parameters: ?a - agent, ?l - location of the object to be cut; ?o - object to be cut, ?toolreceptacle - receptacle to cut the object on.
+;; Preconditions: The toolreceptacle is a cuttingBoardType, the agent is at a location and the object to be cut is at the same location,
+;;               the object is cuttable, the receptacle is at the same location as the agent, and the toolreceptacle is empty.
+;; Postconditions: the ?o object is now cut.
+(:action CutObject
+        :parameters (?a - agent ?l - location ?o - object ?toolreceptacle - receptacle)
+        :precondition (and
+            (receptacleType ?toolreceptacle CuttingBoardType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (cuttable ?o)
+            (receptacleAtLocation ?toolreceptacle ?l)
+            (not (inReceptacle ?o ?toolreceptacle))
+        )
+        :effect (and
+            (isCut ?o)
+        )
+    )
+",FAILED,
+InspectObject,,"
+;; Operator, InspectObject with tool object.
+;; InspectObject takes an object to inspect and a specific tool of type MagnifyingGlassType.
+;; MagnifyingGlassType is an otype. Therefore, the tool is an object.
+;; Parameters: ?a - agent, ?l - location of object to be inspected; ?o - object to be inspected, ?toolobject - object to inspect with.
+;; Preconditions: The toolobject is a MagnifyingGlassType, the agent is at a location and the object to be inspected is at the same location, and the agent is holding the tool.
+;; Postconditions: The agent gains knowledge about the inspected object, represented by the predicate hasKnowledge(?a, ?o).
+(:action InspectObjectWithTool
+        :parameters (?a - agent ?l - location ?o - object ?toolobject - object)
+        :precondition (and
+            (objectType ?toolobject MagnifyingGlassType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (holds ?a ?toolobject)
+        )
+        :effect (and
+            (hasKnowledge ?a ?o)
+        )
+    )
+",FAILED,
+InspectObject,,"
+;; Operator, InspectObject without tool.
+;; InspectObject takes an object to inspect.
+;; This action does not require any tool objects or tool receptacles.
+;; Parameters: ?a - agent, ?l - location of object to be inspected; ?o - object to be inspected.
+;; Preconditions: The agent is at a location and the object to be inspected is at the same location.
+;; Postconditions: The agent gains knowledge about the inspected object, represented by the predicate hasKnowledge(?a, ?o).
+(:action InspectObjectWithoutTool
+        :parameters (?a - agent ?l - location ?o - object)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+        )
+        :effect (and
+            (hasKnowledge ?a ?o)
+        )
+    )
+",FAILED,
+InspectObject,,"
+;; Operator, InspectObject with tool receptacle.
+;; InspectObject takes an object to inspect and a specific tool of type MicroscopeType.
+;; MicroscopeType is an rtype. Therefore, the tool is a receptacle.
+;; Parameters: ?a - agent, ?l - location of object to be inspected; ?o - object to be inspected, ?toolreceptacle - receptacle to inspect with.
+;; Preconditions: The toolreceptacle is a MicroscopeType, the agent is at a location and the receptacle is at the same location, and the agent is holding the object to be inspected.
+;; Postconditions: The agent gains knowledge about the inspected object, represented by the predicate hasKnowledge(?a, ?o).
+(:action InspectObjectWithToolReceptacle
+        :parameters (?a - agent ?l - location ?o - object ?toolreceptacle - receptacle)
+        :precondition (and
+            (receptacleType ?toolreceptacle MicroscopeType)
+            (atLocation ?a ?l)
+            (receptacleAtLocation ?toolreceptacle ?l)
+            (holds ?a ?o)
+        )
+        :effect (and
+            (hasKnowledge ?a ?o)
+        )
+    )
+",FAILED,
+HeatObject,"(:action HeatObject
+        :parameters (?a - agent ?l - location ?r - receptacle ?o - object)
+        :precondition (and
+            (receptacleType ?r MicrowaveType)
+            (atLocation ?a ?l)
+            (receptacleAtLocation ?r ?l)
+            (holds ?a ?o)
+        )
+        :effect (and
+            (isHot ?o)
+        )
+    )","
+(:action HeatObject1
+        :parameters (?a - agent ?l - location ?o - object ?toolreceptacle - receptacle)
+        :precondition (and
+            (receptacleType ?toolreceptacle StoveType)
+            (atLocation ?a ?l)
+            (receptacleAtLocation ?toolreceptacle ?l)
+            (holds ?a ?o)
+        )
+        :effect (and
+           (isHot ?o)
+        )
+    )
+","(:action HeatObject_0
+        :parameters (?a - agent ?l - location ?toolreceptacle - receptacle ?o - object)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(receptacleAtLocation ?toolreceptacle ?l)
+		(holds ?a ?o)
+		)
+        :effect (and 
+		(isHot ?o)
+		)
+)",
+HeatObject,"(:action HeatObject
+        :parameters (?a - agent ?l - location ?r - receptacle ?o - object)
+        :precondition (and
+            (receptacleType ?r MicrowaveType)
+            (atLocation ?a ?l)
+            (receptacleAtLocation ?r ?l)
+            (holds ?a ?o)
+        )
+        :effect (and
+            (isHot ?o)
+        )
+    )","
+(:action HeatObject2
+        :parameters (?a - agent ?l - location ?o - object ?toolreceptacle - receptacle)
+        :precondition (and
+            (receptacleType ?toolreceptacle MicrowaveType)
+            (atLocation ?a ?l)
+            (receptacleAtLocation ?toolreceptacle ?l)
+            (holds ?a ?o)
+        )
+        :effect (and
+           (isHot ?o)
+        )
+    )
+","(:action HeatObject_1
+        :parameters (?toolreceptacle - receptacle ?a - agent ?l - location ?o - object)
+
+        :precondition (and 
+		(receptacleType ?toolreceptacle MicrowaveType)
+		(atLocation ?a ?l)
+		(receptacleAtLocation ?toolreceptacle ?l)
+		(holds ?a ?o)
+		)
+        :effect (and 
+		(isHot ?o)
+		)
+)",
+HeatObject,"(:action HeatObject
+        :parameters (?a - agent ?l - location ?r - receptacle ?o - object)
+        :precondition (and
+            (receptacleType ?r MicrowaveType)
+            (atLocation ?a ?l)
+            (receptacleAtLocation ?r ?l)
+            (holds ?a ?o)
+        )
+        :effect (and
+            (isHot ?o)
+        )
+    )","
+(:action HeatObject3
+        :parameters (?a - agent ?l - location ?o - object ?toolobject - object)
+        :precondition (and
+            (objectType ?toolobject ToasterType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (heatable ?o)
+            (holds ?a ?toolobject)
+        )
+        :effect (and
+            (isHot ?o)
+        )
+    )
+","(:action HeatObject_2
+        :parameters (?toolobject - object ?a - agent ?l - location ?o - object)
+
+        :precondition (and 
+		(objectType ?toolobject ToasterType)
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		(heatable ?o)
+		(holds ?a ?toolobject)
+		)
+        :effect (and 
+		(isHot ?o)
+		)
+)",
+CookObject,,"
+(:action CookObject
+        :parameters (?a - agent ?l - location ?o - object ?toolreceptacle - receptacle)
+        :precondition (and
+            (receptacleType ?toolreceptacle StoveType)
+            (atLocation ?a ?l)
+            (receptacleAtLocation ?toolreceptacle ?l)
+            (holds ?a ?o)
+        )
+        :effect (and
+           (isHot ?o)
+        )
+    )
+","(:action CookObject_0
+        :parameters (?a - agent ?l - location ?toolreceptacle - receptacle ?o - object)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(receptacleAtLocation ?toolreceptacle ?l)
+		(holds ?a ?o)
+		)
+        :effect (and 
+		(isHot ?o)
+		)
+)",
+CookObject,,"
+(:action CookObject
+        :parameters (?a - agent ?l - location ?o - object ?toolobject - object ?toolreceptacle - receptacle)
+        :precondition (and
+            (receptacleType ?toolreceptacle GrillType)
+            (objectType ?toolobject GrillType)
+            (atLocation ?a ?l)
+            (receptacleAtLocation ?toolreceptacle ?l)
+            (holds ?a ?o)
+        )
+        :effect (and
+           (isHot ?o)
+        )
+    )
+","(:action CookObject_1
+        :parameters (?a - agent ?l - location ?toolreceptacle - receptacle ?o - object)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(receptacleAtLocation ?toolreceptacle ?l)
+		(holds ?a ?o)
+		)
+        :effect (and 
+		(isHot ?o)
+		)
+)",
+CookObject,,"
+(:action CookObject
+        :parameters (?a - agent ?l - location ?o - object)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (holds ?a ?o)
+        )
+        :effect (and
+           (isHot ?o)
+        )
+    )
+","(:action CookObject_2
+        :parameters (?a - agent ?l - location ?o - object)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		(holds ?a ?o)
+		)
+        :effect (and 
+		(isHot ?o)
+		)
+)",
+GoToObject,,"
+;; Operator, GoToObject.
+;; GoToObject takes an object to go to and an optional tool object and tool receptacle.
+;; Parameters: ?a - agent, ?lStart - start location; ?lEnd - end location; ?o - object to go to; ?toolobject - optional tool object; ?toolreceptacle - optional tool receptacle.
+;; Preconditions: The agent is at the start location, the object to go to is at the end location, and if a tool object or tool receptacle is specified, the agent is holding the tool object or the tool receptacle is at the start location.
+;; Postconditions: The agent is at the end location and is not at the start location. If a tool object or tool receptacle is specified, the agent is holding the tool object or the tool receptacle is at the end location.
+(:action GoToObject
+      :parameters (?a - agent ?lStart - location ?lEnd - location ?o - object ?toolobject - object ?toolreceptacle - receptacle)
+      :precondition (and
+          (atLocation ?a ?lStart)
+          (objectAtLocation ?o ?lEnd)
+          (or (not (exists (?toolobject) (holds ?a ?toolobject))))
+          (or 
+            (not (exists (?toolreceptacle) (receptacleAtLocation ?toolreceptacle ?lStart))))
+      )
+      :effect (and
+          (atLocation ?a ?lEnd)
+          (not (atLocation ?a ?lStart))
+          (when (and ?toolobject (objectType ?toolobject ToolType))
+            (holds ?a ?toolobject))
+          (when (and ?toolreceptacle (receptacleType ?toolreceptacle ToolReceptacleType))
+            (receptacleAtLocation ?toolreceptacle ?lEnd))
+      )
+ )
+","(:action GoToObject_0
+        :parameters (?a - agent ?lStart - location ?o - object ?lEnd - location)
+
+        :precondition (and 
+		(atLocation ?a ?lStart)
+		(objectAtLocation ?o ?lEnd)
+		)
+        :effect (and 
+		(atLocation ?a ?lEnd)
+		(not (atLocation ?a ?lStart))
+		)
+)",
+GoToObject,,"
+;; Operator, GoToObject with a tool object.
+;; GoToObject takes an object to go to and an optional tool object and tool receptacle.
+;; Parameters: ?a - agent, ?lStart - start location; ?lEnd - end location; ?o - object to go to; ?toolobject - optional tool object; ?toolreceptacle - optional tool receptacle.
+;; Preconditions: The agent is at the start location, the object to go to is at the end location, the tool object is a ToolType, the agent is holding the tool object, and if a tool receptacle is specified, the agent is holding the tool receptacle.
+;; Postconditions: The agent is at the end location and is not at the start location. The agent is still holding the tool object and if a tool receptacle is specified, the agent is still holding the tool receptacle.
+(:action GoToObjectWithTool
+      :parameters (?a - agent ?lStart - location ?lEnd - location ?o - object ?toolobject - object ?toolreceptacle - receptacle)
+      :precondition (and
+          (atLocation ?a ?lStart)
+          (objectAtLocation ?o ?lEnd)
+          (objectType ?toolobject ToolType)
+          (holds ?a ?toolobject)
+          (or (not (exists (?toolreceptacle) (holds ?a ?toolreceptacle))))
+          (or 
+            (not (exists (?toolreceptacle) (receptacleAtLocation ?toolreceptacle ?lStart))))
+      )
+      :effect (and
+          (atLocation ?a ?lEnd)
+          (not (atLocation ?a ?lStart))
+          (holds ?a ?toolobject)
+          (when (and ?toolreceptacle (receptacleType ?toolreceptacle ToolReceptacleType))
+            (receptacleAtLocation ?toolreceptacle ?lEnd))
+      )
+ )
+",FAILED,
+GoToObject,,"
+;; Operator, GoToObject with a tool receptacle.
+;; GoToObject takes an object to go to and an optional tool object and tool receptacle.
+;; Parameters: ?a - agent, ?lStart - start location; ?lEnd - end location; ?o - object to go to; ?toolobject - optional tool object; ?toolreceptacle - optional tool receptacle.
+;; Preconditions: The agent is at the start location, the object to go to is at the end location, the tool receptacle is a ToolReceptacleType, the agent is holding the tool receptacle, and if a tool object is specified, it is a ToolType and the agent is holding the tool object.
+;; Postconditions: The agent is at the end location and is not at the start location. The agent is still holding the tool receptacle and if a tool object is specified, the agent is still holding the tool object.
+(:action GoToObjectWithToolReceptacle
+      :parameters (?a - agent ?lStart - location ?lEnd - location ?o - object ?toolobject - object ?toolreceptacle - receptacle)
+      :precondition (and
+          (atLocation ?a ?lStart)
+          (objectAtLocation ?o ?lEnd)
+          (receptacleType ?toolreceptacle ToolReceptacleType)
+          (receptacleAtLocation ?toolreceptacle ?lStart)
+          (or (not (exists (?toolobject) (holds ?a ?toolobject))))
+          (or 
+            (not (exists (?toolobject) (objectType ?toolobject ToolType))))
+          (or 
+            (not (exists (?toolobject) (holds ?a ?toolobject))))
+      )
+      :effect (and
+          (atLocation ?a ?lEnd)
+          (not (atLocation ?a ?lStart))
+          (receptacleAtLocation ?toolreceptacle ?lEnd)
+          (when (and ?toolobject (objectType ?toolobject ToolType))
+            (holds ?a ?toolobject))
+      )
+ )
+",FAILED,
+GoalExamineObject,,"
+;; Operator, GoalExamineObject1.
+;; GoalExamineObject1 takes an object to examine.
+;; Parameters: ?a - agent, ?l - location of the object; ?o - object to be examined.
+;; Preconditions: The agent is at a location and the object is at the same location, and the object is examinable.
+;; Postconditions: The agent now knows the details of the ?o object.
+(:action GoalExamineObject1
+        :parameters (?a - agent ?l - location ?o - object)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (examinable ?o)
+        )
+        :effect (and
+            (knowsDetails ?a ?o)
+        )
+    )
+",FAILED,
+GoalExamineObject,,"
+;; Operator, GoalExamineObject2.
+;; GoalExamineObject2 takes an object to examine and a specific tool of type MagnifyingGlassType.
+;; MagnifyingGlassType is an otype. Therefore, the tool is an object.
+;; Parameters: ?a - agent, ?l - location of the object; ?o - object to be examined, ?toolobject - object to examine with.
+;; Preconditions: The toolobject is a MagnifyingGlassType, the agent is at a location and the object to be examined is at the same location, the object is examinable, and the agent is holding the tool.
+;; Postconditions: The agent now knows the details of the ?o object.
+(:action GoalExamineObject2
+        :parameters (?a - agent ?l - location ?o - object ?toolobject - object)
+        :precondition (and
+            (objectType ?toolobject MagnifyingGlassType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (examinable ?o)
+            (holds ?a ?toolobject)
+        )
+        :effect (and
+            (knowsDetails ?a ?o)
+        )
+    )
+",FAILED,
+GoalExamineObject,,"
+;; Operator, GoalExamineObject3.
+;; GoalExamineObject3 takes an object to examine and a specific tool of type MicroscopeType, and a specific receptacle of type LaboratoryTableType.
+;; MicroscopeType is an otype. Therefore, the tool is an object.
+;; LaboratoryTableType is an rtype. Therefore, the receptacle is a receptacle.
+;; Parameters: ?a - agent, ?l - location of the object to be examined; ?o - object to be examined, ?toolobject - object to examine with, ?receptacle - location of the Microscope.
+;; Preconditions: The toolobject is a MicroscopeType, the agent is at a location and the object to be examined is at the same location, the object is examinable, the agent is holding the tool, and the Microscope receptacle is at the same location.
+;; Postconditions: The agent now knows the details of the ?o object.
+(:action GoalExamineObject3
+        :parameters (?a - agent ?l - location ?o - object ?toolobject - object ?receptacle - receptacle)
+        :precondition (and
+            (objectType ?toolobject MicroscopeType)
+            (receptacleType ?receptacle LaboratoryTableType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (examinable ?o)
+            (holds ?a ?toolobject)
+            (receptacleAtLocation ?receptacle ?l)
+        )
+        :effect (and
+            (knowsDetails ?a ?o)
+        )
+    )
+",FAILED,
+ChillObject,,"
+(:action ChillObject
+        :parameters (?a - agent ?l - location ?o - object ?toolreceptacle - receptacle)
+        :precondition (and
+            (receptacleType ?toolreceptacle FreezerType)
+            (atLocation ?a ?l)
+            (receptacleAtLocation ?toolreceptacle ?l)
+            (holds ?a ?o)
+        )
+        :effect (and
+           (isCold ?o)
+        )
+    )
+",FAILED,
+ChillObject,,"
+(:action FreezeObject
+        :parameters (?a - agent ?l - location ?o - object ?toolobject - object)
+        :precondition (and
+            (objectType ?toolobject LiquidNitrogenType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (freezable ?o)
+            (holds ?a ?toolobject)
+        )
+        :effect (and
+            (isFrozen ?o)
+        )
+    )
+",FAILED,
+ChillObject,,"
+(:action IceObject
+        :parameters (?a - agent ?l - location ?o - object ?toolreceptacle - receptacle)
+        :precondition (and
+            (receptacleType ?toolreceptacle IceboxType)
+            (atLocation ?a ?l)
+            (receptacleAtLocation ?toolreceptacle ?l)
+            (holds ?a ?o)
+        )
+        :effect (and
+           (isIced ?o)
+        )
+    )
+",FAILED,
+TurnOffObject,,"
+(:action TurnOffObject-ToolObject
+        :parameters (?a - agent ?l - location ?o - object ?toolobject - object)
+        :precondition (and
+            (objectType ?toolobject LightSwitchType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (toggleable ?o)
+            (holds ?a ?toolobject)
+        )
+        :effect (and
+            (not (isOn ?o))
+        )
+    )
+","(:action TurnOffObject_0
+        :parameters (?toolobject - object ?a - agent ?l - location ?o - object)
+
+        :precondition (and 
+		(objectType ?toolobject LightSwitchType)
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		(toggleable ?o)
+		(holds ?a ?toolobject)
+		)
+        :effect (and 
+		(not (isOn ?o))
+		)
+)",
+TurnOffObject,,"
+(:action TurnOffObject-ToolReceptacle
+        :parameters (?a - agent ?l - location ?o - object ?toolreceptacle - receptacle)
+        :precondition (and
+            (receptacleType ?toolreceptacle SinkType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (holds ?a ?o)
+        )
+        :effect (and
+            (not (isOn ?o))
+        )
+    )
+","(:action TurnOffObject_1
+        :parameters (?a - agent ?l - location ?o - object)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		(holds ?a ?o)
+		)
+        :effect (and 
+		(not (isOn ?o))
+		)
+)",
+TurnOffObject,,"
+(:action TurnOffObject-NoTool
+        :parameters (?a - agent ?l - location ?o - object)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (toggleable ?o)
+        )
+        :effect (and
+            (not (isOn ?o))
+        )
+    )
+","(:action TurnOffObject_2
+        :parameters (?a - agent ?l - location ?o - object)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		(toggleable ?o)
+		)
+        :effect (and 
+		(not (isOn ?o))
+		)
+)",
+WashObject,,"
+;; Operator, WashObject1.
+;; WashObject1 takes an object to be washed, a specific tool object of type ClothType, and a specific tool receptacle of type SinkBasinType.
+;; Parameters: ?a - agent, ?l - location of the tool receptacle; ?o - object to be washed, ?toolobject - object to wash with, ?toolreceptacle - receptacle to wash the object in.
+;; Preconditions: The toolobject is a ClothType, the toolreceptacle is a SinkBasinType, the agent is at a location and the receptacle is at the same location, the object is washable, the agent is holding the tool object, and the object is in the tool receptacle.
+;; Postconditions: the ?o object is now clean and not in the tool receptacle.
+(:action WashObject1
+        :parameters (?a - agent ?l - location ?o - object ?toolobject - object ?toolreceptacle - receptacle)
+        :precondition (and
+            (objectType ?toolobject ClothType)
+            (receptacleType ?toolreceptacle SinkBasinType)
+            (atLocation ?a ?l)
+            (receptacleAtLocation ?toolreceptacle ?l)
+            (objectAtLocation ?o ?toolreceptacle)
+            (washable ?o)
+            (holds ?a ?toolobject)
+        )
+        :effect (and
+            (isClean ?o)
+            (not (inReceptacle ?o ?toolreceptacle))
+        )
+    )
+",FAILED,
+WashObject,,"
+;; Operator, WashObject2.
+;; WashObject2 takes an object to be washed and a specific tool object of type DishSpongeType.
+;; The object is not washed in a receptacle.
+;; Parameters: ?a - agent, ?l - location of the object; ?o - object to be washed, ?toolobject - object to wash with.
+;; Preconditions: The toolobject is a DishSpongeType, the agent is at a location and the object is at the same location, and the object is washable and not in any receptacle, and the agent is holding the tool object.
+;; Postconditions: the ?o object is now clean.
+(:action WashObject2
+        :parameters (?a - agent ?l - location ?o - object ?toolobject - object)
+        :precondition (and
+            (objectType ?toolobject DishSpongeType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (washable ?o)
+            (not (inReceptacle ?o ?r))
+            (holds ?a ?toolobject)
+        )
+        :effect (and
+            (isClean ?o)
+        )
+    )
+",FAILED,
+WashObject,,"
+;; Operator, WashObject3.
+;; WashObject3 takes an object to be washed and a specific tool receptacle of type BathtubBasinType.
+;; The object is washed inside the tool receptacle.
+;; Parameters: ?a - agent, ?l1 - location of the agent, ?l2 - location of the object; ?o - object to be washed, ?toolreceptacle - receptacle to wash the object in.
+;; Preconditions: The toolreceptacle is a BathtubBasinType, the agent is at location ?l1, the object is at location ?l2, the object is washable and in location ?l2, and the agent can reach ?l2 from ?l1.
+;; Postconditions: the ?o object is now clean and in the tool receptacle.
+(:action WashObject3
+        :parameters (?a - agent ?l1 - location ?l2 - location ?o - object ?toolreceptacle - receptacle)
+        :precondition (and
+            (receptacleType ?toolreceptacle BathtubBasinType)
+            (atLocation ?a ?l1)
+            (objectAtLocation ?o ?l2)
+            (washable ?o)
+            (reachable ?l1 ?l2)
+        )
+        :effect (and
+            (isClean ?o)
+            (inReceptacle ?o ?toolreceptacle)
+        )
+    )
+",FAILED,
+LookAtObject,,"
+(:action LookAtObject
+        :parameters (?a - agent ?l - location ?o - object)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+        )
+        :effect (and
+        )
+)
+",FAILED,
+LookAtObject,,"
+(:action LookAtObject
+        :parameters (?a - agent ?l - location ?o - object ?toolobject - object)
+        :precondition (and
+            (objectType ?toolobject BookType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (holds ?a ?toolobject)
+        )
+        :effect (and
+        )
+)
+",FAILED,
+LookAtObject,,"
+(:action LookAtObject
+        :parameters (?a - agent ?l - location ?o - object ?toolreceptacle - receptacle)
+        :precondition (and
+            (receptacleType ?toolreceptacle DrawerType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (holds ?a ?o)
+        )
+        :effect (and
+        )
+)
+",FAILED,
+LookObject,,"
+(:action LookObject
+        :parameters (?a - agent ?l - location ?o - object ?toolobject - object)
+        :precondition (and
+            (objectType ?toolobject MagnifyingGlassType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (holds ?a ?toolobject)
+        )
+        :effect (and
+        )
+    )
+",FAILED,
+LookObject,,"
+(:action LookObject
+        :parameters (?a - agent ?l - location ?o - object)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+        )
+        :effect (and
+        )
+)
+",FAILED,
+LookObject,,"
+(:action LookObject
+        :parameters (?a - agent ?l - location ?o - object ?toolreceptacle - receptacle)
+        :precondition (and
+            (receptacleType ?toolreceptacle MicroscopeType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (holds ?a ?toolreceptacle)
+        )
+        :effect (and
+        )
+    )
+",FAILED,

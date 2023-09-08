@@ -1,0 +1,1281 @@
+Experiment Parameters
+================================================================================
+Timestamp: 2023-09-07 13:55:57.768978
+Command to replicate: python main.py --experiment_name alfred_cot_250_filtered_0_912023 --random_seed 0 --output_directory generated --train_iterations 2 --pddl_domain_name alfred_linearized --dataset_name alfred_cot_250_filtered --dataset_fraction 1.0 --dataset_pddl_directory data/dataset/alfred_linearized_pddl --supervision_name supervision --goal_supervision_fraction 0.1 --initial_goal_supervision_prefix ALL --plan_supervision_fraction 0.1 --initial_plans_prefix ALL --initial_pddl_predicates  --initial_pddl_operators GotoLocation PickupObjectInReceptacle PickupObjectNotInReceptacle PutObjectInReceptacle --operator_propose_minimum_usage 2 --operator_use_cot 1 --goal_propose_include_codex_types  --codex_goal_temperature 1.0 --codex_operator_temperature 1.0 --codex_plan_temperature 1.0 --maximum_operator_arity 4 --n_goal_samples 4 --n_plan_samples 5 --n_operator_samples 3 --n_attempts_to_plan 1 --external_goal_sample_with_prompt  --external_goal_supervision data/dataset/alfred-goal-supervision_ --external_plan_supervision data/dataset/alfred-grate-break-fill-restart-supervision.json --external_operator_supervision data/dataset/alfred-grate-break-fill-restart-operator-supervision_ --external_operator_sample_with_prompt  --external_operator_names GrateObject BakeObject FillObject RestartObject --planner task_planner_fd --planner_timeout None --planner_minimum_n_operators 7 --planner_run_second_pass 1 --motionplan_search_type counter --operator_pseudocounts 0.05 --operator_pseudocounts_denominator 0.5 --operator_acceptance_threshold 0.5 --conservative_library_proposal  --checkpoint_every_n_problem_plans 2 --resume  --resume_from_iteration 0 --resume_from_problem_idx 0 --verbose  --debug_export_failed_pddl None --debug_no_propose_plans_operators_goals  --debug_mock_propose_goals  --debug_mock_propose_plans  --debug_mock_propose_operators  --debug_skip_propose_operators_after -1 --debug_skip_propose_plans_after -1 --debug_skip_task_plans  --debug_mock_task_plans  --debug_mock_motion_plans  --debug_skip_motion_plans  --debug_start_problem_idx 0 --debug_skip_problems None --debug_ground_truth_operators  --debug_ground_truth_goals  --debug_stop_after_first_proposal  --debug_cw_skip_location_check  
+
+
+Loaded PDDL file with operators
+================================================================================
+Domain: alfred_linearized
+Filename: data/domains/alfred_linearized.pddl
+Operators: 12
+Ground truth operators: 
+   GotoLocation
+   OpenObject
+   CloseObject
+   PickupObjectInReceptacle
+   PickupObjectNotInReceptacle
+   PutObjectInReceptacle
+   PutObjectInReceptacleObject
+   CleanObject
+   HeatObject
+   CoolObject
+   ToggleObject
+   SliceObject
+Initializing with operators: 
+  GotoLocation
+  PickupObjectInReceptacle
+  PickupObjectNotInReceptacle
+  PutObjectInReceptacle
+
+
+load_alfred_filtered_planning_domain_problems: loaded alfred_cot_250_filtered from data/dataset/alfred-cot-250-filtered-NLgoals-operators.json
+train : 223 / original 223 problems
+valid_seen : 145 / original 145 problems
+valid_unseen : 155 / original 155 problems
+Loaded initial dataset: alfred_cot_250_filtered
+================================================================================
+Initial train problems: 223
+Marking problems for goal supervision: fraction=0.1, prefix=['ALL']
+Sampling problems for goal supervision: 
+	 look_at_obj_in_light : 3
+	 pick_cool_then_place_in_recep : 2
+	 pick_and_place_simple : 3
+	 pick_heat_then_place_in_recep : 3
+	 pick_and_place_simple_slice : 1
+	 pick_heat_then_place_in_recep_slice : 2
+	 pick_clean_then_place_in_recep : 2
+	 pick_cool_then_place_in_recep_slice : 2
+Total goal supervision problems: 18
+Marking problems for plan supervision: fraction=0.1, prefix=['ALL']
+This is not implemented yet. (!!!)
+
+Loaded PDDL supervision
+================================================================================
+Loaded additional PDDL supervision from the following domain files:
+  data/domains/supervision_domains/movie_domain.pddl
+  data/domains/supervision_domains/depot_domain.pddl
+  data/domains/supervision_domains/travel_domain.pddl
+
+
+Training started.
+================================================================================
+
+Using ground truth goals, skipping: propose_goals_for_problems
+preprocess_goals: preprocessing 205 unsolved problems.
+preprocess_goals: Preprocess goals top-K accuracy: 0 / 205 exact match to ground truth goal.
+Logging preprocessed goals: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_preprocessed_goals.csv
+
+mock_propose_plans_for_problems:: from generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_codex_plans.json
+
+
+mock_propose_plans_for_problems:: loaded a total of 223 plans for 223 unsolved problems.
+Logging proposed plans: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_codex_plans.csv
+
+propose_operators_for_problems:: proposing for 27 operators.
+['ExamineObject', 'TurnOnObject', 'TurnOnLight', 'ThrowObject', 'CutObject', 'SliceObject', 'InspectObject', 'HeatObject', 'CookObject', 'OpenObject', 'EmptyObject', 'PlaceObject', 'WashObject', 'TurnOffObject', 'ToastObject', 'CoolObject', 'DrainObject', 'ChillObject', 'CleanObject', 'MicrowaveObject', 'UseObject', 'WarmObject', 'CloseObject', 'LookAtObject', 'RinseObject', 'DiscardObject', 'PutdownObject']
+mock_propose_operators_for_problems:: from generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_codex_operators.json
+Loaded 27 mock operators:
+['ExamineObject', 'TurnOnObject', 'TurnOnLight', 'ThrowObject', 'CutObject', 'SliceObject', 'InspectObject', 'HeatObject', 'CookObject', 'OpenObject', 'EmptyObject', 'PlaceObject', 'WashObject', 'TurnOffObject', 'ToastObject', 'CoolObject', 'DrainObject', 'ChillObject', 'CleanObject', 'MicrowaveObject', 'UseObject', 'WarmObject', 'CloseObject', 'LookAtObject', 'RinseObject', 'DiscardObject', 'PutdownObject']
+preprocess_operators:: preprocessing 27 operators.
+['ExamineObject', 'TurnOnObject', 'TurnOnLight', 'ThrowObject', 'CutObject', 'SliceObject', 'InspectObject', 'HeatObject', 'CookObject', 'OpenObject', 'EmptyObject', 'PlaceObject', 'WashObject', 'TurnOffObject', 'ToastObject', 'CoolObject', 'DrainObject', 'ChillObject', 'CleanObject', 'MicrowaveObject', 'UseObject', 'WarmObject', 'CloseObject', 'LookAtObject', 'RinseObject', 'DiscardObject', 'PutdownObject']
+Logging preprocessed operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_preprocessed_operators.csv
+
+Attempting task and motion planning on all problems.
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 1 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 3 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 5 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 6 / 223 ID=train/pick_and_place_simple-AppleSliced-None-Fridge-30/trial_T20190907_105523_799331 AttemptIdx=0 GoalIdx=0
+  Using mock task plan result.
+  Plan success: False
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 7 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 9 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 11 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 13 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 14 / 223 ID=train/pick_heat_then_place_in_recep-TomatoSliced-None-Fridge-5/trial_T20190908_061406_498045 AttemptIdx=0 GoalIdx=0
+  Using mock task plan result.
+  Plan success: False
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 15 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 17 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 19 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 19 / 223 ID=train/look_at_obj_in_light-Statue-None-DeskLamp-218/trial_T20190909_085327_810149 AttemptIdx=0 GoalIdx=0
+  Using mock task plan result.
+  Plan success: False
+task_planner.attempt_task_plan_for_problem: attempt 20 / 223 ID=train/look_at_obj_in_light-RemoteControl-None-FloorLamp-202/trial_T20190909_014548_223224 AttemptIdx=0 GoalIdx=0
+  Using mock task plan result.
+  Plan success: False
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 21 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 23 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 25 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 27 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 29 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 31 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 33 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 35 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 37 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 39 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 41 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 43 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 45 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 47 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 49 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 51 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 53 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 55 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 57 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 59 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 61 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 63 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 63 / 223 ID=train/pick_clean_then_place_in_recep-Knife-None-SideTable-3/trial_T20190906_210539_903984 AttemptIdx=0 GoalIdx=0
+  Using mock task plan result.
+  Plan success: False
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 65 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 67 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 69 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 71 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 73 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+
+Logging scored operators: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_scored_operators.csv
+Logging all task plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_task_plans.json
+Logging all motion plans out to: generated/alfred_cot_250_filtered_0_912023/0/alfred_cot_250_filtered_0_912023_motion_plans.json
+
+Experiment Summary
+================================================================================
+Iteration: 0
+Evaluated successful motion plans: 0 / 75 problems so far.
+Overall successful motion plans: 0 / 223 problems.
+Total problems: 223
+Current operators: 223
+
+task_planner.attempt_task_plan_for_problem: attempt 76 / 223 ID=train/pick_heat_then_place_in_recep-Potato-None-GarbageCan-12/trial_T20190907_125521_042428 AttemptIdx=0 GoalIdx=0
+Conservative operator proposal; only returning operators above threshold.
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 0 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: set()
+    Language: put a cooked potato in the trash can.
+    Ground truth goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o PotatoType) (receptacleType ?r GarbageCanType) (inReceptacle ?o ?r) (heatable ?o) (isHot ?o) ) )))
+    Proposed goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o PotatoType) (receptacleType ?r GarbageCanType) (inReceptacle ?o ?r) (heatable ?o) (isHot ?o) ) )))
+Instantiating FD with --alias "lama-first" 
+    Plan success: False
+    Plan string:  Plan not found with FD! Error: INFO planner time limit: None INFO planner memory limit: None INFO Running translator. INFO translator stdin: None INFO translator time limit: None INFO translator memory limit: None INFO translator command line string: /Users/zyzzyva/miniconda3/envs/llm-operators-zs/bin/python3 /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/pddlgym_planners/FD/builds/release/bin/translate/translate.py /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpdrslmz_u /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpt0l8ca4l --sas-file /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpd2ym2opw Parsing... Parsing: [0.010s CPU, 0.005s wall-clock] Normalizing task... [0.000s CPU, 0.000s wall-clock] Instantiating... Generating Datalog program... [0.000s CPU, 0.001s wall-clock] Normalizing Datalog program... Normalizing Datalog program: [0.000s CPU, 0.001s wall-clock] Preparing model... [0.000s CPU, 0.003s wall-clock] Generated 42 rules. Computing model... [0.020s CPU, 0.022s wall-clock] 6820 relevant atoms 1314 auxiliary atoms 8134 final queue length 17626 total queue pushes Completing instantiation... [0.080s CPU, 0.066s wall-clock] Instantiating: [0.100s CPU, 0.093s wall-clock] No relaxed solution! Generating unsolvable task... Translator variables: 1 Translator derived variables: 0 Translator facts: 2 Translator goal facts: 1 Translator mutex groups: 0 Translator total mutex groups size: 0 Translator operators: 0 Translator axioms: 0 Translator task size: 4 warning: could not determine peak memory Writing output... [0.000s CPU, 0.000s wall-clock] Done! [0.110s CPU, 0.102s wall-clock] translate exit code: 0 INFO Running search (release). INFO search stdin: /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpd2ym2opw INFO search time limit: None INFO search memory limit: None INFO search command line string: /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/pddlgym_planners/FD/builds/release/bin/downward --search 'let(hlm,landmark_sum(lm_factory=lm_reasonable_orders_hps(lm_rhw()),transform=adapt_costs(one),pref=false),let(hff,ff(transform=adapt_costs(one)),lazy_greedy([hff,hlm],preferred=[hff,hlm],cost_type=one,reopen_closed=false)))' --internal-plan-file sas_plan < /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpd2ym2opw [t=0.00199055s, 408500464 KB] reading input... [t=0.00226832s, 408500464 KB] done reading input! [t=0.006924s, 408500464 KB] Initializing landmark sum heuristic... [t=0.00692892s, 408500464 KB] Generating landmark graph... [t=0.00696816s, 408500464 KB] Building a landmark graph with reasonable orders. [t=0.0069718s, 408500464 KB] Initializing Exploration... [t=0.00700924s, 408500464 KB] Generating landmarks using the RPG/SAS+ approach [t=0.00717283s, 408500464 KB] Removed 0 reasonable or obedient reasonable orders [t=0.00720825s, 408500464 KB] Landmarks generation time: 0.000238456s [t=0.00721141s, 408500464 KB] Discovered 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.0072142s, 408500464 KB] 1 edges [t=0.00721637s, 408500464 KB] approx. reasonable orders [t=0.0072192s, 408500464 KB] approx. obedient reasonable orders [t=0.00722182s, 408500464 KB] Removed 0 reasonable or obedient reasonable orders [t=0.0072242s, 408500464 KB] Landmarks generation time: 0.000294462s [t=0.0072267s, 408500464 KB] Discovered 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.007229s, 408500464 KB] 1 edges [t=0.00723142s, 408500464 KB] Landmark graph generation time: 0.000303646s [t=0.00723351s, 408500464 KB] Landmark graph contains 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00723621s, 408500464 KB] Landmark graph contains 1 orderings. [t=0.00724667s, 408500464 KB] Simplifying 0 unary operators... done! [0 unary operators] [t=0.00725003s, 408500464 KB] time to simplify: 4.551e-06s [t=0.00725274s, 408500464 KB] Initializing additive heuristic... [t=0.00725454s, 408500464 KB] Initializing FF heuristic... [t=0.00752912s, 408500464 KB] Building successor generator...done! [t=0.00753465s, 408500464 KB] peak memory difference for successor generator creation: 0 KB [t=0.00753703s, 408500464 KB] time for successor generation creation: 4.92e-07s [t=0.0075399s, 408500464 KB] Variables: 1 [t=0.0075422s, 408500464 KB] FactPairs: 2 [t=0.00754412s, 408500464 KB] Bytes per state: 4 [t=0.00773916s, 408500464 KB] Conducting lazy best first search, (real) bound = 2147483647 [t=0.00774326s, 408500464 KB] 1 initial landmarks, 1 goal landmarks [t=0.00777758s, 408500464 KB] Initial heuristic value for ff(transform=adapt_costs(one)): infinity [t=0.00778065s, 408500464 KB] Completely explored state space -- no solution! [t=0.00778262s, 408500464 KB] Actual search time: 3.7884e-05s [t=0.00778516s, 408500464 KB] Expanded 0 state(s). [t=0.00778516s, 408500464 KB] Reopened 0 state(s). [t=0.00778516s, 408500464 KB] Evaluated 1 state(s). [t=0.00778516s, 408500464 KB] Evaluations: 1 [t=0.00778516s, 408500464 KB] Generated 0 state(s). [t=0.00778516s, 408500464 KB] Dead ends: 1 state(s). [t=0.00778516s, 408500464 KB] Number of registered states: 1 [t=0.00778516s, 408500464 KB] Int hash set load factor: 1/1 = 1 [t=0.00778516s, 408500464 KB] Int hash set resizes: 0 [t=0.00778516s, 408500464 KB] Search time: 4.6207e-05s [t=0.00778516s, 408500464 KB] Total time: 0.00778516s Search stopped without finding a solution. Peak memory: 408500464 KB search exit code: 12 Driver aborting after search INFO Planner time: 0.15s
+    Plan time: 0.230s
+Conservative operator proposal; attempting with new choice: DiscardObject_2
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 1 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'DiscardObject_2'}
+    Language: put a cooked potato in the trash can.
+    Ground truth goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o PotatoType) (receptacleType ?r GarbageCanType) (inReceptacle ?o ?r) (heatable ?o) (isHot ?o) ) )))
+    Proposed goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o PotatoType) (receptacleType ?r GarbageCanType) (inReceptacle ?o ?r) (heatable ?o) (isHot ?o) ) )))
+Instantiating FD with --alias "lama-first" 
+    Plan success: False
+    Plan string:  Plan not found with FD! Error: INFO planner time limit: None INFO planner memory limit: None INFO Running translator. INFO translator stdin: None INFO translator time limit: None INFO translator memory limit: None INFO translator command line string: /Users/zyzzyva/miniconda3/envs/llm-operators-zs/bin/python3 /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/pddlgym_planners/FD/builds/release/bin/translate/translate.py /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpngigdb4p /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpgo003v4p --sas-file /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpcupwmz_z Parsing... Parsing: [0.010s CPU, 0.001s wall-clock] Normalizing task... [0.000s CPU, 0.000s wall-clock] Instantiating... Generating Datalog program... [0.000s CPU, 0.001s wall-clock] Normalizing Datalog program... Normalizing Datalog program: [0.000s CPU, 0.001s wall-clock] Preparing model... [0.000s CPU, 0.002s wall-clock] Generated 48 rules. Computing model... [0.020s CPU, 0.024s wall-clock] 7126 relevant atoms 1689 auxiliary atoms 8815 final queue length 18412 total queue pushes Completing instantiation... [0.090s CPU, 0.079s wall-clock] Instantiating: [0.110s CPU, 0.108s wall-clock] No relaxed solution! Generating unsolvable task... Translator variables: 1 Translator derived variables: 0 Translator facts: 2 Translator goal facts: 1 Translator mutex groups: 0 Translator total mutex groups size: 0 Translator operators: 0 Translator axioms: 0 Translator task size: 4 warning: could not determine peak memory Writing output... [0.000s CPU, 0.000s wall-clock] Done! [0.120s CPU, 0.112s wall-clock] translate exit code: 0 INFO Running search (release). INFO search stdin: /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpcupwmz_z INFO search time limit: None INFO search memory limit: None INFO search command line string: /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/pddlgym_planners/FD/builds/release/bin/downward --search 'let(hlm,landmark_sum(lm_factory=lm_reasonable_orders_hps(lm_rhw()),transform=adapt_costs(one),pref=false),let(hff,ff(transform=adapt_costs(one)),lazy_greedy([hff,hlm],preferred=[hff,hlm],cost_type=one,reopen_closed=false)))' --internal-plan-file sas_plan < /var/folders/d6/l_63vcns4fd8zd1w5fbtdvz40000gn/T/tmpcupwmz_z [t=0.000100573s, 408500464 KB] reading input... [t=0.000156579s, 408500464 KB] done reading input! [t=0.00369197s, 408500464 KB] Initializing landmark sum heuristic... [t=0.00369709s, 408500464 KB] Generating landmark graph... [t=0.00370099s, 408500464 KB] Building a landmark graph with reasonable orders. [t=0.00370337s, 408500464 KB] Initializing Exploration... [t=0.00370615s, 408500464 KB] Generating landmarks using the RPG/SAS+ approach [t=0.00371813s, 408500464 KB] Removed 0 reasonable or obedient reasonable orders [t=0.0037212s, 408500464 KB] Landmarks generation time: 1.9598e-05s [t=0.00372341s, 408500464 KB] Discovered 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.00372686s, 408500464 KB] 1 edges [t=0.00372907s, 408500464 KB] approx. reasonable orders [t=0.00373157s, 408500464 KB] approx. obedient reasonable orders [t=0.00373375s, 408500464 KB] Removed 0 reasonable or obedient reasonable orders [t=0.00373608s, 408500464 KB] Landmarks generation time: 3.8294e-05s [t=0.00373822s, 408500464 KB] Discovered 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.0037408s, 408500464 KB] 1 edges [t=0.00374281s, 408500464 KB] Landmark graph generation time: 4.7068e-05s [t=0.00374547s, 408500464 KB] Landmark graph contains 2 landmarks, of which 0 are disjunctive and 0 are conjunctive. [t=0.0037481s, 408500464 KB] Landmark graph contains 1 orderings. [t=0.00375724s, 408500464 KB] Simplifying 0 unary operators... done! [0 unary operators] [t=0.00376027s, 408500464 KB] time to simplify: 4.469e-06s [t=0.00376232s, 408500464 KB] Initializing additive heuristic... [t=0.00376396s, 408500464 KB] Initializing FF heuristic... [t=0.00378565s, 408500464 KB] Building successor generator...done! [t=0.00379123s, 408500464 KB] peak memory difference for successor generator creation: 0 KB [t=0.00379332s, 408500464 KB] time for successor generation creation: 1.517e-06s [t=0.00379615s, 408500464 KB] Variables: 1 [t=0.00379808s, 408500464 KB] FactPairs: 2 [t=0.00379996s, 408500464 KB] Bytes per state: 4 [t=0.00382116s, 408500464 KB] Conducting lazy best first search, (real) bound = 2147483647 [t=0.00382559s, 408500464 KB] 1 initial landmarks, 1 goal landmarks [t=0.00383206s, 408500464 KB] Initial heuristic value for ff(transform=adapt_costs(one)): infinity [t=0.00383481s, 408500464 KB] Completely explored state space -- no solution! [t=0.00383674s, 408500464 KB] Actual search time: 9.963e-06s [t=0.00383867s, 408500464 KB] Expanded 0 state(s). [t=0.00383867s, 408500464 KB] Reopened 0 state(s). [t=0.00383867s, 408500464 KB] Evaluated 1 state(s). [t=0.00383867s, 408500464 KB] Evaluations: 1 [t=0.00383867s, 408500464 KB] Generated 0 state(s). [t=0.00383867s, 408500464 KB] Dead ends: 1 state(s). [t=0.00383867s, 408500464 KB] Number of registered states: 1 [t=0.00383867s, 408500464 KB] Int hash set load factor: 1/1 = 1 [t=0.00383867s, 408500464 KB] Int hash set resizes: 0 [t=0.00383867s, 408500464 KB] Search time: 1.7794e-05s [t=0.00383867s, 408500464 KB] Total time: 0.00383867s Search stopped without finding a solution. Peak memory: 408500464 KB search exit code: 12 Driver aborting after search INFO Planner time: 0.15s
+    Plan time: 0.213s
+Conservative operator proposal; attempting with new choice: HeatObject_1
+  Now attempting to plan for goal: 0 / 1
+    Running planner with existing operators + 1 proposed operators: 
+    Initial Operators: dict_keys(['GotoLocation', 'PickupObjectInReceptacle', 'PickupObjectNotInReceptacle', 'PutObjectInReceptacle'])
+    Proposed Operators: {'HeatObject_1'}
+    Language: put a cooked potato in the trash can.
+    Ground truth goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o PotatoType) (receptacleType ?r GarbageCanType) (inReceptacle ?o ?r) (heatable ?o) (isHot ?o) ) )))
+    Proposed goal: (:goal (exists (?r - receptacle) (exists (?o - object) (and (objectType ?o PotatoType) (receptacleType ?r GarbageCanType) (inReceptacle ?o ?r) (heatable ?o) (isHot ?o) ) )))
+Instantiating FD with --alias "lama-first" 
+    Plan success: True
+    Plan string:  (gotolocation agent1 loc_bar_4_bar__minus_2_bar_2_bar_30 loc_bar_0_bar_3_bar_3_bar_45) (gotolocation agent1 loc_bar_0_bar_3_bar_3_bar_45 loc_bar_4_bar_11_bar_1_bar_60) (gotolocation agent1 loc_bar_4_bar_11_bar_1_bar_60 loc_bar__minus_1_bar_5_bar_3_bar_30) (pickupobjectinreceptacle agent1 loc_bar__minus_1_bar_5_bar_3_bar_30 potato__minus_4_dot_83762_comma__minus_4_dot_83762_comma_4_dot_61625768_comma_4_dot_61625768_comma_3_dot_8822288_comma_3_dot_8822288 countertop__minus_3_dot_888_comma__minus_3_dot_888_comma_3_dot_684_comma_3_dot_684_comma_3_dot_8936_comma_3_dot_8936) (gotolocation agent1 loc_bar__minus_1_bar_5_bar_3_bar_30 loc_bar_4_bar_11_bar_1_bar_60) (heatobject_1 agent1 loc_bar_4_bar_11_bar_1_bar_60 garbagecan_5_dot_80777024_comma_5_dot_80777024_comma_11_dot_65005396_comma_11_dot_65005396_comma_0_dot_0_comma_0_dot_0 potato__minus_4_dot_83762_comma__minus_4_dot_83762_comma_4_dot_61625768_comma_4_dot_61625768_comma_3_dot_8822288_comma_3_dot_8822288) (putobjectinreceptacle agent1 loc_bar_4_bar_11_bar_1_bar_60 potatotype potato__minus_4_dot_83762_comma__minus_4_dot_83762_comma_4_dot_61625768_comma_4_dot_61625768_comma_3_dot_8822288_comma_3_dot_8822288 garbagecan_5_dot_80777024_comma_5_dot_80777024_comma_11_dot_65005396_comma_11_dot_65005396_comma_0_dot_0_comma_0_dot_0)
+    Plan time: 0.487s
+[Counter] Loaded counter tree from pickle.
+[Counter] Stored Goals: 926
+motion_planner.attempt_motion_plan_for_problem: attempt 76 / 223 ID=train/pick_heat_then_place_in_recep-Potato-None-GarbageCan-12/trial_T20190907_125521_042428 AttemptIdx=0
+Motion planning for: train/pick_heat_then_place_in_recep-Potato-None-GarbageCan-12/trial_T20190907_125521_042428
+Proposed goal is: 
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o PotatoType) 
+                (receptacleType ?r GarbageCanType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o) 
+            )
+    )))
+Ground truth oracle goal is: 
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o PotatoType) 
+                (receptacleType ?r GarbageCanType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o) 
+            )
+    )))
+Attempting to execute the following motion plan:
+{'action': 'PickupObjectInReceptacle', 'postcondition_ground_predicates': [{'predicate_name': 'inReceptacle', 'arguments': ['potato', 'countertop'], 'is_neg': True}, {'predicate_name': 'holds', 'arguments': ['potato'], 'is_neg': False}], 'precondition_ground_predicates': [{'predicate_name': 'inReceptacle', 'arguments': ['potato', 'countertop'], 'is_neg': False}]}
+
+{'action': 'HeatObject_1', 'postcondition_ground_predicates': [{'predicate_name': 'isHot', 'arguments': ['potato'], 'is_neg': False}], 'precondition_ground_predicates': [{'predicate_name': 'receptacleAtLocation', 'arguments': ['garbagecan', 'loc'], 'is_neg': False}, {'predicate_name': 'holds', 'arguments': ['potato'], 'is_neg': False}]}
+
+{'action': 'PutObjectInReceptacle', 'postcondition_ground_predicates': [{'predicate_name': 'inReceptacle', 'arguments': ['potato', 'garbagecan'], 'is_neg': False}, {'predicate_name': 'holds', 'arguments': ['potato'], 'is_neg': True}], 'precondition_ground_predicates': [{'predicate_name': 'receptacleAtLocation', 'arguments': ['garbagecan', 'loc'], 'is_neg': False}, {'predicate_name': 'holds', 'arguments': ['potato'], 'is_neg': False}]}
+
+Ground truth PDDL plan is: 
+(GotoLocation countertop)
+(PickupObject potato)
+(GotoLocation microwave)
+(HeatObject potato)
+(GotoLocation garbagecan)
+(PutObject potato garbagecan)
+Goal ground truth predicates that will be evaluated: 
+{'predicate_name': 'inReceptacle', 'arguments': ['potato', 'garbagecan'], 'is_neg': False}
+
+{'predicate_name': 'heatable', 'arguments': ['potato'], 'is_neg': False}
+
+{'predicate_name': 'isHot', 'arguments': ['potato'], 'is_neg': False}
+
+ThorEnv started.
+OPERATOR:
+{'action': 'PickupObjectInReceptacle',
+ 'postcondition_ground_predicates': [{'arguments': ['potato', 'countertop'],
+                                      'is_neg': True,
+                                      'predicate_name': 'inReceptacle'},
+                                     {'arguments': ['potato'],
+                                      'is_neg': False,
+                                      'predicate_name': 'holds'}],
+ 'precondition_ground_predicates': [{'arguments': ['potato', 'countertop'],
+                                     'is_neg': False,
+                                     'predicate_name': 'inReceptacle'}]}
+
+GOAL OBJECT SET:
+[('Potato|-01.21|+00.97|+01.15', 'CounterTop|-00.97|+00.97|+02.39'),
+ ('Potato|-01.21|+00.97|+01.15', 'CounterTop|+01.51|+00.97|+02.31'),
+ ('Potato|-01.21|+00.97|+01.15', 'CounterTop|-00.97|+00.97|+00.92'),
+ ('Potato|-00.88|+01.35|+00.20', 'CounterTop|-00.97|+00.97|+02.39'),
+ ('Potato|-00.88|+01.35|+00.20', 'CounterTop|+01.51|+00.97|+02.31'),
+ ('Potato|-00.88|+01.35|+00.20', 'CounterTop|-00.97|+00.97|+00.92'),
+ ('Potato|+01.44|+00.97|+02.12', 'CounterTop|-00.97|+00.97|+02.39'),
+ ('Potato|+01.44|+00.97|+02.12', 'CounterTop|+01.51|+00.97|+02.31'),
+ ('Potato|+01.44|+00.97|+02.12', 'CounterTop|-00.97|+00.97|+00.92')]
+
+PERMISSIBLE OBJECT SET:
+[('Potato|-01.21|+00.97|+01.15', 'CounterTop|-00.97|+00.97|+02.39'),
+ ('Potato|-01.21|+00.97|+01.15', 'CounterTop|+01.51|+00.97|+02.31'),
+ ('Potato|-01.21|+00.97|+01.15', 'CounterTop|-00.97|+00.97|+00.92'),
+ ('Potato|-00.88|+01.35|+00.20', 'CounterTop|-00.97|+00.97|+02.39'),
+ ('Potato|-00.88|+01.35|+00.20', 'CounterTop|+01.51|+00.97|+02.31'),
+ ('Potato|-00.88|+01.35|+00.20', 'CounterTop|-00.97|+00.97|+00.92'),
+ ('Potato|+01.44|+00.97|+02.12', 'CounterTop|-00.97|+00.97|+02.39'),
+ ('Potato|+01.44|+00.97|+02.12', 'CounterTop|+01.51|+00.97|+02.31'),
+ ('Potato|+01.44|+00.97|+02.12', 'CounterTop|-00.97|+00.97|+00.92')]
+
+
+Permissible Objects:
+('Potato|-01.21|+00.97|+01.15', 'CounterTop|-00.97|+00.97|+02.39')
+Starting Counter Search:
+Rollout 0/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PickupObject]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Traj: [ActionConstructors[AlfredActionType.PickupObject]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Action feasible: True
+
+OPERATOR:
+{'action': 'HeatObject_1',
+ 'postcondition_ground_predicates': [{'arguments': ['potato'],
+                                      'is_neg': False,
+                                      'predicate_name': 'isHot'}],
+ 'precondition_ground_predicates': [{'arguments': ['garbagecan', 'loc'],
+                                     'is_neg': False,
+                                     'predicate_name': 'receptacleAtLocation'},
+                                    {'arguments': ['potato'],
+                                     'is_neg': False,
+                                     'predicate_name': 'holds'}]}
+
+GOAL OBJECT SET:
+[('Potato|-01.21|+00.97|+01.15',),
+ ('Potato|-01.21|+00.97|+01.15',),
+ ('Potato|-00.88|+01.35|+00.20',),
+ ('Potato|-00.88|+01.35|+00.20',),
+ ('Potato|-00.88|+01.35|+00.20',),
+ ('Potato|+01.44|+00.97|+02.12',),
+ ('Potato|+01.44|+00.97|+02.12',),
+ ('Potato|+01.44|+00.97|+02.12',)]
+
+PERMISSIBLE OBJECT SET:
+[('Potato|-01.21|+00.97|+01.15',),
+ ('Potato|-01.21|+00.97|+01.15', 'GarbageCan|+01.45|+00.00|+02.91'),
+ ('Potato|-00.88|+01.35|+00.20',),
+ ('Potato|-00.88|+01.35|+00.20', 'GarbageCan|+01.45|+00.00|+02.91'),
+ ('Potato|-00.88|+01.35|+00.20',
+  'GarbageCan|+01.45|+00.00|+02.91',
+  'Potato|-01.21|+00.97|+01.15'),
+ ('Potato|+01.44|+00.97|+02.12',),
+ ('Potato|+01.44|+00.97|+02.12', 'GarbageCan|+01.45|+00.00|+02.91'),
+ ('Potato|+01.44|+00.97|+02.12',
+  'GarbageCan|+01.45|+00.00|+02.91',
+  'Potato|-01.21|+00.97|+01.15')]
+
+
+Permissible Objects:
+('Potato|-01.21|+00.97|+01.15',)
+Starting Counter Search:
+Rollout 0/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Traj: [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Error Message: object not found: Potato|-01.21|+00.97|+01.15
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-01.21|+00.97|+01.15',)) True
+	 State: False
+
+Rollout 1/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Traj: [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-01.21|+00.97|+01.15',)) True
+	 State: False
+
+Rollout 2/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Traj: [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Error Message: object not found: Potato|-01.21|+00.97|+01.15
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-01.21|+00.97|+01.15',)) True
+	 State: False
+
+Rollout 3/50
+
+Permissible Objects:
+('Potato|-01.21|+00.97|+01.15', 'GarbageCan|+01.45|+00.00|+02.91')
+Starting Counter Search:
+Rollout 0/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Traj: [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Error Message: object not found: Potato|-01.21|+00.97|+01.15
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-01.21|+00.97|+01.15',)) True
+	 State: False
+
+Rollout 1/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Traj: [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Error Message: object not found: GarbageCan|+01.45|+00.00|+02.91
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-01.21|+00.97|+01.15',)) True
+	 State: False
+
+Rollout 2/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Traj: [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-01.21|+00.97|+01.15',)) True
+	 State: False
+
+Rollout 3/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Traj: [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-01.21|+00.97|+01.15',)) True
+	 State: False
+
+Rollout 4/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Traj: [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Error Message: object not found: Potato|-01.21|+00.97|+01.15
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-01.21|+00.97|+01.15',)) True
+	 State: False
+
+Rollout 5/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Traj: [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Error Message: object not found: GarbageCan|+01.45|+00.00|+02.91
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-01.21|+00.97|+01.15',)) True
+	 State: False
+
+Rollout 6/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|-01.21|+00.97|+01.15", "receptacle_object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Traj: [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|-01.21|+00.97|+01.15", "receptacle_object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Action feasible: True
+	 Fluent(predicate='isHot', objects=('Potato|-01.21|+00.97|+01.15',)) True
+	 State: False
+
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-01.21|+00.97|+01.15',)) True
+	 State: False
+
+Rollout 7/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PutObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91", "receptacle_object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Traj: [ActionConstructors[AlfredActionType.PutObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91", "receptacle_object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Exception: Agent must have object in inventory to place it.
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-01.21|+00.97|+01.15',)) True
+	 State: False
+
+Rollout 8/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PickupObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Traj: [ActionConstructors[AlfredActionType.PickupObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-01.21|+00.97|+01.15',)) True
+	 State: False
+
+Rollout 9/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PickupObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Traj: [ActionConstructors[AlfredActionType.PickupObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-01.21|+00.97|+01.15',)) True
+	 State: False
+
+Rollout 10/50
+
+Permissible Objects:
+('Potato|-00.88|+01.35|+00.20',)
+Starting Counter Search:
+Rollout 0/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Traj: [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Error Message: object not found: Potato|-00.88|+01.35|+00.20
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 1/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Traj: [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 2/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Traj: [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Error Message: object not found: Potato|-00.88|+01.35|+00.20
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 3/50
+
+Permissible Objects:
+('Potato|-00.88|+01.35|+00.20', 'GarbageCan|+01.45|+00.00|+02.91')
+Starting Counter Search:
+Rollout 0/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Traj: [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Error Message: object not found: Potato|-00.88|+01.35|+00.20
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 1/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Traj: [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Error Message: object not found: GarbageCan|+01.45|+00.00|+02.91
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 2/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Traj: [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 3/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Traj: [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 4/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Traj: [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Error Message: object not found: Potato|-00.88|+01.35|+00.20
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 5/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Traj: [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Error Message: object not found: GarbageCan|+01.45|+00.00|+02.91
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 6/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|-00.88|+01.35|+00.20", "receptacle_object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Traj: [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|-00.88|+01.35|+00.20", "receptacle_object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Exception: Agent must have object in inventory to place it.
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 7/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PutObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91", "receptacle_object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Traj: [ActionConstructors[AlfredActionType.PutObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91", "receptacle_object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Exception: Agent must have object in inventory to place it.
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 8/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PickupObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Traj: [ActionConstructors[AlfredActionType.PickupObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 9/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PickupObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Traj: [ActionConstructors[AlfredActionType.PickupObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 10/50
+
+Permissible Objects:
+('Potato|-00.88|+01.35|+00.20', 'GarbageCan|+01.45|+00.00|+02.91', 'Potato|-01.21|+00.97|+01.15')
+Starting Counter Search:
+Rollout 0/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Traj: [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Error Message: object not found: Potato|-00.88|+01.35|+00.20
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 1/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Traj: [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Error Message: object not found: Potato|-01.21|+00.97|+01.15
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 2/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Traj: [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Error Message: object not found: GarbageCan|+01.45|+00.00|+02.91
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 3/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Traj: [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 4/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Traj: [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 5/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Traj: [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 6/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Traj: [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Error Message: object not found: Potato|-00.88|+01.35|+00.20
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 7/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Traj: [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Error Message: object not found: Potato|-01.21|+00.97|+01.15
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 8/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Traj: [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Error Message: object not found: GarbageCan|+01.45|+00.00|+02.91
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 9/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|-00.88|+01.35|+00.20", "receptacle_object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Traj: [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|-00.88|+01.35|+00.20", "receptacle_object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Exception: Agent must have object in inventory to place it.
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 10/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|-00.88|+01.35|+00.20", "receptacle_object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Traj: [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|-00.88|+01.35|+00.20", "receptacle_object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Exception: Agent must have object in inventory to place it.
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 11/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|-01.21|+00.97|+01.15", "receptacle_object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Traj: [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|-01.21|+00.97|+01.15", "receptacle_object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Action feasible: True
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Error Message: object not found: Potato|-00.88|+01.35|+00.20
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 12/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|-01.21|+00.97|+01.15", "receptacle_object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Traj: [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|-01.21|+00.97|+01.15", "receptacle_object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Error Message: No valid Receptacle found
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 13/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PutObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91", "receptacle_object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Traj: [ActionConstructors[AlfredActionType.PutObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91", "receptacle_object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Exception: Agent must have object in inventory to place it.
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 14/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PutObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91", "receptacle_object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Traj: [ActionConstructors[AlfredActionType.PutObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91", "receptacle_object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Exception: Agent must have object in inventory to place it.
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 15/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|-01.21|+00.97|+01.15", "receptacle_object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Traj: [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|-01.21|+00.97|+01.15", "receptacle_object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Action feasible: True
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 16/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|-01.21|+00.97|+01.15", "receptacle_object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.OpenObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Traj: [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|-01.21|+00.97|+01.15", "receptacle_object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.OpenObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Action feasible: True
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Error Message: object not found: Potato|-00.88|+01.35|+00.20
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 17/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PickupObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Traj: [ActionConstructors[AlfredActionType.PickupObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-01.21|+00.97|+01.15"})]
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 18/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PickupObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Traj: [ActionConstructors[AlfredActionType.PickupObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 19/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PickupObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Traj: [ActionConstructors[AlfredActionType.PickupObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 20/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|-01.21|+00.97|+01.15", "receptacle_object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Traj: [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|-01.21|+00.97|+01.15", "receptacle_object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|-00.88|+01.35|+00.20"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Action feasible: True
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 21/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|-01.21|+00.97|+01.15", "receptacle_object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.PickupObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Traj: [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|-01.21|+00.97|+01.15", "receptacle_object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.PickupObject]({"object_id": "Potato|-01.21|+00.97|+01.15"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|-00.88|+01.35|+00.20"})]
+Action feasible: True
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Error Message: Potato|-01.21|+00.97|+01.15 is not visible.
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|-00.88|+01.35|+00.20',)) True
+	 State: False
+
+Rollout 22/50
+
+Permissible Objects:
+('Potato|+01.44|+00.97|+02.12',)
+Starting Counter Search:
+Rollout 0/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|+01.44|+00.97|+02.12"})]
+Traj: [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|+01.44|+00.97|+02.12"})]
+Error Message: object not found: Potato|+01.44|+00.97|+02.12
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|+01.44|+00.97|+02.12',)) True
+	 State: False
+
+Rollout 1/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|+01.44|+00.97|+02.12"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|+01.44|+00.97|+02.12"})]
+Traj: [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|+01.44|+00.97|+02.12"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|+01.44|+00.97|+02.12"})]
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|+01.44|+00.97|+02.12',)) True
+	 State: False
+
+Rollout 2/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "Potato|+01.44|+00.97|+02.12"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|+01.44|+00.97|+02.12"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|+01.44|+00.97|+02.12"})]
+Traj: [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "Potato|+01.44|+00.97|+02.12"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|+01.44|+00.97|+02.12"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|+01.44|+00.97|+02.12"})]
+Error Message: object not found: Potato|+01.44|+00.97|+02.12
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|+01.44|+00.97|+02.12',)) True
+	 State: False
+
+Rollout 3/50
+
+Permissible Objects:
+('Potato|+01.44|+00.97|+02.12', 'GarbageCan|+01.45|+00.00|+02.91')
+Starting Counter Search:
+Rollout 0/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|+01.44|+00.97|+02.12"})]
+Traj: [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|+01.44|+00.97|+02.12"})]
+Error Message: object not found: Potato|+01.44|+00.97|+02.12
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|+01.44|+00.97|+02.12',)) True
+	 State: False
+
+Rollout 1/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Traj: [ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Error Message: object not found: GarbageCan|+01.45|+00.00|+02.91
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|+01.44|+00.97|+02.12',)) True
+	 State: False
+
+Rollout 2/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|+01.44|+00.97|+02.12"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|+01.44|+00.97|+02.12"})]
+Traj: [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|+01.44|+00.97|+02.12"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|+01.44|+00.97|+02.12"})]
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|+01.44|+00.97|+02.12',)) True
+	 State: False
+
+Rollout 3/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Traj: [ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Error Message: 
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|+01.44|+00.97|+02.12',)) True
+	 State: False
+
+Rollout 4/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "Potato|+01.44|+00.97|+02.12"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|+01.44|+00.97|+02.12"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|+01.44|+00.97|+02.12"})]
+Traj: [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "Potato|+01.44|+00.97|+02.12"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "Potato|+01.44|+00.97|+02.12"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "Potato|+01.44|+00.97|+02.12"})]
+Error Message: object not found: Potato|+01.44|+00.97|+02.12
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|+01.44|+00.97|+02.12',)) True
+	 State: False
+
+Rollout 5/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Traj: [ActionConstructors[AlfredActionType.OpenObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Error Message: object not found: GarbageCan|+01.45|+00.00|+02.91
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|+01.44|+00.97|+02.12',)) True
+	 State: False
+
+Rollout 6/50
+[counter] counter suggests [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|+01.44|+00.97|+02.12", "receptacle_object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Traj: [ActionConstructors[AlfredActionType.PutObject]({"object_id": "Potato|+01.44|+00.97|+02.12", "receptacle_object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.CloseObject]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"}), ActionConstructors[AlfredActionType.ToggleObjectOn]({"object_id": "GarbageCan|+01.45|+00.00|+02.91"})]
+Exception: Agent must have object in inventory to place it.
+Action feasible: False
+	 Fluent(predicate='isHot', objects=('Potato|+01.44|+00.97|+02.12',)) True
+	 State: False
+
