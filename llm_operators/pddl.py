@@ -56,8 +56,8 @@ class Domain:
     def add_additional_constants(self, additional_constant_string):
         self.ground_truth_constants.update(PDDLParser._parse_constants(additional_constant_string))
 
-    def init_operators_to_scores(self, operator_pseudocounts):
-        self.operators_to_scores = defaultdict(lambda: (operator_pseudocounts, operator_pseudocounts))
+    def init_operators_to_scores(self, operator_pseudocounts, operator_pseudocounts_denominator):
+        self.operators_to_scores = defaultdict(lambda: (operator_pseudocounts, operator_pseudocounts_denominator))
 
     def init_pddl_domain(self, pddl_domain):
         if pddl_domain is not None:
@@ -608,6 +608,8 @@ class PDDLParser:
             else:
                 arg_values.append(arg.strip())
                 arg_types.append("")
+        if not allow_partial_ground_predicates:
+            arg_values = [f"?{v}" for v in arg_values]
         return PDDLPredicate(pred_name, len(pred[1:]), arg_types, argument_values=arg_values, neg=neg)
 
     @classmethod
@@ -989,12 +991,15 @@ class PDDLPlan:
     ):
         operator_body = pddl_domain.get_operator_body(action[PDDLPlan.PDDL_ACTION])
         # There's a chance that this is a predefined operator, in which case we need to get it directly.
-        (
-            parameters,
-            processed_preconds,
-            processed_effects,
-            ordered_parameter_keys,
-        ) = parse_operator_components(operator_body, pddl_domain, return_order=True)
+        try:
+            (
+                parameters,
+                processed_preconds,
+                processed_effects,
+                ordered_parameter_keys,
+            ) = parse_operator_components(operator_body, pddl_domain, return_order=True)
+        except:
+            import pdb; pdb.set_trace()
 
         ground_precondition_predicates = PDDLPlan.get_ground_predicates(
             action,
@@ -1479,6 +1484,7 @@ def parse_operator_components(operator_body, pddl_domain, return_order=False):
         patt = r"\(:action(.*):parameters(.*):precondition(.*):effect(.*)\)"
         op_match = re.match(patt, op, re.DOTALL)
         if op_match is None:
+            import pdb; pdb.set_trace()
             return False, ""
         op_name, params, preconds, effects = op_match.groups()
         original_ordered_parameters_keys = parse_parameter_keys(params)
@@ -1494,6 +1500,7 @@ def parse_operator_components(operator_body, pddl_domain, return_order=False):
             allow_partial_ground_predicates=allow_partial_ground_predicates,
         )
         if not precond_parameters:
+            import pdb; pdb.set_trace()
             return False, ""
         (
             effect_parameters,
@@ -1507,6 +1514,7 @@ def parse_operator_components(operator_body, pddl_domain, return_order=False):
             check_static=True,
         )
         if not effect_parameters:
+            import pdb; pdb.set_trace()
             return False, ""
         precond_parameters.update(effect_parameters)
 
@@ -1539,6 +1547,7 @@ def preprocess_operator(
     use_ground_truth_predicates=True,
     proposed_operator_name=None,
 ):
+
     allow_partial_ground_predicates = pddl_domain.constants != ""
     # Purge comments.
     preprocessed_operator = PDDLParser._purge_comments(operator_body)
@@ -1571,6 +1580,7 @@ def preprocess_operator(
             return False, ""
         op_name, params, preconds, effects = op_match.groups()
         op_name = op_name.strip()
+        
         precond_parameters, processed_preconds, _ = preprocess_conjunction_predicates(
             preconds,
             pddl_domain.ground_truth_predicates,
@@ -1595,7 +1605,7 @@ def preprocess_operator(
 
         if not allow_partial_ground_predicates:
             # NB(Jiayuan Mao @ 2023/02/04): if we don't allow partial ground predicates, the parameters do not contain '?'.
-            unground_parameters = [f"?{name} - {param_type}" for (name, param_type) in precond_parameters.items()]
+            unground_parameters = [f"{name} - {param_type}" for (name, param_type) in precond_parameters.items()]
         else:
             unground_parameters = [
                 f"{name} - {param_type}" for (name, param_type) in precond_parameters.items() if name.startswith("?")
@@ -1647,7 +1657,6 @@ def preprocess_conjunction_predicates(
             the processed predicates: a list of strings, each string is a processed predicate,
             the predicate names: a list of predicates, not used in the current implementation.
     """
-
     if conjunction_predicates.strip() == "()":
         return False, [], []
     patt = r"\(and(.*)\)"

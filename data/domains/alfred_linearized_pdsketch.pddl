@@ -12,117 +12,6 @@
     (:types
         agent location receptacle object rtype otype
     )
-    (:constants
-        CandleType - otype
-        ShowerGlassType - otype
-        CDType - otype
-        TomatoType - otype
-        MirrorType - otype
-        ScrubBrushType - otype
-        MugType - otype
-        ToasterType - otype
-        PaintingType - otype
-        CellPhoneType - otype
-        LadleType - otype
-        BreadType - otype
-        PotType - otype
-        BookType - otype
-        TennisRacketType - otype
-        ButterKnifeType - otype
-        ShowerDoorType - otype
-        KeyChainType - otype
-        BaseballBatType - otype
-        EggType - otype
-        PenType - otype
-        ForkType - otype
-        VaseType - otype
-        ClothType - otype
-        WindowType - otype
-        PencilType - otype
-        StatueType - otype
-        LightSwitchType - otype
-        WatchType - otype
-        SpatulaType - otype
-        PaperTowelRollType - otype
-        FloorLampType - otype
-        KettleType - otype
-        SoapBottleType - otype
-        BootsType - otype
-        TowelType - otype
-        PillowType - otype
-        AlarmClockType - otype
-        PotatoType - otype
-        ChairType - otype
-        PlungerType - otype
-        SprayBottleType - otype
-        HandTowelType - otype
-        BathtubType - otype
-        RemoteControlType - otype
-        PepperShakerType - otype
-        PlateType - otype
-        BasketBallType - otype
-        DeskLampType - otype
-        FootstoolType - otype
-        GlassbottleType - otype
-        PaperTowelType - otype
-        CreditCardType - otype
-        PanType - otype
-        ToiletPaperType - otype
-        SaltShakerType - otype
-        PosterType - otype
-        ToiletPaperRollType - otype
-        LettuceType - otype
-        WineBottleType - otype
-        KnifeType - otype
-        LaundryHamperLidType - otype
-        SpoonType - otype
-        TissueBoxType - otype
-        BowlType - otype
-        BoxType - otype
-        SoapBarType - otype
-        HousePlantType - otype
-        NewspaperType - otype
-        CupType - otype
-        DishSpongeType - otype
-        LaptopType - otype
-        TelevisionType - otype
-        StoveKnobType - otype
-        CurtainsType - otype
-        BlindsType - otype
-        TeddyBearType - otype
-        AppleType - otype
-        WateringCanType - otype
-        SinkType - otype
-
-        ArmChairType - rtype
-        BedType - rtype
-        BathtubBasinType - rtype
-        DresserType - rtype
-        SafeType - rtype
-        DiningTableType - rtype
-        SofaType - rtype
-        HandTowelHolderType - rtype
-        StoveBurnerType - rtype
-        CartType - rtype
-        DeskType - rtype
-        CoffeeMachineType - rtype
-        MicrowaveType - rtype
-        ToiletType - rtype
-        CounterTopType - rtype
-        GarbageCanType - rtype
-        CoffeeTableType - rtype
-        CabinetType - rtype
-        SinkBasinType - rtype
-        OttomanType - rtype
-        ToiletPaperHangerType - rtype
-        TowelHolderType - rtype
-        FridgeType - rtype
-        DrawerType - rtype
-        SideTableType - rtype
-        ShelfType - rtype
-        LaundryHamperType - rtype
-
-    )
     (:predicates
         (atLocation ?a - agent ?l - location) ; true if the agent is at the location
         (receptacleAtLocation ?r - receptacle ?l - location) ; true if the receptacle is at the location (constant)
@@ -138,7 +27,7 @@
         (holdsAny ?a - agent) ; agent ?a holds an object
         (holdsAnyReceptacleObject ?a - agent) ; agent ?a holds a receptacle object
         ;(full ?r - receptacle)                                    ; true if the receptacle has no remaining space
-        (isClean ?o - object) ; true if the object has been cleaned in sink
+        (isClean ?o - object) ; true if the object has been clean in sink
         (cleanable ?o - object) ; true if the object can be placed in a sink
         (isHot ?o - object) ; true if the object has been heated up
         (heatable ?o - object) ; true if the object can be heated up in a microwave
@@ -209,7 +98,6 @@
         )
         :effect (and
             (not (objectAtLocation ?o ?l))
-            (not (inReceptacle ?o ?r))
             (holds ?a ?o)
             (holdsAny ?a)
         )
@@ -222,10 +110,6 @@
             (atLocation ?a ?l)
             (objectAtLocation ?o ?l)
             (not (holdsAny ?a))
-            (forall
-                (?re - receptacle)
-                (not (inReceptacle ?o ?re))
-            )
         )
         :effect (and
             (not (objectAtLocation ?o ?l))
@@ -273,6 +157,34 @@
             (objectAtLocation ?o ?l)
         )
     )
+
+    ;; agent puts down a receptacle object in a receptacle
+    ; (:action PutReceptacleObjectInReceptacle
+    ;     :parameters (?a - agent ?l - location ?ot - otype ?outerO - object ?r - receptacle)
+    ;     :precondition (and
+    ;         (atLocation ?a ?l)
+    ;         (receptacleAtLocation ?r ?l)
+    ;         (objectType ?outerO ?ot)
+    ;         (holds ?a ?outerO)
+    ;         (holdsAnyReceptacleObject ?a)
+    ;         (isReceptacleObject ?outerO)
+    ;     )
+    ;     :effect (and
+    ;         (forall
+    ;             (?obj - object)
+    ;             (when
+    ;                 (holds ?a ?obj)
+    ;                 (and
+    ;                     (not (holds ?a ?obj))
+    ;                     (objectAtLocation ?obj ?l)
+    ;                     (inReceptacle ?obj ?r)
+    ;                 )
+    ;             )
+    ;         )
+    ;         (not (holdsAny ?a))
+    ;         (not (holdsAnyReceptacleObject ?a))
+    ;     )
+    ; )
 
     ;; agent cleans some object - currently requires it to be in a sink.
     (:action CleanObject

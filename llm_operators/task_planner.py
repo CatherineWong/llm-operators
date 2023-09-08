@@ -43,6 +43,8 @@ def attempt_task_plan_for_problem(
     debug_skip=False,
     debug_proposed_operators: Optional[Sequence[str]] = None,  # Debugging only.
     verbose=False,
+    conservative_library_proposal=False,
+    operator_acceptance_threshold=None,
 ):
     """
     Evaluates planner to evaluate task plans for a single planning problems, given a PDDL domain.
@@ -98,6 +100,8 @@ def attempt_task_plan_for_problem(
             debug_proposed_operators=debug_proposed_operators,
             debug_export_dir=debug_export_dir,
             verbose=verbose,
+            conservative_library_proposal=conservative_library_proposal,
+            operator_acceptance_threshold=operator_acceptance_threshold
         )
         if output_directory is not None:
             checkpoint_mock_task_plan_for_problem_single(
@@ -116,6 +120,75 @@ def attempt_task_plan_for_problem(
         any_success = problems[problem_id].update_evaluated_pddl_plans(new_evaluated_plans)
     return any_success, new_evaluated_plans
 
+def _generate_conservative_proposed_operator_sample(pddl_domain, random_generator, operator_acceptance_threshold, attempt_number):
+    """
+    Samples a set of at least minimum_n_operators operators.
+    We choose to include each operator independently based on p(n_operator_successes / n_operator_attempts) in previous trials.
+    We make at most max passes through the operator set to do so.
+    """
+    sampled_operators = set()
+    candidate_operators = set()
+    # First, get any operators over the accuracy threshold.
+    for operator_name in pddl_domain.proposed_operators:
+        for operator_body in pddl_domain.proposed_operators[operator_name]:
+                (n_operator_successes, n_operator_attempts) = pddl_domain.operators_to_scores[
+                    (operator_name, operator_body)
+                ]
+                # Only use operators above the success threshold.
+                if float(n_operator_successes / n_operator_attempts) > operator_acceptance_threshold:
+                    sampled_operators.add(operator_name)
+                else:
+                    if random_generator.binomial(1, float(n_operator_successes / n_operator_attempts), 1)[0] > 0:
+                        candidate_operators.add(operator_name)
+    if attempt_number == 0:
+        print("Conservative operator proposal; only returning operators above threshold.")
+        return sampled_operators
+    else:
+        # Randomly choose a single candidate operator.
+        if len(candidate_operators) > 0:
+            candidate_operator = random_generator.choice(list(candidate_operators))
+            print(f"Conservative operator proposal; attempting with new choice: {candidate_operator}")
+            sampled_operators.add(candidate_operator)
+        return sampled_operators
+                    
+
+    
+
+def run_conservative_library_proposal(
+    pddl_domain,
+    problem,
+    planner_type=TASK_PLANNER_FD,
+    minimum_n_operators=None,
+    random_generator=None,
+    command_args=None,
+    goal_idx=None,
+    debug_ground_truth_goals=False,
+    debug_proposed_operators: Optional[Sequence[str]] = None,
+    debug_export_dir=None,
+    verbose=False,
+    operator_acceptance_threshold=None,
+    n_attempts=10,
+):
+    for attempt_number in range(n_attempts + 1):
+        sampled_proposed_operators = _generate_conservative_proposed_operator_sample(
+            pddl_domain=pddl_domain,
+            operator_acceptance_threshold=operator_acceptance_threshold,
+            random_generator=random_generator,
+            attempt_number=attempt_number
+        )
+        success, evaluated_plans, _ = run_planner(
+            pddl_domain=pddl_domain,
+            problem=problem,
+            goal_idx=goal_idx,
+            proposed_operators=sampled_proposed_operators,
+            planner_type=planner_type,
+            debug_ground_truth_goals=debug_ground_truth_goals,
+            debug_export_dir=debug_export_dir,
+            verbose=verbose,
+        )
+        if success:
+            return success, evaluated_plans,  sampled_proposed_operators
+    return success, evaluated_plans, sampled_proposed_operators
 
 def sample_task_plans_for_problem(
     pddl_domain,
@@ -131,6 +204,8 @@ def sample_task_plans_for_problem(
     debug_proposed_operators: Optional[Sequence[str]] = None,
     debug_export_dir=None,
     verbose=False,
+    conservative_library_proposal=False,
+    operator_acceptance_threshold=None
 ):
     """
     Uses a task_planner to propose samples, so we attempt planning using random subsets of
@@ -144,25 +219,40 @@ def sample_task_plans_for_problem(
     overall_problem_json = {"file_name": problem.problem_id, "plans": []}
     any_success = False
 
-    # From the valid operator set, further downsample a set of operators to try, to prevent timeouts and promote operator diversity.
-    if debug_proposed_operators:
-        sampled_proposed_operators = debug_proposed_operators
-    else:
-        sampled_proposed_operators = _generate_random_proposed_operator_sample(
+    if conservative_library_proposal:
+        ### First checks if we can plan with only the operators that are above the acceptance threshold, and then only adds if we cannot solve. Runs the planner multiple times.
+        success, evaluated_plans, sampled_proposed_operators = run_conservative_library_proposal(
             pddl_domain=pddl_domain,
+            problem=problem,
+            planner_type=planner_type,
             minimum_n_operators=minimum_n_operators,
             random_generator=random_generator,
+            goal_idx=goal_idx,
+            debug_ground_truth_goals=debug_ground_truth_goals,
+            debug_proposed_operators=debug_proposed_operators,
+            debug_export_dir=debug_export_dir,
+            verbose=verbose,
+            operator_acceptance_threshold=operator_acceptance_threshold)
+    else:
+        ### Randomly samples a set of operators based on their previous success rate and plans over them.
+        if debug_proposed_operators:
+            sampled_proposed_operators = debug_proposed_operators
+        else:
+            sampled_proposed_operators = _generate_random_proposed_operator_sample(
+                pddl_domain=pddl_domain,
+                minimum_n_operators=minimum_n_operators,
+                random_generator=random_generator,
+            )
+        success, evaluated_plans, _ = run_planner(
+            pddl_domain=pddl_domain,
+            problem=problem,
+            goal_idx=goal_idx,
+            proposed_operators=sampled_proposed_operators,
+            planner_type=planner_type,
+            debug_ground_truth_goals=debug_ground_truth_goals,
+            debug_export_dir=debug_export_dir,
+            verbose=verbose,
         )
-    success, evaluated_plans, _ = run_planner(
-        pddl_domain=pddl_domain,
-        problem=problem,
-        goal_idx=goal_idx,
-        proposed_operators=sampled_proposed_operators,
-        planner_type=planner_type,
-        debug_ground_truth_goals=debug_ground_truth_goals,
-        debug_export_dir=debug_export_dir,
-        verbose=verbose,
-    )
 
     any_success = any_success or success
     for g in evaluated_plans:
@@ -292,17 +382,13 @@ def run_planner(
     evaluated_plans : {goal : Plan}
     """
     output_json = {"file_name": problem.problem_id, "plans": []}
-
     # Get domain strings. Pick the first one that parses
     current_domain_string = pddl_domain.to_string(
-        ground_truth_operators=True,
-        current_operators=False,
+        ground_truth_operators=False, 
+        current_operators=True,
         proposed_operators=proposed_operators,
         show_constants=(not problem.constants_in_problem_file),
     )
-    with open('data/domains/alfred_linearized_pdsketch.pddl') as f:
-        current_domain_string = f.read()
-
 
     if debug_ground_truth_goals:
         sorted_goals = [problem.ground_truth_pddl_problem.ground_truth_goal]
@@ -338,7 +424,6 @@ def run_planner(
                 problem_str=current_problem_string,
                 verbose=verbose,
             )
-            import pdb; pdb.set_trace()
         elif planner_type == TASK_PLANNER_PDSKETCH_ONTHEFLY:
             success, plan_string = pdsketch_onthefly_plan_from_strings(
                 domain_str=current_domain_string, problem_str=current_problem_string
@@ -379,7 +464,6 @@ def run_planner(
                 with open(osp.join(debug_export_dir, f"goal_{current_goal_idx}_problem.pddl"), "w") as f:
                     f.write(current_problem_string)
                 print(f"    !!!Exported domain and problem to {debug_export_dir}")
-
     return any_success, evaluated_plans, output_json
 
 

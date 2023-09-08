@@ -94,14 +94,16 @@ parser.add_argument("--external_operator_names", type=str, nargs="+", help="Init
 # Planner.
 parser.add_argument("--planner", type=str, default="task_planner_fd", help="Which planner to use.")
 parser.add_argument('--planner_timeout', type=int, default=None, help='timeout for the planner')
-parser.add_argument("--planner_minimum_n_operators", type=int, default=10, help="Minimum number of operators we can sample in a proposed library at any point.")
+parser.add_argument("--planner_minimum_n_operators", type=int, default=7, help="Minimum number of operators we can sample in a proposed library at any point.")
 parser.add_argument('--planner_run_second_pass', type=int, default=1, help='whether to run a second pass of the planner: 1 for yes, 0 for no')
 parser.add_argument("--motionplan_search_type", type=str, default="bfs", help="Which search type to use for motion planning: supports bfs or counter")
 
 
 # Scoring functions
-parser.add_argument("--operator_pseudocounts", type=int, default=0.1, help="Assume each operator succeeded at least this many times (MAP smoothing)")
-parser.add_argument("--operator_acceptance_threshold", type=float, default=0.1, help="After each iteration, we prune out operators that have less than this probability of success. We should remove the pseudocounted probabilities.")
+parser.add_argument("--operator_pseudocounts", type=float, default=0.1, help="Assume each operator succeeded at least this many times (MAP smoothing)")
+parser.add_argument("--operator_pseudocounts_denominator", type=float, default=0.1, help="Assume each operator succeeded at least this many times (MAP smoothing)")
+parser.add_argument("--operator_acceptance_threshold", type=float, default=0.5, help="After each iteration, we prune out operators that have less than this probability of success. We should remove the pseudocounted probabilities.")
+parser.add_argument('--conservative_library_proposal', action="store_true", help="If true, we instead now only take operators that have above the operator acceptance threshold, plan once, and then REPLAN if we can't solve the problem.")
 
 # Checkpoints and resume.
 parser.add_argument("--checkpoint_every_n_problem_plans", type=int, default=2, help="Write out results every n problems.")
@@ -162,7 +164,7 @@ def main():
 
     # Initialization. This initializes a set of goals (planning dataset), and a planning domain (a set of predicates + a partial set of initial operators.)
     pddl_domain = datasets.load_pddl_domain(args.pddl_domain_name, args.initial_pddl_operators, args.verbose)
-    pddl_domain.init_operators_to_scores(args.operator_pseudocounts)
+    pddl_domain.init_operators_to_scores(args.operator_pseudocounts, args.operator_pseudocounts_denominator)
 
     # Load planning dataset.
     planning_problems = datasets.load_planning_problems_dataset(
@@ -369,6 +371,8 @@ def _run_task_and_motion_plan(pddl_domain, problem_idx, problem_id, planning_pro
         resume_from_problem_idx=args.resume_from_problem_idx,
         debug_skip=args.debug_skip_task_plans,
         verbose=args.verbose,
+        conservative_library_proposal=args.conservative_library_proposal,
+        operator_acceptance_threshold=args.operator_acceptance_threshold,
     )
 
     if found_new_task_plan:

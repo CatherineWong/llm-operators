@@ -3,7 +3,7 @@ from tempfile import NamedTemporaryFile
 from pddlgym_planners.fd import FD
 from pddlgym_planners.planner import PlanningFailure, PlanningTimeout
 
-TASK_PLANNER_FD_DEFAULT_TIMEOUT = 10
+TASK_PLANNER_FD_DEFAULT_TIMEOUT = 3
 TASK_PLANNER_PDSKETCH_ONTHEFLY_DEFAULT_TIMEOUT = 10
 
 
