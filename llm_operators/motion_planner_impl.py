@@ -33,6 +33,15 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
     operator_sequence = task_plan_json["operator_sequence"]
     # This is the ground truth goal according to ALFRED.
     goal_ground_truth_predicates = task_plan_json["goal_ground_truth_predicates"]
+
+    # This is the goal that we actually planned for.
+    proposed_goal_predicates = [
+        p.to_json()
+        for p in PDDLPlan.get_predicates_from_goal_string(
+            pddl_goal_string=pddl_goal,
+        )
+    ]
+
     if debug_skip:
         return MotionPlanResult(
             pddl_plan=pruned_pddl_plan,
@@ -67,7 +76,7 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
             dataset_split=dataset_split,
             verbose=verbose,
             motionplan_search_type=motionplan_search_type,
-            proposed_goal_predicates=goal_ground_truth_predicates,
+            proposed_goal_predicates=proposed_goal_predicates,
         )
         return MotionPlanResult(
             pddl_plan=pruned_pddl_plan,
