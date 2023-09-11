@@ -891,6 +891,56 @@ class PDDLPlan:
                 )
             )
         return ground_predicates_list
+    
+    @classmethod
+    def get_predicates_from_goal_string(
+        cls,
+        pddl_goal_string,
+        ignore_predicates=[
+            "atLocation",
+            "objectAtLocation",
+            "holdsAny",
+            "objectType",
+            "receptacleType",
+            "holdsAnyReceptacleObject",
+        ],
+    ):
+        """
+        Extracts the ground truth goal from the original problem.
+
+        Returns a list of PDDLPredicates() that represents the goal of the overall motion plan.
+        The goal ground predicates should be in the same form as the predicates returned by the function
+        get_postcondition_predicates() and get_precondition_predicates.
+
+        Example Return Value:
+        [{
+            "predicate_name": "isHeated",
+            "arguments": "apple",
+            "isNeg": False
+        },
+        {
+            "predicate_name": "isSliced",
+            "arguments": "apple",
+            "isNeg": False
+        }]
+        """
+        goal_predicates_strings = PDDLProblem.parse_goal_pddl_list(pddl_goal_string=pddl_goal_string)
+        # PDDLPredicate list rather than list of strings.
+        ground_truth_goal_predicates = goal_predicates_string_to_predicates_list(goal_predicates_strings)
+        # Extract the ground truth goal map
+        ground_arguments_map = get_goal_ground_arguments_map(
+            ground_truth_goal_predicates, type_predicates=["objectType", "receptacleType"]
+        )
+        ground_goal_predicates = PDDLPlan.get_ground_predicates(
+            pddl_action=None,
+            ordered_parameter_keys=None,
+            lifted_predicates_list=ground_truth_goal_predicates,
+            ignore_predicates=ignore_predicates,
+            remove_alfred_agent=True,
+            remove_alfred_object_ids=False,
+            ground_arguments_map=ground_arguments_map,
+        )
+        return ground_goal_predicates
 
     @classmethod
     def get_goal_ground_truth_predicates(
