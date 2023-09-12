@@ -1149,7 +1149,8 @@ class PDDLProblem:
         pddl_problem = PDDLParser._purge_comments(pddl_problem)
         return PDDLParser._find_labelled_expression(pddl_problem, ":goal")
 
-    def parse_goal_pddl_list(self, pddl_goal_string):
+    @classmethod
+    def parse_goal_pddl_list(cls, pddl_goal_string):
         goal_conjunction = PDDLParser._find_labelled_expression(pddl_goal_string, "and")
         _, preprocessed_predicates, _ = preprocess_conjunction_predicates(
             goal_conjunction,

@@ -4,11 +4,12 @@
 (:requirements :adl)
 
 (:types 
-				agent location receptacle object rtype otype
+	agent location receptacle object rtype otype
 )
 
 ;; otype: object types.
 (:otype
+        GraterType - otype
         CandleType - otype
         ShowerGlassType - otype
         CDType - otype
@@ -31,7 +32,7 @@
         EggType - otype
         PenType - otype
         ForkType - otype
-				WhiskType - otype
+		WhiskType - otype
         VaseType - otype
         ClothType - otype
         WindowType - otype
@@ -124,7 +125,7 @@
 
 ;; Predicates defined on this domain. Note the types for each predicate.
 (:predicates
-				(atLocation ?a - agent ?l - location) 
+		(atLocation ?a - agent ?l - location) 
         (receptacleAtLocation ?r - receptacle ?l - location) 
         (objectAtLocation ?o - object ?l - location)
         (inReceptacle ?o - object ?r - receptacle) 
@@ -134,19 +135,24 @@
         (holdsAny ?a - agent) 
         (holdsAnyReceptacleObject ?a - agent) 
         
-				(openable ?r - receptacle) 
+        (fillable ?r - receptacle)
+        (isFilled ?r - receptacle) 
+	    (openable ?r - receptacle) 
         (opened ?r - receptacle) 
         (isClean ?o - object) 
-        (cleanable ?o - object) 
+        (cleanable ?o - object)
+        (restartable ?o - object)
+        (isRestarted ?o - object) 
         (isHot ?o - object) 
         (heatable ?o - object) 
         (isCool ?o - object) 
         (coolable ?o - object) 
-        (toggleable ?o - object) 
-        (isOn ?o - object) 
+        (toggleable ?o - object)  
         (isToggled ?o - object) 
         (sliceable ?o - object) 
-        (isSliced ?o - object) 
+        (isSliced ?o - object)
+        (gratable ?o - object)
+        (isGrated ?o - object) 
  )
 
 ;; Operators defined given the object types, receptacle types, and predicates.
