@@ -927,19 +927,24 @@ class PDDLPlan:
         goal_predicates_strings = PDDLProblem.parse_goal_pddl_list(pddl_goal_string=pddl_goal_string)
         # PDDLPredicate list rather than list of strings.
         ground_truth_goal_predicates = goal_predicates_string_to_predicates_list(goal_predicates_strings)
+        if len(ground_truth_goal_predicates) == 0:
+            return []
         # Extract the ground truth goal map
         ground_arguments_map = get_goal_ground_arguments_map(
             ground_truth_goal_predicates, type_predicates=["objectType", "receptacleType"]
         )
-        ground_goal_predicates = PDDLPlan.get_ground_predicates(
-            pddl_action=None,
-            ordered_parameter_keys=None,
-            lifted_predicates_list=ground_truth_goal_predicates,
-            ignore_predicates=ignore_predicates,
-            remove_alfred_agent=True,
-            remove_alfred_object_ids=False,
-            ground_arguments_map=ground_arguments_map,
-        )
+        try:
+            ground_goal_predicates = PDDLPlan.get_ground_predicates(
+                pddl_action=None,
+                ordered_parameter_keys=None,
+                lifted_predicates_list=ground_truth_goal_predicates,
+                ignore_predicates=ignore_predicates,
+                remove_alfred_agent=True,
+                remove_alfred_object_ids=False,
+                ground_arguments_map=ground_arguments_map,
+            )
+        except:
+            return []
         return ground_goal_predicates
 
     @classmethod
@@ -1785,6 +1790,8 @@ def preprocess_conjunction_predicates(
 
 def goal_predicates_string_to_predicates_list(goal_predicates_list, allow_partial_ground_predicates=True):
     predicates = []
+    if goal_predicates_list is None:
+        return predicates
     for pred_string in goal_predicates_list:
         patt = r"\(not(.*)\)"
         not_match = re.match(patt, pred_string, re.DOTALL)
