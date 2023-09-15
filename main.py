@@ -329,20 +329,20 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
                     args=args, curr_iteration=curr_iteration, output_directory=output_directory,
                     plan_pass_identifier='first',
                     plan_attempt_idx=0, goal_idx=0, rng=rng)
-
-        for plan_attempt_idx in range(args.n_attempts_to_plan):
-            for goal_idx in range(len(planning_problems['train'][problem_id].proposed_pddl_goals)):
-                any_motion_plan_success = _run_task_and_motion_plan(
-                    pddl_domain, problem_idx, problem_id, planning_problems,
-                    args=args, curr_iteration=curr_iteration, output_directory=output_directory,
-                    plan_pass_identifier='first',
-                    plan_attempt_idx=plan_attempt_idx, goal_idx=goal_idx, rng=rng
-                )
-                if any_motion_plan_success:
+        else:
+            for plan_attempt_idx in range(args.n_attempts_to_plan):
+                for goal_idx in range(len(planning_problems['train'][problem_id].proposed_pddl_goals)):
+                    any_motion_plan_success = _run_task_and_motion_plan(
+                        pddl_domain, problem_idx, problem_id, planning_problems,
+                        args=args, curr_iteration=curr_iteration, output_directory=output_directory,
+                        plan_pass_identifier='first',
+                        plan_attempt_idx=plan_attempt_idx, goal_idx=goal_idx, rng=rng
+                    )
+                    if any_motion_plan_success:
+                        break
+                if len(planning_problems['train'][problem_id].solved_motion_plan_results) > 0:
+                    # If we have already found a motion plan, then we don't need to try to replan.
                     break
-            if len(planning_problems['train'][problem_id].solved_motion_plan_results) > 0:
-                # If we have already found a motion plan, then we don't need to try to replan.
-                break
 
         # Checkpoint operators, only reset if we're at the end of the iteration.
         finished_epoch = problem_idx == len(planning_problems["train"]) - 1
