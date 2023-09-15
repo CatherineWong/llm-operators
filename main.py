@@ -16,6 +16,8 @@ import os.path as osp
 import sys
 import numpy as np
 
+from llm_operators import baselines
+
 # Import ALFRED.
 ALFRED_PATH = osp.join(osp.dirname(osp.abspath(__file__)), "alfred")
 print("Adding ALFRED path: {}".format(ALFRED_PATH))
@@ -110,6 +112,10 @@ parser.add_argument("--checkpoint_every_n_problem_plans", type=int, default=2, h
 parser.add_argument('--resume', action='store_true', help='resume from whatever was last saved')
 parser.add_argument("--resume_from_iteration", type=int, default=0, help="Resume from checkpoint at this iteration")
 parser.add_argument("--resume_from_problem_idx", type=int, default=0, help="Resume from checkpoint at this problem")
+
+# Baselines.
+parser.add_argument("--llm_propose_task_predicates", action='store_true', help="Implements a baseline in which the LLM directly proposes the task predicates.")
+parser.add_argument("--external_task_predicates_supervision", type=str, default=None, help="If provided, file containing initial plans that will be provided as supervision.")
 
 ########################################
 
@@ -265,6 +271,26 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
             verbose=args.verbose,
         )
 
+        if args.llm_propose_task_predicates:
+            # Task predicates baseline. 
+            codex.propose_task_predicates_for_problems(
+                problems=planning_problems["train"],
+                domain=pddl_domain,
+                n_samples=args.n_plan_samples,
+                temperature=args.codex_plan_temperature,
+                command_args=args,
+                output_directory=output_directory,
+                resume=args.resume,
+                verbose=args.verbose,
+                external_task_predicates_supervision=args.external_task_predicates_supervision
+            )
+            pddl.preprocess_task_predicates(
+                problems=planning_problems["train"],
+                pddl_domain=pddl_domain,
+                output_directory=output_directory,
+                command_args=args,
+                verbose=args.verbose,
+            )
     if args.debug_stop_after_first_proposal:
         return True
 
@@ -296,6 +322,13 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
             args.debug_skip_problems is not None and problem_idx in args.debug_skip_problems
         ):
             continue
+
+        if args.llm_propose_task_predicates:
+            # Just run the motion planner directly.
+            any_motion_plan_success = baselines._run_llm_propose_task_predicates_motion_planner(pddl_domain, problem_idx, problem_id, planning_problems,
+                    args=args, curr_iteration=curr_iteration, output_directory=output_directory,
+                    plan_pass_identifier='first',
+                    plan_attempt_idx=0, goal_idx=0, rng=rng)
 
         for plan_attempt_idx in range(args.n_attempts_to_plan):
             for goal_idx in range(len(planning_problems['train'][problem_id].proposed_pddl_goals)):
@@ -395,6 +428,7 @@ def _run_task_and_motion_plan(pddl_domain, problem_idx, problem_id, planning_pro
             resume_from_problem_idx=args.resume_from_problem_idx,
             debug_skip=args.debug_skip_motion_plans,
             verbose=args.verbose,
+            llm_propose_task_predicates=args.llm_propose_task_predicates # Baseline -- we skip task proposal if so.
         )
         # Update the global operator scores from the problem.
         pddl.update_pddl_domain_and_problem(

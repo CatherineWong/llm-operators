@@ -1,0 +1,218 @@
+;; You are a software engineer who will be writing plan definitions for a robot in the PDDL planning language.
+;; Predicates defined on this domain. Note the types for each predicate.
+(:predicates
+		(atLocation ?a - agent ?l - location) 
+        (receptacleAtLocation ?r - receptacle ?l - location) 
+        (objectAtLocation ?o - object ?l - location)
+        (inReceptacle ?o - object ?r - receptacle) 
+        (receptacleType ?r - receptacle ?t - rtype) 
+        (objectType ?o - object ?t - otype) 
+        (holds ?a - agent ?o - object) 
+        (holdsAny ?a - agent) 
+        (holdsAnyReceptacleObject ?a - agent) 
+        
+        (fillable ?r - receptacle)
+        (isFilled ?r - receptacle) 
+	    (openable ?r - receptacle) 
+        (opened ?r - receptacle) 
+        (isClean ?o - object) 
+        (cleanable ?o - object)
+        (restartable ?o - object)
+        (isRestarted ?o - object) 
+        (isHot ?o - object) 
+        (heatable ?o - object) 
+        (isCool ?o - object) 
+        (coolable ?o - object) 
+        (toggleable ?o - object)  
+        (isToggled ?o - object) 
+        (sliceable ?o - object) 
+        (isSliced ?o - object)
+        (gratable ?o - object)
+        (isGrated ?o - object) 
+ )
+
+;; Example translations from natural language to a simplified goal name, and then a PDDL plan. A PDDL plan is a sequence of actions in JSON that specifies the preconditions and post conditions of an action. 
+;; Notice that PDDL plans MUST only use predicates, object types, and receptacle types exactly as they appear in the domain above. People may also have been unclear about which objects and actions they were talking about, so we list multiple possible guesses for goal if there is uncertainty over what they meant.
+;; PDDL plans should be based on an actual PDDL domain file.
+;; Human written natural language goal.
+move a grated and baked potato to the microwave.
+;; Problem specific initial information.
+(:init
+        (receptacleType DiningTable__minus_11_dot_476_comma__minus_11_dot_476_comma__minus_2_dot_024_comma__minus_2_dot_024_comma_2_dot_708_comma_2_dot_708 DiningTableType)
+        (receptacleType Microwave__minus_0_dot_576_comma__minus_0_dot_576_comma__minus_3_dot_632_comma__minus_3_dot_632_comma_3_dot_615618228_comma_3_dot_615618228 MicrowaveType)
+        (receptacleType CoffeeMachine__minus_12_dot_416_comma__minus_12_dot_416_comma__minus_0_dot_74_comma__minus_0_dot_74_comma_2_dot_828_comma_2_dot_828 CoffeeMachineType)
+        (receptacleType Cabinet__minus_2_dot_3084752_comma__minus_2_dot_3084752_comma__minus_13_dot_90670492_comma__minus_13_dot_90670492_comma_1_dot_5553788_comma_1_dot_5553788 CabinetType)
+        (receptacleType Cabinet__minus_2_dot_4238228_comma__minus_2_dot_4238228_comma__minus_14_dot_046504_comma__minus_14_dot_046504_comma_1_dot_555379032_comma_1_dot_555379032 CabinetType)
+        (receptacleType Cabinet__minus_11_dot_90636064_comma__minus_11_dot_90636064_comma__minus_12_dot_8052864_comma__minus_12_dot_8052864_comma_1_dot_5553792_comma_1_dot_5553792 CabinetType)
+        (receptacleType Cabinet__minus_2_dot_308474_comma__minus_2_dot_308474_comma__minus_1_dot_789732216_comma__minus_1_dot_789732216_comma_1_dot_555380464_comma_1_dot_555380464 CabinetType)
+        (receptacleType Cabinet__minus_2_dot_3084748_comma__minus_2_dot_3084748_comma__minus_6_dot_90270044_comma__minus_6_dot_90270044_comma_1_dot_555380104_comma_1_dot_555380104 CabinetType)
+        (receptacleType Cabinet__minus_12_dot_088048_comma__minus_12_dot_088048_comma__minus_10_dot_725012_comma__minus_10_dot_725012_comma_8_dot_39263056_comma_8_dot_39263056 CabinetType)
+        (receptacleType Cabinet__minus_12_dot_088048_comma__minus_12_dot_088048_comma__minus_6_dot_972748_comma__minus_6_dot_972748_comma_8_dot_392632_comma_8_dot_392632 CabinetType)
+        (receptacleType Cabinet__minus_2_dot_3084744_comma__minus_2_dot_3084744_comma__minus_10_dot_945648_comma__minus_10_dot_945648_comma_1_dot_5553792_comma_1_dot_5553792 CabinetType)
+        (receptacleType Cabinet__minus_11_dot_24524976_comma__minus_11_dot_24524976_comma__minus_15_dot_057732_comma__minus_15_dot_057732_comma_7_dot_240632_comma_7_dot_240632 CabinetType)
+        (receptacleType Cabinet__minus_4_dot_93218136_comma__minus_4_dot_93218136_comma__minus_15_dot_057732_comma__minus_15_dot_057732_comma_7_dot_240632_comma_7_dot_240632 CabinetType)
+        (receptacleType Cabinet__minus_5_dot_45704316_comma__minus_5_dot_45704316_comma__minus_14_dot_04650496_comma__minus_14_dot_04650496_comma_1_dot_555379032_comma_1_dot_555379032 CabinetType)
+        (receptacleType Cabinet__minus_5_dot_52184964_comma__minus_5_dot_52184964_comma__minus_14_dot_046504_comma__minus_14_dot_046504_comma_1_dot_555379032_comma_1_dot_555379032 CabinetType)
+        (receptacleType Cabinet__minus_0_dot_946940124_comma__minus_0_dot_946940124_comma__minus_7_dot_070028_comma__minus_7_dot_070028_comma_8_dot_392632_comma_8_dot_392632 CabinetType)
+        (receptacleType Cabinet__minus_0_dot_946940124_comma__minus_0_dot_946940124_comma__minus_10_dot_82229328_comma__minus_10_dot_82229328_comma_8_dot_39263056_comma_8_dot_39263056 CabinetType)
+        (receptacleType Cabinet__minus_0_dot_772_comma__minus_0_dot_772_comma__minus_16_dot_96_comma__minus_16_dot_96_comma_4_dot_84_comma_4_dot_84 CabinetType)
+        (receptacleType Cabinet__minus_8_dot_59485912_comma__minus_8_dot_59485912_comma__minus_14_dot_04650496_comma__minus_14_dot_04650496_comma_1_dot_555379032_comma_1_dot_555379032 CabinetType)
+        (receptacleType CounterTop__minus_7_dot_16_comma__minus_7_dot_16_comma__minus_15_dot_216_comma__minus_15_dot_216_comma_3_dot_7968_comma_3_dot_7968 CounterTopType)
+        (receptacleType CounterTop__minus_1_dot_076_comma__minus_1_dot_076_comma__minus_4_dot_3592_comma__minus_4_dot_3592_comma_3_dot_806_comma_3_dot_806 CounterTopType)
+        (receptacleType SinkBasin__minus_7_dot_1452_comma__minus_7_dot_1452_comma__minus_14_dot_9888_comma__minus_14_dot_9888_comma_3_dot_12_comma_3_dot_12 SinkBasinType)
+        (receptacleType Fridge__minus_12_dot_75556944_comma__minus_12_dot_75556944_comma__minus_8_dot_74_comma__minus_8_dot_74_comma_0_dot_0_comma_0_dot_0 FridgeType)
+        (receptacleType StoveBurner__minus_1_dot_5068_comma__minus_1_dot_5068_comma__minus_9_dot_8052_comma__minus_9_dot_8052_comma_3_dot_7468_comma_3_dot_7468 StoveBurnerType)
+        (receptacleType StoveBurner__minus_1_dot_5068_comma__minus_1_dot_5068_comma__minus_8_dot_1256_comma__minus_8_dot_1256_comma_3_dot_7468_comma_3_dot_7468 StoveBurnerType)
+        (receptacleType StoveBurner__minus_0_dot_6612_comma__minus_0_dot_6612_comma__minus_8_dot_1236_comma__minus_8_dot_1236_comma_3_dot_7468_comma_3_dot_7468 StoveBurnerType)
+        (receptacleType StoveBurner__minus_0_dot_6612_comma__minus_0_dot_6612_comma__minus_9_dot_8032_comma__minus_9_dot_8032_comma_3_dot_7468_comma_3_dot_7468 StoveBurnerType)
+        (receptacleType GarbageCan__minus_1_dot_136_comma__minus_1_dot_136_comma__minus_0_dot_14_comma__minus_0_dot_14_comma_0_dot_0001941937516_comma_0_dot_0001941937516 GarbageCanType)
+        (objectType Grater__minus_4_dot_23550844_comma__minus_4_dot_23550844_comma__minus_14_dot_62302972_comma__minus_14_dot_62302972_comma_3_dot_78454852_comma_3_dot_78454852 KnifeType)
+        (objectType Grater__minus_12_dot_90014744_comma__minus_12_dot_90014744_comma__minus_11_dot_30237772_comma__minus_11_dot_30237772_comma_3_dot_78454852_comma_3_dot_78454852 KnifeType)
+        (objectType ButterKnife__minus_0_dot_705183864_comma__minus_0_dot_705183864_comma__minus_6_dot_22003556_comma__minus_6_dot_22003556_comma_3_dot_6641684_comma_3_dot_6641684 ButterKnifeType)
+        (objectType Potato__minus_10_dot_89444924_comma__minus_10_dot_89444924_comma__minus_2_dot_484_comma__minus_2_dot_484_comma_3_dot_031356572_comma_3_dot_031356572 PotatoType)
+        (openable Microwave__minus_0_dot_576_comma__minus_0_dot_576_comma__minus_3_dot_632_comma__minus_3_dot_632_comma_3_dot_615618228_comma_3_dot_615618228)
+        (openable Cabinet__minus_2_dot_3084752_comma__minus_2_dot_3084752_comma__minus_13_dot_90670492_comma__minus_13_dot_90670492_comma_1_dot_5553788_comma_1_dot_5553788)
+        (openable Cabinet__minus_2_dot_4238228_comma__minus_2_dot_4238228_comma__minus_14_dot_046504_comma__minus_14_dot_046504_comma_1_dot_555379032_comma_1_dot_555379032)
+        (openable Cabinet__minus_11_dot_90636064_comma__minus_11_dot_90636064_comma__minus_12_dot_8052864_comma__minus_12_dot_8052864_comma_1_dot_5553792_comma_1_dot_5553792)
+        (openable Cabinet__minus_2_dot_308474_comma__minus_2_dot_308474_comma__minus_1_dot_789732216_comma__minus_1_dot_789732216_comma_1_dot_555380464_comma_1_dot_555380464)
+        (openable Cabinet__minus_2_dot_3084748_comma__minus_2_dot_3084748_comma__minus_6_dot_90270044_comma__minus_6_dot_90270044_comma_1_dot_555380104_comma_1_dot_555380104)
+        (openable Cabinet__minus_0_dot_905916036_comma__minus_0_dot_905916036_comma__minus_6_dot_97341824_comma__minus_6_dot_97341824_comma_7_dot_2151456_comma_7_dot_2151456)
+        (openable Cabinet__minus_0_dot_912821888_comma__minus_0_dot_912821888_comma__minus_1_dot_791858912_comma__minus_1_dot_791858912_comma_7_dot_2_comma_7_dot_2)
+        (openable Cabinet__minus_24_dot_04_comma__minus_24_dot_04_comma__minus_24_dot_08_comma__minus_24_dot_08_comma_4_dot_56_comma_4_dot_56)
+        (openable Cabinet__minus_12_dot_088048_comma__minus_12_dot_088048_comma__minus_10_dot_725012_comma__minus_10_dot_725012_comma_8_dot_39263056_comma_8_dot_39263056)
+        (openable Cabinet__minus_12_dot_088048_comma__minus_12_dot_088048_comma__minus_6_dot_972748_comma__minus_6_dot_972748_comma_8_dot_392632_comma_8_dot_392632)
+        (openable Cabinet__minus_2_dot_3084744_comma__minus_2_dot_3084744_comma__minus_10_dot_945648_comma__minus_10_dot_945648_comma_1_dot_5553792_comma_1_dot_5553792)
+        (openable Cabinet__minus_12_dot_93009092_comma__minus_12_dot_93009092_comma__minus_13_dot_3734188_comma__minus_13_dot_3734188_comma_7_dot_21514464_comma_7_dot_21514464)
+        (openable Cabinet__minus_11_dot_24524976_comma__minus_11_dot_24524976_comma__minus_15_dot_057732_comma__minus_15_dot_057732_comma_7_dot_240632_comma_7_dot_240632)
+        (openable Cabinet__minus_4_dot_93218136_comma__minus_4_dot_93218136_comma__minus_15_dot_057732_comma__minus_15_dot_057732_comma_7_dot_240632_comma_7_dot_240632)
+        (openable Cabinet__minus_5_dot_45704316_comma__minus_5_dot_45704316_comma__minus_14_dot_04650496_comma__minus_14_dot_04650496_comma_1_dot_555379032_comma_1_dot_555379032)
+        (openable Cabinet__minus_5_dot_52184964_comma__minus_5_dot_52184964_comma__minus_14_dot_046504_comma__minus_14_dot_046504_comma_1_dot_555379032_comma_1_dot_555379032)
+        (openable Cabinet__minus_0_dot_905916036_comma__minus_0_dot_905916036_comma__minus_10_dot_90311528_comma__minus_10_dot_90311528_comma_7_dot_21514464_comma_7_dot_21514464)
+        (openable Cabinet__minus_0_dot_946940124_comma__minus_0_dot_946940124_comma__minus_7_dot_070028_comma__minus_7_dot_070028_comma_8_dot_392632_comma_8_dot_392632)
+        (openable Cabinet__minus_0_dot_946940124_comma__minus_0_dot_946940124_comma__minus_10_dot_82229328_comma__minus_10_dot_82229328_comma_8_dot_39263056_comma_8_dot_39263056)
+        (openable Cabinet__minus_0_dot_772_comma__minus_0_dot_772_comma__minus_16_dot_96_comma__minus_16_dot_96_comma_4_dot_84_comma_4_dot_84)
+        (openable Cabinet__minus_8_dot_59485912_comma__minus_8_dot_59485912_comma__minus_14_dot_04650496_comma__minus_14_dot_04650496_comma_1_dot_555379032_comma_1_dot_555379032)
+        (openable Drawer__minus_12_dot_417792_comma__minus_12_dot_417792_comma__minus_11_dot_87546732_comma__minus_11_dot_87546732_comma_3_dot_1910056_comma_3_dot_1910056)
+        (openable Drawer__minus_1_dot_797044_comma__minus_1_dot_797044_comma__minus_5_dot_64035368_comma__minus_5_dot_64035368_comma_3_dot_19100666_comma_3_dot_19100666)
+        (openable Drawer__minus_1_dot_797044_comma__minus_1_dot_797044_comma__minus_3_dot_048515796_comma__minus_3_dot_048515796_comma_3_dot_1910068_comma_3_dot_1910068)
+        (openable Drawer__minus_1_dot_7970448_comma__minus_1_dot_7970448_comma__minus_13_dot_39242076_comma__minus_13_dot_39242076_comma_3_dot_191005468_comma_3_dot_191005468)
+        (openable Drawer__minus_1_dot_797044_comma__minus_1_dot_797044_comma__minus_11_dot_87546732_comma__minus_11_dot_87546732_comma_3_dot_1910056_comma_3_dot_1910056)
+        (openable Fridge__minus_12_dot_75556944_comma__minus_12_dot_75556944_comma__minus_8_dot_74_comma__minus_8_dot_74_comma_0_dot_0_comma_0_dot_0)
+        (atLocation agent1 loc_bar__minus_5_bar__minus_2_bar_0_bar_30)
+        (cleanable Grater__minus_4_dot_23550844_comma__minus_4_dot_23550844_comma__minus_14_dot_62302972_comma__minus_14_dot_62302972_comma_3_dot_78454852_comma_3_dot_78454852)
+        (cleanable Grater__minus_12_dot_90014744_comma__minus_12_dot_90014744_comma__minus_11_dot_30237772_comma__minus_11_dot_30237772_comma_3_dot_78454852_comma_3_dot_78454852)
+        (cleanable ButterKnife__minus_0_dot_705183864_comma__minus_0_dot_705183864_comma__minus_6_dot_22003556_comma__minus_6_dot_22003556_comma_3_dot_6641684_comma_3_dot_6641684)   
+        (heatable Potato__minus_10_dot_89444924_comma__minus_10_dot_89444924_comma__minus_2_dot_484_comma__minus_2_dot_484_comma_3_dot_031356572_comma_3_dot_031356572)
+        (coolable Potato__minus_10_dot_89444924_comma__minus_10_dot_89444924_comma__minus_2_dot_484_comma__minus_2_dot_484_comma_3_dot_031356572_comma_3_dot_031356572) 
+        (gratable Potato__minus_10_dot_89444924_comma__minus_10_dot_89444924_comma__minus_2_dot_484_comma__minus_2_dot_484_comma_3_dot_031356572_comma_3_dot_031356572)
+        (inReceptacle ButterKnife__minus_0_dot_705183864_comma__minus_0_dot_705183864_comma__minus_6_dot_22003556_comma__minus_6_dot_22003556_comma_3_dot_6641684_comma_3_dot_6641684 CounterTop__minus_1_dot_076_comma__minus_1_dot_076_comma__minus_4_dot_3592_comma__minus_4_dot_3592_comma_3_dot_806_comma_3_dot_806)
+        (inReceptacle Potato__minus_10_dot_89444924_comma__minus_10_dot_89444924_comma__minus_2_dot_484_comma__minus_2_dot_484_comma_3_dot_031356572_comma_3_dot_031356572 DiningTable__minus_11_dot_476_comma__minus_11_dot_476_comma__minus_2_dot_024_comma__minus_2_dot_024_comma_2_dot_708_comma_2_dot_708)
+        (inReceptacle Grater__minus_12_dot_90014744_comma__minus_12_dot_90014744_comma__minus_11_dot_30237772_comma__minus_11_dot_30237772_comma_3_dot_78454852_comma_3_dot_78454852 CounterTop__minus_7_dot_16_comma__minus_7_dot_16_comma__minus_15_dot_216_comma__minus_15_dot_216_comma_3_dot_7968_comma_3_dot_7968)
+        (inReceptacle Grater__minus_4_dot_23550844_comma__minus_4_dot_23550844_comma__minus_14_dot_62302972_comma__minus_14_dot_62302972_comma_3_dot_78454852_comma_3_dot_78454852 CounterTop__minus_7_dot_16_comma__minus_7_dot_16_comma__minus_15_dot_216_comma__minus_15_dot_216_comma_3_dot_7968_comma_3_dot_7968)
+        (wasInReceptacle  Potato__minus_10_dot_89444924_comma__minus_10_dot_89444924_comma__minus_2_dot_484_comma__minus_2_dot_484_comma_3_dot_031356572_comma_3_dot_031356572 DiningTable__minus_11_dot_476_comma__minus_11_dot_476_comma__minus_2_dot_024_comma__minus_2_dot_024_comma_2_dot_708_comma_2_dot_708)
+        (receptacleAtLocation DiningTable__minus_11_dot_476_comma__minus_11_dot_476_comma__minus_2_dot_024_comma__minus_2_dot_024_comma_2_dot_708_comma_2_dot_708 loc_bar__minus_11_bar__minus_6_bar_0_bar_45)
+        (receptacleAtLocation Microwave__minus_0_dot_576_comma__minus_0_dot_576_comma__minus_3_dot_632_comma__minus_3_dot_632_comma_3_dot_615618228_comma_3_dot_615618228 loc_bar__minus_4_bar__minus_3_bar_1_bar_45)
+        (receptacleAtLocation CoffeeMachine__minus_12_dot_416_comma__minus_12_dot_416_comma__minus_0_dot_74_comma__minus_0_dot_74_comma_2_dot_828_comma_2_dot_828 loc_bar__minus_8_bar__minus_1_bar_3_bar_45)
+        (receptacleAtLocation Cabinet__minus_2_dot_3084752_comma__minus_2_dot_3084752_comma__minus_13_dot_90670492_comma__minus_13_dot_90670492_comma_1_dot_5553788_comma_1_dot_5553788 loc_bar__minus_6_bar__minus_12_bar_1_bar_60)
+        (receptacleAtLocation Cabinet__minus_2_dot_4238228_comma__minus_2_dot_4238228_comma__minus_14_dot_046504_comma__minus_14_dot_046504_comma_1_dot_555379032_comma_1_dot_555379032 loc_bar__minus_5_bar__minus_10_bar_2_bar_45)
+        (receptacleAtLocation Cabinet__minus_11_dot_90636064_comma__minus_11_dot_90636064_comma__minus_12_dot_8052864_comma__minus_12_dot_8052864_comma_1_dot_5553792_comma_1_dot_5553792 loc_bar__minus_11_bar__minus_13_bar_3_bar_60)
+        (receptacleAtLocation Cabinet__minus_2_dot_308474_comma__minus_2_dot_308474_comma__minus_1_dot_789732216_comma__minus_1_dot_789732216_comma_1_dot_555380464_comma_1_dot_555380464 loc_bar__minus_6_bar__minus_2_bar_1_bar_60)
+        (receptacleAtLocation Cabinet__minus_2_dot_3084748_comma__minus_2_dot_3084748_comma__minus_6_dot_90270044_comma__minus_6_dot_90270044_comma_1_dot_555380104_comma_1_dot_555380104 loc_bar__minus_7_bar__minus_4_bar_1_bar_45)
+        (receptacleAtLocation Cabinet__minus_0_dot_905916036_comma__minus_0_dot_905916036_comma__minus_6_dot_97341824_comma__minus_6_dot_97341824_comma_7_dot_2151456_comma_7_dot_2151456 loc_bar__minus_4_bar__minus_7_bar_1_bar__minus_15)
+        (receptacleAtLocation Cabinet__minus_0_dot_912821888_comma__minus_0_dot_912821888_comma__minus_1_dot_791858912_comma__minus_1_dot_791858912_comma_7_dot_2_comma_7_dot_2 loc_bar__minus_4_bar__minus_2_bar_1_bar__minus_15)
+        (receptacleAtLocation Cabinet__minus_24_dot_04_comma__minus_24_dot_04_comma__minus_24_dot_08_comma__minus_24_dot_08_comma_4_dot_56_comma_4_dot_56 loc_bar__minus_11_bar__minus_13_bar_3_bar_15)
+        (receptacleAtLocation Cabinet__minus_12_dot_088048_comma__minus_12_dot_088048_comma__minus_10_dot_725012_comma__minus_10_dot_725012_comma_8_dot_39263056_comma_8_dot_39263056 loc_bar__minus_8_bar__minus_11_bar_3_bar__minus_30)
+        (receptacleAtLocation Cabinet__minus_12_dot_088048_comma__minus_12_dot_088048_comma__minus_6_dot_972748_comma__minus_6_dot_972748_comma_8_dot_392632_comma_8_dot_392632 loc_bar__minus_8_bar__minus_9_bar_3_bar__minus_30)
+        (receptacleAtLocation Cabinet__minus_2_dot_3084744_comma__minus_2_dot_3084744_comma__minus_10_dot_945648_comma__minus_10_dot_945648_comma_1_dot_5553792_comma_1_dot_5553792 loc_bar__minus_6_bar__minus_13_bar_1_bar_60)
+        (receptacleAtLocation Cabinet__minus_12_dot_93009092_comma__minus_12_dot_93009092_comma__minus_13_dot_3734188_comma__minus_13_dot_3734188_comma_7_dot_21514464_comma_7_dot_21514464 loc_bar__minus_11_bar__minus_13_bar_3_bar__minus_15)
+        (receptacleAtLocation Cabinet__minus_11_dot_24524976_comma__minus_11_dot_24524976_comma__minus_15_dot_057732_comma__minus_15_dot_057732_comma_7_dot_240632_comma_7_dot_240632 loc_bar__minus_9_bar__minus_12_bar_2_bar__minus_15)
+        (receptacleAtLocation Cabinet__minus_4_dot_93218136_comma__minus_4_dot_93218136_comma__minus_15_dot_057732_comma__minus_15_dot_057732_comma_7_dot_240632_comma_7_dot_240632 loc_bar__minus_4_bar__minus_13_bar_2_bar__minus_15)
+        (receptacleAtLocation Cabinet__minus_5_dot_45704316_comma__minus_5_dot_45704316_comma__minus_14_dot_04650496_comma__minus_14_dot_04650496_comma_1_dot_555379032_comma_1_dot_555379032 loc_bar__minus_4_bar__minus_10_bar_2_bar_45)
+        (receptacleAtLocation Cabinet__minus_5_dot_52184964_comma__minus_5_dot_52184964_comma__minus_14_dot_046504_comma__minus_14_dot_046504_comma_1_dot_555379032_comma_1_dot_555379032 loc_bar__minus_8_bar__minus_10_bar_2_bar_45)
+        (receptacleAtLocation Cabinet__minus_0_dot_905916036_comma__minus_0_dot_905916036_comma__minus_10_dot_90311528_comma__minus_10_dot_90311528_comma_7_dot_21514464_comma_7_dot_21514464 loc_bar__minus_4_bar__minus_10_bar_1_bar__minus_15)
+        (receptacleAtLocation Cabinet__minus_0_dot_946940124_comma__minus_0_dot_946940124_comma__minus_7_dot_070028_comma__minus_7_dot_070028_comma_8_dot_392632_comma_8_dot_392632 loc_bar__minus_4_bar__minus_7_bar_1_bar__minus_30)
+        (receptacleAtLocation Cabinet__minus_0_dot_946940124_comma__minus_0_dot_946940124_comma__minus_10_dot_82229328_comma__minus_10_dot_82229328_comma_8_dot_39263056_comma_8_dot_39263056 loc_bar__minus_4_bar__minus_10_bar_1_bar__minus_30)
+        (receptacleAtLocation Cabinet__minus_0_dot_772_comma__minus_0_dot_772_comma__minus_16_dot_96_comma__minus_16_dot_96_comma_4_dot_84_comma_4_dot_84 loc_bar__minus_5_bar__minus_13_bar_1_bar_30)
+        (receptacleAtLocation Cabinet__minus_8_dot_59485912_comma__minus_8_dot_59485912_comma__minus_14_dot_04650496_comma__minus_14_dot_04650496_comma_1_dot_555379032_comma_1_dot_555379032 loc_bar__minus_7_bar__minus_10_bar_2_bar_45)
+        (receptacleAtLocation CounterTop__minus_7_dot_16_comma__minus_7_dot_16_comma__minus_15_dot_216_comma__minus_15_dot_216_comma_3_dot_7968_comma_3_dot_7968 loc_bar__minus_4_bar__minus_13_bar_3_bar_45)
+        (receptacleAtLocation CounterTop__minus_1_dot_076_comma__minus_1_dot_076_comma__minus_4_dot_3592_comma__minus_4_dot_3592_comma_3_dot_806_comma_3_dot_806 loc_bar__minus_4_bar__minus_5_bar_1_bar_45)
+        (receptacleAtLocation SinkBasin__minus_7_dot_1452_comma__minus_7_dot_1452_comma__minus_14_dot_9888_comma__minus_14_dot_9888_comma_3_dot_12_comma_3_dot_12 loc_bar__minus_7_bar__minus_13_bar_2_bar_60)
+        (receptacleAtLocation Drawer__minus_12_dot_417792_comma__minus_12_dot_417792_comma__minus_11_dot_87546732_comma__minus_11_dot_87546732_comma_3_dot_1910056_comma_3_dot_1910056 loc_bar__minus_11_bar__minus_12_bar_3_bar_60)
+        (receptacleAtLocation Drawer__minus_1_dot_797044_comma__minus_1_dot_797044_comma__minus_5_dot_64035368_comma__minus_5_dot_64035368_comma_3_dot_19100666_comma_3_dot_19100666 loc_bar__minus_4_bar__minus_6_bar_1_bar_60)
+        (receptacleAtLocation Drawer__minus_1_dot_797044_comma__minus_1_dot_797044_comma__minus_3_dot_048515796_comma__minus_3_dot_048515796_comma_3_dot_1910068_comma_3_dot_1910068 loc_bar__minus_4_bar__minus_3_bar_1_bar_60)
+        (receptacleAtLocation Drawer__minus_1_dot_7970448_comma__minus_1_dot_7970448_comma__minus_13_dot_39242076_comma__minus_13_dot_39242076_comma_3_dot_191005468_comma_3_dot_191005468 loc_bar__minus_4_bar__minus_13_bar_1_bar_60)
+        (receptacleAtLocation Drawer__minus_1_dot_797044_comma__minus_1_dot_797044_comma__minus_11_dot_87546732_comma__minus_11_dot_87546732_comma_3_dot_1910056_comma_3_dot_1910056 loc_bar__minus_4_bar__minus_12_bar_1_bar_60)
+        (receptacleAtLocation Fridge__minus_12_dot_75556944_comma__minus_12_dot_75556944_comma__minus_8_dot_74_comma__minus_8_dot_74_comma_0_dot_0_comma_0_dot_0 loc_bar__minus_10_bar__minus_9_bar_3_bar_60)
+        (receptacleAtLocation StoveBurner__minus_1_dot_5068_comma__minus_1_dot_5068_comma__minus_9_dot_8052_comma__minus_9_dot_8052_comma_3_dot_7468_comma_3_dot_7468 loc_bar__minus_4_bar__minus_10_bar_1_bar_45)
+        (receptacleAtLocation StoveBurner__minus_1_dot_5068_comma__minus_1_dot_5068_comma__minus_8_dot_1256_comma__minus_8_dot_1256_comma_3_dot_7468_comma_3_dot_7468 loc_bar__minus_4_bar__minus_8_bar_1_bar_45)
+        (receptacleAtLocation StoveBurner__minus_0_dot_6612_comma__minus_0_dot_6612_comma__minus_8_dot_1236_comma__minus_8_dot_1236_comma_3_dot_7468_comma_3_dot_7468 loc_bar__minus_4_bar__minus_8_bar_1_bar_45)
+        (receptacleAtLocation StoveBurner__minus_0_dot_6612_comma__minus_0_dot_6612_comma__minus_9_dot_8032_comma__minus_9_dot_8032_comma_3_dot_7468_comma_3_dot_7468 loc_bar__minus_4_bar__minus_10_bar_1_bar_45)
+        (receptacleAtLocation GarbageCan__minus_1_dot_136_comma__minus_1_dot_136_comma__minus_0_dot_14_comma__minus_0_dot_14_comma_0_dot_0001941937516_comma_0_dot_0001941937516 loc_bar__minus_3_bar_0_bar_1_bar_60)
+        (objectAtLocation Potato__minus_10_dot_89444924_comma__minus_10_dot_89444924_comma__minus_2_dot_484_comma__minus_2_dot_484_comma_3_dot_031356572_comma_3_dot_031356572 loc_bar__minus_8_bar__minus_3_bar_3_bar_45)
+        (objectAtLocation ButterKnife__minus_0_dot_705183864_comma__minus_0_dot_705183864_comma__minus_6_dot_22003556_comma__minus_6_dot_22003556_comma_3_dot_6641684_comma_3_dot_6641684 loc_bar__minus_4_bar__minus_6_bar_1_bar_45)
+        (objectAtLocation Grater__minus_4_dot_23550844_comma__minus_4_dot_23550844_comma__minus_14_dot_62302972_comma__minus_14_dot_62302972_comma_3_dot_78454852_comma_3_dot_78454852 loc_bar__minus_4_bar__minus_13_bar_2_bar_60)
+        (objectAtLocation Grater__minus_12_dot_90014744_comma__minus_12_dot_90014744_comma__minus_11_dot_30237772_comma__minus_11_dot_30237772_comma_3_dot_78454852_comma_3_dot_78454852 loc_bar__minus_11_bar__minus_12_bar_3_bar_60)
+        )
+
+;; PDDL plan for "move a grated and microwaved potato to the fridge."
+<START>
+{
+    'action': 'pick_up_grater', 
+    'precondition_ground_predicates': 
+    [
+        {'predicate_name': 'inReceptacle', 'arguments': ['grater', 'countertop'], 'is_neg': False}
+    ],
+    'postcondition_ground_predicates': 
+    [
+        {'predicate_name': 'inReceptacle', 'arguments': ['grater', 'countertop'], 'is_neg': True}, {'predicate_name': 'holds', 'arguments': ['grater'], 'is_neg': False}
+    ]
+},
+{   'action': 'grate_potato', 
+    'precondition_ground_predicates': 
+        [{'predicate_name': 'gratable', 'arguments': ['potato'], 'is_neg': False}, 
+        {'predicate_name': 'holds', 'arguments': ['butterknife'], 'is_neg': False}],
+    'postcondition_ground_predicates': 
+        [{'predicate_name': 'isGrated', 'arguments': ['potato'], 'is_neg': False}]
+},
+{
+    'action': 'put_down_grater', 
+    'precondition_ground_predicates':
+         [{'predicate_name': 'receptacleAtLocation', 'arguments': ['countertop', 'loc'], 'is_neg': False}, {'predicate_name': 'holds', 'arguments': ['grater'], 'is_neg': False}],
+    'postcondition_ground_predicates': 
+        [{'predicate_name': 'inReceptacle', 'arguments': ['grater', 'countertop'], 'is_neg': False}, {'predicate_name': 'holds', 'arguments': ['grater'], 'is_neg': True}]
+},
+{
+    'action': 'pick_up_potato', 
+    'precondition_ground_predicates':
+        [
+            {'predicate_name': 'inReceptacle', 'arguments': ['potato', 'diningtable'], 'is_neg': False}
+        ],
+    'postcondition_ground_predicates':
+        [
+            {'predicate_name': 'inReceptacle', 'arguments': ['potato', 'diningtable'], 'is_neg': True}, {'predicate_name': 'holds', 'arguments': ['potato'], 'is_neg': False}
+        ]
+},
+{
+    'action': 'microwave_potato', 
+    'precondition_ground_predicates': 
+        [
+            {'predicate_name': 'receptacleAtLocation', 'arguments': ['oven', 'loc'], 'is_neg': False}, {'predicate_name': 'holds', 'arguments': ['potato'], 'is_neg': False}
+        ],
+    'postcondition_ground_predicates': 
+        [
+            {'predicate_name': 'isHot', 'arguments': ['potato'], 'is_neg': False}
+        ]
+},
+{
+    'action': 'move_potato_to_fridge', 
+    'precondition_ground_predicates': 
+        [
+            {'predicate_name': 'receptacleAtLocation', 'arguments': ['fridge', 'loc'], 'is_neg': False}, 
+            {'predicate_name': 'holds', 'arguments': ['potato'], 'is_neg': False}
+        ]
+    'postcondition_ground_predicates': 
+        [
+            {'predicate_name': 'inReceptacle', 'arguments': ['potato', 'fridge'], 'is_neg': False}, {'predicate_name': 'holds', 'arguments': ['potato'], 'is_neg': True}
+        ]
+}
+<END>

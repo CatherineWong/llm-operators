@@ -1,6 +1,6 @@
 ;; Specification in PDDL1 of the Extended Task domain
 
-(define (domain put_task)
+(define (domain alfred)
     (:requirements :adl
     )
     (:types

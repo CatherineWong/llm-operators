@@ -50,6 +50,8 @@ def attempt_task_plan_for_problem(
     Evaluates planner to evaluate task plans for a single planning problems, given a PDDL domain.
     :ret: TRUE if we've added a new PDDL plan for a goal. Updates problem for task plan.
     """
+
+
     if verbose:
         print(f"task_planner.attempt_task_plan_for_problem: attempt {problem_idx} / {len(problems)} ID={problem_id} AttemptIdx={plan_attempt_idx} GoalIdx={goal_idx}")
     if debug_skip:

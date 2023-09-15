@@ -1,7 +1,7 @@
 ;; Specification in PDDL of the Alfred domain
 ;; Intended to be used with Fast Downward which supports PDDL 2.2 level 1 plus the :action-costs requirement from PDDL 3.1.
 
-(define (domain put_task)
+(define (domain alfred)
  (:requirements
     :adl
     :action-costs

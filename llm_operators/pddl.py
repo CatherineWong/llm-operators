@@ -11,7 +11,7 @@ import json
 
 from contextlib import contextmanager
 from collections import defaultdict
-
+from frozendict import frozendict
 
 class Domain:
     def __init__(
@@ -1144,6 +1144,11 @@ class PDDLProblem:
         self.ground_truth_goal = self.parse_goal_pddl(self.ground_truth_pddl_problem_string)
         self.ground_truth_goal_list = self.parse_goal_pddl_list(self.ground_truth_goal)
         self.ground_truth_objects_dict = self.parse_problem_objects_pddl(return_dict=True)
+        self.ground_truth_init_string = self.parse_problem_init_pddl_string(self.ground_truth_pddl_problem_string)
+
+    def parse_problem_init_pddl_string(self, pddl_problem):
+        pddl_problem = PDDLParser._purge_comments(pddl_problem)
+        return PDDLParser._find_labelled_expression(pddl_problem, ":init")
 
     def get_pddl_string_with_proposed_goal(self, proposed_goal):
         # Replaces the ground truth goal with a proposed goal.
@@ -1819,3 +1824,100 @@ def get_goal_ground_arguments_map(goal_predicates_list, type_predicates=["object
             ground_argument_type = PDDLPredicate.get_alfred_object_type(predicate.argument_values[1])
             ground_arguments_map[ground_argument_var] = ground_argument_type
     return ground_arguments_map
+
+def preprocess_task_predicates(
+    problems,
+    pddl_domain,
+    output_directory,
+    command_args,
+    verbose=False
+):
+    unsolved_problems = [
+        problems[p]
+        for p in problems
+        if len(problems[p].solved_motion_plan_results) < 1 and not problems[p].should_supervise_pddl_goal
+    ]
+    output_json = dict()
+    if verbose:
+        print(f"preprocess_task_predicates: preprocessing {len(unsolved_problems)} unsolved problems.")
+    for problem in unsolved_problems:
+        preprocessed_task_predicates = set()
+        for proposed_task_predicate in problem.proposed_pddl_task_predicates:
+            success, preprocessed_task_predicate_set = preprocess_task_predicate_strings(proposed_task_predicate, pddl_domain, problem.ground_truth_pddl_problem.ground_truth_objects_dict)
+            if not success:
+                print("Failed to preprocess predicates")
+                print(proposed_task_predicate)
+            preprocessed_task_predicates.add(preprocessed_task_predicate_set)
+        preprocessed_task_predicates = list(preprocessed_task_predicates)
+        problem.codex_raw_task_predicates = problem.proposed_pddl_task_predicates
+        problem.proposed_pddl_task_predicates = preprocessed_task_predicates
+
+        output_json[problem.problem_id] = preprocessed_task_predicates
+
+    experiment_name = command_args.experiment_name
+    experiment_tag = "" if len(experiment_name) < 1 else f"{experiment_name}_"
+    output_filepath = f"{experiment_tag}preprocessed_task_predicates.json"
+    if output_directory:
+        with open(os.path.join(output_directory, output_filepath), "w") as f:
+            json.dump(output_json, f)
+
+def preprocess_task_predicate_strings(proposed_task_predicate, pddl_domain, ground_truth_objects_dict):
+    from ast import literal_eval
+    """:ret: list of ground truth predicate objects as frozendicts"""
+    preprocessed_task_predicates_list = []
+    try:
+        raw_predicates = literal_eval(f"[{proposed_task_predicate}]")
+    except:
+        print("Error, could not parse predicates list.")
+        return False, tuple(preprocessed_task_predicates_list)
+    for raw_task_predicates in raw_predicates:
+
+        preprocessed_action = {
+            "action" : "",
+            "precondition_ground_predicates" : [],
+            "postcondition_ground_predicates" : []
+        }
+        preprocessed_action['action'] = raw_task_predicates.get("action", "")
+        for predicate_list in ["precondition_ground_predicates", "postcondition_ground_predicates"]:
+            preprocessed_predicate_list = []
+            raw_predicate_list = raw_task_predicates.get(predicate_list, [])
+            for predicate in raw_predicate_list:
+                if check_valid_predicate(predicate, pddl_domain.ground_truth_predicates, pddl_domain.ground_truth_constants, use_alfred_ground_argtypes=pddl_domain.domain_name == "alfred"):
+                    preprocessed_predicate_list.append(make_hashable_predicate(predicate))
+            preprocessed_action[predicate_list] = tuple(preprocessed_predicate_list)
+        
+        preprocessed_action = frozendict(preprocessed_action)
+        preprocessed_task_predicates_list.append(preprocessed_action)
+    preprocessed_task_predicates_list = tuple(preprocessed_task_predicates_list)
+    return True, preprocessed_task_predicates_list
+
+def make_hashable_predicate(predicate):
+    predicate['arguments'] = tuple(predicate['arguments'])
+    predicate = frozendict(predicate)
+    return predicate
+
+def check_valid_predicate(predicate, ground_truth_predicates, ground_truth_constants, use_alfred_ground_argtypes):
+    ground_argtypes = {
+        'object' : 'otype',
+        'receptacle' : 'rtype'
+    }
+    if predicate['predicate_name'] not in ground_truth_predicates:
+        return False
+    valid = True
+
+    ground_truth_argtypes = ground_truth_predicates[predicate['predicate_name']].arg_types
+    if use_alfred_ground_argtypes:
+        # Remove 'agent' from argtypes.
+        ground_truth_argtypes = [a for a in ground_truth_argtypes if a != "agent"]
+
+    for argname, argtype in zip(predicate['arguments'], ground_truth_argtypes):
+        if use_alfred_ground_argtypes:
+            argname = f"{argname.title()}Type" # This is 
+            argtype = ground_argtypes.get(argtype, "")
+
+        # These are ground predicates, so we need to be comparing objects to otypes.
+        if ground_truth_constants is not None:
+             if  argname  not in ground_truth_constants or ground_truth_constants[ argname] != argtype:
+                    valid = False
+                    break
+    return valid

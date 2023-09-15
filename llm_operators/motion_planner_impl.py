@@ -15,6 +15,7 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
     verbose,
     debug_skip=False,
     motionplan_search_type="bfs",
+    llm_propose_task_predicates=False
 ):
     if verbose:
         print(f"Motion planning for: {problem_id}")
@@ -23,24 +24,35 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
         print(f"Ground truth oracle goal is: ")
         print(problems[problem_id].ground_truth_pddl_problem.ground_truth_goal)
 
-    # Convert plan to sequential plan predicates. Returns a pruned PDDL plan that does not include operators we didn't execute.
-    task_plan_json, pruned_pddl_plan = pddl_plan.to_task_plan_json(
-        problem=problems[problem_id],
-        pddl_domain=pddl_domain,
-        remove_alfred_object_ids=True,
-        remove_alfred_agent=True,
-    )
-    operator_sequence = task_plan_json["operator_sequence"]
-    # This is the ground truth goal according to ALFRED.
-    goal_ground_truth_predicates = task_plan_json["goal_ground_truth_predicates"]
-
-    # This is the goal that we actually planned for.
-    proposed_goal_predicates = [
-        p.to_json()
-        for p in PDDLPlan.get_predicates_from_goal_string(
-            pddl_goal_string=pddl_goal,
+    if llm_propose_task_predicates:
+        operator_sequence, pruned_pddl_plan = pddl_plan, PDDLPlan(plan_string="")
+        goal_ground_truth_predicates = PDDLPlan.get_goal_ground_truth_predicates(
+            problems[problem_id], pddl_domain,
         )
-    ]
+        goal_ground_truth_predicates = [
+            ground_predicate.to_json() for ground_predicate in goal_ground_truth_predicates
+        ]
+        proposed_goal_predicates = goal_ground_truth_predicates
+
+    else:
+        # Convert plan to sequential plan predicates. Returns a pruned PDDL plan that does not include operators we didn't execute.
+        task_plan_json, pruned_pddl_plan = pddl_plan.to_task_plan_json(
+            problem=problems[problem_id],
+            pddl_domain=pddl_domain,
+            remove_alfred_object_ids=True,
+            remove_alfred_agent=True,
+        )
+        operator_sequence = task_plan_json["operator_sequence"]
+        # This is the ground truth goal according to ALFRED.
+        goal_ground_truth_predicates = task_plan_json["goal_ground_truth_predicates"]
+
+        # This is the goal that we actually planned for.
+        proposed_goal_predicates = [
+            p.to_json()
+            for p in PDDLPlan.get_predicates_from_goal_string(
+                pddl_goal_string=pddl_goal,
+            )
+        ]
 
     if debug_skip:
         return MotionPlanResult(

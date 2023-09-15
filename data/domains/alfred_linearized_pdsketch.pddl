@@ -6,7 +6,7 @@
 ;; Removed is on check from toggling.
 ;; Flattened away the 'OR' to require the microwave, fridge, and sink.
 
-(define (domain put_task)
+(define (domain alfred)
     (:requirements :adl
     )
     (:types
