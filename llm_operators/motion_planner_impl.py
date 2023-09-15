@@ -15,6 +15,7 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
     verbose,
     debug_skip=False,
     motionplan_search_type="bfs",
+    motion_plan_directly_on_goal=False,
 ):
     if verbose:
         print(f"Motion planning for: {problem_id}")
@@ -30,9 +31,6 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
         remove_alfred_object_ids=True,
         remove_alfred_agent=True,
     )
-    operator_sequence = task_plan_json["operator_sequence"]
-    # This is the ground truth goal according to ALFRED.
-    goal_ground_truth_predicates = task_plan_json["goal_ground_truth_predicates"]
 
     # This is the goal that we actually planned for.
     proposed_goal_predicates = [
@@ -41,6 +39,13 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
             pddl_goal_string=pddl_goal,
         )
     ]
+
+    if motion_plan_directly_on_goal:
+        operator_sequence = [{"action": "", "precondition_ground_predicates": [], "postcondition_ground_predicates": proposed_goal_predicates}]
+    else:
+        operator_sequence = task_plan_json["operator_sequence"]
+    # This is the ground truth goal according to ALFRED.
+    goal_ground_truth_predicates = task_plan_json["goal_ground_truth_predicates"]
 
     if debug_skip:
         return MotionPlanResult(

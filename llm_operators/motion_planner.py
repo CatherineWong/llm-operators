@@ -61,6 +61,7 @@ def attempt_motion_plan_for_problem(
     resume_from_iteration=0,
     resume_from_problem_idx=0,
     debug_skip=False,
+    motion_plan_directly_on_goal=False,
     verbose=False,
 ):
     from llm_operators.motion_planner_impl import evaluate_alfred_motion_plans_and_costs_for_goal_plan, evaluate_cw_motion_plans_and_costs_for_goal_plan
@@ -92,6 +93,8 @@ def attempt_motion_plan_for_problem(
     new_motion_plan_keys = []
     used_mock = False
     for pddl_goal, pddl_plan in new_task_plans.items():
+        print("GOAL:", pddl_goal)
+
         rv = None
         start_time, end_time = 0, 0
         if resume and output_directory is not None:
@@ -100,7 +103,7 @@ def attempt_motion_plan_for_problem(
         if rv is None:
             start_time = time.time()
             if "alfred" in dataset_name:
-                motion_plan_result = evaluate_alfred_motion_plans_and_costs_for_goal_plan(problem_id, problems, pddl_goal, pddl_plan, pddl_domain, motionplan_search_type=command_args.motionplan_search_type, debug_skip=debug_skip, verbose=verbose)
+                motion_plan_result = evaluate_alfred_motion_plans_and_costs_for_goal_plan(problem_id, problems, pddl_goal, pddl_plan, pddl_domain, motionplan_search_type=command_args.motionplan_search_type, debug_skip=debug_skip, motion_plan_directly_on_goal=motion_plan_directly_on_goal, verbose=verbose)
             elif dataset_name == "crafting_world_20230204_minining_only" or dataset_name == "crafting_world_20230829_crafting_only":
                 motion_plan_result = evaluate_cw_motion_plans_and_costs_for_goal_plan(problem_id, problems, pddl_goal, pddl_plan, pddl_domain, debug_skip=debug_skip, verbose=verbose)
             else:

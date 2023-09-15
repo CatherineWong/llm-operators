@@ -111,6 +111,9 @@ parser.add_argument('--resume', action='store_true', help='resume from whatever 
 parser.add_argument("--resume_from_iteration", type=int, default=0, help="Resume from checkpoint at this iteration")
 parser.add_argument("--resume_from_problem_idx", type=int, default=0, help="Resume from checkpoint at this problem")
 
+# Baselines
+parser.add_argument("--motion_plan_directly_on_goal", action="store_true", help="If provided, this will skip the task planning step and directly motion plan on the goal.")
+
 ########################################
 
 parser.add_argument("--verbose", action="store_true", help="Run on verbose.")
@@ -234,36 +237,37 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
             command_args=args,
             verbose=args.verbose,
         )
-        codex.propose_plans_operators_for_problems(
-            problems=planning_problems["train"],
-            domain=pddl_domain,
-            supervision_pddl=supervision_pddl,
-            n_plan_samples=args.n_plan_samples,
-            n_operator_samples=args.n_operator_samples,
-            plan_temperature=args.codex_plan_temperature,
-            operator_temperature=args.codex_operator_temperature,
-            operator_minimum_usage=args.operator_propose_minimum_usage,
-            operator_use_cot=bool(args.operator_use_cot),
-            external_plan_supervision=args.external_plan_supervision,
-            external_operator_supervision=args.external_operator_supervision,
-            external_operator_sample_with_prompt=args.external_operator_sample_with_prompt,
-            external_operator_names=args.external_operator_names,
-            use_gt=args.debug_ground_truth_operators,
-            command_args=args,
-            curr_iteration=curr_iteration,
-            output_directory=output_directory,
-            resume=args.resume,
-            debug_skip_propose_operators_after=args.debug_skip_propose_operators_after,
-            debug_skip_propose_plans_after=args.debug_skip_propose_plans_after,
-            verbose=args.verbose,
-        )
-        pddl.preprocess_operators(
-            pddl_domain,
-            output_directory=output_directory,
-            maximum_operator_arity=args.maximum_operator_arity,
-            command_args=args,
-            verbose=args.verbose,
-        )
+        if not args.motion_plan_directly_on_goal:
+            codex.propose_plans_operators_for_problems(
+                problems=planning_problems["train"],
+                domain=pddl_domain,
+                supervision_pddl=supervision_pddl,
+                n_plan_samples=args.n_plan_samples,
+                n_operator_samples=args.n_operator_samples,
+                plan_temperature=args.codex_plan_temperature,
+                operator_temperature=args.codex_operator_temperature,
+                operator_minimum_usage=args.operator_propose_minimum_usage,
+                operator_use_cot=bool(args.operator_use_cot),
+                external_plan_supervision=args.external_plan_supervision,
+                external_operator_supervision=args.external_operator_supervision,
+                external_operator_sample_with_prompt=args.external_operator_sample_with_prompt,
+                external_operator_names=args.external_operator_names,
+                use_gt=args.debug_ground_truth_operators,
+                command_args=args,
+                curr_iteration=curr_iteration,
+                output_directory=output_directory,
+                resume=args.resume,
+                debug_skip_propose_operators_after=args.debug_skip_propose_operators_after,
+                debug_skip_propose_plans_after=args.debug_skip_propose_plans_after,
+                verbose=args.verbose,
+            )
+            pddl.preprocess_operators(
+                pddl_domain,
+                output_directory=output_directory,
+                maximum_operator_arity=args.maximum_operator_arity,
+                command_args=args,
+                verbose=args.verbose,
+            )
 
     if args.debug_stop_after_first_proposal:
         return True
@@ -373,6 +377,7 @@ def _run_task_and_motion_plan(pddl_domain, problem_idx, problem_id, planning_pro
         verbose=args.verbose,
         conservative_library_proposal=args.conservative_library_proposal,
         operator_acceptance_threshold=args.operator_acceptance_threshold,
+        motion_plan_directly_on_goal=args.motion_plan_directly_on_goal,
     )
 
     if found_new_task_plan:
@@ -394,6 +399,7 @@ def _run_task_and_motion_plan(pddl_domain, problem_idx, problem_id, planning_pro
             resume_from_iteration=args.resume_from_iteration,
             resume_from_problem_idx=args.resume_from_problem_idx,
             debug_skip=args.debug_skip_motion_plans,
+            motion_plan_directly_on_goal=args.motion_plan_directly_on_goal, 
             verbose=args.verbose,
         )
         # Update the global operator scores from the problem.

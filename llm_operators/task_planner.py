@@ -45,6 +45,7 @@ def attempt_task_plan_for_problem(
     verbose=False,
     conservative_library_proposal=False,
     operator_acceptance_threshold=None,
+    motion_plan_directly_on_goal=False,
 ):
     """
     Evaluates planner to evaluate task plans for a single planning problems, given a PDDL domain.
@@ -66,6 +67,15 @@ def attempt_task_plan_for_problem(
         )
     else:
         debug_export_dir = None
+
+    if motion_plan_directly_on_goal:
+        if verbose:
+            print(f"task_planner.attempt_task_plan_for_problem: skipping task planning, motion planning directly on goal.")
+        new_task_plans = {}
+        for goal_str in sorted(problems[problem_id].proposed_pddl_goals):
+            new_task_plans[goal_str] = PDDLPlan(plan_string="", pddl_domain=pddl_domain)
+
+        return True, new_task_plans
 
     # experiment_tag = "" if len(command_args.experiment_name) < 1 else f"{command_args.experiment_name}_"
     # output_filepath = f"{experiment_tag}task_plans.json"
