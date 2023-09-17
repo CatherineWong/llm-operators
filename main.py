@@ -407,6 +407,7 @@ def _run_task_and_motion_plan(pddl_domain, problem_idx, problem_id, planning_pro
         conservative_library_proposal=args.conservative_library_proposal,
         operator_acceptance_threshold=args.operator_acceptance_threshold,
     )
+    
 
     if found_new_task_plan:
         # Motion plan. Attempts to generate a motion plan for a problem.

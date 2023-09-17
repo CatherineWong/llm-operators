@@ -13,6 +13,8 @@ from contextlib import contextmanager
 from collections import defaultdict
 from frozendict import frozendict
 
+ALFRED_DOMAIN_FILE_NAME = "put_task"
+
 class Domain:
     def __init__(
         self,
@@ -1847,7 +1849,9 @@ def preprocess_task_predicates(
             if not success:
                 print("Failed to preprocess predicates")
                 print(proposed_task_predicate)
-            preprocessed_task_predicates.add(preprocessed_task_predicate_set)
+            else:
+                if len(preprocessed_task_predicate_set) > 0:
+                    preprocessed_task_predicates.add(preprocessed_task_predicate_set)
         preprocessed_task_predicates = list(preprocessed_task_predicates)
         problem.codex_raw_task_predicates = problem.proposed_pddl_task_predicates
         problem.proposed_pddl_task_predicates = preprocessed_task_predicates
@@ -1882,12 +1886,14 @@ def preprocess_task_predicate_strings(proposed_task_predicate, pddl_domain, grou
             preprocessed_predicate_list = []
             raw_predicate_list = raw_task_predicates.get(predicate_list, [])
             for predicate in raw_predicate_list:
-                if check_valid_predicate(predicate, pddl_domain.ground_truth_predicates, pddl_domain.ground_truth_constants, use_alfred_ground_argtypes=pddl_domain.domain_name == "alfred"):
+                if check_valid_predicate(predicate, pddl_domain.ground_truth_predicates, pddl_domain.ground_truth_constants, use_alfred_ground_argtypes=pddl_domain.domain_name == ALFRED_DOMAIN_FILE_NAME):
                     preprocessed_predicate_list.append(make_hashable_predicate(predicate))
             preprocessed_action[predicate_list] = tuple(preprocessed_predicate_list)
         
         preprocessed_action = frozendict(preprocessed_action)
-        preprocessed_task_predicates_list.append(preprocessed_action)
+
+        if not check_empty_action(preprocessed_action):
+            preprocessed_task_predicates_list.append(preprocessed_action)
     preprocessed_task_predicates_list = tuple(preprocessed_task_predicates_list)
     return True, preprocessed_task_predicates_list
 
@@ -1895,6 +1901,9 @@ def make_hashable_predicate(predicate):
     predicate['arguments'] = tuple(predicate['arguments'])
     predicate = frozendict(predicate)
     return predicate
+
+def check_empty_action(preprocessed_action):
+    return len(preprocessed_action['postcondition_ground_predicates']) == 0
 
 def check_valid_predicate(predicate, ground_truth_predicates, ground_truth_constants, use_alfred_ground_argtypes):
     ground_argtypes = {

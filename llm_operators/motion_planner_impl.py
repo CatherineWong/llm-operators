@@ -80,6 +80,7 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
             "task": task_name,
             "repeat_idx": 0,  # How do we know which one it is?
         }
+        import pdb; pdb.set_trace()
         raw_motion_plan_result = alfredplanner.run_motion_planner(
             task=alfred_motion_task,
             operator_sequence=operator_sequence,
