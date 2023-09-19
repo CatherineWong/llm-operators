@@ -1874,28 +1874,30 @@ def preprocess_task_predicate_strings(proposed_task_predicate, pddl_domain, grou
     except:
         print("Error, could not parse predicates list.")
         return False, tuple(preprocessed_task_predicates_list)
-    for raw_task_predicates in raw_predicates:
+    try:
+        for raw_task_predicates in raw_predicates:
+            preprocessed_action = {
+                "action" : "",
+                "precondition_ground_predicates" : [],
+                "postcondition_ground_predicates" : []
+            }
+            preprocessed_action['action'] = raw_task_predicates.get("action", "")
+            for predicate_list in ["precondition_ground_predicates", "postcondition_ground_predicates"]:
+                preprocessed_predicate_list = []
+                raw_predicate_list = raw_task_predicates.get(predicate_list, [])
+                for predicate in raw_predicate_list:
+                    if check_valid_predicate(predicate, pddl_domain.ground_truth_predicates, pddl_domain.ground_truth_constants, use_alfred_ground_argtypes=pddl_domain.domain_name == ALFRED_DOMAIN_FILE_NAME):
+                        preprocessed_predicate_list.append(make_hashable_predicate(predicate))
+                preprocessed_action[predicate_list] = tuple(preprocessed_predicate_list)
+            
+            preprocessed_action = frozendict(preprocessed_action)
 
-        preprocessed_action = {
-            "action" : "",
-            "precondition_ground_predicates" : [],
-            "postcondition_ground_predicates" : []
-        }
-        preprocessed_action['action'] = raw_task_predicates.get("action", "")
-        for predicate_list in ["precondition_ground_predicates", "postcondition_ground_predicates"]:
-            preprocessed_predicate_list = []
-            raw_predicate_list = raw_task_predicates.get(predicate_list, [])
-            for predicate in raw_predicate_list:
-                if check_valid_predicate(predicate, pddl_domain.ground_truth_predicates, pddl_domain.ground_truth_constants, use_alfred_ground_argtypes=pddl_domain.domain_name == ALFRED_DOMAIN_FILE_NAME):
-                    preprocessed_predicate_list.append(make_hashable_predicate(predicate))
-            preprocessed_action[predicate_list] = tuple(preprocessed_predicate_list)
-        
-        preprocessed_action = frozendict(preprocessed_action)
-
-        if not check_empty_action(preprocessed_action):
-            preprocessed_task_predicates_list.append(preprocessed_action)
-    preprocessed_task_predicates_list = tuple(preprocessed_task_predicates_list)
-    return True, preprocessed_task_predicates_list
+            if not check_empty_action(preprocessed_action):
+                preprocessed_task_predicates_list.append(preprocessed_action)
+        preprocessed_task_predicates_list = tuple(preprocessed_task_predicates_list)
+        return True, preprocessed_task_predicates_list
+    except:
+        return False, tuple(preprocessed_task_predicates_list)
 
 def make_hashable_predicate(predicate):
     predicate['arguments'] = tuple(predicate['arguments'])

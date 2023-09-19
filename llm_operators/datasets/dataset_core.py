@@ -60,6 +60,10 @@ class Problem:
         self.codex_raw_task_predicates = [] # List of strings 
         self.proposed_pddl_task_predicates = [] # List of preprocessed objects
 
+        # One or more proposed code policies for the code policies baseline.
+        self.codex_raw_code_policies = []
+        self.proposed_code_policies = []
+
         # Evaluated PDDL plans that solve proposed_pddl_goals, created by a task planner. This is reset at each iteration.
         # This is a dict from {goal : list(PDDLPlan)} # But the list items are deduped.
         self.evaluated_pddl_plans = defaultdict(list)

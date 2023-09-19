@@ -1,5 +1,6 @@
 import os
 import alfred.alfredplanner as alfredplanner
+import alfred.alfredpolicy as alfredpolicy
 
 from llm_operators.pddl import PDDLPlan
 from llm_operators.experiment_utils import RANDOM_SEED
@@ -15,7 +16,8 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
     verbose,
     debug_skip=False,
     motionplan_search_type="bfs",
-    llm_propose_task_predicates=False
+    llm_propose_task_predicates=False,
+    llm_propose_code_policies=False
 ):
     if verbose:
         print(f"Motion planning for: {problem_id}")
@@ -24,7 +26,9 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
         print(f"Ground truth oracle goal is: ")
         print(problems[problem_id].ground_truth_pddl_problem.ground_truth_goal)
 
-    if llm_propose_task_predicates:
+    ### Propose task predicates baseline.
+    
+    if llm_propose_task_predicates or llm_propose_code_policies:
         operator_sequence, pruned_pddl_plan = pddl_plan, PDDLPlan(plan_string="")
         goal_ground_truth_predicates = PDDLPlan.get_goal_ground_truth_predicates(
             problems[problem_id], pddl_domain,
@@ -80,17 +84,26 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
             "task": task_name,
             "repeat_idx": 0,  # How do we know which one it is?
         }
-        import pdb; pdb.set_trace()
-        raw_motion_plan_result = alfredplanner.run_motion_planner(
-            task=alfred_motion_task,
-            operator_sequence=operator_sequence,
-            goal_ground_predicates=goal_ground_truth_predicates,
-            robot_init=RANDOM_SEED,
-            dataset_split=dataset_split,
-            verbose=verbose,
-            motionplan_search_type=motionplan_search_type,
-            proposed_goal_predicates=proposed_goal_predicates,
-        )
+        if llm_propose_code_policies:
+            raw_motion_plan_result = alfredpolicy.run_alfred_policy(
+                task=alfred_motion_task,
+                policy_sequence=operator_sequence,
+                goal_ground_predicates=goal_ground_truth_predicates,
+                robot_init=RANDOM_SEED,
+                dataset_split=dataset_split,
+                verbose=verbose,
+            )
+        else:
+            raw_motion_plan_result = alfredplanner.run_motion_planner(
+                task=alfred_motion_task,
+                operator_sequence=operator_sequence,
+                goal_ground_predicates=goal_ground_truth_predicates,
+                robot_init=RANDOM_SEED,
+                dataset_split=dataset_split,
+                verbose=verbose,
+                motionplan_search_type=motionplan_search_type,
+                proposed_goal_predicates=proposed_goal_predicates,
+            )
         return MotionPlanResult(
             pddl_plan=pruned_pddl_plan,
             task_success=raw_motion_plan_result["task_success"],

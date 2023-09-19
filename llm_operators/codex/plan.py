@@ -220,8 +220,63 @@ def _get_plan_string_from_solved_problem(problem, domain):
         string = problem.get_solved_pddl_plan_string()
         plan = PDDLPlan(plan_string=string)
         return plan.plan_to_string(domain.operator_canonical_name_map)
+    
+########### Baseline implementation, propose a sequence of completely grounded code policies for each problem given goals and example other problems.
+def propose_code_policies_for_problems(
+        problems, 
+        domain,
+        n_samples=4,
+        temperature=DEFAULT_PLAN_TEMPERATURE,
+        resume=False,
+        output_directory=None,
+        verbose=False,
+        external_code_policies_supervision=None,
+        command_args=None
+):
+    experiment_name = command_args.experiment_name
+    unsolved_problems, solved_problems = get_solved_unsolved_problems(problems, context='pddl_plan')
+    output_json = {}
+    experiment_tag = "" if len(experiment_name) < 1 else f"{experiment_name}_"
+    output_filepath = f"{experiment_tag}codex_code_policies.json"
 
-### Baseline implementation, propose a sequence of completely grounded operator predicates for each problem given goals and example other problems.
+    if resume and os.path.exists(os.path.join(output_directory, output_filepath)):
+        mock_propose_code_policies_for_problems(output_filepath, unsolved_problems, output_directory, domain)
+        return
+    from num2words import num2words
+    if verbose:
+        print(f"propose_code_policies_for_problems: proposing for {len(unsolved_problems)} unsolved problems.")
+
+    for idx, problem in enumerate(unsolved_problems):
+        problem.proposed_code_policies = []
+        codex_prompt, proposed_task_predicate_definitions = _propose_task_predicate_definition(domain, solved_problems, problem, n_samples, temperature, external_code_policies_supervision)
+        output_json[problem.problem_id] = {
+            CODEX_PROMPT: codex_prompt,
+            CODEX_OUTPUT: proposed_task_predicate_definitions,
+        }
+        if verbose:
+            print(f'propose_task_predicates_for_problems:: "{problem.language}":')
+            for i, goal_string in enumerate(proposed_task_predicate_definitions):
+                print(f"[Goal {i+1}/{len(proposed_task_predicate_definitions)}]")
+                print(goal_string)
+        problem.proposed_code_policies.extend(proposed_task_predicate_definitions)
+    if output_directory:
+        with open(os.path.join(output_directory, output_filepath), "w") as f:
+            json.dump(output_json, f)
+    
+
+def mock_propose_code_policies_for_problems(output_filepath, unsolved_problems, output_directory, current_domain):
+    with open(os.path.join(output_directory, output_filepath), "r") as f:
+        output_json = json.load(f)
+    print(f"mock_code_policies_for_problems:: from {os.path.join(output_directory, output_filepath)}")
+    for p in unsolved_problems:
+        if p.problem_id in output_json:
+            p.proposed_code_policies.extend(output_json[p.problem_id][CODEX_OUTPUT])
+    print(
+        f"mock_code_policies_for_problems:: loaded a total of {len([p for p in unsolved_problems if len(p.proposed_code_policies) > 0])} code policies for {len(unsolved_problems)} unsolved problems."
+    )
+    return
+
+########### Baseline implementation, propose a sequence of completely grounded operator predicates for each problem given goals and example other problems.
 def propose_task_predicates_for_problems(
         problems,
         domain,
@@ -234,7 +289,7 @@ def propose_task_predicates_for_problems(
         command_args=None
 ):
     """
-    Proposes PDDL task predicates given NL goals. We condition . We do NOT condition on the 
+    Proposes PDDL task predicates given NL goals.
     """
     experiment_name = command_args.experiment_name
     unsolved_problems, solved_problems = get_solved_unsolved_problems(problems, context='pddl_plan')

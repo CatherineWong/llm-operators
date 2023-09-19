@@ -1,0 +1,178 @@
+;; You will be a software engineer who will be writing a plan for a robot acting in a household environment. Your plan will be written as a sequence of imperative functions, each which defines a single action in this environment to achieve a natural language goal. These functions should be written in Python, with respect to the following code API.
+
+;; Possible objects and receptacles types. 
+OBJECT_TYPES = ['grater', 'candle', 'showerglass', 'cd', 'tomato', 'mirror', 'scrubbrush', 'mug', 'toaster', 'painting', 'cellphone', 'ladle', 'bread', 'pot', 'book', 'tennisracket', 'butterknife', 'showerdoor', 'keychain', 'baseballbat', 'egg', 'pen', 'fork', 'whisk', 'vase', 'cloth', 'window', 'pencil', 'statue', 'lightswitch', 'watch', 'spatula', 'papertowelroll', 'floorlamp', 'kettle', 'soapbottle', 'boots', 'towel', 'pillow', 'alarmclock', 'potato', 'chair', 'plunger', 'spraybottle', 'handtowel', 'bathtub', 'remotecontrol', 'peppershaker', 'plate', 'basketball', 'desklamp', 'footstool', 'glassbottle', 'papertowel', 'creditcard', 'pan', 'toiletpaper', 'saltshaker', 'poster', 'toiletpaperroll', 'lettuce', 'winebottle', 'knife', 'laundryhamperlid', 'spoon', 'tissuebox', 'bowl', 'box', 'soapbar', 'houseplant', 'newspaper', 'cup', 'dishsponge', 'laptop', 'television', 'stoveknob', 'curtains', 'blinds', 'teddybear', 'apple', 'wateringcan', 'sink']
+
+RECEPTACLE_TYPES = ['armchair', 'bed', 'bathtubbasin', 'dresser', 'safe', 'diningtable', 'sofa', 'handtowelholder', 'stoveburner', 'cart', 'desk', 'coffeemachine', 'microwave', 'toilet', 'countertop', 'garbagecan', 'coffeetable', 'cabinet', 'sinkbasin', 'ottoman', 'toiletpaperhanger', 'towelholder', 'fridge', 'drawer', 'sidetable', 'shelf', 'laundryhamper']
+
+;; Predicates for querying the environment state.
+env_state.holds(object_id)
+env_state.inReceptacle(object_id, receptacle_id)
+env_state.isHot(object_id)
+env_state.heatable(object_id)
+env_state.isClean(object_id)
+env_state.cleanable(object_id)
+env_state.isCool(object_id)
+env_state.coolable(object_id)
+env_state.toggleable(object_id)
+env_state.isToggled(object_id)
+env_state.sliceable(object_id)
+env_state.isSliced(object_id)
+env_state.fillable(object_id)
+env_state.isFillable(object_id)
+env_state.
+
+;; Predicates for querying the environment state.
+(:predicates
+		(atLocation ?a - agent ?l - location) 
+        (receptacleAtLocation ?r - receptacle ?l - location) 
+        (objectAtLocation ?o - object ?l - location)
+        (inReceptacle ?o - object ?r - receptacle) 
+        (receptacleType ?r - receptacle ?t - rtype) 
+        (objectType ?o - object ?t - otype) 
+        (holds ?a - agent ?o - object) 
+        (holdsAny ?a - agent) 
+        (holdsAnyReceptacleObject ?a - agent) 
+        
+        (fillable ?r - receptacle)
+        (isFilled ?r - receptacle) 
+	    (openable ?r - receptacle) 
+        (opened ?r - receptacle) 
+        (isClean ?o - object) 
+        (cleanable ?o - object)
+        (restartable ?o - object)
+        (isRestarted ?o - object) 
+        (isHot ?o - object) 
+        (heatable ?o - object) 
+        (isCool ?o - object) 
+        (coolable ?o - object) 
+        (toggleable ?o - object)  
+        (isToggled ?o - object) 
+        (sliceable ?o - object) 
+        (isSliced ?o - object)
+        (gratable ?o - object)
+        (isGrated ?o - object) 
+ )
+
+;; Example translations from natural language to a simplified goal name, and then a PDDL plan. A PDDL plan is a sequence of actions in JSON that specifies the preconditions and post conditions of an action. 
+;; Notice that PDDL plans MUST only use predicates, object types, and receptacle types exactly as they appear in the domain above. People may also have been unclear about which objects and actions they were talking about, so we list multiple possible guesses for goal if there is uncertainty over what they meant.
+;; PDDL plans should be based on an actual PDDL domain file.
+
+;; Human written natural language goal.
+place a baked, grated apple on top of the dining table.
+
+;; Plan as code policies for "place a baked, grated apple on top of the dining table."
+<START>
+{
+    "action": "PickupObject",
+    "argument_names" : ('env_state', 'env', 'object_id'),
+    "ground_arguments" : ("env_state", "env", "grater"),
+    "body" : 
+"""
+    # Preconditions: None.
+
+    # Low-level actions: pick up the object.
+    try:
+        action = PickupObject(args={'object_id':object_id})
+        success = act(env=env, action=action)
+        print("Successfully picked up an object!")
+    except:
+        print("Execution failure...")
+        return False
+
+    # Postconditions:
+    final_env_state = perceive(env)
+    return (final_env_state.holds(object_id)), final_env_state
+"""
+},
+{
+    "action": "GrateObject",
+    "args": [
+        "apple",
+        "grater"
+    ]
+},
+{
+    "action": "PutObjectInReceptacle",
+    "argument_names" : ('env_state', 'env', 'object_id', 'receptacle_object_id'),
+    "ground_arguments" : ("env_state", "env", "grater", "diningtable"),
+    "body" : 
+"""
+    # Preconditions: we should be holding the object.
+    if (not env_state.holds(object_id)):
+        print("Failure, not holding object.")
+        return False, env_state
+
+    # Low-level actions: put the object in the receptacle.
+    try:
+        print("Trying to put in receptacle.")
+        action = PutObject(args={'object_id':object_id, 'receptacle_object_id':receptacle_object_id})
+        success = act(env=env, action=action)
+        print("Result of PutObject is: {success}")
+    except:
+        print("Failure, could not place in receptacle.")
+        return False, env_state
+
+    # Postconditions:
+    final_env_state = perceive(env)
+    if (not final_env_state.holds(object_id)) and (final_env_state.inReceptacle(object_id, receptacle_object_id)):
+        return True, final_env_state
+"""
+},
+{
+    "action": "PickupObject",
+    "argument_names" : ('env_state', 'env', 'object_id'),
+    "ground_arguments" : ("env_state", "env", "apple"),
+    "body" : 
+"""
+    # Preconditions: None.
+
+    # Low-level actions: pick up the object.
+    try:
+        action = PickupObject(args={'object_id':object_id})
+        success = act(env=env, action=action)
+        print("Successfully picked up an object!")
+    except:
+        print("Execution failure...")
+        return False
+
+    # Postconditions:
+    final_env_state = perceive(env)
+    return (final_env_state.holds(object_id)), final_env_state
+"""
+},
+{
+    "action": "BakeObject",
+    "args": [
+        "apple",
+        "oven"
+    ]
+},
+{
+    "action": "PutObjectInReceptacle",
+    "argument_names" : ('env_state', 'env', 'object_id', 'receptacle_object_id'),
+    "ground_arguments" : ("env_state", "env", "apple", "sidetable"),
+    "body" : 
+"""
+    # Preconditions: we should be holding the object.
+    if (not env_state.holds(object_id)):
+        print("Failure, not holding object.")
+        return False, env_state
+
+    # Low-level actions: put the object in the receptacle.
+    try:
+        print("Trying to put in receptacle.")
+        action = PutObject(args={'object_id':object_id, 'receptacle_object_id':receptacle_object_id})
+        success = act(env=env, action=action)
+        print("Result of PutObject is: {success}")
+    except:
+        print("Failure, could not place in receptacle.")
+        return False, env_state
+
+    # Postconditions:
+    final_env_state = perceive(env)
+    if (not final_env_state.holds(object_id)) and (final_env_state.inReceptacle(object_id, receptacle_object_id)):
+        return True, final_env_state
+"""
+},
+<END>

@@ -117,6 +117,9 @@ parser.add_argument("--resume_from_problem_idx", type=int, default=0, help="Resu
 parser.add_argument("--llm_propose_task_predicates", action='store_true', help="Implements a baseline in which the LLM directly proposes the task predicates.")
 parser.add_argument("--external_task_predicates_supervision", type=str, default=None, help="If provided, file containing initial plans that will be provided as supervision.")
 
+parser.add_argument("--llm_propose_code_policies", action='store_true', help="Implements a baseline in which the LLM directly proposes a code policies.")
+parser.add_argument("--external_code_policies_supervision", type=str, default=None, help="If provided, file containing initial plans that will be provided as supervision.")
+
 ########################################
 
 parser.add_argument("--verbose", action="store_true", help="Run on verbose.")
@@ -270,6 +273,25 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
             command_args=args,
             verbose=args.verbose,
         )
+        if args.llm_propose_code_policies:
+            codex.propose_code_policies_for_problems(
+                problems=planning_problems["train"],
+                domain=pddl_domain,
+                n_samples=args.n_plan_samples,
+                temperature=args.codex_plan_temperature,
+                command_args=args,
+                output_directory=output_directory,
+                resume=args.resume,
+                verbose=args.verbose,
+                external_code_policies_supervision=args.external_code_policies_supervision
+            )
+            pddl.preprocess_code_policies(
+                problems=planning_problems["train"],
+                pddl_domain=pddl_domain,
+                output_directory=output_directory,
+                command_args=args,
+                verbose=args.verbose,
+            ) 
 
         if args.llm_propose_task_predicates:
             # Task predicates baseline. 
@@ -324,8 +346,15 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
             continue
 
         if args.llm_propose_task_predicates:
-            # Just run the motion planner directly.
+            # Baseline: plan directly on task predicate sequence proposed by LLM.
             any_motion_plan_success = baselines._run_llm_propose_task_predicates_motion_planner(pddl_domain, problem_idx, problem_id, planning_problems,
+                    args=args, curr_iteration=curr_iteration, output_directory=output_directory,
+                    plan_pass_identifier='first',
+                    plan_attempt_idx=0, goal_idx=0, rng=rng)
+            
+        elif args.llm_propose_code_policies:
+            # Baseline: plan directly on code policies proposed by LLM.
+             any_motion_plan_success = baselines._run_llm_propose_code_policies_motion_planner(pddl_domain, problem_idx, problem_id, planning_problems,
                     args=args, curr_iteration=curr_iteration, output_directory=output_directory,
                     plan_pass_identifier='first',
                     plan_attempt_idx=0, goal_idx=0, rng=rng)
