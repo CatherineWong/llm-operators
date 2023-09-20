@@ -1,6 +1,4 @@
 ;; Based on those examples, write an example for the following human readable goal and initial problem specification.
 ;; Human written natural language goal.
 <GOAL>
-;; Problem specific initial information.
-<INIT>
-;; Write a different PDDL plan. Start each with <START> and end with <END>. 
+;; Write a different code policy. Start with <START> and end with <END>. 

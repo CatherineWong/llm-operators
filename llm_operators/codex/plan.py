@@ -248,7 +248,7 @@ def propose_code_policies_for_problems(
 
     for idx, problem in enumerate(unsolved_problems):
         problem.proposed_code_policies = []
-        codex_prompt, proposed_task_predicate_definitions = _propose_task_predicate_definition(domain, solved_problems, problem, n_samples, temperature, external_code_policies_supervision)
+        codex_prompt, proposed_task_predicate_definitions = _propose_code_policy_definition(domain, solved_problems, problem, n_samples, temperature, external_code_policies_supervision)
         output_json[problem.problem_id] = {
             CODEX_PROMPT: codex_prompt,
             CODEX_OUTPUT: proposed_task_predicate_definitions,
@@ -275,6 +275,43 @@ def mock_propose_code_policies_for_problems(output_filepath, unsolved_problems, 
         f"mock_code_policies_for_problems:: loaded a total of {len([p for p in unsolved_problems if len(p.proposed_code_policies) > 0])} code policies for {len(unsolved_problems)} unsolved problems."
     )
     return
+
+def _propose_code_policy_definition(domain, solved_problems, problem, n_samples, temperature, external_task_predicates_supervision, max_examples=1):
+    from num2words import num2words
+
+    with open(external_task_predicates_supervision + "system.txt") as f:
+        system_message = f.read()
+    
+    # We don't add examples from the problems, as we have a limited context. We have examples in the prompt.
+    
+    with open(external_task_predicates_supervision + "user.txt") as f:
+        sampling_message = f.read()
+        GOAL = "<GOAL>"
+        sampling_message = sampling_message.replace(GOAL, problem.language)
+    codex_prompt = [{"role": "system", "content": system_message}, {"role": "user", "content": sampling_message}]
+
+    TASK_SAMPLING_START_TOKEN = "<START>"
+    TASK_SAMPLING_END_TOKEN = "<END>"
+
+    task_predicates = []
+    try:
+        completions = get_completions(
+            codex_prompt,
+            temperature=temperature,
+            n_samples=n_samples,
+            max_tokens=1500,
+        )
+        for completion in completions:
+            # Parse the tokens out of the completion.
+            import re
+
+            matches = re.findall(
+                rf"{TASK_SAMPLING_START_TOKEN}(.*?){TASK_SAMPLING_END_TOKEN}", completion, re.DOTALL
+            )[:1]
+            task_predicates += matches
+        return codex_prompt, task_predicates
+    except:
+        return codex_prompt, []
 
 ########### Baseline implementation, propose a sequence of completely grounded operator predicates for each problem given goals and example other problems.
 def propose_task_predicates_for_problems(

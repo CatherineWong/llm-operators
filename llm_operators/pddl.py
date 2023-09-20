@@ -39,6 +39,7 @@ class Domain:
         self.functions = self.init_simple_pddl(functions, "functions")
         self.operators = self.init_operators(operators)  # Evaluated operators.
         self.operator_canonical_name_map = {}
+        self.code_skill_canonical_name_map = {}
         self.ground_truth_operators = None
         self.ground_truth_predicates = PDDLParser._parse_domain_predicates(self.pddl_domain)
         self.ground_truth_constants = PDDLParser._parse_constants(self.constants[len("(:constants") : -1])
@@ -51,6 +52,8 @@ class Domain:
         self.codex_raw_operators = defaultdict(list)
         self.operators_to_scores = None  # (operator_name, body) -> (# times the operator has been successful, # of times it has been used) -- this is used to estimate the Bernoulli probability that this operator should be included. This is initialized with self.initialize_operators_to_scores
         # Some operators have had standardized names.
+
+        self.proposed_code_skills = {} # Skill name to definition.
 
         # Additional object types necessary to prompt codex.
         self.codex_types = ""
@@ -1827,6 +1830,149 @@ def get_goal_ground_arguments_map(goal_predicates_list, type_predicates=["object
             ground_arguments_map[ground_argument_var] = ground_argument_type
     return ground_arguments_map
 
+##### Preprocess code policies for the baseline.
+def preprocess_code_policies(
+    problems,
+    pddl_domain,
+    output_directory,
+    command_args,
+    verbose=False
+):
+    unsolved_problems = [
+        problems[p]
+        for p in problems
+        if len(problems[p].solved_motion_plan_results) < 1 and not problems[p].should_supervise_pddl_goal
+    ]
+    output_json = dict()
+    if verbose:
+        print(f"preprocess_task_predicates: preprocessing {len(unsolved_problems)} unsolved problems.")
+    all_proposed_code_skills = defaultdict(set)
+    for problem in unsolved_problems:
+        # Extract code policies as if they are operators and put them in as operator names.
+        proposed_code_policies = set()
+        for proposed_code_policy_string in problem.proposed_code_policies:
+            success, preprocessed_code_skills, preprocessed_code_policies = preprocess_code_policy_strings(proposed_code_policy_string, pddl_domain)
+            if success:
+                for skill_name in preprocessed_code_skills:
+                    all_proposed_code_skills[skill_name].update(preprocessed_code_skills[skill_name])
+                try:
+                    proposed_code_policies.add(preprocessed_code_policies)
+                except:
+                    continue
+        proposed_code_policies  = list(proposed_code_policies)
+        problem.codex_raw_code_policies = problem.proposed_code_policies
+        problem.proposed_code_policies = proposed_code_policies
+
+    # Now, canonicalize all of the proposed code skills.
+    output_json = dict()
+    logs = defaultdict(list)
+    proposed_code_skills_numbered = dict()
+    for canonical_code_skill_name in all_proposed_code_skills:
+        for idx, proposed_code_skill in enumerate(all_proposed_code_skills[canonical_code_skill_name]):
+            preprocessed_code_skill_name = f"{canonical_code_skill_name}_{idx}"
+            logs[canonical_code_skill_name].append(proposed_code_skill)
+            pddl_domain.code_skill_canonical_name_map[preprocessed_code_skill_name] = canonical_code_skill_name
+            output_json[preprocessed_code_skill_name] = proposed_code_skill
+            proposed_code_skills_numbered[preprocessed_code_skill_name] = proposed_code_skill
+    pddl_domain.proposed_code_skills = proposed_code_skills_numbered
+    print(f"Found a total of {len(pddl_domain.proposed_code_skills)} distinct code skill definitions for {len(all_proposed_code_skills)} code skill names.")
+    print(f"All code skill names: {all_proposed_code_skills.keys()}")
+
+    # Write out to an output JSON.
+    experiment_name = command_args.experiment_name
+    experiment_tag = "" if len(experiment_name) < 1 else f"{experiment_name}_"
+    output_filepath = f"{experiment_tag}preprocessed_code_policies.json"
+    if output_directory:
+        with open(os.path.join(output_directory, output_filepath), "w") as f:
+            json.dump(output_json, f)
+    log_preprocessed_code_policies(
+        pddl_domain,
+        logs,
+        output_directory,
+        experiment_name=command_args.experiment_name,
+        verbose=verbose,
+    )
+
+def log_preprocessed_code_policies(pddl_domain, logs, output_directory, experiment_name, verbose=False):
+    # Human readable CSV.
+    experiment_name = experiment_name
+    experiment_tag = "" if len(experiment_name) < 1 else f"{experiment_name}_"
+    output_filepath = f"{experiment_tag}preprocessed_code_policies.csv"
+
+    if output_directory:
+        print(f"Logging preprocessed code_policies: {os.path.join(output_directory, output_filepath)}")
+        with open(os.path.join(output_directory, output_filepath), "w") as f:
+            fieldnames = ["action_name", "codex_code_policy"]
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+
+            for action_name, actions in logs.items():
+                for action in actions:
+                    writer.writerow({
+                        "action_name": action_name,
+                        "codex_code_policy": action
+                    })
+    print('')
+
+
+def preprocess_code_policy_strings(proposed_code_policy_string, pddl_domain):
+    """
+    :ret: success if we can extract a minimal representation
+    preprocessed_code_skills = {code_skill_name: ungrounded_code_skill_body}
+    preprocessed_code_policies = [{grounded code skills}]
+    """
+    from ast import literal_eval
+    """:ret: list of ground truth predicate objects as frozendicts"""
+    preprocessed_code_skills = defaultdict(set)
+    preprocessed_action_list = []
+    try:
+        raw_action_list = literal_eval(f"{proposed_code_policy_string}")
+    except:
+        print("Error, could not parse predicates list.")
+        return False, preprocessed_code_skills, preprocessed_action_list
+    try:
+        for raw_action in raw_action_list:
+            preprocessed_action = {
+                "action" : "",
+                "argument_names" : (),
+                "ground_arguments" : (),
+                "body": ""
+            }
+            preprocessed_action['action'] = raw_action.get("action", "")
+            # Minimal check.
+            raw_argument_names, raw_ground_arguments, raw_body =  raw_action.get("argument_names", ""), raw_action.get("ground_arguments", ""), raw_action.get("body", "")
+
+            if check_valid_arguments(raw_argument_names, raw_ground_arguments, use_alfred=pddl_domain.domain_name == ALFRED_DOMAIN_FILE_NAME) and len(raw_body) > 0:
+                preprocessed_action["argument_names"], preprocessed_action["ground_arguments"] = tuple(raw_argument_names), tuple(raw_ground_arguments)
+                preprocessed_action["body"] = raw_body
+
+                preprocessed_action = frozendict(preprocessed_action)
+                preprocessed_action_list.append(preprocessed_action)
+                # Make a version without the ground arguments.
+                unground_action = frozendict({
+                    key : copy.copy(preprocessed_action[key])
+                    for key in ['action', 'argument_names', 'body']
+                })
+                
+                preprocessed_code_skills[preprocessed_action['action']].add(unground_action)
+        preprocessed_action_list = tuple(preprocessed_action_list)
+        return True, preprocessed_code_skills, preprocessed_action_list
+    except:
+        return False, preprocessed_code_skills, tuple(preprocessed_action_list)
+
+def check_valid_arguments(raw_argument_names, raw_ground_arguments, use_alfred):
+    
+    if not (type(raw_argument_names) == type(raw_ground_arguments) == tuple):
+        return False
+    if not len(raw_argument_names) == len(raw_ground_arguments):
+        return False
+    
+    if use_alfred:
+        if not (raw_argument_names[:2] == raw_ground_arguments[:2] == ('env_state', 'env')):
+            return False 
+    return True
+
+##### Preprocess task predicates for the baseline.
 def preprocess_task_predicates(
     problems,
     pddl_domain,

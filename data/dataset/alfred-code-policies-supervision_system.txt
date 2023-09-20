@@ -68,15 +68,13 @@ GrateObject = alfred_action_factory(
     parameters=["object_id"],
 )
 
-;; Example translations from natural language to a simplified goal name, and then a PDDL plan. A PDDL plan is a sequence of actions in JSON that specifies the preconditions and post conditions of an action. 
-;; Notice that PDDL plans MUST only use predicates, object types, and receptacle types exactly as they appear in the domain above. People may also have been unclear about which objects and actions they were talking about, so we list multiple possible guesses for goal if there is uncertainty over what they meant.
-;; PDDL plans should be based on an actual PDDL domain file.
-
+;; Example translations from natural language to a code policy in Python.
+;; Notice that code MUST only use predicates, object types, and receptacle types exactly as they appear in the domain above. People may also have been unclear about which objects and actions they were talking about, so consider multiple possible guesses for goal if there is uncertainty over what they meant.
 ;; Human written natural language goal.
-place a baked, grated apple on top of the dining table.
-
-;; Plan as code policies for "place a baked, grated apple on top of the dining table."
+put grated cheese on the countertop.
+;; Plan as code policies for "put grated cheese on the countertop."
 <START>
+[
 {
     "action": "PickupObject",
     "argument_names" : ('env_state', 'env', 'object_id'),
@@ -102,7 +100,141 @@ place a baked, grated apple on top of the dining table.
 {
 "action": "GrateObject",
 "argument_names" : ('env_state', 'env', 'object_id', 'tool_object_id'),
-"ground_arguments" : ("env_state", "env", "apple", "kgrater"),
+"ground_arguments" : ("env_state", "env", "cheese", "grater"),
+"body" : """
+    # Preconditions: holding the tool object.
+    if (not env_state.holds(tool_object_id)):
+        print("Failure, not holding tool.")
+        return False, env_state
+    # Precondition: object is sliceable.
+    if (not env_state.sliceable(object_id)):
+        print("Failure, object is not sliceable.")
+        return False, env_state
+
+    # Low-level actions: grate the object if you're holding the tool.
+    try:
+        action = GrateObject(args={'object_id':object_id})
+        success = act(env=env, action=action)
+        print("Successfully sliced up an object!")
+    except:
+        print("Execution failure...")
+        return False
+
+    # Postconditions: the object is grated.
+    final_env_state = perceive(env)
+    return (final_env_state.isGrated(object_id)), final_env_state
+"""
+        }
+{
+    "action": "PutObjectInReceptacle",
+    "argument_names" : ('env_state', 'env', 'object_id', 'receptacle_object_id'),
+    "ground_arguments" : ("env_state", "env", "grater", "sidetable"),
+    "body" : 
+"""
+    # Preconditions: we should be holding the object.
+    if (not env_state.holds(object_id)):
+        print("Failure, not holding object.")
+        return False, env_state
+
+    # Low-level actions: put the object in the receptacle.
+    try:
+        print("Trying to put in receptacle.")
+        action = PutObject(args={'object_id':object_id, 'receptacle_object_id':receptacle_object_id})
+        success = act(env=env, action=action)
+        print("Result of PutObject is: {success}")
+    except:
+        print("Failure, could not place in receptacle.")
+        return False, env_state
+
+    # Postconditions: not holding the object and the object is in the receptacle.
+    final_env_state = perceive(env)
+    if (not final_env_state.holds(object_id)) and (final_env_state.inReceptacle(object_id, receptacle_object_id)):
+        return True, final_env_state
+"""
+},
+{
+    "action": "PickupObject",
+    "argument_names" : ('env_state', 'env', 'object_id'),
+    "ground_arguments" : ("env_state", "env", "cheese"),
+    "body" : 
+"""
+    # Preconditions: None.
+
+    # Low-level actions: pick up the object.
+    try:
+        action = PickupObject(args={'object_id':object_id})
+        success = act(env=env, action=action)
+        print("Successfully picked up an object!")
+    except:
+        print("Execution failure...")
+        return False
+
+    # Postconditions: holding the object.
+    final_env_state = perceive(env)
+    return (final_env_state.holds(object_id)), final_env_state
+"""
+},
+{
+    "action": "PutObjectInReceptacle",
+    "argument_names" : ('env_state', 'env', 'object_id', 'receptacle_object_id'),
+    "ground_arguments" : ("env_state", "env", "cheese", "countertop"),
+    "body" : 
+"""
+    # Preconditions: we should be holding the object.
+    if (not env_state.holds(object_id)):
+        print("Failure, not holding object.")
+        return False, env_state
+
+    # Low-level actions: put the object in the receptacle.
+    try:
+        print("Trying to put in receptacle.")
+        action = PutObject(args={'object_id':object_id, 'receptacle_object_id':receptacle_object_id})
+        success = act(env=env, action=action)
+        print("Result of PutObject is: {success}")
+    except:
+        print("Failure, could not place in receptacle.")
+        return False, env_state
+
+    # Postconditions: not holding the object and the object is in the receptacle.
+    final_env_state = perceive(env)
+    if (not final_env_state.holds(object_id)) and (final_env_state.inReceptacle(object_id, receptacle_object_id)):
+        return True, final_env_state
+"""
+}
+]
+<END>
+
+;; Human written natural language goal.
+place a baked, grated apple on top of the dining table.
+;; Plan as code policies for "place a baked, grated apple on top of the dining table."
+<START>
+[
+{
+    "action": "PickupObject",
+    "argument_names" : ('env_state', 'env', 'object_id'),
+    "ground_arguments" : ("env_state", "env", "grater"),
+    "body" : 
+"""
+    # Preconditions: None.
+
+    # Low-level actions: pick up the object.
+    try:
+        action = PickupObject(args={'object_id':object_id})
+        success = act(env=env, action=action)
+        print("Successfully picked up an object!")
+    except:
+        print("Execution failure...")
+        return False
+
+    # Postconditions: holding the object.
+    final_env_state = perceive(env)
+    return (final_env_state.holds(object_id)), final_env_state
+"""
+},
+{
+"action": "GrateObject",
+"argument_names" : ('env_state', 'env', 'object_id', 'tool_object_id'),
+"ground_arguments" : ("env_state", "env", "apple", "grater"),
 "body" : """
     # Preconditions: holding the tool object.
     if (not env_state.holds(tool_object_id)):
@@ -234,7 +366,7 @@ place a baked, grated apple on top of the dining table.
 {
     "action": "PutObjectInReceptacle",
     "argument_names" : ('env_state', 'env', 'object_id', 'receptacle_object_id'),
-    "ground_arguments" : ("env_state", "env", "apple", "sidetable"),
+    "ground_arguments" : ("env_state", "env", "apple", "diningtable"),
     "body" : 
 """
     # Preconditions: we should be holding the object.
@@ -257,5 +389,6 @@ place a baked, grated apple on top of the dining table.
     if (not final_env_state.holds(object_id)) and (final_env_state.inReceptacle(object_id, receptacle_object_id)):
         return True, final_env_state
 """
-},
+}
+]
 <END>
