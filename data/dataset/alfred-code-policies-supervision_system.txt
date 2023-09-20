@@ -18,41 +18,55 @@ env_state.toggleable(object_id)
 env_state.isToggled(object_id)
 env_state.sliceable(object_id)
 env_state.isSliced(object_id)
-env_state.fillable(object_id)
-env_state.isFillable(object_id)
-env_state.
+env_state.gratable(object_id)
+env_state.isGrated(object_id)
 
-;; Predicates for querying the environment state.
-(:predicates
-		(atLocation ?a - agent ?l - location) 
-        (receptacleAtLocation ?r - receptacle ?l - location) 
-        (objectAtLocation ?o - object ?l - location)
-        (inReceptacle ?o - object ?r - receptacle) 
-        (receptacleType ?r - receptacle ?t - rtype) 
-        (objectType ?o - object ?t - otype) 
-        (holds ?a - agent ?o - object) 
-        (holdsAny ?a - agent) 
-        (holdsAnyReceptacleObject ?a - agent) 
-        
-        (fillable ?r - receptacle)
-        (isFilled ?r - receptacle) 
-	    (openable ?r - receptacle) 
-        (opened ?r - receptacle) 
-        (isClean ?o - object) 
-        (cleanable ?o - object)
-        (restartable ?o - object)
-        (isRestarted ?o - object) 
-        (isHot ?o - object) 
-        (heatable ?o - object) 
-        (isCool ?o - object) 
-        (coolable ?o - object) 
-        (toggleable ?o - object)  
-        (isToggled ?o - object) 
-        (sliceable ?o - object) 
-        (isSliced ?o - object)
-        (gratable ?o - object)
-        (isGrated ?o - object) 
- )
+;; Actions that can be taken in the object state.
+OpenObject = alfred_action_factory(
+    name="OpenObject", action_type=AlfredActionType.OpenObject, parameters=["object_id"]
+)
+
+CloseObject = alfred_action_factory(
+    name="CloseObject",
+    action_type=AlfredActionType.CloseObject,
+    parameters=["object_id"],
+)
+
+PickupObject = alfred_action_factory(
+    name="PickupObject",
+    action_type=AlfredActionType.PickupObject,
+    parameters=["object_id"],
+)
+
+PutObject = alfred_action_factory(
+    name="PutObject",
+    action_type=AlfredActionType.PutObject,
+    parameters=["object_id", "receptacle_object_id"],
+)
+
+ToggleObjectOn = alfred_action_factory(
+    name="ToggleObjectOn",
+    action_type=AlfredActionType.ToggleObjectOn,
+    parameters=["object_id"],
+)
+
+ToggleObjectOff = alfred_action_factory(
+    name="ToggleObjectOff",
+    action_type=AlfredActionType.ToggleObjectOff,
+    parameters=["object_id"],
+)
+
+SliceObject = alfred_action_factory(
+    name="SliceObject",
+    action_type=AlfredActionType.SliceObject,
+    parameters=["object_id"],
+)
+
+GrateObject = alfred_action_factory(
+    name="GrateObject",
+    action_type=AlfredActionType.GrateObject,
+    parameters=["object_id"],
+)
 
 ;; Example translations from natural language to a simplified goal name, and then a PDDL plan. A PDDL plan is a sequence of actions in JSON that specifies the preconditions and post conditions of an action. 
 ;; Notice that PDDL plans MUST only use predicates, object types, and receptacle types exactly as they appear in the domain above. People may also have been unclear about which objects and actions they were talking about, so we list multiple possible guesses for goal if there is uncertainty over what they meant.
@@ -80,18 +94,39 @@ place a baked, grated apple on top of the dining table.
         print("Execution failure...")
         return False
 
-    # Postconditions:
+    # Postconditions: holding the object.
     final_env_state = perceive(env)
     return (final_env_state.holds(object_id)), final_env_state
 """
 },
 {
-    "action": "GrateObject",
-    "args": [
-        "apple",
-        "grater"
-    ]
-},
+"action": "GrateObject",
+"argument_names" : ('env_state', 'env', 'object_id', 'tool_object_id'),
+"ground_arguments" : ("env_state", "env", "apple", "kgrater"),
+"body" : """
+    # Preconditions: holding the tool object.
+    if (not env_state.holds(tool_object_id)):
+        print("Failure, not holding tool.")
+        return False, env_state
+    # Precondition: object is sliceable.
+    if (not env_state.sliceable(object_id)):
+        print("Failure, object is not sliceable.")
+        return False, env_state
+
+    # Low-level actions: grate the object if you're holding the tool.
+    try:
+        action = GrateObject(args={'object_id':object_id})
+        success = act(env=env, action=action)
+        print("Successfully sliced up an object!")
+    except:
+        print("Execution failure...")
+        return False
+
+    # Postconditions: the object is grated.
+    final_env_state = perceive(env)
+    return (final_env_state.isGrated(object_id)), final_env_state
+"""
+        }
 {
     "action": "PutObjectInReceptacle",
     "argument_names" : ('env_state', 'env', 'object_id', 'receptacle_object_id'),
@@ -113,7 +148,7 @@ place a baked, grated apple on top of the dining table.
         print("Failure, could not place in receptacle.")
         return False, env_state
 
-    # Postconditions:
+    # Postconditions: not holding the object and the object is in the receptacle.
     final_env_state = perceive(env)
     if (not final_env_state.holds(object_id)) and (final_env_state.inReceptacle(object_id, receptacle_object_id)):
         return True, final_env_state
@@ -136,17 +171,65 @@ place a baked, grated apple on top of the dining table.
         print("Execution failure...")
         return False
 
-    # Postconditions:
+    # Postconditions: holding the object.
     final_env_state = perceive(env)
     return (final_env_state.holds(object_id)), final_env_state
 """
 },
 {
-    "action": "BakeObject",
-    "args": [
-        "apple",
-        "oven"
-    ]
+"action": "BakeObject",
+"argument_names" : ('env_state', 'env', 'object_id', 'receptacle_object_id'),
+"ground_arguments" : ("env_state", "env", "apple", "oven"),
+"body" : """
+    # Preconditions: we should be holding the object.
+    if (not env_state.holds(object_id)):
+        print("Failure, not holding object.")
+        return False, env_state
+
+    # Low-level actions: open the receptacle
+    if (not env_state.opened(receptacle_object_id)):
+        try:
+            action = OpenObject(args={'object_id':receptacle_object_id})
+            success = act(env=env, action=action)
+            print("Successfully opened up an object!")
+        except:
+            print("Execution failure...")
+            return False
+
+    # Low-level actions: put the object in the receptacle.
+    try:
+        print("Trying to put in receptacle.")
+        action = PutObject(args={'object_id':object_id, 'receptacle_object_id':receptacle_object_id})
+        success = act(env=env, action=action)
+        print(f"Result of PutObject is: {success}")
+    except:
+        print("Failure, could not place in receptacle.")
+        return False, env_state
+
+    # Low-level actions: close the receptacle
+    try:
+        action = CloseObject(args={'object_id':receptacle_object_id})
+        success = act(env=env, action=action)
+        print(f"Result of CloseObject is: {success}")
+    except:
+        print("Execution failure...")
+        return False
+
+    # Low-level actions: open the receptacle again
+    if (not env_state.opened(receptacle_object_id)):
+        try:
+            action = OpenObject(args={'object_id':receptacle_object_id})
+            success = act(env=env, action=action)
+            print(f"Result of OpenObject is: {success}")
+        except:
+            print("Execution failure...")
+            return False
+
+
+    # Postconditions: object is hot.
+    final_env_state = perceive(env)
+    return (final_env_state.isHot(object_id)), final_env_state
+"""
 },
 {
     "action": "PutObjectInReceptacle",
@@ -169,7 +252,7 @@ place a baked, grated apple on top of the dining table.
         print("Failure, could not place in receptacle.")
         return False, env_state
 
-    # Postconditions:
+    # Postconditions: not holding the object and the object is in the receptacle.
     final_env_state = perceive(env)
     if (not final_env_state.holds(object_id)) and (final_env_state.inReceptacle(object_id, receptacle_object_id)):
         return True, final_env_state

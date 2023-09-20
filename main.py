@@ -273,25 +273,25 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
             command_args=args,
             verbose=args.verbose,
         )
-        if args.llm_propose_code_policies:
-            codex.propose_code_policies_for_problems(
-                problems=planning_problems["train"],
-                domain=pddl_domain,
-                n_samples=args.n_plan_samples,
-                temperature=args.codex_plan_temperature,
-                command_args=args,
-                output_directory=output_directory,
-                resume=args.resume,
-                verbose=args.verbose,
-                external_code_policies_supervision=args.external_code_policies_supervision
-            )
-            pddl.preprocess_code_policies(
-                problems=planning_problems["train"],
-                pddl_domain=pddl_domain,
-                output_directory=output_directory,
-                command_args=args,
-                verbose=args.verbose,
-            ) 
+        # if args.llm_propose_code_policies:
+        #     codex.propose_code_policies_for_problems(
+        #         problems=planning_problems["train"],
+        #         domain=pddl_domain,
+        #         n_samples=args.n_plan_samples,
+        #         temperature=args.codex_plan_temperature,
+        #         command_args=args,
+        #         output_directory=output_directory,
+        #         resume=args.resume,
+        #         verbose=args.verbose,
+        #         external_code_policies_supervision=args.external_code_policies_supervision
+        #     )
+        #     pddl.preprocess_code_policies(
+        #         problems=planning_problems["train"],
+        #         pddl_domain=pddl_domain,
+        #         output_directory=output_directory,
+        #         command_args=args,
+        #         verbose=args.verbose,
+        #     ) 
 
         if args.llm_propose_task_predicates:
             # Task predicates baseline. 
