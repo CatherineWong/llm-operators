@@ -62,11 +62,15 @@ parser.add_argument("--dataset_fraction", default=1.0, type=float, help="Fractio
 parser.add_argument("--dataset_pddl_directory", type=str, help="Location of the top level PDDL directory.")
 parser.add_argument("--supervision_name", type=str, default="supervision", help="Tag for the supervision dataset to load.")
 
+# Mark the fraction of the dataset that we want to reserve for validation.
+parser.add_argument("--restrict_goal_prefix_train", type=str, nargs="+", default=[ALL], help="Which initial goal types to train on.")
+
 # Mark the fraction of the dataset that we want to supervise on.
 parser.add_argument("--goal_supervision_fraction", default=0.1, type=float, help="Randomly selected fraction of the dataset to supervise with ground truth PDDL goals.")
 parser.add_argument("--initial_goal_supervision_prefix", type=str, nargs="+", default=[ALL], help="Which initial goal types to supervise on, or ALL if we want to sample ALL of the goal types. This will be sampled in accordance to the underlying distribution of problems of that problem type.")
 parser.add_argument("--plan_supervision_fraction", default=0.1, type=float, help="Randomly selected fraction of the dataset to supervise with ground truth PDDL goals.")
 parser.add_argument("--initial_plans_prefix", type=str, nargs="+", default=[ALL], help="Which initial plan types to supervise on. Used to seed the Codex proposals, or ALL if we want some subset of the initial")
+
 
 # Codex proposal parameters.
 parser.add_argument("--initial_pddl_predicates", type=str, nargs="+", default=[], help="Which initial PDDL predicates to run with.  Used to seed the Codex proposals.")
@@ -187,6 +191,7 @@ def main():
         initial_pddl_operators=args.initial_pddl_operators,
         domain=pddl_domain,
         verbose=args.verbose,
+        restrict_goal_prefix_train=args.restrict_goal_prefix_train
     )
 
     # Load any external supervision on PDDL domains.

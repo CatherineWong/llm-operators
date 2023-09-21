@@ -8,7 +8,7 @@ from llm_operators.pddl import Domain, OtherDomain, PDDLPlan
 
 PDDL_PLAN = "pddl_plan"
 PDDL_PLAN_OVERALL_COST = "pddl_plan_overall_cost"
-
+ALL = "ALL"
 
 class Problem:
     # A planning problem, which contains both PDDL and low-level plan information.
@@ -303,7 +303,20 @@ def mark_goal_supervision_problems(planning_dataset, initial_goal_supervision_pr
         total_goal_supervision += num_problems_to_supervise
     print(f"Total goal supervision problems: {total_goal_supervision}")
 
+def restrict_goal_supervision_problems(planning_dataset, initial_goal_supervision_prefix):
+    if initial_goal_supervision_prefix == ["ALL"]:
+        return planning_dataset
+    restricted_planning_dataset = defaultdict(lambda: defaultdict())
 
+    for split in planning_dataset:
+        problem_prefix_to_problem_ids = build_problem_prefix_to_problem_ids(
+            planning_dataset, initial_goal_supervision_prefix, split=split
+        )
+        for prefix in initial_goal_supervision_prefix:
+            for problem in problem_prefix_to_problem_ids[prefix]:
+                restricted_planning_dataset[split][problem] = planning_dataset[split][problem]
+    return restricted_planning_dataset
+    
 def load_planning_problems_dataset(
     dataset_name,
     dataset_pddl_directory,
@@ -315,6 +328,7 @@ def load_planning_problems_dataset(
     initial_pddl_operators,
     domain=None,
     verbose=False,
+    restrict_goal_prefix_train=[ALL],
 ):
     planning_problem_loader = PLANNING_PROBLEMS_REGISTRY[dataset_name]
     planning_problem_loader.domain = domain
@@ -330,6 +344,8 @@ def load_planning_problems_dataset(
     print('=' * 80)
     print(f"Initial train problems: {len(planning_dataset['train'])}")
 
+    print(f"Restricting planning problems from goal prefix: {restrict_goal_prefix_train}")
+    planning_dataset = restrict_goal_supervision_problems(planning_dataset, restrict_goal_prefix_train)
     print(f'Marking problems for goal supervision: fraction={initial_goal_supervision_fraction}, prefix={initial_goal_supervision_prefix}')
     mark_goal_supervision_problems(planning_dataset, initial_goal_supervision_prefix, initial_goal_supervision_fraction)
 
