@@ -1,10 +1,10 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
-
 import copy
 import os.path as osp
 import itertools
 import json
+
 
 from llm_operators.datasets.dataset_core import register_planning_pddl_domain, register_planning_domain_problems
 from llm_operators.datasets.dataset_utils import load_pddl_file_with_operators
@@ -121,7 +121,7 @@ def load_crafting_world_20230829_crafting_only(dataset_pddl_directory: str, data
 
 
 class SimpleConjunction(object):
-    def __init__(self, conjuncts: list[str]):
+    def __init__(self, conjuncts):
         self.conjuncts = conjuncts
 
 

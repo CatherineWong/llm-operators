@@ -2009,6 +2009,7 @@ def check_valid_arguments(raw_argument_names, raw_ground_arguments, use_alfred):
 
 ##### Preprocess task predicates for the baseline.
 def preprocess_task_predicates(
+    dataset_name,
     problems,
     pddl_domain,
     output_directory,
@@ -2026,7 +2027,7 @@ def preprocess_task_predicates(
     for problem in unsolved_problems:
         preprocessed_task_predicates = set()
         for proposed_task_predicate in problem.proposed_pddl_task_predicates:
-            success, preprocessed_task_predicate_set = preprocess_task_predicate_strings(proposed_task_predicate, pddl_domain, problem.ground_truth_pddl_problem.ground_truth_objects_dict)
+            success, preprocessed_task_predicate_set = preprocess_task_predicate_strings(dataset_name, proposed_task_predicate, pddl_domain, problem.ground_truth_pddl_problem.ground_truth_objects_dict)
             if not success:
                 print("Failed to preprocess predicates")
                 print(proposed_task_predicate)
@@ -2046,39 +2047,56 @@ def preprocess_task_predicates(
         with open(os.path.join(output_directory, output_filepath), "w") as f:
             json.dump(output_json, f)
 
-def preprocess_task_predicate_strings(proposed_task_predicate, pddl_domain, ground_truth_objects_dict):
+def preprocess_task_predicate_strings(dataset_name, proposed_task_predicate, pddl_domain, ground_truth_objects_dict):
     from ast import literal_eval
     """:ret: list of ground truth predicate objects as frozendicts"""
     preprocessed_task_predicates_list = []
-    try:
-        raw_predicates = literal_eval(f"[{proposed_task_predicate}]")
-    except:
-        print("Error, could not parse predicates list.")
-        return False, tuple(preprocessed_task_predicates_list)
-    try:
-        for raw_task_predicates in raw_predicates:
-            preprocessed_action = {
-                "action" : "",
-                "precondition_ground_predicates" : [],
-                "postcondition_ground_predicates" : []
-            }
-            preprocessed_action['action'] = raw_task_predicates.get("action", "")
-            for predicate_list in ["precondition_ground_predicates", "postcondition_ground_predicates"]:
-                preprocessed_predicate_list = []
-                raw_predicate_list = raw_task_predicates.get(predicate_list, [])
-                for predicate in raw_predicate_list:
-                    if check_valid_predicate(predicate, pddl_domain.ground_truth_predicates, pddl_domain.ground_truth_constants, use_alfred_ground_argtypes=pddl_domain.domain_name == ALFRED_DOMAIN_FILE_NAME):
-                        preprocessed_predicate_list.append(make_hashable_predicate(predicate))
-                preprocessed_action[predicate_list] = tuple(preprocessed_predicate_list)
-            
-            preprocessed_action = frozendict(preprocessed_action)
 
-            if not check_empty_action(preprocessed_action):
-                preprocessed_task_predicates_list.append(preprocessed_action)
-        preprocessed_task_predicates_list = tuple(preprocessed_task_predicates_list)
-        return True, preprocessed_task_predicates_list
-    except:
-        return False, tuple(preprocessed_task_predicates_list)
+    if "alfred" in dataset_name:
+        try:
+            raw_predicates = literal_eval(f"[{proposed_task_predicate}]")
+        except:
+            print("Error, could not parse predicates list.")
+            return False, tuple(preprocessed_task_predicates_list)
+        try:
+            for raw_task_predicates in raw_predicates:
+                preprocessed_action = {
+                    "action" : "",
+                    "precondition_ground_predicates" : [],
+                    "postcondition_ground_predicates" : []
+                }
+                preprocessed_action['action'] = raw_task_predicates.get("action", "")
+                for predicate_list in ["precondition_ground_predicates", "postcondition_ground_predicates"]:
+                    preprocessed_predicate_list = []
+                    raw_predicate_list = raw_task_predicates.get(predicate_list, [])
+                    for predicate in raw_predicate_list:
+                        if check_valid_predicate(predicate, pddl_domain.ground_truth_predicates, pddl_domain.ground_truth_constants, use_alfred_ground_argtypes=pddl_domain.domain_name == ALFRED_DOMAIN_FILE_NAME):
+                            preprocessed_predicate_list.append(make_hashable_predicate(predicate))
+                    preprocessed_action[predicate_list] = tuple(preprocessed_predicate_list)
+                
+                preprocessed_action = frozendict(preprocessed_action)
+
+                if not check_empty_action(preprocessed_action):
+                    preprocessed_task_predicates_list.append(preprocessed_action)
+            preprocessed_task_predicates_list = tuple(preprocessed_task_predicates_list)
+            return True, preprocessed_task_predicates_list
+        except:
+            return False, tuple(preprocessed_task_predicates_list)
+    else:
+        # If minecraft, literally just check that its a list of strings.
+        raw_predicate_list = literal_eval(proposed_task_predicate)
+        for predicate_list in raw_predicate_list:
+            if not type(predicate_list) == list:
+                return False, ()
+            for predicate in predicate_list:
+                if not type(predicate) == str:
+                    return False, ()
+            preprocessed_predicate_list = tuple(predicate_list)
+            preprocessed_task_predicates_list.append(preprocessed_predicate_list)
+
+        return preprocessed_task_predicates_list
+
+
 
 def make_hashable_predicate(predicate):
     predicate['arguments'] = tuple(predicate['arguments'])

@@ -1,4 +1,4 @@
-name: llm-operators
+name: llm-operators-mc
 channels:
   - conda-forge
   - defaults

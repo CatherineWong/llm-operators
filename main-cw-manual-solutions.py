@@ -4,7 +4,7 @@
 import os.path as osp
 import sys
 import argparse
-
+import llm_operators.codex as codex
 import llm_operators.datasets as datasets
 import llm_operators.experiment_utils as experiment_utils
 import llm_operators.datasets.crafting_world as crafting_world
@@ -129,6 +129,7 @@ def run_manual_solution_primitive(pds_domain, problems):
 
 
 def run_manual_solution_subgoal(pds_domain, problems):
+    # Run manual solutions proposed by LLMs.
     for problem_key, problem in problems.items():
         print('Now solving problem: {}'.format(problem_key))
         simulator, gt_goal = load_state_from_problem(pds_domain, problem)

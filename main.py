@@ -225,7 +225,7 @@ def main():
 
 def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_iteration, output_directory, rng, split="train"):
     # Given a domain and a set of goals, this uses Codex + preprocessing to sample a set of operator definitions for goals.
-    if not args.debug_no_propose_plans_operators_goals:
+    if not args.debug_no_propose_plans_operators_goals and not args.llm_propose_task_predicates and not args.llm_propose_code_policies:
         codex.propose_goals_for_problems(
             dataset_name=args.dataset_name,
             problems=planning_problems[split],
@@ -287,46 +287,47 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
                 command_args=args,
                 verbose=args.verbose,
             )
-        if args.llm_propose_code_policies:
-            codex.propose_code_policies_for_problems(
-                problems=planning_problems[split],
-                domain=pddl_domain,
-                n_samples=args.n_plan_samples,
-                temperature=args.codex_plan_temperature,
-                command_args=args,
-                output_directory=output_directory,
-                resume=args.resume,
-                verbose=args.verbose,
-                external_code_policies_supervision=args.external_code_policies_supervision
-            )
-            pddl.preprocess_code_policies(
-                problems=planning_problems[split],
-                pddl_domain=pddl_domain,
-                output_directory=output_directory,
-                command_args=args,
-                verbose=args.verbose,
-            ) 
+    if args.llm_propose_code_policies:
+        codex.propose_code_policies_for_problems(
+            problems=planning_problems[split],
+            domain=pddl_domain,
+            n_samples=args.n_plan_samples,
+            temperature=args.codex_plan_temperature,
+            command_args=args,
+            output_directory=output_directory,
+            resume=args.resume,
+            verbose=args.verbose,
+            external_code_policies_supervision=args.external_code_policies_supervision
+        )
+        pddl.preprocess_code_policies(
+            problems=planning_problems[split],
+            pddl_domain=pddl_domain,
+            output_directory=output_directory,
+            command_args=args,
+            verbose=args.verbose,
+        ) 
 
-        if args.llm_propose_task_predicates:
-            # Task predicates baseline. 
-            codex.propose_task_predicates_for_problems(
-                problems=planning_problems[split],
-                domain=pddl_domain,
-                n_samples=args.n_plan_samples,
-                temperature=args.codex_plan_temperature,
-                command_args=args,
-                output_directory=output_directory,
-                resume=args.resume,
-                verbose=args.verbose,
-                external_task_predicates_supervision=args.external_task_predicates_supervision
-            )
-            pddl.preprocess_task_predicates(
-                problems=planning_problems[split],
-                pddl_domain=pddl_domain,
-                output_directory=output_directory,
-                command_args=args,
-                verbose=args.verbose,
-            )
+    if args.llm_propose_task_predicates:
+        # Task predicates baseline. 
+        codex.propose_task_predicates_for_problems(
+            problems=planning_problems[split],
+            domain=pddl_domain,
+            n_samples=args.n_plan_samples,
+            temperature=args.codex_plan_temperature,
+            command_args=args,
+            output_directory=output_directory,
+            resume=args.resume,
+            verbose=args.verbose,
+            external_task_predicates_supervision=args.external_task_predicates_supervision
+        )
+        pddl.preprocess_task_predicates(
+            dataset_name=args.dataset_name,
+            problems=planning_problems[split],
+            pddl_domain=pddl_domain,
+            output_directory=output_directory,
+            command_args=args,
+            verbose=args.verbose,
+        )
     if args.debug_stop_after_first_proposal:
         return True
 
@@ -361,7 +362,7 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
 
         if args.llm_propose_task_predicates:
             # Baseline: plan directly on task predicate sequence proposed by LLM.
-            any_motion_plan_success = baselines._run_llm_propose_task_predicates_motion_planner(pddl_domain, problem_idx, problem_id, planning_problems,
+            any_motion_plan_success = baselines._run_llm_propose_task_predicates_motion_planner(args.dataset_name, pddl_domain, problem_idx, problem_id, planning_problems,
                     args=args, curr_iteration=curr_iteration, output_directory=output_directory,
                     plan_pass_identifier='first',
                     plan_attempt_idx=0, goal_idx=0, rng=rng, split=split)
