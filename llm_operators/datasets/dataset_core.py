@@ -339,13 +339,12 @@ def load_planning_problems_dataset(
         dataset_fraction=dataset_fraction,
         verbose=verbose,
     )
+    planning_dataset = restrict_goal_supervision_problems(planning_dataset, restrict_goal_prefix_train)
+    print(f"Restricting planning problems from goal prefix: {restrict_goal_prefix_train}")
 
     print(f"Loaded initial dataset: {dataset_name}")
     print('=' * 80)
     print(f"Initial train problems: {len(planning_dataset['train'])}")
-
-    print(f"Restricting planning problems from goal prefix: {restrict_goal_prefix_train}")
-    planning_dataset = restrict_goal_supervision_problems(planning_dataset, restrict_goal_prefix_train)
     print(f'Marking problems for goal supervision: fraction={initial_goal_supervision_fraction}, prefix={initial_goal_supervision_prefix}')
     mark_goal_supervision_problems(planning_dataset, initial_goal_supervision_prefix, initial_goal_supervision_fraction)
 

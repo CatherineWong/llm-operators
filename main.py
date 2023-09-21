@@ -54,6 +54,7 @@ parser.add_argument("--experiment_name", type=str, default="", help="Experiment 
 parser.add_argument("--random_seed", type=int, default=0, help="Random seed for replication.")
 parser.add_argument("--output_directory", type=str, help="Location of the directory for writing outputs.")
 parser.add_argument("--train_iterations", type=int, help="How many training iterations to run.")
+parser.add_argument("--val_split", type=str, default="valid_seen", help="Name of val split.")
 
 # Dataset setup.
 parser.add_argument("--pddl_domain_name", type=str, help="Name of the PDDL domain to load.")
@@ -215,13 +216,18 @@ def main():
         if stop:
             print('Stop the experiment.')
             break
+    # Run the validation set.
+    print("======Running validation=======")
+    curr_iteration = args.train_iterations + 1
+    output_directory = experiment_utils.get_output_directory(curr_iteration=curr_iteration, command_args=args, experiment_name_to_load=args.experiment_name)
+    stop = run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_iteration, output_directory, rng, split=args.val_split)
 
 
-def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_iteration, output_directory, rng):
+def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_iteration, output_directory, rng, split="train"):
     # Given a domain and a set of goals, this uses Codex + preprocessing to sample a set of operator definitions for goals.
     if not args.debug_no_propose_plans_operators_goals:
         codex.propose_goals_for_problems(
-            problems=planning_problems["train"],
+            problems=planning_problems[split],
             domain=pddl_domain,
             initial_pddl_predicates=args.initial_pddl_predicates,  # Currently this has no effect.
             supervision_pddl=None,  # (ZS 7/27/23) skip supervising on external datasets for now.
@@ -242,45 +248,47 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
             external_goal_sample_with_prompt=args.external_goal_sample_with_prompt,
         )
         pddl.preprocess_goals(
-            problems=planning_problems["train"],
+            problems=planning_problems[split],
             pddl_domain=pddl_domain,
             output_directory=output_directory,
             command_args=args,
             verbose=args.verbose,
         )
-        codex.propose_plans_operators_for_problems(
-            problems=planning_problems["train"],
-            domain=pddl_domain,
-            supervision_pddl=supervision_pddl,
-            n_plan_samples=args.n_plan_samples,
-            n_operator_samples=args.n_operator_samples,
-            plan_temperature=args.codex_plan_temperature,
-            operator_temperature=args.codex_operator_temperature,
-            operator_minimum_usage=args.operator_propose_minimum_usage,
-            operator_use_cot=bool(args.operator_use_cot),
-            external_plan_supervision=args.external_plan_supervision,
-            external_operator_supervision=args.external_operator_supervision,
-            external_operator_sample_with_prompt=args.external_operator_sample_with_prompt,
-            external_operator_names=args.external_operator_names,
-            use_gt=args.debug_ground_truth_operators,
-            command_args=args,
-            curr_iteration=curr_iteration,
-            output_directory=output_directory,
-            resume=args.resume,
-            debug_skip_propose_operators_after=args.debug_skip_propose_operators_after,
-            debug_skip_propose_plans_after=args.debug_skip_propose_plans_after,
-            verbose=args.verbose,
-        )
-        pddl.preprocess_operators(
-            pddl_domain,
-            output_directory=output_directory,
-            maximum_operator_arity=args.maximum_operator_arity,
-            command_args=args,
-            verbose=args.verbose,
-        )
+
+        if split == "train":
+            codex.propose_plans_operators_for_problems(
+                problems=planning_problems[split],
+                domain=pddl_domain,
+                supervision_pddl=supervision_pddl,
+                n_plan_samples=args.n_plan_samples,
+                n_operator_samples=args.n_operator_samples,
+                plan_temperature=args.codex_plan_temperature,
+                operator_temperature=args.codex_operator_temperature,
+                operator_minimum_usage=args.operator_propose_minimum_usage,
+                operator_use_cot=bool(args.operator_use_cot),
+                external_plan_supervision=args.external_plan_supervision,
+                external_operator_supervision=args.external_operator_supervision,
+                external_operator_sample_with_prompt=args.external_operator_sample_with_prompt,
+                external_operator_names=args.external_operator_names,
+                use_gt=args.debug_ground_truth_operators,
+                command_args=args,
+                curr_iteration=curr_iteration,
+                output_directory=output_directory,
+                resume=args.resume,
+                debug_skip_propose_operators_after=args.debug_skip_propose_operators_after,
+                debug_skip_propose_plans_after=args.debug_skip_propose_plans_after,
+                verbose=args.verbose,
+            )
+            pddl.preprocess_operators(
+                pddl_domain,
+                output_directory=output_directory,
+                maximum_operator_arity=args.maximum_operator_arity,
+                command_args=args,
+                verbose=args.verbose,
+            )
         if args.llm_propose_code_policies:
             codex.propose_code_policies_for_problems(
-                problems=planning_problems["train"],
+                problems=planning_problems[split],
                 domain=pddl_domain,
                 n_samples=args.n_plan_samples,
                 temperature=args.codex_plan_temperature,
@@ -291,7 +299,7 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
                 external_code_policies_supervision=args.external_code_policies_supervision
             )
             pddl.preprocess_code_policies(
-                problems=planning_problems["train"],
+                problems=planning_problems[split],
                 pddl_domain=pddl_domain,
                 output_directory=output_directory,
                 command_args=args,
@@ -301,7 +309,7 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
         if args.llm_propose_task_predicates:
             # Task predicates baseline. 
             codex.propose_task_predicates_for_problems(
-                problems=planning_problems["train"],
+                problems=planning_problems[split],
                 domain=pddl_domain,
                 n_samples=args.n_plan_samples,
                 temperature=args.codex_plan_temperature,
@@ -312,7 +320,7 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
                 external_task_predicates_supervision=args.external_task_predicates_supervision
             )
             pddl.preprocess_task_predicates(
-                problems=planning_problems["train"],
+                problems=planning_problems[split],
                 pddl_domain=pddl_domain,
                 output_directory=output_directory,
                 command_args=args,
@@ -344,7 +352,7 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
         )
 
     print('Attempting task and motion planning on all problems.')
-    for problem_idx, problem_id in enumerate(planning_problems["train"]):
+    for problem_idx, problem_id in enumerate(planning_problems[split]):
         if problem_idx < args.debug_start_problem_idx or (
             args.debug_skip_problems is not None and problem_idx in args.debug_skip_problems
         ):
@@ -355,14 +363,14 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
             any_motion_plan_success = baselines._run_llm_propose_task_predicates_motion_planner(pddl_domain, problem_idx, problem_id, planning_problems,
                     args=args, curr_iteration=curr_iteration, output_directory=output_directory,
                     plan_pass_identifier='first',
-                    plan_attempt_idx=0, goal_idx=0, rng=rng)
+                    plan_attempt_idx=0, goal_idx=0, rng=rng, split=split)
             
         elif args.llm_propose_code_policies:
             # Baseline: plan directly on code policies proposed by LLM.
              any_motion_plan_success = baselines._run_llm_propose_code_policies_motion_planner(pddl_domain, problem_idx, problem_id, planning_problems,
                     args=args, curr_iteration=curr_iteration, output_directory=output_directory,
                     plan_pass_identifier='first',
-                    plan_attempt_idx=0, goal_idx=0, rng=rng)
+                    plan_attempt_idx=0, goal_idx=0, rng=rng, split=split)
         else:
             for plan_attempt_idx in range(args.n_attempts_to_plan):
                 for goal_idx in range(len(planning_problems['train'][problem_id].proposed_pddl_goals)):
@@ -370,46 +378,46 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
                         pddl_domain, problem_idx, problem_id, planning_problems,
                         args=args, curr_iteration=curr_iteration, output_directory=output_directory,
                         plan_pass_identifier='first',
-                        plan_attempt_idx=plan_attempt_idx, goal_idx=goal_idx, rng=rng
+                        plan_attempt_idx=plan_attempt_idx, goal_idx=goal_idx, rng=rng, split=split
                     )
                     if any_motion_plan_success:
                         break
-                if len(planning_problems['train'][problem_id].solved_motion_plan_results) > 0:
+                if len(planning_problems[split][problem_id].solved_motion_plan_results) > 0:
                     # If we have already found a motion plan, then we don't need to try to replan.
                     break
 
         # Checkpoint operators, only reset if we're at the end of the iteration.
-        finished_epoch = problem_idx == len(planning_problems["train"]) - 1
+        finished_epoch = problem_idx == len(planning_problems[split]) - 1
         if (problem_idx % args.checkpoint_every_n_problem_plans == 0) or finished_epoch:
             _checkpoint_and_log_tamp(
                 pddl_domain, problem_idx, planning_problems, finished_epoch,
-                args=args, curr_iteration=curr_iteration, output_directory=output_directory
+                args=args, curr_iteration=curr_iteration, output_directory=output_directory, split=split
             )
 
-    if bool(args.planner_run_second_pass):
+    if bool(args.planner_run_second_pass) and split == "train":
         print('Running a second-pass to task and motion planning on unsolved problems.')
-        for problem_idx, problem_id in enumerate(planning_problems["train"]):
+        for problem_idx, problem_id in enumerate(planning_problems[split]):
             if len(planning_problems['train'][problem_id].solved_motion_plan_results) > 0:
                 continue
 
             for plan_attempt_idx in range(1):
-                for goal_idx in range(len(planning_problems['train'][problem_id].proposed_pddl_goals)):
+                for goal_idx in range(len(planning_problems[split][problem_id].proposed_pddl_goals)):
                     any_motion_plan_success = _run_task_and_motion_plan(
                         pddl_domain, problem_idx, problem_id, planning_problems,
                         args=args, curr_iteration=curr_iteration, output_directory=output_directory,
                         plan_pass_identifier='second',
-                        plan_attempt_idx=plan_attempt_idx, goal_idx=goal_idx, rng=rng
+                        plan_attempt_idx=plan_attempt_idx, goal_idx=goal_idx, rng=rng, split=split
                     )
                     if any_motion_plan_success:
                         break
-                if len(planning_problems['train'][problem_id].solved_motion_plan_results) > 0:
+                if len(planning_problems[split][problem_id].solved_motion_plan_results) > 0:
                     # If we have already found a motion plan, then we don't need to try to replan.
                     break
 
-    _checkpoint_and_log_tamp(pddl_domain, 0, planning_problems, True, args=args, curr_iteration=curr_iteration, output_directory=output_directory)
+    _checkpoint_and_log_tamp(pddl_domain, 0, planning_problems, True, args=args, curr_iteration=curr_iteration, output_directory=output_directory, split=split)
 
     # Compute the number of unsolved problems
-    unsolved, _ = codex.get_solved_unsolved_problems(planning_problems["train"])
+    unsolved, _ = codex.get_solved_unsolved_problems(planning_problems[split])
     if len(unsolved) == 0:
         print("All problems solved! You should open a bottle of champagne and the Overleaf website.")
         return True
@@ -417,13 +425,13 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
     return False
 
 
-def _run_task_and_motion_plan(pddl_domain, problem_idx, problem_id, planning_problems, args, curr_iteration, output_directory, plan_pass_identifier, plan_attempt_idx, goal_idx, rng):
+def _run_task_and_motion_plan(pddl_domain, problem_idx, problem_id, planning_problems, args, curr_iteration, output_directory, plan_pass_identifier, plan_attempt_idx, goal_idx, rng, split):
     # Task plan. Attempts to generate a task plan for each problem.
     found_new_task_plan, new_task_plans = task_planner.attempt_task_plan_for_problem(
         pddl_domain=pddl_domain,
         problem_idx=problem_idx,
         problem_id=problem_id,
-        problems=planning_problems["train"],
+        problems=planning_problems[split],
         minimum_n_operators=args.planner_minimum_n_operators,
         random_generator=rng,
         use_mock=args.debug_mock_task_plans,
@@ -449,7 +457,7 @@ def _run_task_and_motion_plan(pddl_domain, problem_idx, problem_id, planning_pro
             pddl_domain=pddl_domain,
             problem_idx=problem_idx,
             problem_id=problem_id,
-            problems=planning_problems["train"],
+            problems=planning_problems[split],
             dataset_name=args.dataset_name,
             new_task_plans=new_task_plans,
             use_mock=args.debug_mock_motion_plans,
@@ -465,21 +473,23 @@ def _run_task_and_motion_plan(pddl_domain, problem_idx, problem_id, planning_pro
             verbose=args.verbose,
             llm_propose_task_predicates=args.llm_propose_task_predicates # Baseline -- we skip task proposal if so.
         )
-        # Update the global operator scores from the problem.
-        pddl.update_pddl_domain_and_problem(
-            pddl_domain=pddl_domain,
-            problem_idx=problem_idx,
-            problem_id=problem_id,
-            problems=planning_problems["train"],
-            new_motion_plan_keys=new_motion_plan_keys,
-            command_args=args,
-            verbose=args.verbose,
-        )
+
+        if split == "train":
+            # Update the global operator scores from the problem.
+            pddl.update_pddl_domain_and_problem(
+                pddl_domain=pddl_domain,
+                problem_idx=problem_idx,
+                problem_id=problem_id,
+                problems=planning_problems[split],
+                new_motion_plan_keys=new_motion_plan_keys,
+                command_args=args,
+                verbose=args.verbose,
+            )
         return any_motion_planner_success
     return False
 
 
-def _checkpoint_and_log_tamp(pddl_domain, problem_idx, planning_problems, finished_epoch, args, curr_iteration, output_directory):
+def _checkpoint_and_log_tamp(pddl_domain, problem_idx, planning_problems, finished_epoch, args, curr_iteration, output_directory, split):
     print('')
     pddl.checkpoint_and_reset_operators(
         pddl_domain=pddl_domain,
@@ -498,7 +508,7 @@ def _checkpoint_and_log_tamp(pddl_domain, problem_idx, planning_problems, finish
     pddl.checkpoint_and_reset_plans(
         curr_iteration=curr_iteration,
         pddl_domain=pddl_domain,
-        problems=planning_problems["train"],
+        problems=planning_problems[split],
         command_args=args,
         output_directory=output_directory,
         reset_plans=False,
@@ -507,12 +517,12 @@ def _checkpoint_and_log_tamp(pddl_domain, problem_idx, planning_problems, finish
     experiment_utils.output_iteration_summary(
         curr_iteration=curr_iteration,
         pddl_domain=pddl_domain,
-        problems=planning_problems["train"],
+        problems=planning_problems[split],
         command_args=args,
         output_directory=output_directory,
         finished_epoch=finished_epoch,
         problem_idx=problem_idx,
-        total_problems=len(planning_problems["train"]),
+        total_problems=len(planning_problems[split]),
     )
 
 

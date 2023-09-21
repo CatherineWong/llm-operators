@@ -2,8 +2,8 @@ import frozendict
 from llm_operators import motion_planner
 from llm_operators import pddl
 
-def _run_llm_propose_task_predicates_motion_planner(pddl_domain, problem_idx, problem_id, planning_problems, args, curr_iteration, output_directory, plan_pass_identifier, plan_attempt_idx, goal_idx, rng):
-    problems = planning_problems["train"]
+def _run_llm_propose_task_predicates_motion_planner(pddl_domain, problem_idx, problem_id, planning_problems, args, curr_iteration, output_directory, plan_pass_identifier, plan_attempt_idx, goal_idx, rng, split):
+    problems = planning_problems[split]
 
     any_motion_planner_success = False
     for idx, llm_task_plans in enumerate(problems[problem_id].proposed_pddl_task_predicates):
@@ -16,7 +16,7 @@ def _run_llm_propose_task_predicates_motion_planner(pddl_domain, problem_idx, pr
                 pddl_domain=pddl_domain,
                 problem_idx=problem_idx,
                 problem_id=problem_id,
-                problems=planning_problems["train"],
+                problems=planning_problems[split],
                 dataset_name=args.dataset_name,
                 new_task_plans=task_plans,
                 use_mock=args.debug_mock_motion_plans,
@@ -36,8 +36,8 @@ def _run_llm_propose_task_predicates_motion_planner(pddl_domain, problem_idx, pr
     return any_motion_planner_success
 
 
-def _run_llm_propose_code_policies_motion_planner(pddl_domain, problem_idx, problem_id, planning_problems, args, curr_iteration, output_directory, plan_pass_identifier, plan_attempt_idx, goal_idx, rng):
-    problems = planning_problems["train"]
+def _run_llm_propose_code_policies_motion_planner(pddl_domain, problem_idx, problem_id, planning_problems, args, curr_iteration, output_directory, plan_pass_identifier, plan_attempt_idx, goal_idx, rng, split):
+    problems = planning_problems[split]
     any_motion_planner_success = False
     for idx, llm_code_policies in enumerate(problems[problem_id].proposed_code_policies):
         print(f"Evaluating [{idx+1}/{len(problems[problem_id].proposed_code_policies)}] LLM proposed code policies.")
@@ -49,7 +49,7 @@ def _run_llm_propose_code_policies_motion_planner(pddl_domain, problem_idx, prob
                 pddl_domain=pddl_domain,
                 problem_idx=problem_idx,
                 problem_id=problem_id,
-                problems=planning_problems["train"],
+                problems=planning_problems[split],
                 dataset_name=args.dataset_name,
                 new_task_plans=code_policies,
                 use_mock=args.debug_mock_motion_plans,
@@ -70,7 +70,7 @@ def _run_llm_propose_code_policies_motion_planner(pddl_domain, problem_idx, prob
             pddl_domain=pddl_domain,
             problem_idx=problem_idx,
             problem_id=problem_id,
-            problems=planning_problems["train"],
+            problems=planning_problems[split],
             new_motion_plan_keys=new_motion_plan_keys,
             command_args=args,
             verbose=args.verbose,
