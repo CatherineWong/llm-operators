@@ -1,0 +1,78 @@
+problem_id,attempt_id,minimum_n_operators,goal,success,plan,sampled_operators
+train/pick_and_place_simple-Pencil-None-Shelf-310/trial_T20190908_023618_136375,0,7,"(:goal
+	(exists (?r - receptacle)
+(exists (?o - object)
+(and 
+		(objectType ?o PencilType)
+		(receptacleType ?r ShelfType)
+		(inReceptacle ?o ?r))))
+)",True,"(gotolocation agent1 loc_bar__minus_4_bar__minus_4_bar_3_bar_30 loc_bar__minus_2_bar__minus_5_bar_2_bar_15)
+(gotolocation agent1 loc_bar__minus_2_bar__minus_5_bar_2_bar_15 loc_bar__minus_2_bar__minus_5_bar_2_bar_45)
+(pickupobjectinreceptacle agent1 loc_bar__minus_2_bar__minus_5_bar_2_bar_45 pencil__minus_2_dot_820572_comma__minus_2_dot_820572_comma__minus_7_dot_87871076_comma__minus_7_dot_87871076_comma_3_dot_3651648_comma_3_dot_3651648 desk__minus_3_dot_849575044_comma__minus_3_dot_849575044_comma__minus_8_dot_224_comma__minus_8_dot_224_comma__minus_0_dot_008_comma__minus_0_dot_008)
+(gotolocation agent1 loc_bar__minus_2_bar__minus_5_bar_2_bar_45 loc_bar__minus_2_bar__minus_5_bar_2_bar_15)
+(putobjectinreceptacle agent1 loc_bar__minus_2_bar__minus_5_bar_2_bar_15 penciltype pencil__minus_2_dot_820572_comma__minus_2_dot_820572_comma__minus_7_dot_87871076_comma__minus_7_dot_87871076_comma_3_dot_3651648_comma_3_dot_3651648 shelf__minus_3_dot_757575036_comma__minus_3_dot_757575036_comma__minus_8_dot_4956_comma__minus_8_dot_4956_comma_5_dot_356_comma_5_dot_356)",[]
+train/pick_and_place_simple-Glassbottle-None-Fridge-16/trial_T20190908_045933_322597,0,7,"(:goal
+	(exists (?r - receptacle)
+(exists (?o - object)
+(and 
+		(objectType ?o GlassbottleType)
+		(receptacleType ?r FridgeType)
+		(inReceptacle ?o ?r))))
+)",True,"(gotolocation agent1 loc_bar_1_bar_10_bar_2_bar_30 loc_bar_0_bar_4_bar_3_bar_30)
+(pickupobjectinreceptacle agent1 loc_bar_0_bar_4_bar_3_bar_30 glassbottle__minus_4_dot_63670732_comma__minus_4_dot_63670732_comma_4_dot_23483468_comma_4_dot_23483468_comma_4_dot_11286688_comma_4_dot_11286688 countertop__minus_3_dot_2522_comma__minus_3_dot_2522_comma_8_dot_756_comma_8_dot_756_comma_4_dot_252_comma_4_dot_252)
+(gotolocation agent1 loc_bar_0_bar_4_bar_3_bar_30 loc_bar_0_bar__minus_2_bar_3_bar_60)
+(putobjectinreceptacle agent1 loc_bar_0_bar__minus_2_bar_3_bar_60 glassbottletype glassbottle__minus_4_dot_63670732_comma__minus_4_dot_63670732_comma_4_dot_23483468_comma_4_dot_23483468_comma_4_dot_11286688_comma_4_dot_11286688 fridge__minus_3_dot_636_comma__minus_3_dot_636_comma__minus_1_dot_624_comma__minus_1_dot_624_comma_0_dot_0_comma_0_dot_0)",[]
+train/pick_and_place_simple-SprayBottle-None-Toilet-418/trial_T20190906_190917_905379,0,7,"(:goal
+	(exists (?r - receptacle)
+(exists (?o - object)
+(and 
+		(objectType ?o SprayBottleType)
+		(receptacleType ?r ToiletType)
+		(inReceptacle ?o ?r))))
+)",True,"(gotolocation agent1 loc_bar__minus_8_bar__minus_2_bar_3_bar_30 loc_bar__minus_2_bar__minus_10_bar_2_bar_15)
+(gotolocation agent1 loc_bar__minus_2_bar__minus_10_bar_2_bar_15 loc_bar__minus_8_bar__minus_15_bar_3_bar_60)
+(pickupobjectinreceptacle agent1 loc_bar__minus_8_bar__minus_15_bar_3_bar_60 spraybottle__minus_10_dot_4812212_comma__minus_10_dot_4812212_comma__minus_15_dot_0615692_comma__minus_15_dot_0615692_comma_3_dot_23161626_comma_3_dot_23161626 countertop__minus_10_dot_532_comma__minus_10_dot_532_comma__minus_12_dot_164_comma__minus_12_dot_164_comma_3_dot_376_comma_3_dot_376)
+(gotolocation agent1 loc_bar__minus_8_bar__minus_15_bar_3_bar_60 loc_bar__minus_2_bar__minus_10_bar_2_bar_15)
+(putobjectinreceptacle agent1 loc_bar__minus_2_bar__minus_10_bar_2_bar_15 spraybottletype spraybottle__minus_10_dot_4812212_comma__minus_10_dot_4812212_comma__minus_15_dot_0615692_comma__minus_15_dot_0615692_comma_3_dot_23161626_comma_3_dot_23161626 toilet__minus_1_dot_810838224_comma__minus_1_dot_810838224_comma__minus_12_dot_2095146_comma__minus_12_dot_2095146_comma_0_dot_0025726184_comma_0_dot_0025726184)",[]
+train/pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-426/trial_T20190909_044756_658872,0,7,"(:goal
+	(exists (?r - receptacle)
+(exists (?o - object)
+(and 
+		(objectType ?o ToiletPaperRollType)
+		(receptacleType ?r ToiletPaperHangerType)
+		(inReceptacle ?o ?r))))
+)",False,,['HeatObject_1']
+train/pick_and_place_simple-Book-None-Cabinet-310/trial_T20190908_154222_896076,0,7,"(:goal
+	(exists (?r - receptacle)
+(exists (?o - object)
+(and 
+		(objectType ?o BookType)
+		(receptacleType ?r CabinetType)
+		(inReceptacle ?o ?r))))
+)",True,"(gotolocation agent1 loc_bar__minus_3_bar__minus_1_bar_2_bar_30 loc_bar_5_bar__minus_3_bar_1_bar_60)
+(pickupobjectinreceptacle agent1 loc_bar_5_bar__minus_3_bar_1_bar_60 book_6_dot_6877508_comma_6_dot_6877508_comma__minus_3_dot_3330572_comma__minus_3_dot_3330572_comma_2_dot_7280964_comma_2_dot_7280964 sidetable_6_dot_412_comma_6_dot_412_comma__minus_3_dot_952_comma__minus_3_dot_952_comma_1_dot_852_comma_1_dot_852)
+(gotolocation agent1 loc_bar_5_bar__minus_3_bar_1_bar_60 loc_bar__minus_1_bar__minus_5_bar_2_bar_15)
+(putobjectinreceptacle agent1 loc_bar__minus_1_bar__minus_5_bar_2_bar_15 booktype book_6_dot_6877508_comma_6_dot_6877508_comma__minus_3_dot_3330572_comma__minus_3_dot_3330572_comma_2_dot_7280964_comma_2_dot_7280964 cabinet__minus_0_dot_1202516556_comma__minus_0_dot_1202516556_comma__minus_7_dot_674432_comma__minus_7_dot_674432_comma_6_dot_10477304_comma_6_dot_10477304)",[]
+train/pick_and_place_simple-Box-None-Sofa-205/trial_T20190907_214830_497445,0,7,"(:goal
+	(exists (?r - receptacle)
+(exists (?o - object)
+(and 
+		(objectType ?o BoxType)
+		(receptacleType ?r SofaType)
+		(inReceptacle ?o ?r))))
+)",True,"(gotolocation agent1 loc_bar__minus_11_bar_1_bar_3_bar_30 loc_bar__minus_10_bar_7_bar_1_bar_45)
+(pickupobjectinreceptacle agent1 loc_bar__minus_10_bar_7_bar_1_bar_45 box__minus_7_dot_49467088_comma__minus_7_dot_49467088_comma_6_dot_78114748_comma_6_dot_78114748_comma_3_dot_468812944_comma_3_dot_468812944 diningtable__minus_6_dot_368032_comma__minus_6_dot_368032_comma_5_dot_096312_comma_5_dot_096312_comma_1_dot_2581852_comma_1_dot_2581852)
+(gotolocation agent1 loc_bar__minus_10_bar_7_bar_1_bar_45 loc_bar__minus_13_bar_21_bar_3_bar_60)
+(putobjectinreceptacle agent1 loc_bar__minus_13_bar_21_bar_3_bar_60 boxtype box__minus_7_dot_49467088_comma__minus_7_dot_49467088_comma_6_dot_78114748_comma_6_dot_78114748_comma_3_dot_468812944_comma_3_dot_468812944 sofa__minus_17_dot_702484_comma__minus_17_dot_702484_comma_20_dot_248_comma_20_dot_248_comma_0_dot_039098684_comma_0_dot_039098684)",[]
+train/pick_and_place_simple-Box-None-Sofa-220/trial_T20190907_165527_462462,0,7,"(:goal
+	(exists (?r - receptacle)
+(exists (?o - object)
+(and 
+		(objectType ?o BoxType)
+		(receptacleType ?r SofaType)
+		(inReceptacle ?o ?r))))
+)",True,"(gotolocation agent1 loc_bar__minus_19_bar_7_bar_1_bar_30 loc_bar__minus_11_bar_2_bar_2_bar_60)
+(gotolocation agent1 loc_bar__minus_11_bar_2_bar_2_bar_60 loc_bar__minus_9_bar_7_bar_2_bar_60)
+(pickupobjectinreceptacle agent1 loc_bar__minus_9_bar_7_bar_2_bar_60 box__minus_9_dot_05871392_comma__minus_9_dot_05871392_comma_5_dot_0059352_comma_5_dot_0059352_comma_2_dot_668_comma_2_dot_668 coffeetable__minus_10_dot_584_comma__minus_10_dot_584_comma_4_dot_6012_comma_4_dot_6012_comma__minus_0_dot_002000009408_comma__minus_0_dot_002000009408)
+(gotolocation agent1 loc_bar__minus_9_bar_7_bar_2_bar_60 loc_bar__minus_11_bar_2_bar_2_bar_60)
+(putobjectinreceptacle agent1 loc_bar__minus_11_bar_2_bar_2_bar_60 boxtype box__minus_9_dot_05871392_comma__minus_9_dot_05871392_comma_5_dot_0059352_comma_5_dot_0059352_comma_2_dot_668_comma_2_dot_668 sofa__minus_10_dot_732_comma__minus_10_dot_732_comma__minus_0_dot_4984_comma__minus_0_dot_4984_comma__minus_0_dot_184_comma__minus_0_dot_184)",[]

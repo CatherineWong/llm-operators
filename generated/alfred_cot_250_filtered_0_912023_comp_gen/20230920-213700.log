@@ -1,0 +1,1846 @@
+Experiment Parameters
+================================================================================
+Timestamp: 2023-09-20 21:37:00.359491
+Command to replicate: python main.py --experiment_name alfred_cot_250_filtered_0_912023_comp_gen --random_seed 0 --output_directory generated --train_iterations 2 --pddl_domain_name alfred_linearized --dataset_name alfred_cot_250_filtered --dataset_fraction 1.0 --dataset_pddl_directory data/dataset/alfred_linearized_pddl --supervision_name supervision --restrict_goal_prefix_train pick_and_place_simple pick_clean_then_place_in_recep pick_heat_then_place_in_recep pick_cool_then_place_in_recep look_at_obj_in_light --goal_supervision_fraction 0.1 --initial_goal_supervision_prefix ALL --plan_supervision_fraction 0.1 --initial_plans_prefix ALL --initial_pddl_predicates  --initial_pddl_operators GotoLocation PickupObjectInReceptacle PickupObjectNotInReceptacle PutObjectInReceptacle --operator_propose_minimum_usage 2 --operator_use_cot 1 --goal_propose_include_codex_types  --codex_goal_temperature 1.0 --codex_operator_temperature 1.0 --codex_plan_temperature 1.0 --maximum_operator_arity 4 --n_goal_samples 4 --n_plan_samples 5 --n_operator_samples 3 --n_attempts_to_plan 1 --external_goal_sample_with_prompt  --external_goal_supervision data/dataset/alfred-goal-supervision_ --external_plan_supervision data/dataset/alfred-grate-break-fill-restart-supervision.json --external_operator_supervision data/dataset/alfred-grate-break-fill-restart-operator-supervision_ --external_operator_sample_with_prompt  --external_operator_names GrateObject BakeObject FillObject RestartObject --planner task_planner_fd --planner_timeout None --planner_minimum_n_operators 7 --planner_run_second_pass 1 --motionplan_search_type counter --operator_pseudocounts 0.05 --operator_pseudocounts_denominator 0.5 --operator_acceptance_threshold 0.5 --conservative_library_proposal  --checkpoint_every_n_problem_plans 2 --resume  --resume_from_iteration 0 --resume_from_problem_idx 0 --llm_propose_task_predicates  --external_task_predicates_supervision None --llm_propose_code_policies  --external_code_policies_supervision None --verbose  --debug_export_failed_pddl None --debug_no_propose_plans_operators_goals  --debug_mock_propose_goals  --debug_mock_propose_plans  --debug_mock_propose_operators  --debug_skip_propose_operators_after -1 --debug_skip_propose_plans_after -1 --debug_skip_task_plans  --debug_mock_task_plans  --debug_mock_motion_plans  --debug_skip_motion_plans  --debug_start_problem_idx 0 --debug_skip_problems None --debug_ground_truth_operators  --debug_ground_truth_goals  --debug_stop_after_first_proposal  --debug_cw_skip_location_check  
+
+
+Loaded PDDL file with operators
+================================================================================
+Domain: alfred_linearized
+Filename: data/domains/alfred_linearized.pddl
+Operators: 12
+Ground truth operators: 
+   GotoLocation
+   OpenObject
+   CloseObject
+   PickupObjectInReceptacle
+   PickupObjectNotInReceptacle
+   PutObjectInReceptacle
+   PutObjectInReceptacleObject
+   CleanObject
+   HeatObject
+   CoolObject
+   ToggleObject
+   SliceObject
+Initializing with operators: 
+  GotoLocation
+  PickupObjectInReceptacle
+  PickupObjectNotInReceptacle
+  PutObjectInReceptacle
+
+
+load_alfred_filtered_planning_domain_problems: loaded alfred_cot_250_filtered from data/dataset/alfred-cot-250-filtered-NLgoals-operators.json
+train : 223 / original 223 problems
+valid_seen : 145 / original 145 problems
+valid_unseen : 155 / original 155 problems
+Loaded initial dataset: alfred_cot_250_filtered
+================================================================================
+Initial train problems: 223
+Restricting planning problems from goal prefix: ['pick_and_place_simple', 'pick_clean_then_place_in_recep', 'pick_heat_then_place_in_recep', 'pick_cool_then_place_in_recep', 'look_at_obj_in_light']
+--Return--
+> /Users/zyzzyva/Desktop/zyzzyva/code/llm-operators/llm_operators/datasets/dataset_core.py(313)restrict_goal_supervision_problems()->None
+-> import pdb; pdb.set_trace()
+(Pdb) 8
+(Pdb) 3
+(Pdb) {'train/look_at_obj_in_light-Cloth-None-DeskLamp-303/trial_T20190908_131610_591705': Problem(
+problem_id=train/look_at_obj_in_light-Cloth-None-DeskLamp-303/trial_T20190908_131610_591705,
+language="examine a towel with a lamp.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation cloth) (PickupObject cloth) (GotoLocation desklamp) (ToggleObject desklamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-20/trial_T20190906_161428_039508': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-20/trial_T20190906_161428_039508,
+language="put a chilled mug on the coffee maker.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject mug) (GotoLocation fridge) (CoolObject mug) (GotoLocation coffeemachine) (PutObject mug coffeemachine)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-TissueBox-None-FloorLamp-225/trial_T20190907_150815_536818': Problem(
+problem_id=train/look_at_obj_in_light-TissueBox-None-FloorLamp-225/trial_T20190907_150815_536818,
+language="to see the tissue box in the lamp light.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation tissuebox) (PickupObject tissuebox) (GotoLocation floorlamp) (ToggleObject floorlamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-WineBottle-None-GarbageCan-16/trial_T20190907_015045_510934': Problem(
+problem_id=train/pick_cool_then_place_in_recep-WineBottle-None-GarbageCan-16/trial_T20190907_015045_510934,
+language="chill bottle in refrigerator , throw in trash can to front left of paper towels.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject winebottle) (GotoLocation fridge) (CoolObject winebottle) (GotoLocation garbagecan) (PutObject winebottle garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-Pencil-None-Shelf-310/trial_T20190908_023618_136375': Problem(
+problem_id=train/pick_and_place_simple-Pencil-None-Shelf-310/trial_T20190908_023618_136375,
+language="move a pencil to the desk shelf.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation desk) (PickupObject pencil) (GotoLocation shelf) (PutObject pencil shelf)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Mug-None-Cabinet-6/trial_T20190908_034437_632398': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Mug-None-Cabinet-6/trial_T20190908_034437_632398,
+language="to take a mug from the microwave to put it away in the cabinet.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject mug) (GotoLocation microwave) (HeatObject mug) (GotoLocation cabinet) (PutObject mug cabinet)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-AppleSliced-None-Fridge-30/trial_T20190907_105523_799331': Problem(
+problem_id=train/pick_and_place_simple-AppleSliced-None-Fridge-30/trial_T20190907_105523_799331,
+language="carry a knife to cut the yellow apple in the fridge.",
+goal_prefix="pick_and_place_simple_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject knife) (GotoLocation apple) (SliceObject apple)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-AppleSliced-None-Fridge-30/trial_T20190907_105723_672392': Problem(
+problem_id=train/pick_and_place_simple-AppleSliced-None-Fridge-30/trial_T20190907_105723_672392,
+language="place an apple slice inside of the fridge.",
+goal_prefix="pick_and_place_simple_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject knife) (GotoLocation apple) (SliceObject apple) (GotoLocation fridge) (PutObject knife fridge) (GotoLocation microwave) (PickupObject apple) (GotoLocation fridge) (PutObject apple fridge)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Potato-None-SinkBasin-24/trial_T20190909_052222_333703': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Potato-None-SinkBasin-24/trial_T20190909_052222_333703,
+language="put the chilled potato in the sink.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject potato) (GotoLocation fridge) (CoolObject potato) (GotoLocation sinkbasin) (PutObject potato sinkbasin)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-Mug-None-DeskLamp-301/trial_T20190908_155916_103990': Problem(
+problem_id=train/look_at_obj_in_light-Mug-None-DeskLamp-301/trial_T20190908_155916_103990,
+language="inspect a mug with a lamp.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation dresser) (PickupObject mug) (GotoLocation desklamp) (ToggleObject desklamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-RemoteControl-None-FloorLamp-229/trial_T20190907_184408_159194': Problem(
+problem_id=train/look_at_obj_in_light-RemoteControl-None-FloorLamp-229/trial_T20190907_184408_159194,
+language="turn a lamp on with a remote in hand.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation armchair) (PickupObject remotecontrol) (GotoLocation floorlamp) (ToggleObject floorlamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-11/trial_T20190907_164503_292853': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-11/trial_T20190907_164503_292853,
+language="put a heated mug in the coffee maker.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject mug) (GotoLocation microwave) (HeatObject mug) (GotoLocation coffeemachine) (PutObject mug coffeemachine)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-TomatoSliced-None-SideTable-28/trial_T20190908_213552_035696': Problem(
+problem_id=train/pick_and_place_simple-TomatoSliced-None-SideTable-28/trial_T20190908_213552_035696,
+language="slice the tomato on the black stand.",
+goal_prefix="pick_and_place_simple_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject butterknife) (GotoLocation tomato) (SliceObject tomato)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Potato-None-SideTable-28/trial_T20190907_075841_463460': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Potato-None-SideTable-28/trial_T20190907_075841_463460,
+language="put a heated potato on the small black table.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation fridge) (PickupObject potato) (GotoLocation microwave) (HeatObject potato) (GotoLocation sidetable) (PutObject potato sidetable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-TomatoSliced-None-Fridge-5/trial_T20190908_061406_498045': Problem(
+problem_id=train/pick_heat_then_place_in_recep-TomatoSliced-None-Fridge-5/trial_T20190908_061406_498045,
+language="place a cooked tomato slice in the refrigerator.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation tomato) (SliceObject tomato) (PutObject butterknife garbagecan) (PickupObject tomato) (GotoLocation microwave) (HeatObject tomato) (GotoLocation fridge) (PutObject tomato fridge)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-SoapBar-None-GarbageCan-421/trial_T20190907_041233_785188': Problem(
+problem_id=train/pick_clean_then_place_in_recep-SoapBar-None-GarbageCan-421/trial_T20190907_041233_785188,
+language="put a clean bar of soap in the trash can.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject soapbar) (GotoLocation sinkbasin) (CleanObject soapbar) (GotoLocation garbagecan) (PutObject soapbar garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-PotatoSliced-None-SinkBasin-25/trial_T20190907_062007_896057': Problem(
+problem_id=train/pick_and_place_simple-PotatoSliced-None-SinkBasin-25/trial_T20190907_062007_896057,
+language="slice a potato in a sink with a knife.",
+goal_prefix="pick_and_place_simple_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject knife) (GotoLocation potato) (SliceObject potato)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Tomato-None-CounterTop-14/trial_T20190909_012732_375728': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Tomato-None-CounterTop-14/trial_T20190909_012732_375728,
+language="place a clean tomato on the counter.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject tomato) (GotoLocation sinkbasin) (CleanObject tomato) (GotoLocation countertop) (PutObject tomato countertop)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Potato-None-SinkBasin-26/trial_T20190909_095444_078134': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Potato-None-SinkBasin-26/trial_T20190909_095444_078134,
+language="put a heated potato in the sink.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject potato) (GotoLocation microwave) (HeatObject potato) (GotoLocation sinkbasin) (PutObject potato sinkbasin)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-Statue-None-DeskLamp-218/trial_T20190909_085327_810149': Problem(
+problem_id=train/look_at_obj_in_light-Statue-None-DeskLamp-218/trial_T20190909_085327_810149,
+language="examine the figurine by the light.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject statue) (GotoLocation desklamp) (ToggleObject desklamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-RemoteControl-None-FloorLamp-202/trial_T20190909_014548_223224': Problem(
+problem_id=train/look_at_obj_in_light-RemoteControl-None-FloorLamp-202/trial_T20190909_014548_223224,
+language="examine a remote control by the light of a tall lamp.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation remotecontrol) (PickupObject remotecontrol) (GotoLocation floorlamp) (ToggleObject floorlamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-Glassbottle-None-Fridge-16/trial_T20190908_045933_322597': Problem(
+problem_id=train/pick_and_place_simple-Glassbottle-None-Fridge-16/trial_T20190908_045933_322597,
+language="put a vase in a fridge.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject glassbottle) (GotoLocation fridge) (PutObject glassbottle fridge)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-BreadSliced-None-Fridge-2/trial_T20190909_075013_874186': Problem(
+problem_id=train/pick_heat_then_place_in_recep-BreadSliced-None-Fridge-2/trial_T20190909_075013_874186,
+language="put a slice of warm toast in the fridge.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject knife) (GotoLocation bread) (SliceObject bread) (GotoLocation drawer) (PutObject knife drawer) (GotoLocation countertop) (PickupObject bread) (GotoLocation microwave) (HeatObject bread) (GotoLocation fridge) (PutObject bread fridge)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Egg-None-SinkBasin-8/trial_T20190907_001539_470934': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Egg-None-SinkBasin-8/trial_T20190907_001539_470934,
+language="drop a cooked egg in the sink.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject egg) (GotoLocation microwave) (HeatObject egg) (GotoLocation sinkbasin) (PutObject egg sinkbasin)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-LettuceSliced-None-DiningTable-24/trial_T20190906_220047_928975': Problem(
+problem_id=train/pick_and_place_simple-LettuceSliced-None-DiningTable-24/trial_T20190906_220047_928975,
+language="slice lettuce on the table with the knife.",
+goal_prefix="pick_and_place_simple_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject knife) (GotoLocation lettuce) (SliceObject lettuce)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-PotatoSliced-None-SinkBasin-13/trial_T20190919_030951_364977': Problem(
+problem_id=train/pick_cool_then_place_in_recep-PotatoSliced-None-SinkBasin-13/trial_T20190919_030951_364977,
+language="place a cold potato slice in the sink.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation potato) (SliceObject potato) (GotoLocation sinkbasin) (PutObject butterknife sinkbasin) (GotoLocation countertop) (PickupObject potato) (GotoLocation fridge) (CoolObject potato) (GotoLocation sinkbasin) (PutObject potato sinkbasin)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-TomatoSliced-None-SinkBasin-4/trial_T20190909_064937_166184': Problem(
+problem_id=train/pick_heat_then_place_in_recep-TomatoSliced-None-SinkBasin-4/trial_T20190909_064937_166184,
+language="to heat a tomato slice and place it in the sink.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject knife) (SliceObject tomato) (GotoLocation sinkbasin) (PutObject knife sinkbasin) (GotoLocation diningtable) (PickupObject tomato) (GotoLocation microwave) (HeatObject tomato) (GotoLocation sinkbasin) (PutObject tomato sinkbasin)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-ButterKnife-None-CounterTop-25/trial_T20190907_212022_934468': Problem(
+problem_id=train/pick_clean_then_place_in_recep-ButterKnife-None-CounterTop-25/trial_T20190907_212022_934468,
+language="place a clean knife in the large sink.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation sinkbasin) (CleanObject butterknife) (GotoLocation countertop) (PutObject butterknife countertop)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Mug-None-Cabinet-30/trial_T20190909_044538_375844': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Mug-None-Cabinet-30/trial_T20190909_044538_375844,
+language="to heat a mug and put it inside of the cabinet.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject mug) (GotoLocation microwave) (HeatObject mug) (GotoLocation cabinet) (PutObject mug cabinet)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-SprayBottle-None-Toilet-418/trial_T20190906_190917_905379': Problem(
+problem_id=train/pick_and_place_simple-SprayBottle-None-Toilet-418/trial_T20190906_190917_905379,
+language="place a spray bottle on top of a toilet cistern.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject spraybottle) (GotoLocation toilet) (PutObject spraybottle toilet)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-PotatoSliced-None-Microwave-2/trial_T20190909_094553_729319': Problem(
+problem_id=train/pick_cool_then_place_in_recep-PotatoSliced-None-Microwave-2/trial_T20190909_094553_729319,
+language="putting a cold potato slice in the microwave.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject knife) (GotoLocation potato) (SliceObject potato) (GotoLocation sinkbasin) (PutObject knife sinkbasin) (GotoLocation sinkbasin) (PickupObject potato) (GotoLocation fridge) (CoolObject potato) (GotoLocation microwave) (PutObject potato microwave)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-426/trial_T20190909_044756_658872': Problem(
+problem_id=train/pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-426/trial_T20190909_044756_658872,
+language="to put an empty roll on the toilet paper holder on the wall.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject toiletpaper) (GotoLocation toiletpaperhanger) (PutObject toiletpaper toiletpaperhanger)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-PotatoSliced-None-Microwave-5/trial_T20190914_020559_534073': Problem(
+problem_id=train/pick_cool_then_place_in_recep-PotatoSliced-None-Microwave-5/trial_T20190914_020559_534073,
+language="put a cold potato slice in the microwave.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject knife) (GotoLocation potato) (SliceObject potato) (GotoLocation fridge) (PutObject knife fridge) (GotoLocation countertop) (PickupObject potato) (GotoLocation fridge) (CoolObject potato) (GotoLocation microwave) (PutObject potato microwave)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Apple-None-SinkBasin-24/trial_T20190909_040401_888395': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Apple-None-SinkBasin-24/trial_T20190909_040401_888395,
+language="putting a hot apple in the sink.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject apple) (GotoLocation microwave) (HeatObject apple) (GotoLocation sinkbasin) (PutObject apple sinkbasin)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Mug-None-Cabinet-22/trial_T20190908_144232_130522': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Mug-None-Cabinet-22/trial_T20190908_144232_130522,
+language="put the chilled mug in the cabinet.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation cabinet) (PickupObject mug) (GotoLocation fridge) (CoolObject mug) (GotoLocation cabinet) (PutObject mug cabinet)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-AppleSliced-None-Fridge-6/trial_T20190907_182032_987487': Problem(
+problem_id=train/pick_heat_then_place_in_recep-AppleSliced-None-Fridge-6/trial_T20190907_182032_987487,
+language="put a hot chunk of apple in the freezer.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation apple) (SliceObject apple) (GotoLocation microwave) (PutObject butterknife microwave) (GotoLocation countertop) (PickupObject apple) (GotoLocation microwave) (HeatObject apple) (GotoLocation fridge) (PutObject apple fridge)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-Bowl-None-DeskLamp-302/trial_T20190908_030636_661532': Problem(
+problem_id=train/look_at_obj_in_light-Bowl-None-DeskLamp-302/trial_T20190908_030636_661532,
+language="turn a lamp on with a bowl in hand.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation desk) (PickupObject bowl) (GotoLocation desklamp) (ToggleObject desklamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Apple-None-CounterTop-2/trial_T20190908_112534_364453': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Apple-None-CounterTop-2/trial_T20190908_112534_364453,
+language="place a heated apple on a counter.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject apple) (GotoLocation microwave) (HeatObject apple) (GotoLocation countertop) (PutObject apple countertop)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Plate-None-Cabinet-22/trial_T20190908_084019_408981': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Plate-None-Cabinet-22/trial_T20190908_084019_408981,
+language="place a cooled plate in a cabinet.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sinkbasin) (PickupObject plate) (GotoLocation fridge) (CoolObject plate) (GotoLocation cabinet) (PutObject plate cabinet)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Mug-None-Shelf-20/trial_T20190907_054109_225243': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Mug-None-Shelf-20/trial_T20190907_054109_225243,
+language="put the heated cup on the shelf.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject mug) (GotoLocation microwave) (HeatObject mug) (GotoLocation shelf) (PutObject mug shelf)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-AppleSliced-None-DiningTable-17/trial_T20190908_095621_618627': Problem(
+problem_id=train/pick_heat_then_place_in_recep-AppleSliced-None-DiningTable-17/trial_T20190908_095621_618627,
+language="move a heated piece of apple from the refrigerator to the table.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject knife) (GotoLocation apple) (SliceObject apple) (GotoLocation countertop) (PutObject knife countertop) (GotoLocation fridge) (PickupObject apple) (GotoLocation microwave) (HeatObject apple) (GotoLocation diningtable) (PutObject apple diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-AppleSliced-None-DiningTable-15/trial_T20190907_224100_128711': Problem(
+problem_id=train/pick_heat_then_place_in_recep-AppleSliced-None-DiningTable-15/trial_T20190907_224100_128711,
+language="to heat a piece of apple and place it on the end of the table.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject knife) (GotoLocation apple) (SliceObject apple) (PutObject knife countertop) (PickupObject apple) (GotoLocation microwave) (HeatObject apple) (GotoLocation diningtable) (PutObject apple diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Spoon-None-Drawer-5/trial_T20190907_080537_064131': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Spoon-None-Drawer-5/trial_T20190907_080537_064131,
+language="place a washed spoon in a drawer with the fork.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject spoon) (GotoLocation sinkbasin) (CleanObject spoon) (GotoLocation drawer) (PutObject spoon drawer)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-TomatoSliced-None-SinkBasin-15/trial_T20190909_020319_726874': Problem(
+problem_id=train/pick_heat_then_place_in_recep-TomatoSliced-None-SinkBasin-15/trial_T20190909_020319_726874,
+language="place a slice of heated tomato in a sink.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject knife) (SliceObject tomato) (GotoLocation microwave) (PutObject knife microwave) (GotoLocation diningtable) (PickupObject tomato) (GotoLocation microwave) (HeatObject tomato) (GotoLocation sinkbasin) (PutObject tomato sinkbasin)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-Bowl-None-DeskLamp-327/trial_T20190907_094422_792919': Problem(
+problem_id=train/look_at_obj_in_light-Bowl-None-DeskLamp-327/trial_T20190907_094422_792919,
+language="turn on the lamp on the desk while holding the bowl.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation dresser) (PickupObject bowl) (GotoLocation desklamp) (ToggleObject desklamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-20/trial_T20190906_161453_754806': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-20/trial_T20190906_161453_754806,
+language="place a chilled mug in a coffee maker.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject mug) (GotoLocation fridge) (CoolObject mug) (GotoLocation coffeemachine) (PutObject mug coffeemachine)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-TomatoSliced-None-Fridge-6/trial_T20190918_162404_957531': Problem(
+problem_id=train/pick_and_place_simple-TomatoSliced-None-Fridge-6/trial_T20190918_162404_957531,
+language="place a slice of tomato in the fridge.",
+goal_prefix="pick_and_place_simple_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation tomato) (SliceObject tomato) (GotoLocation sinkbasin) (PutObject butterknife sinkbasin) (GotoLocation countertop) (PickupObject tomato) (GotoLocation fridge) (PutObject tomato fridge)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-Laptop-None-FloorLamp-205/trial_T20190907_130015_600297': Problem(
+problem_id=train/look_at_obj_in_light-Laptop-None-FloorLamp-205/trial_T20190907_130015_600297,
+language="examine a laptop by the dim light of a living room.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sofa) (PickupObject laptop) (GotoLocation floorlamp) (ToggleObject floorlamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-Book-None-Cabinet-310/trial_T20190908_154222_896076': Problem(
+problem_id=train/pick_and_place_simple-Book-None-Cabinet-310/trial_T20190908_154222_896076,
+language="put the book in the desk cabinet.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation bed) (PickupObject book) (GotoLocation cabinet) (PutObject book cabinet)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-BreadSliced-None-GarbageCan-12/trial_T20190907_121108_221602': Problem(
+problem_id=train/pick_heat_then_place_in_recep-BreadSliced-None-GarbageCan-12/trial_T20190907_121108_221602,
+language="put a heated slice of bred in a bin.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject knife) (GotoLocation bread) (SliceObject bread) (PutObject knife countertop) (PickupObject bread) (GotoLocation microwave) (HeatObject bread) (GotoLocation garbagecan) (PutObject bread garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-Box-None-Sofa-205/trial_T20190907_214830_497445': Problem(
+problem_id=train/pick_and_place_simple-Box-None-Sofa-205/trial_T20190907_214830_497445,
+language="take the box from the kitchen table , put it on the red couch.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject box) (GotoLocation sofa) (PutObject box sofa)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-Box-None-Sofa-220/trial_T20190907_165527_462462': Problem(
+problem_id=train/pick_and_place_simple-Box-None-Sofa-220/trial_T20190907_165527_462462,
+language="take the box from the table , put it on the couch.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation coffeetable) (PickupObject box) (GotoLocation sofa) (PutObject box sofa)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Pot-None-CounterTop-17/trial_T20190908_235146_972017': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Pot-None-CounterTop-17/trial_T20190908_235146_972017,
+language="chill a pot and place it on the counter.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation stoveburner) (PickupObject pot) (GotoLocation fridge) (CoolObject pot) (GotoLocation countertop) (PutObject pot countertop)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-BreadSliced-None-DiningTable-19/trial_T20190907_203429_844011': Problem(
+problem_id=train/pick_heat_then_place_in_recep-BreadSliced-None-DiningTable-19/trial_T20190907_203429_844011,
+language="slice the bread , cook a slice put it on the table.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject knife) (GotoLocation bread) (SliceObject bread) (GotoLocation microwave) (PutObject knife microwave) (GotoLocation diningtable) (PickupObject bread) (GotoLocation microwave) (HeatObject bread) (GotoLocation diningtable) (PutObject bread diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-CD-None-Dresser-323/trial_T20190908_005459_168199': Problem(
+problem_id=train/pick_and_place_simple-CD-None-Dresser-323/trial_T20190908_005459_168199,
+language="move the cd that ' s on top of the desk to on top of the dresser.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation desk) (PickupObject cd) (GotoLocation dresser) (PutObject cd dresser)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-TomatoSliced-None-DiningTable-18/trial_T20190909_101511_247105': Problem(
+problem_id=train/pick_cool_then_place_in_recep-TomatoSliced-None-DiningTable-18/trial_T20190909_101511_247105,
+language="put a chilled tomato slice on the table.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject butterknife) (GotoLocation tomato) (SliceObject tomato) (GotoLocation cabinet) (PutObject butterknife cabinet) (GotoLocation diningtable) (PickupObject tomato) (GotoLocation fridge) (CoolObject tomato) (GotoLocation diningtable) (PutObject tomato diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-AppleSliced-None-Microwave-14/trial_T20190908_171151_027975': Problem(
+problem_id=train/pick_and_place_simple-AppleSliced-None-Microwave-14/trial_T20190908_171151_027975,
+language="to place an apple in the microwave and cut it into three slices.",
+goal_prefix="pick_and_place_simple_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sinkbasin) (PickupObject apple) (GotoLocation microwave) (PutObject apple microwave) (GotoLocation countertop) (PickupObject knife) (GotoLocation apple) (SliceObject apple)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Apple-None-Fridge-12/trial_T20190909_151749_236238': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Apple-None-Fridge-12/trial_T20190909_151749_236238,
+language="put a heated apple in the fridge.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject apple) (GotoLocation microwave) (HeatObject apple) (GotoLocation fridge) (PutObject apple fridge)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Mug-None-Cabinet-6/trial_T20190908_034250_033547': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Mug-None-Cabinet-6/trial_T20190908_034250_033547,
+language="heat up mug , put mug in cabinet.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation coffeemachine) (PickupObject mug) (GotoLocation microwave) (HeatObject mug) (GotoLocation cabinet) (PutObject mug cabinet)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Potato-None-SinkBasin-14/trial_T20190908_231758_432650': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Potato-None-SinkBasin-14/trial_T20190908_231758_432650,
+language="put a warm potato in the sink.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject potato) (GotoLocation microwave) (HeatObject potato) (GotoLocation sinkbasin) (PutObject potato sinkbasin)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-Pen-None-Shelf-310/trial_T20190909_113535_223329': Problem(
+problem_id=train/pick_and_place_simple-Pen-None-Shelf-310/trial_T20190909_113535_223329,
+language="move pen from desk to shelf.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation desk) (PickupObject pen) (GotoLocation shelf) (PutObject pen shelf)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Kettle-None-CounterTop-18/trial_T20190908_025529_009980': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Kettle-None-CounterTop-18/trial_T20190908_025529_009980,
+language="place a washed kettle on a kitchen counter top.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation stoveburner) (PickupObject kettle) (GotoLocation sinkbasin) (CleanObject kettle) (GotoLocation countertop) (PutObject kettle countertop)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-BreadSliced-None-GarbageCan-2/trial_T20190908_105707_315068': Problem(
+problem_id=train/pick_heat_then_place_in_recep-BreadSliced-None-GarbageCan-2/trial_T20190908_105707_315068,
+language="put a heated slice of bread in the trash can.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation bread) (SliceObject bread) (GotoLocation drawer) (PutObject butterknife drawer) (GotoLocation countertop) (PickupObject bread) (GotoLocation microwave) (HeatObject bread) (GotoLocation garbagecan) (PutObject bread garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Knife-None-SideTable-3/trial_T20190906_210539_903984': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Knife-None-SideTable-3/trial_T20190906_210539_903984,
+language="put a washed knife on a counter.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation knife) (PickupObject knife) (GotoLocation sinkbasin) (CleanObject knife) (GotoLocation sidetable) (PutObject knife sidetable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Tomato-None-SideTable-21/trial_T20190909_012146_287700': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Tomato-None-SideTable-21/trial_T20190909_012146_287700,
+language="put a heated tomato on the small black table.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject tomato) (GotoLocation microwave) (HeatObject tomato) (GotoLocation sidetable) (PutObject tomato sidetable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Mug-None-CoffeeMachine-25/trial_T20190907_223942_379753': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Mug-None-CoffeeMachine-25/trial_T20190907_223942_379753,
+language="clean mug in sink and return to coffee maker.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation coffeemachine) (PickupObject mug) (GotoLocation sinkbasin) (CleanObject mug) (GotoLocation coffeemachine) (PutObject mug coffeemachine)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-BreadSliced-None-GarbageCan-16/trial_T20190907_232412_371318': Problem(
+problem_id=train/pick_heat_then_place_in_recep-BreadSliced-None-GarbageCan-16/trial_T20190907_232412_371318,
+language="put a hot slice of bread in a bin.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sinkbasin) (PickupObject butterknife) (GotoLocation bread) (SliceObject bread) (PutObject butterknife diningtable) (PickupObject bread) (GotoLocation microwave) (HeatObject bread) (GotoLocation garbagecan) (PutObject bread garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Pot-None-DiningTable-23/trial_T20190909_061357_391676': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Pot-None-DiningTable-23/trial_T20190909_061357_391676,
+language="chill a pan in the fridge and put it on the counter.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation stoveburner) (PickupObject pot) (GotoLocation fridge) (CoolObject pot) (GotoLocation diningtable) (PutObject pot diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-LettuceSliced-None-GarbageCan-20/trial_T20190909_125307_108909': Problem(
+problem_id=train/pick_cool_then_place_in_recep-LettuceSliced-None-GarbageCan-20/trial_T20190909_125307_108909,
+language="put a chilled piece of sliced lettuce in a green bin.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject knife) (GotoLocation lettuce) (SliceObject lettuce) (GotoLocation garbagecan) (PutObject knife garbagecan) (GotoLocation diningtable) (PickupObject lettuce) (GotoLocation fridge) (CoolObject lettuce) (GotoLocation garbagecan) (PutObject lettuce garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-Book-None-Cabinet-310/trial_T20190908_154238_160623': Problem(
+problem_id=train/pick_and_place_simple-Book-None-Cabinet-310/trial_T20190908_154238_160623,
+language="move a book into a cabinet.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation bed) (PickupObject book) (GotoLocation cabinet) (PutObject book cabinet)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Egg-None-GarbageCan-8/trial_T20190909_120617_866099': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Egg-None-GarbageCan-8/trial_T20190909_120617_866099,
+language="put a microwaved egg in the garbage.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation egg) (PickupObject egg) (GotoLocation microwave) (HeatObject egg) (GotoLocation garbagecan) (PutObject egg garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-KeyChain-None-FloorLamp-205/trial_T20190909_114633_189769': Problem(
+problem_id=train/look_at_obj_in_light-KeyChain-None-FloorLamp-205/trial_T20190909_114633_189769,
+language="examine a key chain by the dim natural light of a living room.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sidetable) (PickupObject keychain) (GotoLocation floorlamp) (ToggleObject floorlamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-LettuceSliced-None-DiningTable-24/trial_T20190906_220204_504890': Problem(
+problem_id=train/pick_and_place_simple-LettuceSliced-None-DiningTable-24/trial_T20190906_220204_504890,
+language="use the knife on the table by the stove to slice the cabbage on the white table.",
+goal_prefix="pick_and_place_simple_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation lettuce) (SliceObject lettuce)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-Plunger-None-Cabinet-405/trial_T20190908_120726_695995': Problem(
+problem_id=train/pick_and_place_simple-Plunger-None-Cabinet-405/trial_T20190908_120726_695995,
+language="move the plunger from next to the toilet to the cupboard under the sink.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation plunger) (PickupObject plunger) (GotoLocation cabinet) (PutObject plunger cabinet)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-CreditCard-None-FloorLamp-228/trial_T20190908_113131_743545': Problem(
+problem_id=train/look_at_obj_in_light-CreditCard-None-FloorLamp-228/trial_T20190908_113131_743545,
+language="pick up a credit card and turn a lamp on.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation coffeetable) (PickupObject creditcard) (GotoLocation floorlamp) (ToggleObject floorlamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-BreadSliced-None-Microwave-19/trial_T20190911_082218_676174': Problem(
+problem_id=train/pick_cool_then_place_in_recep-BreadSliced-None-Microwave-19/trial_T20190911_082218_676174,
+language="move a slice of cold bread to the microwave.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject knife) (GotoLocation bread) (SliceObject bread) (GotoLocation fridge) (PutObject knife fridge) (GotoLocation diningtable) (PickupObject bread) (GotoLocation fridge) (CoolObject bread) (GotoLocation microwave) (PutObject bread microwave)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Potato-None-GarbageCan-12/trial_T20190907_125521_042428': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Potato-None-GarbageCan-12/trial_T20190907_125521_042428,
+language="put a cooked potato in the trash can.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject potato) (GotoLocation microwave) (HeatObject potato) (GotoLocation garbagecan) (PutObject potato garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-Box-None-DiningTable-223/trial_T20190907_201444_740434': Problem(
+problem_id=train/pick_and_place_simple-Box-None-DiningTable-223/trial_T20190907_201444_740434,
+language="put a box on a table.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation box) (PickupObject box) (GotoLocation diningtable) (PutObject box diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-PotatoSliced-None-DiningTable-27/trial_T20190908_030342_504066': Problem(
+problem_id=train/pick_cool_then_place_in_recep-PotatoSliced-None-DiningTable-27/trial_T20190908_030342_504066,
+language="to cool a slice of potato and place it on the table.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject knife) (GotoLocation potato) (SliceObject potato) (GotoLocation cabinet) (PutObject knife cabinet) (GotoLocation diningtable) (PickupObject potato) (GotoLocation fridge) (CoolObject potato) (GotoLocation diningtable) (PutObject potato diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-TomatoSliced-None-Fridge-15/trial_T20190909_005143_132045': Problem(
+problem_id=train/pick_heat_then_place_in_recep-TomatoSliced-None-Fridge-15/trial_T20190909_005143_132045,
+language="place a cooked tomato slice in the refrigerator.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sinkbasin) (PickupObject butterknife) (GotoLocation tomato) (SliceObject tomato) (GotoLocation sinkbasin) (PutObject butterknife sinkbasin) (GotoLocation fridge) (PickupObject tomato) (GotoLocation microwave) (HeatObject tomato) (GotoLocation fridge) (PutObject tomato fridge)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-LettuceSliced-None-DiningTable-24/trial_T20190906_220147_111155': Problem(
+problem_id=train/pick_and_place_simple-LettuceSliced-None-DiningTable-24/trial_T20190906_220147_111155,
+language="use the knife to cut the lettuce on the table.",
+goal_prefix="pick_and_place_simple_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject butterknife) (GotoLocation lettuce) (SliceObject lettuce)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-Bowl-None-DeskLamp-302/trial_T20190907_190751_819937': Problem(
+problem_id=train/look_at_obj_in_light-Bowl-None-DeskLamp-302/trial_T20190907_190751_819937,
+language="inspect a bowl by lamplight.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation desk) (PickupObject bowl) (GotoLocation desklamp) (ToggleObject desklamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-TomatoSliced-None-Fridge-19/trial_T20190907_162559_502428': Problem(
+problem_id=train/pick_heat_then_place_in_recep-TomatoSliced-None-Fridge-19/trial_T20190907_162559_502428,
+language="place a cooked tomato slice inside the fridge.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject knife) (SliceObject tomato) (GotoLocation fridge) (PutObject knife fridge) (GotoLocation diningtable) (PickupObject tomato) (GotoLocation microwave) (HeatObject tomato) (GotoLocation fridge) (PutObject tomato fridge)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Cup-None-Cabinet-18/trial_T20190907_150623_388922': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Cup-None-Cabinet-18/trial_T20190907_150623_388922,
+language="put a warmed glass in the cabinet.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject cup) (GotoLocation microwave) (HeatObject cup) (GotoLocation cabinet) (PutObject cup cabinet)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-BreadSliced-None-Microwave-6/trial_T20190909_115420_904817': Problem(
+problem_id=train/pick_cool_then_place_in_recep-BreadSliced-None-Microwave-6/trial_T20190909_115420_904817,
+language="put a cold piece of bread in the microwave.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject knife) (GotoLocation bread) (SliceObject bread) (GotoLocation fridge) (PutObject knife fridge) (GotoLocation countertop) (PickupObject bread) (GotoLocation fridge) (CoolObject bread) (GotoLocation microwave) (PutObject bread microwave)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-RemoteControl-None-FloorLamp-210/trial_T20190909_005614_868994': Problem(
+problem_id=train/look_at_obj_in_light-RemoteControl-None-FloorLamp-210/trial_T20190909_005614_868994,
+language="examine a remote in the light of a tall lamp.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sofa) (PickupObject remotecontrol) (GotoLocation floorlamp) (ToggleObject floorlamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-CreditCard-None-FloorLamp-216/trial_T20190907_160540_519104': Problem(
+problem_id=train/look_at_obj_in_light-CreditCard-None-FloorLamp-216/trial_T20190907_160540_519104,
+language="hold a credit card while turning on a lamp.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sidetable) (PickupObject creditcard) (GotoLocation floorlamp) (ToggleObject floorlamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-TomatoSliced-None-GarbageCan-23/trial_T20190909_034745_393039': Problem(
+problem_id=train/pick_heat_then_place_in_recep-TomatoSliced-None-GarbageCan-23/trial_T20190909_034745_393039,
+language="throw away a slice of heated tomato in the trash bin.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation tomato) (SliceObject tomato) (GotoLocation countertop) (PutObject butterknife countertop) (GotoLocation sinkbasin) (PickupObject tomato) (GotoLocation microwave) (HeatObject tomato) (GotoLocation garbagecan) (PutObject tomato garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-Pen-None-FloorLamp-212/trial_T20190907_000516_042741': Problem(
+problem_id=train/look_at_obj_in_light-Pen-None-FloorLamp-212/trial_T20190907_000516_042741,
+language="grab the pen from the table , turn on the floor lamp.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sidetable) (PickupObject pen) (GotoLocation floorlamp) (ToggleObject floorlamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-PotatoSliced-None-SinkBasin-24/trial_T20190918_232253_006450': Problem(
+problem_id=train/pick_heat_then_place_in_recep-PotatoSliced-None-SinkBasin-24/trial_T20190918_232253_006450,
+language="place a cooked slice of potato in the sink.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject knife) (GotoLocation potato) (SliceObject potato) (PutObject knife countertop) (PickupObject potato) (GotoLocation microwave) (HeatObject potato) (GotoLocation sinkbasin) (PutObject potato sinkbasin)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Mug-None-CoffeeMachine-24/trial_T20190906_185346_459023': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Mug-None-CoffeeMachine-24/trial_T20190906_185346_459023,
+language="put a clean mug in the coffee machine.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject mug) (GotoLocation sinkbasin) (CleanObject mug) (GotoLocation coffeemachine) (PutObject mug coffeemachine)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-PotatoSliced-None-GarbageCan-25/trial_T20190907_165437_326025': Problem(
+problem_id=train/pick_heat_then_place_in_recep-PotatoSliced-None-GarbageCan-25/trial_T20190907_165437_326025,
+language="throw away a cooked slice of potato.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation potato) (SliceObject potato) (GotoLocation microwave) (PutObject butterknife microwave) (GotoLocation garbagecan) (PickupObject potato) (GotoLocation microwave) (HeatObject potato) (GotoLocation garbagecan) (PutObject potato garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-TomatoSliced-None-CounterTop-25/trial_T20190908_233941_496641': Problem(
+problem_id=train/pick_and_place_simple-TomatoSliced-None-CounterTop-25/trial_T20190908_233941_496641,
+language="use a large metal knife to slice up a tomato on the counter.",
+goal_prefix="pick_and_place_simple_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject knife) (SliceObject tomato)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-Candle-None-CounterTop-417/trial_T20190909_142343_223524': Problem(
+problem_id=train/pick_and_place_simple-Candle-None-CounterTop-417/trial_T20190909_142343_223524,
+language="place a green candle on a counter.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation toilet) (PickupObject candle) (GotoLocation countertop) (PutObject candle countertop)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-TomatoSliced-None-DiningTable-18/trial_T20190914_033809_050650': Problem(
+problem_id=train/pick_cool_then_place_in_recep-TomatoSliced-None-DiningTable-18/trial_T20190914_033809_050650,
+language="pick up knife , cut tomato , place into fridge , remove from fridge , place on table.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation tomato) (SliceObject tomato) (GotoLocation diningtable) (PutObject butterknife diningtable) (GotoLocation diningtable) (PickupObject tomato) (GotoLocation fridge) (CoolObject tomato) (GotoLocation diningtable) (PutObject tomato diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Tomato-None-DiningTable-11/trial_T20190908_220012_692282': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Tomato-None-DiningTable-11/trial_T20190908_220012_692282,
+language="put a cold tomato on the table.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject tomato) (GotoLocation fridge) (CoolObject tomato) (GotoLocation diningtable) (PutObject tomato diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-Laptop-None-DeskLamp-323/trial_T20190908_014226_839563': Problem(
+problem_id=train/look_at_obj_in_light-Laptop-None-DeskLamp-323/trial_T20190908_014226_839563,
+language="examine a notebook computer by the light of a lamp.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation bed) (PickupObject laptop) (GotoLocation desklamp) (ToggleObject desklamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-Tomato-None-Microwave-8/trial_T20190907_205050_993517': Problem(
+problem_id=train/pick_and_place_simple-Tomato-None-Microwave-8/trial_T20190907_205050_993517,
+language="put the tomato in the microwave.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject tomato) (GotoLocation microwave) (PutObject tomato microwave)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Tomato-None-SinkBasin-6/trial_T20190907_204944_538890': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Tomato-None-SinkBasin-6/trial_T20190907_204944_538890,
+language="put a warmed tomato in the sink.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject tomato) (GotoLocation microwave) (HeatObject tomato) (GotoLocation sinkbasin) (PutObject tomato sinkbasin)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Potato-None-GarbageCan-6/trial_T20190907_164308_014097': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Potato-None-GarbageCan-6/trial_T20190907_164308_014097,
+language="place a cooled potato in a garbage bin.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation garbagecan) (PickupObject potato) (GotoLocation fridge) (CoolObject potato) (GotoLocation garbagecan) (PutObject potato garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-AppleSliced-None-SideTable-21/trial_T20190908_030402_887474': Problem(
+problem_id=train/pick_heat_then_place_in_recep-AppleSliced-None-SideTable-21/trial_T20190908_030402_887474,
+language="place a microwaved apple slice on top of the black table.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sidetable) (PickupObject butterknife) (SliceObject apple) (GotoLocation diningtable) (PutObject butterknife diningtable) (GotoLocation sidetable) (PickupObject apple) (GotoLocation microwave) (HeatObject apple) (GotoLocation sidetable) (PutObject apple sidetable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Lettuce-None-DiningTable-27/trial_T20190907_175045_014819': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Lettuce-None-DiningTable-27/trial_T20190907_175045_014819,
+language="cool the cabbage in the refrigerator , put it back on the table.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject lettuce) (GotoLocation fridge) (CoolObject lettuce) (GotoLocation diningtable) (PutObject lettuce diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-CellPhone-None-Desk-327/trial_T20190907_162400_978293': Problem(
+problem_id=train/pick_and_place_simple-CellPhone-None-Desk-327/trial_T20190907_162400_978293,
+language="move the cell phone from the shelves to desk.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation shelf) (PickupObject cellphone) (GotoLocation desk) (PutObject cellphone desk)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Bowl-None-Cabinet-18/trial_T20190908_031815_585714': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Bowl-None-Cabinet-18/trial_T20190908_031815_585714,
+language="put in the chilled bowl inside the cabinet.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation cabinet) (PickupObject bowl) (GotoLocation fridge) (CoolObject bowl) (GotoLocation cabinet) (PutObject bowl cabinet)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-KeyChain-None-Sofa-229/trial_T20190908_123359_988104': Problem(
+problem_id=train/pick_and_place_simple-KeyChain-None-Sofa-229/trial_T20190908_123359_988104,
+language="put the keys on the couch.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation coffeetable) (PickupObject keychain) (GotoLocation sofa) (PutObject keychain sofa)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-CellPhone-None-DeskLamp-318/trial_T20190909_005934_726946': Problem(
+problem_id=train/look_at_obj_in_light-CellPhone-None-DeskLamp-318/trial_T20190909_005934_726946,
+language="pick up a smartphone , turn on a lamp.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation desk) (PickupObject cellphone) (GotoLocation desklamp) (ToggleObject desklamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-KeyChain-None-FloorLamp-203/trial_T20190909_060210_354107': Problem(
+problem_id=train/look_at_obj_in_light-KeyChain-None-FloorLamp-203/trial_T20190909_060210_354107,
+language="pick up the keys and then turn the lamp on behind the blue chair.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation armchair) (PickupObject keychain) (GotoLocation floorlamp) (ToggleObject floorlamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-AppleSliced-None-SinkBasin-18/trial_T20190909_005234_628704': Problem(
+problem_id=train/pick_heat_then_place_in_recep-AppleSliced-None-SinkBasin-18/trial_T20190909_005234_628704,
+language="put a microwaved slice of apple in the sink.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation apple) (SliceObject apple) (GotoLocation sinkbasin) (PutObject butterknife sinkbasin) (GotoLocation sinkbasin) (PickupObject apple) (GotoLocation microwave) (HeatObject apple) (GotoLocation sinkbasin) (PutObject apple sinkbasin)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Mug-None-Cabinet-30/trial_T20190909_044843_334172': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Mug-None-Cabinet-30/trial_T20190909_044843_334172,
+language="put a heated mug into a cupboard.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject mug) (GotoLocation microwave) (HeatObject mug) (GotoLocation cabinet) (PutObject mug cabinet)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Pot-None-DiningTable-27/trial_T20190909_013328_302952': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Pot-None-DiningTable-27/trial_T20190909_013328_302952,
+language="pick up a pan from the stove , refrigerate it , put in on the table.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation stoveburner) (PickupObject pot) (GotoLocation fridge) (CoolObject pot) (GotoLocation diningtable) (PutObject pot diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Cup-None-Cabinet-27/trial_T20190908_123907_725964': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Cup-None-Cabinet-27/trial_T20190908_123907_725964,
+language="place a warm glass in the cabinet.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation fridge) (PickupObject cup) (GotoLocation microwave) (HeatObject cup) (GotoLocation cabinet) (PutObject cup cabinet)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Mug-None-Shelf-7/trial_T20190907_022308_669309': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Mug-None-Shelf-7/trial_T20190907_022308_669309,
+language="heat the white cup from table in the microwave , put it on the shelf.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject mug) (GotoLocation microwave) (HeatObject mug) (GotoLocation shelf) (PutObject mug shelf)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-SoapBar-None-BathtubBasin-411/trial_T20190907_033311_020938': Problem(
+problem_id=train/pick_clean_then_place_in_recep-SoapBar-None-BathtubBasin-411/trial_T20190907_033311_020938,
+language="place wet soap on the edge of the bathtub.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject soapbar) (GotoLocation sinkbasin) (CleanObject soapbar) (GotoLocation bathtubbasin) (PutObject soapbar bathtubbasin)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Pot-None-Cabinet-1/trial_T20190908_184157_888194': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Pot-None-Cabinet-1/trial_T20190908_184157_888194,
+language="put a cold pot in the cabinet.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject pot) (GotoLocation fridge) (CoolObject pot) (GotoLocation cabinet) (PutObject pot cabinet)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-BreadSliced-None-GarbageCan-19/trial_T20190908_174425_766449': Problem(
+problem_id=train/pick_cool_then_place_in_recep-BreadSliced-None-GarbageCan-19/trial_T20190908_174425_766449,
+language="cool a bread slice plus place it in the trash can.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (SliceObject bread) (GotoLocation fridge) (PutObject butterknife fridge) (GotoLocation countertop) (PickupObject bread) (GotoLocation fridge) (CoolObject bread) (GotoLocation garbagecan) (PutObject bread garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Cup-None-Fridge-22/trial_T20190908_072702_772430': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Cup-None-Fridge-22/trial_T20190908_072702_772430,
+language="place a heated cup inside the refrigerator.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sinkbasin) (PickupObject cup) (GotoLocation microwave) (HeatObject cup) (GotoLocation fridge) (PutObject cup fridge)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-Pillow-None-DeskLamp-314/trial_T20190908_115844_093537': Problem(
+problem_id=train/look_at_obj_in_light-Pillow-None-DeskLamp-314/trial_T20190908_115844_093537,
+language="look at the pillow in the light.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation bed) (PickupObject pillow) (GotoLocation desklamp) (ToggleObject desklamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-BreadSliced-None-SideTable-3/trial_T20190907_000233_574076': Problem(
+problem_id=train/pick_and_place_simple-BreadSliced-None-SideTable-3/trial_T20190907_000233_574076,
+language="put a slice of bread on a stand.",
+goal_prefix="pick_and_place_simple_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation knife) (PickupObject knife) (GotoLocation bread) (SliceObject bread) (GotoLocation sidetable) (PutObject knife sidetable) (GotoLocation countertop) (PickupObject bread) (GotoLocation sidetable) (PutObject bread sidetable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-Pen-None-FloorLamp-221/trial_T20190907_180910_112762': Problem(
+problem_id=train/look_at_obj_in_light-Pen-None-FloorLamp-221/trial_T20190907_180910_112762,
+language="examine a pen by the light of a floor lamp.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation coffeetable) (PickupObject pen) (GotoLocation floorlamp) (ToggleObject floorlamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-Cloth-None-SinkBasin-417/trial_T20190908_120422_949453': Problem(
+problem_id=train/pick_and_place_simple-Cloth-None-SinkBasin-417/trial_T20190908_120422_949453,
+language="move a rag from a cabinet to the sink.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation cabinet) (PickupObject cloth) (GotoLocation sinkbasin) (PutObject cloth sinkbasin)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-Pillow-None-FloorLamp-212/trial_T20190907_163730_866373': Problem(
+problem_id=train/look_at_obj_in_light-Pillow-None-FloorLamp-212/trial_T20190907_163730_866373,
+language="turn on a lamp while holding a red cushion.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sofa) (PickupObject pillow) (GotoLocation floorlamp) (ToggleObject floorlamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-KeyChain-None-FloorLamp-223/trial_T20190909_110146_114031': Problem(
+problem_id=train/look_at_obj_in_light-KeyChain-None-FloorLamp-223/trial_T20190909_110146_114031,
+language="turn on the lamp while holding the keys.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject keychain) (GotoLocation floorlamp) (ToggleObject floorlamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Apple-None-GarbageCan-12/trial_T20190908_172302_166350': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Apple-None-GarbageCan-12/trial_T20190908_172302_166350,
+language="put a warmed apple in the trash can.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation garbagecan) (PickupObject apple) (GotoLocation microwave) (HeatObject apple) (GotoLocation garbagecan) (PutObject apple garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Tomato-None-DiningTable-23/trial_T20190909_000922_271997': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Tomato-None-DiningTable-23/trial_T20190909_000922_271997,
+language="place a rinsed tomato on a table.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject tomato) (GotoLocation sinkbasin) (CleanObject tomato) (GotoLocation diningtable) (PutObject tomato diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-AppleSliced-None-DiningTable-18/trial_T20190909_022438_980686': Problem(
+problem_id=train/pick_cool_then_place_in_recep-AppleSliced-None-DiningTable-18/trial_T20190909_022438_980686,
+language="to cool a piece of apple and place it on the kitchen table.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject butterknife) (GotoLocation apple) (SliceObject apple) (GotoLocation diningtable) (PutObject butterknife diningtable) (GotoLocation diningtable) (PickupObject apple) (GotoLocation fridge) (CoolObject apple) (GotoLocation diningtable) (PutObject apple diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-AppleSliced-None-SinkBasin-4/trial_T20190907_154132_135926': Problem(
+problem_id=train/pick_heat_then_place_in_recep-AppleSliced-None-SinkBasin-4/trial_T20190907_154132_135926,
+language="put a slice of cooked apple into the sink.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject knife) (GotoLocation apple) (SliceObject apple) (GotoLocation sinkbasin) (PutObject knife sinkbasin) (GotoLocation diningtable) (PickupObject apple) (GotoLocation microwave) (HeatObject apple) (GotoLocation sinkbasin) (PutObject apple sinkbasin)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Apple-None-Fridge-27/trial_T20190906_220808_492885': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Apple-None-Fridge-27/trial_T20190906_220808_492885,
+language="put a cleaned apple in the fridge.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation microwave) (PickupObject apple) (GotoLocation sinkbasin) (CleanObject apple) (GotoLocation fridge) (PutObject apple fridge)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Cup-None-Cabinet-8/trial_T20190907_170522_408193': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Cup-None-Cabinet-8/trial_T20190907_170522_408193,
+language="heat a glass and put it in the cabinet.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject cup) (GotoLocation microwave) (HeatObject cup) (GotoLocation cabinet) (PutObject cup cabinet)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-AppleSliced-None-Microwave-11/trial_T20190909_152218_676963': Problem(
+problem_id=train/pick_cool_then_place_in_recep-AppleSliced-None-Microwave-11/trial_T20190909_152218_676963,
+language="to cool an apple piece as well as place it in the microwave.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject knife) (GotoLocation apple) (SliceObject apple) (GotoLocation fridge) (PutObject knife fridge) (GotoLocation diningtable) (PickupObject apple) (GotoLocation fridge) (CoolObject apple) (GotoLocation microwave) (PutObject apple microwave)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-7/trial_T20190908_123421_558588': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-7/trial_T20190908_123421_558588,
+language="place a heated coffee mug in a coffeemaker.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation fridge) (PickupObject mug) (GotoLocation microwave) (HeatObject mug) (GotoLocation coffeemachine) (PutObject mug coffeemachine)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Apple-None-Microwave-12/trial_T20190911_003046_688848': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Apple-None-Microwave-12/trial_T20190911_003046_688848,
+language="put a cold apple in the microwave.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject apple) (GotoLocation fridge) (CoolObject apple) (GotoLocation microwave) (PutObject apple microwave)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-ButterKnife-None-Drawer-30/trial_T20190908_051931_072703': Problem(
+problem_id=train/pick_clean_then_place_in_recep-ButterKnife-None-Drawer-30/trial_T20190908_051931_072703,
+language="put the clean knife in the cabinet drawer.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation sinkbasin) (CleanObject butterknife) (GotoLocation drawer) (PutObject butterknife drawer)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-WineBottle-None-Cabinet-16/trial_T20190907_084106_624638': Problem(
+problem_id=train/pick_cool_then_place_in_recep-WineBottle-None-Cabinet-16/trial_T20190907_084106_624638,
+language="put chilled wine in the cabinet.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject winebottle) (GotoLocation fridge) (CoolObject winebottle) (GotoLocation cabinet) (PutObject winebottle cabinet)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-ButterKnife-None-Drawer-2/trial_T20190908_044255_995925': Problem(
+problem_id=train/pick_clean_then_place_in_recep-ButterKnife-None-Drawer-2/trial_T20190908_044255_995925,
+language="place a rinsed knife in a drawer.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation sinkbasin) (CleanObject butterknife) (GotoLocation drawer) (PutObject butterknife drawer)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Egg-None-SideTable-21/trial_T20190907_045036_700265': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Egg-None-SideTable-21/trial_T20190907_045036_700265,
+language="put a heated egg on the small black table.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject egg) (GotoLocation microwave) (HeatObject egg) (GotoLocation sidetable) (PutObject egg sidetable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-Bowl-None-CoffeeTable-201/trial_T20190907_171714_885383': Problem(
+problem_id=train/pick_and_place_simple-Bowl-None-CoffeeTable-201/trial_T20190907_171714_885383,
+language="set the bowl on the coffee table.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation bowl) (PickupObject bowl) (GotoLocation coffeetable) (PutObject bowl coffeetable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-TomatoSliced-None-DiningTable-23/trial_T20190907_061945_946479': Problem(
+problem_id=train/pick_heat_then_place_in_recep-TomatoSliced-None-DiningTable-23/trial_T20190907_061945_946479,
+language="put a microwaved tomato slice on the counter.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation tomato) (SliceObject tomato) (GotoLocation countertop) (PutObject butterknife countertop) (GotoLocation sinkbasin) (PickupObject tomato) (GotoLocation microwave) (HeatObject tomato) (GotoLocation diningtable) (PutObject tomato diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Bread-None-CounterTop-7/trial_T20190909_012427_332210': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Bread-None-CounterTop-7/trial_T20190909_012427_332210,
+language="to chill a loaf of bread and put it on the counter.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject bread) (GotoLocation fridge) (CoolObject bread) (GotoLocation countertop) (PutObject bread countertop)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-AppleSliced-None-GarbageCan-14/trial_T20190908_022829_998348': Problem(
+problem_id=train/pick_cool_then_place_in_recep-AppleSliced-None-GarbageCan-14/trial_T20190908_022829_998348,
+language="place a cooled slice of apple in the black bin.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sinkbasin) (PickupObject butterknife) (SliceObject apple) (PutObject butterknife sinkbasin) (PickupObject apple) (GotoLocation fridge) (CoolObject apple) (GotoLocation garbagecan) (PutObject apple garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Pan-None-StoveBurner-2/trial_T20190906_215744_388781': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Pan-None-StoveBurner-2/trial_T20190906_215744_388781,
+language="place a clean pan on the electric cooker.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation stoveburner) (PickupObject pan) (GotoLocation sinkbasin) (CleanObject pan) (GotoLocation stoveburner) (PutObject pan stoveburner)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-CD-None-DeskLamp-302/trial_T20190907_154604_364291': Problem(
+problem_id=train/look_at_obj_in_light-CD-None-DeskLamp-302/trial_T20190907_154604_364291,
+language="examine the cd under the light of the table lamp.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation desk) (PickupObject cd) (GotoLocation desklamp) (ToggleObject desklamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-TomatoSliced-None-GarbageCan-19/trial_T20190908_224803_743034': Problem(
+problem_id=train/pick_cool_then_place_in_recep-TomatoSliced-None-GarbageCan-19/trial_T20190908_224803_743034,
+language="place a chilled slice of tomato into a bin.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject knife) (GotoLocation tomato) (SliceObject tomato) (PutObject knife garbagecan) (PickupObject tomato) (GotoLocation fridge) (CoolObject tomato) (GotoLocation garbagecan) (PutObject tomato garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-Pencil-None-Desk-309/trial_T20190918_231013_763397': Problem(
+problem_id=train/pick_and_place_simple-Pencil-None-Desk-309/trial_T20190918_231013_763397,
+language="move a pencil from the table to the counter.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sidetable) (PickupObject pencil) (GotoLocation desk) (PutObject pencil desk)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Cloth-None-BathtubBasin-419/trial_T20190909_014042_055607': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Cloth-None-BathtubBasin-419/trial_T20190909_014042_055607,
+language="place a rinsed towel inside a tub.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation bathtubbasin) (PickupObject cloth) (GotoLocation sinkbasin) (CleanObject cloth) (GotoLocation bathtubbasin) (PutObject cloth bathtubbasin)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-AppleSliced-None-GarbageCan-19/trial_T20190909_111859_174743': Problem(
+problem_id=train/pick_cool_then_place_in_recep-AppleSliced-None-GarbageCan-19/trial_T20190909_111859_174743,
+language="throw away a chilled apple slice.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation apple) (SliceObject apple) (GotoLocation fridge) (PutObject butterknife fridge) (GotoLocation diningtable) (PickupObject apple) (GotoLocation fridge) (CoolObject apple) (GotoLocation garbagecan) (PutObject apple garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-Candle-None-SideTable-420/trial_T20190907_025655_142954': Problem(
+problem_id=train/pick_and_place_simple-Candle-None-SideTable-420/trial_T20190907_025655_142954,
+language="put a candle on a table.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation candle) (PickupObject candle) (GotoLocation sidetable) (PutObject candle sidetable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-PotatoSliced-None-Fridge-18/trial_T20190912_110736_098163': Problem(
+problem_id=train/pick_heat_then_place_in_recep-PotatoSliced-None-Fridge-18/trial_T20190912_110736_098163,
+language="slice a potato , cook it in the microwave , and put it in the refrigerator.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sinkbasin) (PickupObject butterknife) (GotoLocation potato) (SliceObject potato) (GotoLocation sinkbasin) (PutObject butterknife sinkbasin) (GotoLocation sinkbasin) (PickupObject potato) (GotoLocation microwave) (HeatObject potato) (GotoLocation fridge) (PutObject potato fridge)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-KeyChain-None-Dresser-317/trial_T20190910_184933_511149': Problem(
+problem_id=train/pick_and_place_simple-KeyChain-None-Dresser-317/trial_T20190910_184933_511149,
+language="put keys on the dresser.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sidetable) (PickupObject keychain) (GotoLocation dresser) (PutObject keychain dresser)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-PotatoSliced-None-Microwave-21/trial_T20190908_064303_598028': Problem(
+problem_id=train/pick_cool_then_place_in_recep-PotatoSliced-None-Microwave-21/trial_T20190908_064303_598028,
+language="place a chilled potato slice inside the microwave.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation potato) (SliceObject potato) (GotoLocation fridge) (PutObject butterknife fridge) (GotoLocation sidetable) (PickupObject potato) (GotoLocation fridge) (CoolObject potato) (GotoLocation microwave) (PutObject potato microwave)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Spatula-None-CounterTop-19/trial_T20190906_181322_850030': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Spatula-None-CounterTop-19/trial_T20190906_181322_850030,
+language="put a cleaned spatula on the the counter.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject spatula) (GotoLocation sinkbasin) (CleanObject spatula) (GotoLocation countertop) (PutObject spatula countertop)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-RemoteControl-None-ArmChair-223/trial_T20190908_163723_604442': Problem(
+problem_id=train/pick_and_place_simple-RemoteControl-None-ArmChair-223/trial_T20190908_163723_604442,
+language="move a remote control to a chair.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation coffeetable) (PickupObject remotecontrol) (GotoLocation armchair) (PutObject remotecontrol armchair)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-CD-None-Shelf-319/trial_T20190908_060915_412301': Problem(
+problem_id=train/pick_and_place_simple-CD-None-Shelf-319/trial_T20190908_060915_412301,
+language="put a cd in the book shelf.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation dresser) (PickupObject cd) (GotoLocation shelf) (PutObject cd shelf)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-Plate-None-FloorLamp-211/trial_T20190907_131058_267698': Problem(
+problem_id=train/look_at_obj_in_light-Plate-None-FloorLamp-211/trial_T20190907_131058_267698,
+language="examine the plate under the light of the lamp.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation shelf) (PickupObject plate) (GotoLocation floorlamp) (ToggleObject floorlamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-BreadSliced-None-GarbageCan-30/trial_T20190907_044445_578004': Problem(
+problem_id=train/pick_heat_then_place_in_recep-BreadSliced-None-GarbageCan-30/trial_T20190907_044445_578004,
+language="slice bread , cook a slice , put it in the trash.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation bread) (SliceObject bread) (GotoLocation drawer) (PutObject butterknife drawer) (GotoLocation countertop) (PickupObject bread) (GotoLocation microwave) (HeatObject bread) (GotoLocation garbagecan) (PutObject bread garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-Vase-None-Safe-204/trial_T20190919_000336_714640': Problem(
+problem_id=train/pick_and_place_simple-Vase-None-Safe-204/trial_T20190919_000336_714640,
+language="put a blue vase in the safe on the floor.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject vase) (GotoLocation safe) (PutObject vase safe)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-Newspaper-None-Sofa-211/trial_T20190906_175004_203092': Problem(
+problem_id=train/pick_and_place_simple-Newspaper-None-Sofa-211/trial_T20190906_175004_203092,
+language="move a newspaper from a tv stand to a sofa.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation newspaper) (PickupObject newspaper) (GotoLocation sofa) (PutObject newspaper sofa)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-TomatoSliced-None-Microwave-18/trial_T20190911_190644_778748': Problem(
+problem_id=train/pick_cool_then_place_in_recep-TomatoSliced-None-Microwave-18/trial_T20190911_190644_778748,
+language="cut a slice of tomato , chill it , then cook it in the microwave.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject knife) (GotoLocation tomato) (SliceObject tomato) (GotoLocation countertop) (PutObject knife countertop) (GotoLocation countertop) (PickupObject tomato) (GotoLocation fridge) (CoolObject tomato) (GotoLocation microwave) (PutObject tomato microwave)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-TomatoSliced-None-Microwave-12/trial_T20190908_165447_696883': Problem(
+problem_id=train/pick_cool_then_place_in_recep-TomatoSliced-None-Microwave-12/trial_T20190908_165447_696883,
+language="put the chilled tomato in the microwave.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation tomato) (SliceObject tomato) (GotoLocation countertop) (PutObject butterknife countertop) (GotoLocation countertop) (PickupObject tomato) (GotoLocation fridge) (CoolObject tomato) (GotoLocation microwave) (PutObject tomato microwave)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-6/trial_T20190906_204029_896727': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-6/trial_T20190906_204029_896727,
+language="to place a chilled mug in the coffee maker.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject mug) (GotoLocation fridge) (CoolObject mug) (GotoLocation coffeemachine) (PutObject mug coffeemachine)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Plate-None-Shelf-7/trial_T20190906_193846_907707': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Plate-None-Shelf-7/trial_T20190906_193846_907707,
+language="place a hot plate on top of the shelves in the corner of the kitchen.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject plate) (GotoLocation microwave) (HeatObject plate) (GotoLocation shelf) (PutObject plate shelf)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-Pen-None-DeskLamp-327/trial_T20190909_020734_953975': Problem(
+problem_id=train/look_at_obj_in_light-Pen-None-DeskLamp-327/trial_T20190909_020734_953975,
+language="pick up the pen from the dresser and turn the lamp on.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation dresser) (PickupObject pen) (GotoLocation desklamp) (ToggleObject desklamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-13/trial_T20190908_092542_043460': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-13/trial_T20190908_092542_043460,
+language="place a heated mug on a coffee maker.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject mug) (GotoLocation microwave) (HeatObject mug) (GotoLocation coffeemachine) (PutObject mug coffeemachine)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-TomatoSliced-None-SideTable-3/trial_T20190908_091615_973891': Problem(
+problem_id=train/pick_and_place_simple-TomatoSliced-None-SideTable-3/trial_T20190908_091615_973891,
+language="slice a tomato that is on the microwave stand.",
+goal_prefix="pick_and_place_simple_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation knife) (PickupObject knife) (GotoLocation tomato) (SliceObject tomato)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Egg-None-CounterTop-27/trial_T20190909_002105_967038': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Egg-None-CounterTop-27/trial_T20190909_002105_967038,
+language="put a chilled egg on the counter.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject egg) (GotoLocation fridge) (CoolObject egg) (GotoLocation countertop) (PutObject egg countertop)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-Pen-None-DeskLamp-305/trial_T20190907_115824_746935': Problem(
+problem_id=train/look_at_obj_in_light-Pen-None-DeskLamp-305/trial_T20190907_115824_746935,
+language="examine a pen next to the light of a lamp.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation shelf) (PickupObject pen) (GotoLocation desklamp) (ToggleObject desklamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Pot-None-CounterTop-24/trial_T20190907_002332_305243': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Pot-None-CounterTop-24/trial_T20190907_002332_305243,
+language="place a cooled pan down on the kitchen counter corner.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation stoveburner) (PickupObject pot) (GotoLocation fridge) (CoolObject pot) (GotoLocation countertop) (PutObject pot countertop)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Spatula-None-CounterTop-30/trial_T20190909_050831_328612': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Spatula-None-CounterTop-30/trial_T20190909_050831_328612,
+language="return a washed spatula to a kitchen counter.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject spatula) (CleanObject ) (GotoLocation countertop) (PutObject spatula countertop)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-Plunger-None-Cabinet-403/trial_T20190909_054730_826329': Problem(
+problem_id=train/pick_and_place_simple-Plunger-None-Cabinet-403/trial_T20190909_054730_826329,
+language="move the plunger to the cabinet under the sink.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation plunger) (PickupObject plunger) (GotoLocation cabinet) (PutObject plunger cabinet)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Apple-None-SideTable-28/trial_T20190906_180710_251060': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Apple-None-SideTable-28/trial_T20190906_180710_251060,
+language="put a warm apple on the table.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sidetable) (PickupObject apple) (GotoLocation microwave) (HeatObject apple) (GotoLocation sidetable) (PutObject apple sidetable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-PotatoSliced-None-Fridge-11/trial_T20190910_232930_757480': Problem(
+problem_id=train/pick_heat_then_place_in_recep-PotatoSliced-None-Fridge-11/trial_T20190910_232930_757480,
+language="put a cooked piece of potato into the fridge.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation butterknife) (PickupObject butterknife) (GotoLocation potato) (SliceObject potato) (GotoLocation countertop) (PutObject butterknife countertop) (GotoLocation countertop) (PickupObject potato) (GotoLocation microwave) (HeatObject potato) (GotoLocation fridge) (PutObject potato fridge)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-Pillow-None-DeskLamp-305/trial_T20190909_110717_764199': Problem(
+problem_id=train/look_at_obj_in_light-Pillow-None-DeskLamp-305/trial_T20190909_110717_764199,
+language="look at a striped pillow under a lit lamp.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation bed) (PickupObject pillow) (GotoLocation desklamp) (ToggleObject desklamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Cloth-None-Drawer-427/trial_T20190909_070336_423393': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Cloth-None-Drawer-427/trial_T20190909_070336_423393,
+language="put a cleaned cloth in a drawer.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation bathtubbasin) (PickupObject cloth) (GotoLocation sinkbasin) (CleanObject cloth) (GotoLocation drawer) (PutObject cloth drawer)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Potato-None-Microwave-25/trial_T20190908_113515_119158': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Potato-None-Microwave-25/trial_T20190908_113515_119158,
+language="put a chilled sweet potato in the microwave.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation microwave) (PickupObject potato) (GotoLocation fridge) (CoolObject potato) (GotoLocation microwave) (PutObject potato microwave)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-Pen-None-Desk-310/trial_T20190908_030223_620154': Problem(
+problem_id=train/pick_and_place_simple-Pen-None-Desk-310/trial_T20190908_030223_620154,
+language="pick a pencil in the dustbin and place it on the table.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation garbagecan) (PickupObject pen) (GotoLocation desk) (PutObject pen desk)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Egg-None-GarbageCan-11/trial_T20190906_181033_636334': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Egg-None-GarbageCan-11/trial_T20190906_181033_636334,
+language="throw away a rinsed egg.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation garbagecan) (PickupObject egg) (GotoLocation sinkbasin) (CleanObject egg) (GotoLocation garbagecan) (PutObject egg garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Tomato-None-DiningTable-26/trial_T20190907_160916_014285': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Tomato-None-DiningTable-26/trial_T20190907_160916_014285,
+language="col the tomato from the trash in the refrigerator , put the tomato on the table.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation garbagecan) (PickupObject tomato) (GotoLocation fridge) (CoolObject tomato) (GotoLocation diningtable) (PutObject tomato diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Spatula-None-DiningTable-17/trial_T20190909_044854_236942': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Spatula-None-DiningTable-17/trial_T20190909_044854_236942,
+language="put a clean spatula on the table.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject spatula) (GotoLocation sinkbasin) (CleanObject spatula) (GotoLocation diningtable) (PutObject spatula diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-Watch-None-FloorLamp-217/trial_T20190907_011607_273414': Problem(
+problem_id=train/look_at_obj_in_light-Watch-None-FloorLamp-217/trial_T20190907_011607_273414,
+language="grab the watch on the coffee table , turn on the floor lamp in the corner.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation coffeetable) (PickupObject watch) (GotoLocation floorlamp) (ToggleObject floorlamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-AlarmClock-None-DeskLamp-309/trial_T20190908_062755_880343': Problem(
+problem_id=train/look_at_obj_in_light-AlarmClock-None-DeskLamp-309/trial_T20190908_062755_880343,
+language="examine an alarm clock by the light of a table lamp.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation desk) (PickupObject alarmclock) (GotoLocation desklamp) (ToggleObject desklamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-TomatoSliced-None-Microwave-24/trial_T20190912_072414_861932': Problem(
+problem_id=train/pick_cool_then_place_in_recep-TomatoSliced-None-Microwave-24/trial_T20190912_072414_861932,
+language="to cool a tomato slice plus place it in the microwave.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation tomato) (SliceObject tomato) (PutObject butterknife diningtable) (PickupObject tomato) (GotoLocation fridge) (CoolObject tomato) (GotoLocation microwave) (PutObject tomato microwave)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Cloth-None-BathtubBasin-406/trial_T20190907_183646_891246': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Cloth-None-BathtubBasin-406/trial_T20190907_183646_891246,
+language="wash the cloth from the tub in the sink , put it back in the tub.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation bathtubbasin) (PickupObject cloth) (GotoLocation sinkbasin) (CleanObject cloth) (GotoLocation bathtubbasin) (PutObject cloth bathtubbasin)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-RemoteControl-None-ArmChair-230/trial_T20190909_020906_064567': Problem(
+problem_id=train/pick_and_place_simple-RemoteControl-None-ArmChair-230/trial_T20190909_020906_064567,
+language="move the remote from the table to a chair.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation coffeetable) (PickupObject remotecontrol) (GotoLocation armchair) (PutObject remotecontrol armchair)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-AppleSliced-None-DiningTable-27/trial_T20190907_171803_405680': Problem(
+problem_id=train/pick_cool_then_place_in_recep-AppleSliced-None-DiningTable-27/trial_T20190907_171803_405680,
+language="place a chilled piece of apple between the two tomatoes on the table.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject butterknife) (SliceObject apple) (GotoLocation cabinet) (PutObject butterknife cabinet) (GotoLocation diningtable) (PickupObject apple) (GotoLocation fridge) (CoolObject apple) (GotoLocation diningtable) (PutObject apple diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Cup-None-SinkBasin-12/trial_T20190906_180434_894600': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Cup-None-SinkBasin-12/trial_T20190906_180434_894600,
+language="put the chilled glass in the sink.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject cup) (GotoLocation fridge) (CoolObject cup) (GotoLocation sinkbasin) (PutObject cup sinkbasin)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Egg-None-DiningTable-19/trial_T20190909_152159_542794': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Egg-None-DiningTable-19/trial_T20190909_152159_542794,
+language="put heated egg on kitchen table.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sinkbasin) (PickupObject egg) (GotoLocation microwave) (HeatObject egg) (GotoLocation diningtable) (PutObject egg diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-Pencil-None-DeskLamp-306/trial_T20190907_235854_062993': Problem(
+problem_id=train/look_at_obj_in_light-Pencil-None-DeskLamp-306/trial_T20190907_235854_062993,
+language="carry a pencil while turning on a lamp.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation shelf) (PickupObject pencil) (GotoLocation desklamp) (ToggleObject desklamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-LettuceSliced-None-DiningTable-27/trial_T20190909_061209_506966': Problem(
+problem_id=train/pick_cool_then_place_in_recep-LettuceSliced-None-DiningTable-27/trial_T20190909_061209_506966,
+language="to cool a slice of lettuce and place it on the kitchen table.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject butterknife) (GotoLocation lettuce) (SliceObject lettuce) (GotoLocation diningtable) (PutObject butterknife diningtable) (GotoLocation diningtable) (PickupObject lettuce) (GotoLocation fridge) (CoolObject lettuce) (GotoLocation diningtable) (PutObject lettuce diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-SoapBottle-None-GarbageCan-417/trial_T20190909_120106_745160': Problem(
+problem_id=train/pick_and_place_simple-SoapBottle-None-GarbageCan-417/trial_T20190909_120106_745160,
+language="put a bottle in a trash can.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation cabinet) (PickupObject soapbottle) (GotoLocation garbagecan) (PutObject soapbottle garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-TomatoSliced-None-CounterTop-25/trial_T20190908_233657_231915': Problem(
+problem_id=train/pick_and_place_simple-TomatoSliced-None-CounterTop-25/trial_T20190908_233657_231915,
+language="cut a tomato on the counter.",
+goal_prefix="pick_and_place_simple_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject knife) (GotoLocation tomato) (SliceObject tomato)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Lettuce-None-SideTable-21/trial_T20190907_101234_922599': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Lettuce-None-SideTable-21/trial_T20190907_101234_922599,
+language="place a cleaned head of lettuce on a small side table.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject lettuce) (GotoLocation sinkbasin) (CleanObject lettuce) (GotoLocation sidetable) (PutObject lettuce sidetable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Egg-None-Fridge-20/trial_T20190907_224507_776787': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Egg-None-Fridge-20/trial_T20190907_224507_776787,
+language="warm up an egg to put in the fridge.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject egg) (GotoLocation microwave) (HeatObject egg) (GotoLocation fridge) (PutObject egg fridge)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-CellPhone-None-Drawer-302/trial_T20190907_235412_132976': Problem(
+problem_id=train/pick_and_place_simple-CellPhone-None-Drawer-302/trial_T20190907_235412_132976,
+language="take the phone from the top of the nightstand and place it in the drawer.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation bed) (PickupObject cellphone) (GotoLocation drawer) (PutObject cellphone drawer)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-BreadSliced-None-CounterTop-11/trial_T20190907_154448_313676': Problem(
+problem_id=train/pick_heat_then_place_in_recep-BreadSliced-None-CounterTop-11/trial_T20190907_154448_313676,
+language="put a microwaved slice of bread on the counter by the stove top.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject butterknife) (SliceObject bread) (GotoLocation countertop) (PutObject butterknife countertop) (GotoLocation diningtable) (PickupObject bread) (GotoLocation microwave) (HeatObject bread) (GotoLocation countertop) (PutObject bread countertop)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-BreadSliced-None-SideTable-28/trial_T20190907_180304_503402': Problem(
+problem_id=train/pick_heat_then_place_in_recep-BreadSliced-None-SideTable-28/trial_T20190907_180304_503402,
+language="slice a loaf of bread with a knife , cook it in a microwave put it the small brown table.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sidetable) (PickupObject knife) (GotoLocation bread) (SliceObject bread) (GotoLocation diningtable) (PutObject knife diningtable) (GotoLocation diningtable) (PickupObject bread) (GotoLocation microwave) (HeatObject bread) (GotoLocation sidetable) (PutObject bread sidetable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-SoapBar-None-Cabinet-418/trial_T20190907_035143_529621': Problem(
+problem_id=train/pick_clean_then_place_in_recep-SoapBar-None-Cabinet-418/trial_T20190907_035143_529621,
+language="place wet soap in a cabinet.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation cabinet) (PickupObject soapbar) (GotoLocation sinkbasin) (CleanObject soapbar) (GotoLocation cabinet) (PutObject soapbar cabinet)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Lettuce-None-GarbageCan-16/trial_T20190909_014736_101510': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Lettuce-None-GarbageCan-16/trial_T20190909_014736_101510,
+language="put a cold head of lettuce in the garbage.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sinkbasin) (PickupObject lettuce) (GotoLocation fridge) (CoolObject lettuce) (GotoLocation garbagecan) (PutObject lettuce garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-LettuceSliced-None-CounterTop-1/trial_T20190909_153325_717118': Problem(
+problem_id=train/pick_cool_then_place_in_recep-LettuceSliced-None-CounterTop-1/trial_T20190909_153325_717118,
+language="put a chilled slice of lettuce on the counter.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation lettuce) (SliceObject lettuce) (GotoLocation fridge) (PutObject butterknife fridge) (GotoLocation countertop) (PickupObject lettuce) (GotoLocation fridge) (CoolObject lettuce) (GotoLocation countertop) (PutObject lettuce countertop)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Egg-None-SinkBasin-8/trial_T20190907_001607_953024': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Egg-None-SinkBasin-8/trial_T20190907_001607_953024,
+language="place a cooked egg in the sink.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation egg) (PickupObject egg) (GotoLocation microwave) (HeatObject egg) (GotoLocation sinkbasin) (PutObject egg sinkbasin)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-PotatoSliced-None-SinkBasin-1/trial_T20190909_120859_255584': Problem(
+problem_id=train/pick_heat_then_place_in_recep-PotatoSliced-None-SinkBasin-1/trial_T20190909_120859_255584,
+language="put a cooked slice of potato in the middle of the sink.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sinkbasin) (PickupObject potato) (GotoLocation sinkbasin) (PutObject potato sinkbasin) (PickupObject butterknife) (SliceObject potato) (PutObject butterknife sinkbasin) (PickupObject potato) (GotoLocation microwave) (HeatObject potato) (GotoLocation sinkbasin) (PutObject potato sinkbasin)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Tomato-None-Fridge-20/trial_T20190909_091539_383661': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Tomato-None-Fridge-20/trial_T20190909_091539_383661,
+language="put washed tomato in fridge.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject tomato) (GotoLocation sinkbasin) (CleanObject tomato) (GotoLocation fridge) (PutObject tomato fridge)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Potato-None-GarbageCan-18/trial_T20190909_044319_709757': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Potato-None-GarbageCan-18/trial_T20190909_044319_709757,
+language="put a cold potato in the garbage.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject potato) (GotoLocation fridge) (CoolObject potato) (GotoLocation garbagecan) (PutObject potato garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-Egg-None-GarbageCan-5/trial_T20190906_190505_376018': Problem(
+problem_id=train/pick_heat_then_place_in_recep-Egg-None-GarbageCan-5/trial_T20190906_190505_376018,
+language="put a heated egg in the trash can.",
+goal_prefix="pick_heat_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sinkbasin) (PickupObject egg) (GotoLocation microwave) (HeatObject egg) (GotoLocation garbagecan) (PutObject egg garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-TomatoSliced-None-SideTable-3/trial_T20190908_091633_587949': Problem(
+problem_id=train/pick_and_place_simple-TomatoSliced-None-SideTable-3/trial_T20190908_091633_587949,
+language="remove the tomato from the fridge and cut it up on the table.",
+goal_prefix="pick_and_place_simple_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation fridge) (PickupObject tomato) (GotoLocation sidetable) (PutObject tomato sidetable) (GotoLocation knife) (PickupObject knife) (GotoLocation tomato) (SliceObject tomato)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Bread-None-DiningTable-26/trial_T20190906_184052_211612': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Bread-None-DiningTable-26/trial_T20190906_184052_211612,
+language="chill a loaf of bread and move it to the table.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject bread) (GotoLocation fridge) (CoolObject bread) (GotoLocation diningtable) (PutObject bread diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Tomato-None-GarbageCan-6/trial_T20190909_083011_638518': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Tomato-None-GarbageCan-6/trial_T20190909_083011_638518,
+language="chill the tomato in the fridge then throw it away.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation garbagecan) (PickupObject tomato) (GotoLocation fridge) (CoolObject tomato) (GotoLocation garbagecan) (PutObject tomato garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-TomatoSliced-None-SinkBasin-15/trial_T20190909_043958_476680': Problem(
+problem_id=train/pick_heat_then_place_in_recep-TomatoSliced-None-SinkBasin-15/trial_T20190909_043958_476680,
+language="put a heated tomato slice in the sink.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation tomato) (SliceObject tomato) (PutObject butterknife garbagecan) (PickupObject tomato) (GotoLocation microwave) (HeatObject tomato) (GotoLocation sinkbasin) (PutObject tomato sinkbasin)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-CreditCard-None-ArmChair-206/trial_T20190909_023729_905485': Problem(
+problem_id=train/pick_and_place_simple-CreditCard-None-ArmChair-206/trial_T20190909_023729_905485,
+language="put a credit card on the blue chair.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sofa) (PickupObject creditcard) (GotoLocation armchair) (PutObject creditcard armchair)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Mug-None-SideTable-21/trial_T20190907_153609_495974': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Mug-None-SideTable-21/trial_T20190907_153609_495974,
+language="cool down the cup on the small black table.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sidetable) (PickupObject mug) (GotoLocation fridge) (CoolObject mug) (GotoLocation sidetable) (PutObject mug sidetable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-Pen-None-DeskLamp-309/trial_T20190909_052008_160445': Problem(
+problem_id=train/look_at_obj_in_light-Pen-None-DeskLamp-309/trial_T20190909_052008_160445,
+language="examine a pen by the light of a lamp on a small table.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation desk) (PickupObject pen) (GotoLocation desklamp) (ToggleObject desklamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/look_at_obj_in_light-AlarmClock-None-DeskLamp-327/trial_T20190909_102016_233685': Problem(
+problem_id=train/look_at_obj_in_light-AlarmClock-None-DeskLamp-327/trial_T20190909_102016_233685,
+language="turn on desk lamp with clock in hand.",
+goal_prefix="look_at_obj_in_light",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation dresser) (PickupObject alarmclock) (GotoLocation desklamp) (ToggleObject desklamp)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-PotatoSliced-None-GarbageCan-18/trial_T20190909_070406_229146': Problem(
+problem_id=train/pick_cool_then_place_in_recep-PotatoSliced-None-GarbageCan-18/trial_T20190909_070406_229146,
+language="pick up knife , cut potato , place potato in fridge , place potato into trash can.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject knife) (GotoLocation potato) (SliceObject potato) (GotoLocation fridge) (PutObject knife fridge) (GotoLocation countertop) (PickupObject potato) (GotoLocation fridge) (CoolObject potato) (GotoLocation garbagecan) (PutObject potato garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-Lettuce-None-DiningTable-18/trial_T20190909_122629_020439': Problem(
+problem_id=train/pick_cool_then_place_in_recep-Lettuce-None-DiningTable-18/trial_T20190909_122629_020439,
+language="put a chilled head of lettuce on a black table.",
+goal_prefix="pick_cool_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject lettuce) (GotoLocation fridge) (CoolObject lettuce) (GotoLocation diningtable) (PutObject lettuce diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Fork-None-Drawer-30/trial_T20190908_030821_996789': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Fork-None-Drawer-30/trial_T20190908_030821_996789,
+language="put a clean fork in the drawer.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject fork) (CleanObject ) (GotoLocation drawer) (PutObject fork drawer)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-TomatoSliced-None-Fridge-6/trial_T20190907_233151_665009': Problem(
+problem_id=train/pick_and_place_simple-TomatoSliced-None-Fridge-6/trial_T20190907_233151_665009,
+language="slice the bell pepper in the fridge.",
+goal_prefix="pick_and_place_simple_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation tomato) (SliceObject tomato)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_cool_then_place_in_recep-PotatoSliced-None-CounterTop-19/trial_T20190918_170643_072586': Problem(
+problem_id=train/pick_cool_then_place_in_recep-PotatoSliced-None-CounterTop-19/trial_T20190918_170643_072586,
+language="slice the potato and cool it down in the refrigerator so it can be returned to the counter top.",
+goal_prefix="pick_cool_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject butterknife) (GotoLocation potato) (SliceObject potato) (GotoLocation countertop) (PutObject butterknife countertop) (GotoLocation diningtable) (PickupObject potato) (GotoLocation fridge) (CoolObject potato) (GotoLocation countertop) (PutObject potato countertop)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Lettuce-None-DiningTable-21/trial_T20190908_215554_002650': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Lettuce-None-DiningTable-21/trial_T20190908_215554_002650,
+language="put a clean head of lettuce on the table.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sidetable) (PickupObject lettuce) (GotoLocation sinkbasin) (CleanObject lettuce) (GotoLocation diningtable) (PutObject lettuce diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Tomato-None-DiningTable-23/trial_T20190909_000844_354286': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Tomato-None-DiningTable-23/trial_T20190909_000844_354286,
+language="put the clean tomato on the table.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject tomato) (GotoLocation sinkbasin) (CleanObject tomato) (GotoLocation diningtable) (PutObject tomato diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-AppleSliced-None-Microwave-14/trial_T20190908_171220_804585': Problem(
+problem_id=train/pick_and_place_simple-AppleSliced-None-Microwave-14/trial_T20190908_171220_804585,
+language="use a butter knife to slice up an apple that is in the microwave.",
+goal_prefix="pick_and_place_simple_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sinkbasin) (PickupObject butterknife) (GotoLocation apple) (SliceObject apple)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-Fork-None-DiningTable-15/trial_T20190907_203144_140359': Problem(
+problem_id=train/pick_clean_then_place_in_recep-Fork-None-DiningTable-15/trial_T20190907_203144_140359,
+language="put a cleaned fork on the table.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation countertop) (PickupObject fork) (GotoLocation sinkbasin) (CleanObject fork) (GotoLocation diningtable) (PutObject fork diningtable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_clean_then_place_in_recep-SoapBar-None-GarbageCan-403/trial_T20190909_080111_999655': Problem(
+problem_id=train/pick_clean_then_place_in_recep-SoapBar-None-GarbageCan-403/trial_T20190909_080111_999655,
+language="put a clean bar of soap in a small green bin.",
+goal_prefix="pick_clean_then_place_in_recep",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation soapbar) (PickupObject soapbar) (GotoLocation sinkbasin) (CleanObject soapbar) (GotoLocation garbagecan) (PutObject soapbar garbagecan)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-TomatoSliced-None-SideTable-28/trial_T20190908_213541_082467': Problem(
+problem_id=train/pick_and_place_simple-TomatoSliced-None-SideTable-28/trial_T20190908_213541_082467,
+language="slice a tomato on the black table.",
+goal_prefix="pick_and_place_simple_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation sidetable) (PickupObject butterknife) (GotoLocation tomato) (SliceObject tomato)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_and_place_simple-AlarmClock-None-Dresser-319/trial_T20190908_002730_200712': Problem(
+problem_id=train/pick_and_place_simple-AlarmClock-None-Dresser-319/trial_T20190908_002730_200712,
+language="move a clock to the dresser.",
+goal_prefix="pick_and_place_simple",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation shelf) (PickupObject alarmclock) (GotoLocation dresser) (PutObject alarmclock dresser)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+), 'train/pick_heat_then_place_in_recep-TomatoSliced-None-SideTable-28/trial_T20190908_083001_373327': Problem(
+problem_id=train/pick_heat_then_place_in_recep-TomatoSliced-None-SideTable-28/trial_T20190908_083001_373327,
+language="put a heated slice of tomato on the table.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject butterknife) (GotoLocation tomato) (SliceObject tomato) (GotoLocation sidetable) (PutObject butterknife sidetable) (GotoLocation countertop) (PickupObject tomato) (GotoLocation microwave) (HeatObject tomato) (GotoLocation sidetable) (PutObject tomato sidetable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+)}
+(Pdb) *** SyntaxError: invalid syntax
+(Pdb) *** KeyError: 'train'
+(Pdb) *** KeyError: 0
+(Pdb) Problem(
+problem_id=train/pick_heat_then_place_in_recep-TomatoSliced-None-SideTable-28/trial_T20190908_083001_373327,
+language="put a heated slice of tomato on the table.",
+goal_prefix="pick_heat_then_place_in_recep_slice",
+ground_truth_pddl_plan=PDDLPlan[(GotoLocation diningtable) (PickupObject butterknife) (GotoLocation tomato) (SliceObject tomato) (GotoLocation sidetable) (PutObject butterknife sidetable) (GotoLocation countertop) (PickupObject tomato) (GotoLocation microwave) (HeatObject tomato) (GotoLocation sidetable) (PutObject tomato sidetable)],
+should_supervise_pddl_plan=False
+proposed_pddl_goals = []
+proposed_pddl_plans = []
+)
+(Pdb) defaultdict(<class 'list'>, {'look_at_obj_in_light': ['train/look_at_obj_in_light-Cloth-None-DeskLamp-303/trial_T20190908_131610_591705', 'train/look_at_obj_in_light-TissueBox-None-FloorLamp-225/trial_T20190907_150815_536818', 'train/look_at_obj_in_light-Mug-None-DeskLamp-301/trial_T20190908_155916_103990', 'train/look_at_obj_in_light-RemoteControl-None-FloorLamp-229/trial_T20190907_184408_159194', 'train/look_at_obj_in_light-Statue-None-DeskLamp-218/trial_T20190909_085327_810149', 'train/look_at_obj_in_light-RemoteControl-None-FloorLamp-202/trial_T20190909_014548_223224', 'train/look_at_obj_in_light-Bowl-None-DeskLamp-302/trial_T20190908_030636_661532', 'train/look_at_obj_in_light-Bowl-None-DeskLamp-327/trial_T20190907_094422_792919', 'train/look_at_obj_in_light-Laptop-None-FloorLamp-205/trial_T20190907_130015_600297', 'train/look_at_obj_in_light-KeyChain-None-FloorLamp-205/trial_T20190909_114633_189769', 'train/look_at_obj_in_light-CreditCard-None-FloorLamp-228/trial_T20190908_113131_743545', 'train/look_at_obj_in_light-Bowl-None-DeskLamp-302/trial_T20190907_190751_819937', 'train/look_at_obj_in_light-RemoteControl-None-FloorLamp-210/trial_T20190909_005614_868994', 'train/look_at_obj_in_light-CreditCard-None-FloorLamp-216/trial_T20190907_160540_519104', 'train/look_at_obj_in_light-Pen-None-FloorLamp-212/trial_T20190907_000516_042741', 'train/look_at_obj_in_light-Laptop-None-DeskLamp-323/trial_T20190908_014226_839563', 'train/look_at_obj_in_light-CellPhone-None-DeskLamp-318/trial_T20190909_005934_726946', 'train/look_at_obj_in_light-KeyChain-None-FloorLamp-203/trial_T20190909_060210_354107', 'train/look_at_obj_in_light-Pillow-None-DeskLamp-314/trial_T20190908_115844_093537', 'train/look_at_obj_in_light-Pen-None-FloorLamp-221/trial_T20190907_180910_112762', 'train/look_at_obj_in_light-Pillow-None-FloorLamp-212/trial_T20190907_163730_866373', 'train/look_at_obj_in_light-KeyChain-None-FloorLamp-223/trial_T20190909_110146_114031', 'train/look_at_obj_in_light-CD-None-DeskLamp-302/trial_T20190907_154604_364291', 'train/look_at_obj_in_light-Plate-None-FloorLamp-211/trial_T20190907_131058_267698', 'train/look_at_obj_in_light-Pen-None-DeskLamp-327/trial_T20190909_020734_953975', 'train/look_at_obj_in_light-Pen-None-DeskLamp-305/trial_T20190907_115824_746935', 'train/look_at_obj_in_light-Pillow-None-DeskLamp-305/trial_T20190909_110717_764199', 'train/look_at_obj_in_light-Watch-None-FloorLamp-217/trial_T20190907_011607_273414', 'train/look_at_obj_in_light-AlarmClock-None-DeskLamp-309/trial_T20190908_062755_880343', 'train/look_at_obj_in_light-Pencil-None-DeskLamp-306/trial_T20190907_235854_062993', 'train/look_at_obj_in_light-Pen-None-DeskLamp-309/trial_T20190909_052008_160445', 'train/look_at_obj_in_light-AlarmClock-None-DeskLamp-327/trial_T20190909_102016_233685'], 'pick_cool_then_place_in_recep': ['train/pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-20/trial_T20190906_161428_039508', 'train/pick_cool_then_place_in_recep-WineBottle-None-GarbageCan-16/trial_T20190907_015045_510934', 'train/pick_cool_then_place_in_recep-Potato-None-SinkBasin-24/trial_T20190909_052222_333703', 'train/pick_cool_then_place_in_recep-Mug-None-Cabinet-22/trial_T20190908_144232_130522', 'train/pick_cool_then_place_in_recep-Plate-None-Cabinet-22/trial_T20190908_084019_408981', 'train/pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-20/trial_T20190906_161453_754806', 'train/pick_cool_then_place_in_recep-Pot-None-CounterTop-17/trial_T20190908_235146_972017', 'train/pick_cool_then_place_in_recep-Pot-None-DiningTable-23/trial_T20190909_061357_391676', 'train/pick_cool_then_place_in_recep-Tomato-None-DiningTable-11/trial_T20190908_220012_692282', 'train/pick_cool_then_place_in_recep-Potato-None-GarbageCan-6/trial_T20190907_164308_014097', 'train/pick_cool_then_place_in_recep-Lettuce-None-DiningTable-27/trial_T20190907_175045_014819', 'train/pick_cool_then_place_in_recep-Bowl-None-Cabinet-18/trial_T20190908_031815_585714', 'train/pick_cool_then_place_in_recep-Pot-None-DiningTable-27/trial_T20190909_013328_302952', 'train/pick_cool_then_place_in_recep-Pot-None-Cabinet-1/trial_T20190908_184157_888194', 'train/pick_cool_then_place_in_recep-Apple-None-Microwave-12/trial_T20190911_003046_688848', 'train/pick_cool_then_place_in_recep-WineBottle-None-Cabinet-16/trial_T20190907_084106_624638', 'train/pick_cool_then_place_in_recep-Bread-None-CounterTop-7/trial_T20190909_012427_332210', 'train/pick_cool_then_place_in_recep-Mug-None-CoffeeMachine-6/trial_T20190906_204029_896727', 'train/pick_cool_then_place_in_recep-Egg-None-CounterTop-27/trial_T20190909_002105_967038', 'train/pick_cool_then_place_in_recep-Pot-None-CounterTop-24/trial_T20190907_002332_305243', 'train/pick_cool_then_place_in_recep-Potato-None-Microwave-25/trial_T20190908_113515_119158', 'train/pick_cool_then_place_in_recep-Tomato-None-DiningTable-26/trial_T20190907_160916_014285', 'train/pick_cool_then_place_in_recep-Cup-None-SinkBasin-12/trial_T20190906_180434_894600', 'train/pick_cool_then_place_in_recep-Lettuce-None-GarbageCan-16/trial_T20190909_014736_101510', 'train/pick_cool_then_place_in_recep-Potato-None-GarbageCan-18/trial_T20190909_044319_709757', 'train/pick_cool_then_place_in_recep-Bread-None-DiningTable-26/trial_T20190906_184052_211612', 'train/pick_cool_then_place_in_recep-Tomato-None-GarbageCan-6/trial_T20190909_083011_638518', 'train/pick_cool_then_place_in_recep-Mug-None-SideTable-21/trial_T20190907_153609_495974', 'train/pick_cool_then_place_in_recep-Lettuce-None-DiningTable-18/trial_T20190909_122629_020439'], 'pick_and_place_simple': ['train/pick_and_place_simple-Pencil-None-Shelf-310/trial_T20190908_023618_136375', 'train/pick_and_place_simple-Glassbottle-None-Fridge-16/trial_T20190908_045933_322597', 'train/pick_and_place_simple-SprayBottle-None-Toilet-418/trial_T20190906_190917_905379', 'train/pick_and_place_simple-ToiletPaper-None-ToiletPaperHanger-426/trial_T20190909_044756_658872', 'train/pick_and_place_simple-Book-None-Cabinet-310/trial_T20190908_154222_896076', 'train/pick_and_place_simple-Box-None-Sofa-205/trial_T20190907_214830_497445', 'train/pick_and_place_simple-Box-None-Sofa-220/trial_T20190907_165527_462462', 'train/pick_and_place_simple-CD-None-Dresser-323/trial_T20190908_005459_168199', 'train/pick_and_place_simple-Pen-None-Shelf-310/trial_T20190909_113535_223329', 'train/pick_and_place_simple-Book-None-Cabinet-310/trial_T20190908_154238_160623', 'train/pick_and_place_simple-Plunger-None-Cabinet-405/trial_T20190908_120726_695995', 'train/pick_and_place_simple-Box-None-DiningTable-223/trial_T20190907_201444_740434', 'train/pick_and_place_simple-Candle-None-CounterTop-417/trial_T20190909_142343_223524', 'train/pick_and_place_simple-Tomato-None-Microwave-8/trial_T20190907_205050_993517', 'train/pick_and_place_simple-CellPhone-None-Desk-327/trial_T20190907_162400_978293', 'train/pick_and_place_simple-KeyChain-None-Sofa-229/trial_T20190908_123359_988104', 'train/pick_and_place_simple-Cloth-None-SinkBasin-417/trial_T20190908_120422_949453', 'train/pick_and_place_simple-Bowl-None-CoffeeTable-201/trial_T20190907_171714_885383', 'train/pick_and_place_simple-Pencil-None-Desk-309/trial_T20190918_231013_763397', 'train/pick_and_place_simple-Candle-None-SideTable-420/trial_T20190907_025655_142954', 'train/pick_and_place_simple-KeyChain-None-Dresser-317/trial_T20190910_184933_511149', 'train/pick_and_place_simple-RemoteControl-None-ArmChair-223/trial_T20190908_163723_604442', 'train/pick_and_place_simple-CD-None-Shelf-319/trial_T20190908_060915_412301', 'train/pick_and_place_simple-Vase-None-Safe-204/trial_T20190919_000336_714640', 'train/pick_and_place_simple-Newspaper-None-Sofa-211/trial_T20190906_175004_203092', 'train/pick_and_place_simple-Plunger-None-Cabinet-403/trial_T20190909_054730_826329', 'train/pick_and_place_simple-Pen-None-Desk-310/trial_T20190908_030223_620154', 'train/pick_and_place_simple-RemoteControl-None-ArmChair-230/trial_T20190909_020906_064567', 'train/pick_and_place_simple-SoapBottle-None-GarbageCan-417/trial_T20190909_120106_745160', 'train/pick_and_place_simple-CellPhone-None-Drawer-302/trial_T20190907_235412_132976', 'train/pick_and_place_simple-CreditCard-None-ArmChair-206/trial_T20190909_023729_905485', 'train/pick_and_place_simple-AlarmClock-None-Dresser-319/trial_T20190908_002730_200712'], 'pick_heat_then_place_in_recep': ['train/pick_heat_then_place_in_recep-Mug-None-Cabinet-6/trial_T20190908_034437_632398', 'train/pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-11/trial_T20190907_164503_292853', 'train/pick_heat_then_place_in_recep-Potato-None-SideTable-28/trial_T20190907_075841_463460', 'train/pick_heat_then_place_in_recep-Potato-None-SinkBasin-26/trial_T20190909_095444_078134', 'train/pick_heat_then_place_in_recep-Egg-None-SinkBasin-8/trial_T20190907_001539_470934', 'train/pick_heat_then_place_in_recep-Mug-None-Cabinet-30/trial_T20190909_044538_375844', 'train/pick_heat_then_place_in_recep-Apple-None-SinkBasin-24/trial_T20190909_040401_888395', 'train/pick_heat_then_place_in_recep-Apple-None-CounterTop-2/trial_T20190908_112534_364453', 'train/pick_heat_then_place_in_recep-Mug-None-Shelf-20/trial_T20190907_054109_225243', 'train/pick_heat_then_place_in_recep-Apple-None-Fridge-12/trial_T20190909_151749_236238', 'train/pick_heat_then_place_in_recep-Mug-None-Cabinet-6/trial_T20190908_034250_033547', 'train/pick_heat_then_place_in_recep-Potato-None-SinkBasin-14/trial_T20190908_231758_432650', 'train/pick_heat_then_place_in_recep-Tomato-None-SideTable-21/trial_T20190909_012146_287700', 'train/pick_heat_then_place_in_recep-Egg-None-GarbageCan-8/trial_T20190909_120617_866099', 'train/pick_heat_then_place_in_recep-Potato-None-GarbageCan-12/trial_T20190907_125521_042428', 'train/pick_heat_then_place_in_recep-Cup-None-Cabinet-18/trial_T20190907_150623_388922', 'train/pick_heat_then_place_in_recep-Tomato-None-SinkBasin-6/trial_T20190907_204944_538890', 'train/pick_heat_then_place_in_recep-Mug-None-Cabinet-30/trial_T20190909_044843_334172', 'train/pick_heat_then_place_in_recep-Cup-None-Cabinet-27/trial_T20190908_123907_725964', 'train/pick_heat_then_place_in_recep-Mug-None-Shelf-7/trial_T20190907_022308_669309', 'train/pick_heat_then_place_in_recep-Cup-None-Fridge-22/trial_T20190908_072702_772430', 'train/pick_heat_then_place_in_recep-Apple-None-GarbageCan-12/trial_T20190908_172302_166350', 'train/pick_heat_then_place_in_recep-Cup-None-Cabinet-8/trial_T20190907_170522_408193', 'train/pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-7/trial_T20190908_123421_558588', 'train/pick_heat_then_place_in_recep-Egg-None-SideTable-21/trial_T20190907_045036_700265', 'train/pick_heat_then_place_in_recep-Plate-None-Shelf-7/trial_T20190906_193846_907707', 'train/pick_heat_then_place_in_recep-Mug-None-CoffeeMachine-13/trial_T20190908_092542_043460', 'train/pick_heat_then_place_in_recep-Apple-None-SideTable-28/trial_T20190906_180710_251060', 'train/pick_heat_then_place_in_recep-Egg-None-DiningTable-19/trial_T20190909_152159_542794', 'train/pick_heat_then_place_in_recep-Egg-None-Fridge-20/trial_T20190907_224507_776787', 'train/pick_heat_then_place_in_recep-Egg-None-SinkBasin-8/trial_T20190907_001607_953024', 'train/pick_heat_then_place_in_recep-Egg-None-GarbageCan-5/trial_T20190906_190505_376018'], 'pick_and_place_simple_slice': ['train/pick_and_place_simple-AppleSliced-None-Fridge-30/trial_T20190907_105523_799331', 'train/pick_and_place_simple-AppleSliced-None-Fridge-30/trial_T20190907_105723_672392', 'train/pick_and_place_simple-TomatoSliced-None-SideTable-28/trial_T20190908_213552_035696', 'train/pick_and_place_simple-PotatoSliced-None-SinkBasin-25/trial_T20190907_062007_896057', 'train/pick_and_place_simple-LettuceSliced-None-DiningTable-24/trial_T20190906_220047_928975', 'train/pick_and_place_simple-TomatoSliced-None-Fridge-6/trial_T20190918_162404_957531', 'train/pick_and_place_simple-AppleSliced-None-Microwave-14/trial_T20190908_171151_027975', 'train/pick_and_place_simple-LettuceSliced-None-DiningTable-24/trial_T20190906_220204_504890', 'train/pick_and_place_simple-LettuceSliced-None-DiningTable-24/trial_T20190906_220147_111155', 'train/pick_and_place_simple-TomatoSliced-None-CounterTop-25/trial_T20190908_233941_496641', 'train/pick_and_place_simple-BreadSliced-None-SideTable-3/trial_T20190907_000233_574076', 'train/pick_and_place_simple-TomatoSliced-None-SideTable-3/trial_T20190908_091615_973891', 'train/pick_and_place_simple-TomatoSliced-None-CounterTop-25/trial_T20190908_233657_231915', 'train/pick_and_place_simple-TomatoSliced-None-SideTable-3/trial_T20190908_091633_587949', 'train/pick_and_place_simple-TomatoSliced-None-Fridge-6/trial_T20190907_233151_665009', 'train/pick_and_place_simple-AppleSliced-None-Microwave-14/trial_T20190908_171220_804585', 'train/pick_and_place_simple-TomatoSliced-None-SideTable-28/trial_T20190908_213541_082467'], 'pick_heat_then_place_in_recep_slice': ['train/pick_heat_then_place_in_recep-TomatoSliced-None-Fridge-5/trial_T20190908_061406_498045', 'train/pick_heat_then_place_in_recep-BreadSliced-None-Fridge-2/trial_T20190909_075013_874186', 'train/pick_heat_then_place_in_recep-TomatoSliced-None-SinkBasin-4/trial_T20190909_064937_166184', 'train/pick_heat_then_place_in_recep-AppleSliced-None-Fridge-6/trial_T20190907_182032_987487', 'train/pick_heat_then_place_in_recep-AppleSliced-None-DiningTable-17/trial_T20190908_095621_618627', 'train/pick_heat_then_place_in_recep-AppleSliced-None-DiningTable-15/trial_T20190907_224100_128711', 'train/pick_heat_then_place_in_recep-TomatoSliced-None-SinkBasin-15/trial_T20190909_020319_726874', 'train/pick_heat_then_place_in_recep-BreadSliced-None-GarbageCan-12/trial_T20190907_121108_221602', 'train/pick_heat_then_place_in_recep-BreadSliced-None-DiningTable-19/trial_T20190907_203429_844011', 'train/pick_heat_then_place_in_recep-BreadSliced-None-GarbageCan-2/trial_T20190908_105707_315068', 'train/pick_heat_then_place_in_recep-BreadSliced-None-GarbageCan-16/trial_T20190907_232412_371318', 'train/pick_heat_then_place_in_recep-TomatoSliced-None-Fridge-15/trial_T20190909_005143_132045', 'train/pick_heat_then_place_in_recep-TomatoSliced-None-Fridge-19/trial_T20190907_162559_502428', 'train/pick_heat_then_place_in_recep-TomatoSliced-None-GarbageCan-23/trial_T20190909_034745_393039', 'train/pick_heat_then_place_in_recep-PotatoSliced-None-SinkBasin-24/trial_T20190918_232253_006450', 'train/pick_heat_then_place_in_recep-PotatoSliced-None-GarbageCan-25/trial_T20190907_165437_326025', 'train/pick_heat_then_place_in_recep-AppleSliced-None-SideTable-21/trial_T20190908_030402_887474', 'train/pick_heat_then_place_in_recep-AppleSliced-None-SinkBasin-18/trial_T20190909_005234_628704', 'train/pick_heat_then_place_in_recep-AppleSliced-None-SinkBasin-4/trial_T20190907_154132_135926', 'train/pick_heat_then_place_in_recep-TomatoSliced-None-DiningTable-23/trial_T20190907_061945_946479', 'train/pick_heat_then_place_in_recep-PotatoSliced-None-Fridge-18/trial_T20190912_110736_098163', 'train/pick_heat_then_place_in_recep-BreadSliced-None-GarbageCan-30/trial_T20190907_044445_578004', 'train/pick_heat_then_place_in_recep-PotatoSliced-None-Fridge-11/trial_T20190910_232930_757480', 'train/pick_heat_then_place_in_recep-BreadSliced-None-CounterTop-11/trial_T20190907_154448_313676', 'train/pick_heat_then_place_in_recep-BreadSliced-None-SideTable-28/trial_T20190907_180304_503402', 'train/pick_heat_then_place_in_recep-PotatoSliced-None-SinkBasin-1/trial_T20190909_120859_255584', 'train/pick_heat_then_place_in_recep-TomatoSliced-None-SinkBasin-15/trial_T20190909_043958_476680', 'train/pick_heat_then_place_in_recep-TomatoSliced-None-SideTable-28/trial_T20190908_083001_373327'], 'pick_clean_then_place_in_recep': ['train/pick_clean_then_place_in_recep-SoapBar-None-GarbageCan-421/trial_T20190907_041233_785188', 'train/pick_clean_then_place_in_recep-Tomato-None-CounterTop-14/trial_T20190909_012732_375728', 'train/pick_clean_then_place_in_recep-ButterKnife-None-CounterTop-25/trial_T20190907_212022_934468', 'train/pick_clean_then_place_in_recep-Spoon-None-Drawer-5/trial_T20190907_080537_064131', 'train/pick_clean_then_place_in_recep-Kettle-None-CounterTop-18/trial_T20190908_025529_009980', 'train/pick_clean_then_place_in_recep-Knife-None-SideTable-3/trial_T20190906_210539_903984', 'train/pick_clean_then_place_in_recep-Mug-None-CoffeeMachine-25/trial_T20190907_223942_379753', 'train/pick_clean_then_place_in_recep-Mug-None-CoffeeMachine-24/trial_T20190906_185346_459023', 'train/pick_clean_then_place_in_recep-SoapBar-None-BathtubBasin-411/trial_T20190907_033311_020938', 'train/pick_clean_then_place_in_recep-Tomato-None-DiningTable-23/trial_T20190909_000922_271997', 'train/pick_clean_then_place_in_recep-Apple-None-Fridge-27/trial_T20190906_220808_492885', 'train/pick_clean_then_place_in_recep-ButterKnife-None-Drawer-30/trial_T20190908_051931_072703', 'train/pick_clean_then_place_in_recep-ButterKnife-None-Drawer-2/trial_T20190908_044255_995925', 'train/pick_clean_then_place_in_recep-Pan-None-StoveBurner-2/trial_T20190906_215744_388781', 'train/pick_clean_then_place_in_recep-Cloth-None-BathtubBasin-419/trial_T20190909_014042_055607', 'train/pick_clean_then_place_in_recep-Spatula-None-CounterTop-19/trial_T20190906_181322_850030', 'train/pick_clean_then_place_in_recep-Spatula-None-CounterTop-30/trial_T20190909_050831_328612', 'train/pick_clean_then_place_in_recep-Cloth-None-Drawer-427/trial_T20190909_070336_423393', 'train/pick_clean_then_place_in_recep-Egg-None-GarbageCan-11/trial_T20190906_181033_636334', 'train/pick_clean_then_place_in_recep-Spatula-None-DiningTable-17/trial_T20190909_044854_236942', 'train/pick_clean_then_place_in_recep-Cloth-None-BathtubBasin-406/trial_T20190907_183646_891246', 'train/pick_clean_then_place_in_recep-Lettuce-None-SideTable-21/trial_T20190907_101234_922599', 'train/pick_clean_then_place_in_recep-SoapBar-None-Cabinet-418/trial_T20190907_035143_529621', 'train/pick_clean_then_place_in_recep-Tomato-None-Fridge-20/trial_T20190909_091539_383661', 'train/pick_clean_then_place_in_recep-Fork-None-Drawer-30/trial_T20190908_030821_996789', 'train/pick_clean_then_place_in_recep-Lettuce-None-DiningTable-21/trial_T20190908_215554_002650', 'train/pick_clean_then_place_in_recep-Tomato-None-DiningTable-23/trial_T20190909_000844_354286', 'train/pick_clean_then_place_in_recep-Fork-None-DiningTable-15/trial_T20190907_203144_140359', 'train/pick_clean_then_place_in_recep-SoapBar-None-GarbageCan-403/trial_T20190909_080111_999655'], 'pick_cool_then_place_in_recep_slice': ['train/pick_cool_then_place_in_recep-PotatoSliced-None-SinkBasin-13/trial_T20190919_030951_364977', 'train/pick_cool_then_place_in_recep-PotatoSliced-None-Microwave-2/trial_T20190909_094553_729319', 'train/pick_cool_then_place_in_recep-PotatoSliced-None-Microwave-5/trial_T20190914_020559_534073', 'train/pick_cool_then_place_in_recep-TomatoSliced-None-DiningTable-18/trial_T20190909_101511_247105', 'train/pick_cool_then_place_in_recep-LettuceSliced-None-GarbageCan-20/trial_T20190909_125307_108909', 'train/pick_cool_then_place_in_recep-BreadSliced-None-Microwave-19/trial_T20190911_082218_676174', 'train/pick_cool_then_place_in_recep-PotatoSliced-None-DiningTable-27/trial_T20190908_030342_504066', 'train/pick_cool_then_place_in_recep-BreadSliced-None-Microwave-6/trial_T20190909_115420_904817', 'train/pick_cool_then_place_in_recep-TomatoSliced-None-DiningTable-18/trial_T20190914_033809_050650', 'train/pick_cool_then_place_in_recep-BreadSliced-None-GarbageCan-19/trial_T20190908_174425_766449', 'train/pick_cool_then_place_in_recep-AppleSliced-None-DiningTable-18/trial_T20190909_022438_980686', 'train/pick_cool_then_place_in_recep-AppleSliced-None-Microwave-11/trial_T20190909_152218_676963', 'train/pick_cool_then_place_in_recep-AppleSliced-None-GarbageCan-14/trial_T20190908_022829_998348', 'train/pick_cool_then_place_in_recep-TomatoSliced-None-GarbageCan-19/trial_T20190908_224803_743034', 'train/pick_cool_then_place_in_recep-AppleSliced-None-GarbageCan-19/trial_T20190909_111859_174743', 'train/pick_cool_then_place_in_recep-PotatoSliced-None-Microwave-21/trial_T20190908_064303_598028', 'train/pick_cool_then_place_in_recep-TomatoSliced-None-Microwave-18/trial_T20190911_190644_778748', 'train/pick_cool_then_place_in_recep-TomatoSliced-None-Microwave-12/trial_T20190908_165447_696883', 'train/pick_cool_then_place_in_recep-TomatoSliced-None-Microwave-24/trial_T20190912_072414_861932', 'train/pick_cool_then_place_in_recep-AppleSliced-None-DiningTable-27/trial_T20190907_171803_405680', 'train/pick_cool_then_place_in_recep-LettuceSliced-None-DiningTable-27/trial_T20190909_061209_506966', 'train/pick_cool_then_place_in_recep-LettuceSliced-None-CounterTop-1/trial_T20190909_153325_717118', 'train/pick_cool_then_place_in_recep-PotatoSliced-None-GarbageCan-18/trial_T20190909_070406_229146', 'train/pick_cool_then_place_in_recep-PotatoSliced-None-CounterTop-19/trial_T20190918_170643_072586']})
+(Pdb) []
+(Pdb) 9
+(Pdb) ['train/pick_clean_then_place_in_recep-SoapBar-None-GarbageCan-421/trial_T20190907_041233_785188', 'train/pick_clean_then_place_in_recep-Tomato-None-CounterTop-14/trial_T20190909_012732_375728', 'train/pick_clean_then_place_in_recep-ButterKnife-None-CounterTop-25/trial_T20190907_212022_934468', 'train/pick_clean_then_place_in_recep-Spoon-None-Drawer-5/trial_T20190907_080537_064131', 'train/pick_clean_then_place_in_recep-Kettle-None-CounterTop-18/trial_T20190908_025529_009980', 'train/pick_clean_then_place_in_recep-Knife-None-SideTable-3/trial_T20190906_210539_903984', 'train/pick_clean_then_place_in_recep-Mug-None-CoffeeMachine-25/trial_T20190907_223942_379753', 'train/pick_clean_then_place_in_recep-Mug-None-CoffeeMachine-24/trial_T20190906_185346_459023', 'train/pick_clean_then_place_in_recep-SoapBar-None-BathtubBasin-411/trial_T20190907_033311_020938', 'train/pick_clean_then_place_in_recep-Tomato-None-DiningTable-23/trial_T20190909_000922_271997', 'train/pick_clean_then_place_in_recep-Apple-None-Fridge-27/trial_T20190906_220808_492885', 'train/pick_clean_then_place_in_recep-ButterKnife-None-Drawer-30/trial_T20190908_051931_072703', 'train/pick_clean_then_place_in_recep-ButterKnife-None-Drawer-2/trial_T20190908_044255_995925', 'train/pick_clean_then_place_in_recep-Pan-None-StoveBurner-2/trial_T20190906_215744_388781', 'train/pick_clean_then_place_in_recep-Cloth-None-BathtubBasin-419/trial_T20190909_014042_055607', 'train/pick_clean_then_place_in_recep-Spatula-None-CounterTop-19/trial_T20190906_181322_850030', 'train/pick_clean_then_place_in_recep-Spatula-None-CounterTop-30/trial_T20190909_050831_328612', 'train/pick_clean_then_place_in_recep-Cloth-None-Drawer-427/trial_T20190909_070336_423393', 'train/pick_clean_then_place_in_recep-Egg-None-GarbageCan-11/trial_T20190906_181033_636334', 'train/pick_clean_then_place_in_recep-Spatula-None-DiningTable-17/trial_T20190909_044854_236942', 'train/pick_clean_then_place_in_recep-Cloth-None-BathtubBasin-406/trial_T20190907_183646_891246', 'train/pick_clean_then_place_in_recep-Lettuce-None-SideTable-21/trial_T20190907_101234_922599', 'train/pick_clean_then_place_in_recep-SoapBar-None-Cabinet-418/trial_T20190907_035143_529621', 'train/pick_clean_then_place_in_recep-Tomato-None-Fridge-20/trial_T20190909_091539_383661', 'train/pick_clean_then_place_in_recep-Fork-None-Drawer-30/trial_T20190908_030821_996789', 'train/pick_clean_then_place_in_recep-Lettuce-None-DiningTable-21/trial_T20190908_215554_002650', 'train/pick_clean_then_place_in_recep-Tomato-None-DiningTable-23/trial_T20190909_000844_354286', 'train/pick_clean_then_place_in_recep-Fork-None-DiningTable-15/trial_T20190907_203144_140359', 'train/pick_clean_then_place_in_recep-SoapBar-None-GarbageCan-403/trial_T20190909_080111_999655']
+(Pdb) 
