@@ -44,7 +44,7 @@ python main.py --experiment_name $EXPR_NAME \
   --initial_goal_supervision_prefix SKIP \
   --train_iterations 5 --output_directory generated --operator-use-cot 1 \
   --goal_propose_include_codex_types --operator_propose_minimum_usage 1 --planner task_planner_pdsketch_onthefly --maximum_operator_arity 9 \
-  --n_attempts_to_plan 1 --n_goal_samples 1 --n_plan_sample 1 \
+  --n_attempts_to_plan 3 --n_goal_samples 1 --n_plan_sample 1 \
   --external_operator_supervision data/dataset/crafting-world-crafting-only-operator-supervision_ --external_operator_sample_with_prompt --external_operator_names craft-arrow craft-wood-plank \
   --planner_timeout 120 \
   --verbose $@

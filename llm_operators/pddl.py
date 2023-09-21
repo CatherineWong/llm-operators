@@ -1169,6 +1169,9 @@ class PDDLProblem:
         pddl_problem = PDDLParser._purge_comments(pddl_problem)
         return PDDLParser._find_labelled_expression(pddl_problem, ":init")
 
+    def get_ground_truth_pddl_string(self):
+        return self.ground_truth_pddl_problem_string
+
     def get_pddl_string_with_proposed_goal(self, proposed_goal):
         # Replaces the ground truth goal with a proposed goal.
         pddl_string = self.ground_truth_pddl_problem_string.replace(self.ground_truth_goal, proposed_goal)

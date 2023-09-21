@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import copy
 import os.path as osp
 import itertools
 import json
@@ -49,10 +50,11 @@ def load_crafting_world_teleport_pddl_domain(verbose=False):
     return domain
 
 
-CRAFTING_WORLD_20230204_DATASET_NAME = 'crafting_world_20230204_minining_only'
+CRAFTING_WORLD_20230204_DATASET_NAME = 'crafting_world_20230204_mining_only'
+
 
 @register_planning_domain_problems(CRAFTING_WORLD_20230204_DATASET_NAME)
-def load_crafting_world_20230204_minining_only(dataset_pddl_directory: str, dataset_fraction: float, verbose=False):
+def load_crafting_world_20230204_mining_only(dataset_pddl_directory: str, dataset_fraction: float, verbose=False):
     """Experiments crafting_world_v20230204_mining_only
 
         1. The map is a linear chain: t1 t2 t3 ...
@@ -64,20 +66,20 @@ def load_crafting_world_20230204_minining_only(dataset_pddl_directory: str, data
         7. Instructions are generated with a single template: Mine X from the map.
 
     .. code::
-        python main.py --experiment_name cw_v20230204_mining_only_full --dataset_name crafting_world_20230204_minining_only --supervision_name supervision --pddl_domain_name crafting_world --dataset_fraction 1.0 --training_plans_fraction 1.0 --initial_plans_prefix mining --initial_pddl_operators move-up move-down move-left move-right pick-up place-down mine-iron-ore --verbose --train_iterations 1 --dataset_pddl_directory data/dataset/crafting_world_v20230204_mining_only --goal_propose_include_codex_types --operator_propose_minimum_usage 1 --output_directory generated --debug_stop_after_first_proposal
+        python main.py --experiment_name cw_v20230204_mining_only_full --dataset_name crafting_world_20230204_mining_only --supervision_name supervision --pddl_domain_name crafting_world --dataset_fraction 1.0 --training_plans_fraction 1.0 --initial_plans_prefix mining --initial_pddl_operators move-up move-down move-left move-right pick-up place-down mine-iron-ore --verbose --train_iterations 1 --dataset_pddl_directory data/dataset/crafting_world_v20230204_mining_only --goal_propose_include_codex_types --operator_propose_minimum_usage 1 --output_directory generated --debug_stop_after_first_proposal
 
     Note that since the task planner will timeout on this domain, we need to implement a new task planner (skipped for now, only testing for proposals).
     See generated/cw_v20230204_mining_only_full/0/cw_v20230204_mining_only_full_preprocessed_operators.csv for results.
     """
-    from llm_operators.datasets.crafting_world_gen.cw_20230204_minining_only import problem_from_raw_record
+    from llm_operators.datasets.crafting_world_gen.cw_20230204_mining_only import problem_from_raw_record
 
     with open(osp.join(dataset_pddl_directory, 'dataset.json')) as f:
         dataset = json.load(f)
 
     has_teleport = False
-    if hasattr(load_crafting_world_20230204_minining_only, 'domain'):
-        has_teleport = 'teleport' in load_crafting_world_20230204_minining_only.domain.domain_name
-        print('!!! domain name', load_crafting_world_20230204_minining_only.domain.domain_name)
+    if hasattr(load_crafting_world_20230204_mining_only, 'domain'):
+        has_teleport = 'teleport' in load_crafting_world_20230204_mining_only.domain.domain_name
+        print('!!! domain name', load_crafting_world_20230204_mining_only.domain.domain_name)
         print('!!! has_teleport', has_teleport)
 
     for split, split_problems in dataset.items():
@@ -118,9 +120,15 @@ def load_crafting_world_20230829_crafting_only(dataset_pddl_directory: str, data
     return dataset
 
 
+class SimpleConjunction(object):
+    def __init__(self, conjuncts: list[str]):
+        self.conjuncts = conjuncts
+
+
 class CraftingWorld20230204Simulator(object):
     def __init__(self):
         self.nr_grids = 15
+        self.nr_inventory = 3
         self.agent_pos = 1
         self.objects = dict()  # str: (str, int), name: (type, pos)
         self.inventory = dict()  # int: Optional[Tuple[str, str]]  # (type, name)
@@ -130,7 +138,8 @@ class CraftingWorld20230204Simulator(object):
         agent_at = list(state['agent-at'])[0][0]
         self.agent_pos = int(agent_at[1:])
 
-        nr_inventory = len(objects['inventory'])
+        self.nr_grids = len(objects['tile'])
+        self.nr_inventory = nr_inventory = len(objects['inventory'])
 
         self.objects = dict()
         self.inventory = {i: None for i in range(1, 1 + nr_inventory)}
@@ -158,6 +167,7 @@ class CraftingWorld20230204Simulator(object):
 
     def move_to(self, pos):
         self.agent_pos = max(1, min(self.nr_grids, pos))
+        return True
 
     def move_left(self):
         self.agent_pos = max(1, self.agent_pos - 1)
@@ -230,9 +240,9 @@ class CraftingWorld20230204Simulator(object):
         for rule in CRAFTING_RULES:
             if target_type is not None and underline_to_pascal(rule['create']) != target_type:
                 continue
-            print('  checking crafting rule', rule['location'], rule['recipe'], rule['create'])
-            if not SKIP_CRAFTING_LOCATION_CHECK:
-                print(f'    matching crafting location', underline_to_pascal(rule['location']), obj_type)
+            # print('  checking crafting rule', rule['location'], rule['recipe'], rule['create'])
+            # if not SKIP_CRAFTING_LOCATION_CHECK:
+            #     print(f'    matching crafting location', underline_to_pascal(rule['location']), obj_type)
             if underline_to_pascal(rule['location']) == obj_type or SKIP_CRAFTING_LOCATION_CHECK:
                 if len(rule['recipe']) == len(ingredients_inventory):
                     current_holding_types = set()
@@ -242,19 +252,23 @@ class CraftingWorld20230204Simulator(object):
                     target_holding_types = set()
                     for ingredient_type in rule['recipe']:
                         target_holding_types.add(underline_to_pascal(ingredient_type))
-                    print(f'    matching crafting recipe current={current_holding_types}, target={target_holding_types}')
+                    # print(f'    matching crafting recipe current={current_holding_types}, target={target_holding_types}')
                     if current_holding_types == target_holding_types:
                         new_obj_type = underline_to_pascal(rule['create'])
                         self.inventory[inventory] = (new_obj_type, hypothetical_object_name)
                         self.hypothetical.remove(hypothetical_object_name)
-                        print('    crafting success')
+                        # print('    crafting success')
                         return True
         return False
 
     def goal_satisfied(self, goals):
         for goal in goals:
             parts = goal.split(' ')
-            if parts[0] == 'inventory-holding':
+            if parts[0] == 'agent-at':
+                pos = int(parts[1][1:])
+                if self.agent_pos != pos:
+                    return False
+            elif parts[0] == 'inventory-holding':
                 inv_id = int(parts[1][1:])
                 obj_name = parts[2]
                 if self.inventory[inv_id] is None:
@@ -287,6 +301,59 @@ class CraftingWorld20230204Simulator(object):
                 raise NotImplementedError()
 
         return True
+
+    def goal_satisfied_conjunction(self, conjunction: SimpleConjunction):
+        return self.goal_satisfied(conjunction.conjuncts)
+
+    def copy(self) -> 'CraftingWorld20230204Simulator':
+        return copy.deepcopy(self)
+
+    def enumerate_actions(s: 'CraftingWorld20230204Simulator'):
+        for i in range(1, s.nr_grids + 1):
+            yield lambda s, i=i: s.move_to(i)
+        for i in range(1, s.nr_inventory + 1):
+            for obj_name in s.objects:
+                yield lambda s, i=i, obj_name=obj_name: s.pick_up(i, obj_name)
+        for obj_name in s.objects:
+            for inv in s.inventory:
+                for hypothetical_object_name in s.hypothetical:
+                    yield lambda s, obj_name=obj_name, inv=inv, hypothetical_object_name=hypothetical_object_name: s.mine(obj_name, inv, hypothetical_object_name)
+        for obj_name in s.objects:
+            for inv in s.inventory:
+                for hypothetical_object_name in s.hypothetical:
+                    for inv2 in s.inventory:
+                        yield lambda s, obj_name=obj_name, inv=inv, hypothetical_object_name=hypothetical_object_name, inv2=inv2: s.mine(obj_name, inv, hypothetical_object_name, inv2)
+        assert SKIP_CRAFTING_LOCATION_CHECK
+        for obj_name in s.objects:
+            for inv in s.inventory:
+                for hypothetical_object_name in s.hypothetical:
+                    for inv2 in s.inventory:
+                        yield lambda s, obj_name=obj_name, inv=inv, hypothetical_object_name=hypothetical_object_name, inv2=inv2: s.craft(obj_name, inv, hypothetical_object_name, [inv2])
+                        for inv3 in s.inventory:
+                            yield lambda s, obj_name=obj_name, inv=inv, hypothetical_object_name=hypothetical_object_name, inv2=inv2, inv3=inv3: s.craft(obj_name, inv, hypothetical_object_name, [inv2, inv3])
+
+
+def local_search_for_subgoal(simulator: CraftingWorld20230204Simulator, conjunction: SimpleConjunction, max_steps=int(1e6)):
+    simulator = simulator.copy()
+
+    def bfs(s):
+        visited_nodes = 1
+        q = [(s, [])]
+        while len(q) > 0:
+            s, actions = q.pop(0)
+            for a in s.enumerate_actions():
+                simulator = s.copy()
+                if a(simulator):
+                    if simulator.goal_satisfied_conjunction(conjunction):
+                        return simulator, actions + [a]
+                    q.append((simulator, actions + [a]))
+                    visited_nodes += 1
+                    if visited_nodes > max_steps:
+                        return None
+
+        return None
+
+    return bfs(simulator)
 
 
 CRAFTING_WORLD_CODEX_TYPES = """

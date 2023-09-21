@@ -152,11 +152,14 @@ def gen_v20230829_solution(record: Dict[str, Any]) -> Optional[PDDLPlan]:
 
     current_pos = 1
     actions = list()
+    primitive_actions = list()
     tool_object_ids = list()
     for i, x in enumerate(target_rule['recipe']):
         location, tool_object_id = _find_object_on_the_map(record, x)
         actions.append(f'(move-to t{current_pos} t{location + 1})')
         actions.append(f'(pick-up i{i + 1} o{tool_object_id} t{location + 1})')
+        primitive_actions.append({'action': 'move_to', 'args': [location + 1]})
+        primitive_actions.append({'action': 'pick_up', 'args': [i + 1, tool_object_id]})
         tool_object_ids.append(tool_object_id)
         current_pos = location + 1
 

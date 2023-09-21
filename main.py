@@ -227,6 +227,7 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
     # Given a domain and a set of goals, this uses Codex + preprocessing to sample a set of operator definitions for goals.
     if not args.debug_no_propose_plans_operators_goals:
         codex.propose_goals_for_problems(
+            dataset_name=args.dataset_name,
             problems=planning_problems[split],
             domain=pddl_domain,
             initial_pddl_predicates=args.initial_pddl_predicates,  # Currently this has no effect.

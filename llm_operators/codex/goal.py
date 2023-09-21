@@ -23,6 +23,7 @@ GOAL_SAMPLING_END_TOKEN = "<END>"
 
 
 def propose_goals_for_problems(
+    dataset_name,
     problems,
     domain,
     initial_pddl_predicates,
@@ -74,19 +75,42 @@ def propose_goals_for_problems(
         problem.proposed_pddl_goals = []
         if verbose and idx % print_every == 0:
             print(f"propose_goals_for_problems:: now on {idx} / {len(unsolved_problems)}")
-        codex_prompt, proposed_goal_definitions = _propose_goal_definition(domain, solved_problems, problem, n_samples, temperature, include_codex_types, max_goal_examples, external_goal_supervision, external_goal_sample_with_prompt)
 
-        output_json[problem.problem_id] = {
-            CODEX_PROMPT: codex_prompt,
-            CODEX_OUTPUT: proposed_goal_definitions,
-        }
-        if verbose:
-            print(f'propose_goals_for_problems:: "{problem.language}":')
-            for i, goal_string in enumerate(proposed_goal_definitions):
-                print(f"[Goal {i+1}/{len(proposed_goal_definitions)}]")
-                print(goal_string)
-        problem.proposed_pddl_goals.extend(proposed_goal_definitions)  # editing the problem
+        #### LCW - Temporary split between ALFRED and Minecraft behaviors to preserve exact prompting behaviors used in ICML experiments.
+        if "alfred" in dataset_name:
+            ### ALFRED goal prompting.
+            codex_prompt, proposed_goal_definitions = _propose_alfred_goal_definition(domain, solved_problems, problem, n_samples, temperature, include_codex_types, max_goal_examples, external_goal_supervision, external_goal_sample_with_prompt)
 
+            output_json[problem.problem_id] = {
+                CODEX_PROMPT: codex_prompt,
+                CODEX_OUTPUT: proposed_goal_definitions,
+            }
+            if verbose:
+                print(f'propose_goals_for_problems:: "{problem.language}":')
+                for i, goal_string in enumerate(proposed_goal_definitions):
+                    print(f"[Goal {i+1}/{len(proposed_goal_definitions)}]")
+                    print(goal_string)
+            problem.proposed_pddl_goals.extend(proposed_goal_definitions)  # editing the problem
+        else:
+            #### Minecraft goal prompting.
+            try:
+                goal_strings = []
+                for i in range(n_samples):
+                    prompt = _get_minecraft_prompt(max_goal_examples, supervision_pddl, domain, include_codex_types, problem, solved_problems)
+                    goal_strings.append(get_completions(prompt, temperature=temperature, stop=STOP_TOKEN, n_samples=1)[0])
+                output_json[problem.problem_id] = {
+                    CODEX_PROMPT: prompt,
+                    CODEX_OUTPUT: goal_strings,
+                }
+                if verbose:
+                    print(f'propose_goals_for_problems:: "{problem.language}":')
+                    for i, goal_string in enumerate(goal_strings):
+                        print(f"[Goal {i+1}/{len(goal_strings)}]")
+                        print(goal_string)
+                problem.proposed_pddl_goals.extend(goal_strings)  # editing the problem
+            except Exception as e:
+                print(e)
+                continue
     if output_directory:
         with open(os.path.join(output_directory, output_filepath), "w") as f:
             json.dump(output_json, f)
@@ -106,9 +130,25 @@ def mock_propose_goals_for_problems(output_filepath, unsolved_problems, output_d
 
 
 ############################################################################################################
+def _get_minecraft_prompt(max_goal_examples, supervision_pddl, domain, include_codex_types, problem, solved_problems):
+        nl_header = "\n;; Natural language goals and PDDL goals\n\n"
+        # Generate unique prompt for each sample
+        prompt = nl_header
+        if supervision_pddl:  # Add supervision from external prompts.
+            prompt += _get_supervision_goal_prompt(supervision_pddl)
+
+        max_goal_examples = min(max_goal_examples, len(solved_problems))
+        solved_to_prompt = random.sample(solved_problems, max_goal_examples)
+
+        # domains for all alfred problems should be the same.
+        prompt += _get_domain_string(domain, solved_to_prompt[0])
+        for solved_problem in solved_to_prompt:  # constructing the input prompt
+            prompt += _get_solved_goal_prompt(domain, solved_problem)
+        prompt += _get_unsolved_goal_prompt(domain, problem, include_codex_types=include_codex_types, include_domain_string=False)
+        return prompt
 
 # Utility functions for composing the prompt for goal proposal.
-def _propose_goal_definition(domain, solved_problems, problem, n_goal_samples, temperature, include_codex_types, max_goal_examples, external_goal_supervision, external_goal_sample_with_prompt):
+def _propose_alfred_goal_definition(domain, solved_problems, problem, n_goal_samples, temperature, include_codex_types, max_goal_examples, external_goal_supervision, external_goal_sample_with_prompt):
     if external_goal_supervision is not None:
          # For now, we also only support sampling with the prompt.
          assert external_goal_sample_with_prompt
