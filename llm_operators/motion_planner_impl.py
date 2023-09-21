@@ -29,7 +29,8 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
     ### Propose task predicates baseline.
     
     if llm_propose_task_predicates or llm_propose_code_policies:
-        operator_sequence, pruned_pddl_plan = pddl_plan, PDDLPlan(plan_string="")
+        
+        operator_sequence, pruned_pddl_plan = pddl_plan, PDDLPlan.from_code_policy(code_policy=pddl_plan)
         goal_ground_truth_predicates = PDDLPlan.get_goal_ground_truth_predicates(
             problems[problem_id], pddl_domain,
         )

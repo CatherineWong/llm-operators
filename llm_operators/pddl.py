@@ -295,6 +295,7 @@ def update_pddl_domain_and_problem(
     """
     any_success = False
     for goal, plan in new_motion_plan_keys:
+
         motion_plan_result = problems[problem_id].evaluated_motion_planner_results[(goal, plan)]
         if motion_plan_result.task_success:
             problems[problem_id].proposed_pddl_goals = [goal]  # only keep this goal for future planning
@@ -707,11 +708,24 @@ class PDDLPlan:
     PDDL_PRECOND_GROUND_PREDICATES = "precondition_ground_predicates"
     PDDL_INFINITE_COST = 100000
 
+    
     def __hash__(self):
         return hash(self.plan_string)
 
     def __eq__(self, other):
         return self.plan_string == other.plan_string
+    @classmethod
+    def from_code_policy(cls, code_policy):
+        # Silly method. We use different naming schemes for code policies and operators, this canonicalizes them.
+        plan_dicts = []
+        for code_policy_dict in code_policy:
+            plan_dict = {
+                cls.PDDL_ACTION : code_policy_dict[cls.PDDL_ACTION],
+                cls.PDDL_ARGUMENTS : code_policy_dict["ground_arguments"],
+                cls.PDDL_OPERATOR_BODY : code_policy_dict["body"]
+            }
+            plan_dicts.append(plan_dict)
+        return PDDLPlan(plan=plan_dicts)
 
     def __init__(
         self,
@@ -1867,6 +1881,7 @@ def preprocess_code_policies(
     output_json = dict()
     logs = defaultdict(list)
     proposed_code_skills_numbered = dict()
+    inverse_proposed_code_skills_numbered = dict()
     for canonical_code_skill_name in all_proposed_code_skills:
         for idx, proposed_code_skill in enumerate(all_proposed_code_skills[canonical_code_skill_name]):
             preprocessed_code_skill_name = f"{canonical_code_skill_name}_{idx}"
@@ -1874,9 +1889,26 @@ def preprocess_code_policies(
             pddl_domain.code_skill_canonical_name_map[preprocessed_code_skill_name] = canonical_code_skill_name
             output_json[preprocessed_code_skill_name] = proposed_code_skill
             proposed_code_skills_numbered[preprocessed_code_skill_name] = proposed_code_skill
+            inverse_proposed_code_skills_numbered[proposed_code_skill] = preprocessed_code_skill_name
     pddl_domain.proposed_code_skills = proposed_code_skills_numbered
     print(f"Found a total of {len(pddl_domain.proposed_code_skills)} distinct code skill definitions for {len(all_proposed_code_skills)} code skill names.")
     print(f"All code skill names: {all_proposed_code_skills.keys()}")
+
+    # Now, go through and mark all of the skills in the code policies according to their canonical name.
+    for problem in unsolved_problems:
+        renamed_proposed_code_policies = []
+        for proposed_code_policy in problem.proposed_code_policies:
+            renamed_proposed_code_policy = []
+            for skill in proposed_code_policy:
+                unground_action = frozendict({
+                    key : copy.copy(skill[key])
+                    for key in ['argument_names', 'body']
+                })
+                renamed_skill = {k : v for k, v in skill.items()}
+                renamed_skill['action'] = inverse_proposed_code_skills_numbered[unground_action]
+                renamed_proposed_code_policy.append(frozendict(renamed_skill))
+            renamed_proposed_code_policies.append(tuple(renamed_proposed_code_policy))
+        problem.proposed_code_policies = renamed_proposed_code_policies
 
     # Write out to an output JSON.
     experiment_name = command_args.experiment_name
@@ -1951,7 +1983,7 @@ def preprocess_code_policy_strings(proposed_code_policy_string, pddl_domain):
                 # Make a version without the ground arguments.
                 unground_action = frozendict({
                     key : copy.copy(preprocessed_action[key])
-                    for key in ['action', 'argument_names', 'body']
+                    for key in ['argument_names', 'body']
                 })
                 
                 preprocessed_code_skills[preprocessed_action['action']].add(unground_action)
