@@ -369,7 +369,7 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
             
         elif args.llm_propose_code_policies:
             # Baseline: plan directly on code policies proposed by LLM.
-             any_motion_plan_success = baselines._run_llm_propose_code_policies_motion_planner(pddl_domain, problem_idx, problem_id, planning_problems,
+             any_motion_plan_success = baselines._run_llm_propose_code_policies_motion_planner(args.dataset_name, pddl_domain, problem_idx, problem_id, planning_problems,
                     args=args, curr_iteration=curr_iteration, output_directory=output_directory,
                     plan_pass_identifier='first',
                     plan_attempt_idx=0, goal_idx=0, rng=rng, split=split)

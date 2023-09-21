@@ -2084,17 +2084,20 @@ def preprocess_task_predicate_strings(dataset_name, proposed_task_predicate, pdd
         except:
             return False, tuple(preprocessed_task_predicates_list)
     else:
-        # If minecraft, literally just check that its a list of strings.
-        raw_predicate_list = literal_eval(proposed_task_predicate)
-        for predicate_list in raw_predicate_list:
-            if not type(predicate_list) == list:
-                return False, ()
-            for predicate in predicate_list:
-                if not type(predicate) == str:
+        try:
+            # If minecraft, literally just check that its a list of strings.
+            raw_predicate_list = literal_eval(proposed_task_predicate)
+            for predicate_list in raw_predicate_list:
+                if not type(predicate_list) == list:
                     return False, ()
-            preprocessed_predicate_list = tuple(predicate_list)
-            preprocessed_task_predicates_list.append(preprocessed_predicate_list)
-        return True, tuple(preprocessed_task_predicates_list)
+                for predicate in predicate_list:
+                    if not type(predicate) == str:
+                        return False, ()
+                preprocessed_predicate_list = tuple(predicate_list)
+                preprocessed_task_predicates_list.append(preprocessed_predicate_list)
+            return True, tuple(preprocessed_task_predicates_list)
+        except:
+            return False, ()
 
 
 
