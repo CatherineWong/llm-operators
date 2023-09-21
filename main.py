@@ -205,6 +205,7 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
     # Given a domain and a set of goals, this uses Codex + preprocessing to sample a set of operator definitions for goals.
     if not args.debug_no_propose_plans_operators_goals:
         codex.propose_goals_for_problems(
+            dataset_name=args.dataset_name,
             problems=planning_problems["train"],
             domain=pddl_domain,
             initial_pddl_predicates=args.initial_pddl_predicates,  # Currently this has no effect.
@@ -336,6 +337,12 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
                 if len(planning_problems['train'][problem_id].solved_motion_plan_results) > 0:
                     # If we have already found a motion plan, then we don't need to try to replan.
                     break
+
+    if output_directory is not None:
+        output_filename = osp.join(output_directory, 'domain.pddl')
+        with open(output_filename, 'w') as f:
+            f.write(pddl_domain.to_string())
+        print('Saved domain to {}'.format(output_filename))
 
     _checkpoint_and_log_tamp(pddl_domain, 0, planning_problems, True, args=args, curr_iteration=curr_iteration, output_directory=output_directory)
 

@@ -1,3 +1,6 @@
+import re
+
+
 def underline_to_pascal(s: str) -> str:
     """Converts a string from underlined to pascal case.
 
@@ -22,3 +25,14 @@ def underline_to_space(s: str) -> str:
         "hello world"
     """
     return ' '.join([w.lower() for w in s.split('_')])
+
+
+def pascal_to_underline(s: str) -> str:
+    """Converts a string from pascal to underlined case.
+
+    Example:
+        >>> pascal_to_underline("HelloWorld")
+        "hello_world"
+    """
+    return '_'.join([w.lower() for w in re.findall('[A-Z][a-z]*', s)])
+

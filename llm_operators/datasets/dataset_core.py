@@ -1,7 +1,7 @@
 from collections import defaultdict
 import random
 import json
-from typing import Sequence, Dict
+from typing import Optional, Sequence, Dict
 
 import numpy as np
 from llm_operators.pddl import Domain, OtherDomain, PDDLPlan
@@ -21,6 +21,8 @@ class Problem:
         ground_truth_pddl_problem=None,
         should_supervise_pddl_goal=False,
         should_supervise_pddl_plan=False,
+        ground_truth_primitive_plan=None,
+        ground_truth_subgoal_sequence=None,
         goal_prefix=None,
         chain_of_thought=None,
     ):
@@ -44,6 +46,9 @@ class Problem:
                 self.ground_truth_pddl_plan = PDDLPlan(plan_string=ground_truth_pddl_plan)
             else:
                 self.ground_truth_pddl_plan = PDDLPlan(plan=ground_truth_pddl_plan)  # A ground truth PDDLPlan object.
+
+        self.ground_truth_primitive_plan = ground_truth_primitive_plan  # A list of dictionaries.
+        self.ground_truth_subgoal_sequence = ground_truth_subgoal_sequence  # A list of [subgoal_items]
 
         self.should_supervise_pddl_goal = (
             should_supervise_pddl_goal  # Whether to supervise specifically on ground truth information about the goal.
@@ -198,7 +203,7 @@ def register_planning_pddl_domain(name):
     return wrapper
 
 
-def load_pddl_domain(pddl_domain_name: str, initial_pddl_operators: Sequence[str], verbose: bool = False) -> Domain:
+def load_pddl_domain(pddl_domain_name: str, initial_pddl_operators: Optional[Sequence[str]], verbose: bool = False) -> Domain:
     """Main entry for loading a PDDL domain.
 
     Args:
@@ -207,9 +212,10 @@ def load_pddl_domain(pddl_domain_name: str, initial_pddl_operators: Sequence[str
     planning_domain_loader = PLANNING_PDDL_DOMAINS_REGISTRY[pddl_domain_name]
     pddl_domain = planning_domain_loader(verbose)
     # Only keep the designated initial operators.
-    for o in list(pddl_domain.operators.keys()):
-        if o not in initial_pddl_operators:
-            pddl_domain.remove_operator(o)
+    if initial_pddl_operators is not None:
+        for o in list(pddl_domain.operators.keys()):
+            if o not in initial_pddl_operators:
+                pddl_domain.remove_operator(o)
     if verbose:
         print("Initializing with operators: ")
         for o in list(pddl_domain.operators.keys()):

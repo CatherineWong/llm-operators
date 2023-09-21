@@ -1,0 +1,306 @@
+;; These operators are based on the following PDDL domain definition.
+ (:requirements :strips)
+ (:constants
+  Key - object-type
+  WorkStation - object-type
+  Pickaxe - object-type
+  IronOreVein - object-type
+  IronOre - object-type
+  IronIngot - object-type
+  CoalOreVein - object-type
+  Coal - object-type
+  GoldOreVein - object-type
+  GoldOre - object-type
+  GoldIngot - object-type
+  CobblestoneStash - object-type
+  Cobblestone - object-type
+  Axe - object-type
+  Tree - object-type
+  Wood - object-type
+  WoodPlank - object-type
+  Stick - object-type
+  WeaponStation - object-type
+  Sword - object-type
+  Chicken - object-type
+  Feather - object-type
+  Arrow - object-type
+  ToolStation - object-type
+  Shears - object-type
+  Sheep - object-type
+  Wool - object-type
+  Bed - object-type
+  BedStation - object-type
+  BoatStation - object-type
+  Boat - object-type
+  SugarCanePlant - object-type
+  SugarCane - object-type
+  Paper - object-type
+  Furnace - object-type
+  FoodStation - object-type
+  Bowl - object-type
+  PotatoPlant - object-type
+  Potato - object-type
+  CookedPotato - object-type
+  BeetrootCrop - object-type
+  Beetroot - object-type
+  BeetrootSoup - object-type
+
+  Hypothetical - object-type
+  Trash - object-type
+ )
+
+(:types
+   tile
+   object
+   inventory
+   object-type
+ )
+(:predicates
+   (agent-at ?t - tile)
+   (object-at ?x - object ?t - tile)
+   (inventory-holding ?i - inventory ?x - object)
+   (inventory-empty ?i - inventory)
+
+   (object-of-type ?x - object ?ot - object-type)
+ )
+
+;;;; Only use predicates and functions available in the PDDL domain. each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory). Each crafting rule requires max 2 ingredients that should be in the agent's inventory. You can guess different tools to be used or different ingredients to be used for the same operator. For example:
+
+;; Operator: craft-wood-plank
+
+<START>
+;; Guess number 1
+;; To craft a wood plank, you need 1 wood in your inventory.
+(:action craft-wood-plank
+  :parameters (?ingredientinv1 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a WorkStation
+    (object-at ?station ?t)
+    (object-of-type ?station WorkStation)
+    ;; the first ingredient is a Wood
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 Wood)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become a WoodPlank
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target WoodPlank)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 Wood))
+    (object-of-type ?ingredient1 Hypothetical)
+  )
+ )
+<END>
+
+<START>
+;; Guess number 2
+;; To craft a wood plank, you need 2 wood in your inventory
+(:action craft-wood-plank
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a WorkStation
+    (object-at ?station ?t)
+    (object-of-type ?station WorkStation)
+    ;; the first ingredient is a Wood
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 Wood)
+    ;; the second ingredient is a Wood
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 Wood)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become a WoodPlank
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target WoodPlank)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 Wood))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the second ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 Wood))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )
+<END>
+
+<START>
+;; Guess number 3
+;; To craft a wood plank, you need 1 wood and 1 coal in your inventory.
+(:action craft-wood-plank
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a WorkStation
+    (object-at ?station ?t)
+    (object-of-type ?station WorkStation)
+    ;; the first ingredient is a Wood
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 Wood)
+    ;; the second ingredient is a Coal
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 Coal)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become a WoodPlank
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target WoodPlank)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 Wood))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the second ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 Coal))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )
+<END>
+
+;; Operator: craft-arrow
+
+<START>
+;; Guess number 1
+;; To craft an arrow, you need 1 stick and 1 feather in your inventory.
+(:action craft-arrow
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a WorkStation
+    (object-at ?station ?t)
+    (object-of-type ?station WorkStation)
+    ;; the first ingredient is a Stick
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 Stick)
+    ;; the second ingredient is a Feather
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 Feather)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become a Arrow
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Arrow)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 Stick))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 Feather))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )
+<END>
+
+<START>
+;; Guess number 2
+;; To craft an arrow, you need 1 stick and 1 GoldOre in your inventory.
+(:action craft-arrow
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a WorkStation
+    (object-at ?station ?t)
+    (object-of-type ?station WorkStation)
+    ;; the first ingredient is a Stick
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 Stick)
+    ;; the second ingredient is a GoldOre
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 GoldOre)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become a Arrow
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Arrow)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 Stick))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 GoldOre))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )
+<END>
+
+<START>
+;; Guess number 3
+;; To craft an arrow, you need 1 stick and 1 iron ingot in your inventory.
+(:action craft-arrow
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a WorkStation
+    (object-at ?station ?t)
+    (object-of-type ?station WorkStation)
+    ;; the first ingredient is a Stick
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 Stick)
+    ;; the second ingredient is a IronIngot
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 IronIngot)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become a Arrow
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Arrow)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 Stick))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 IronIngot))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )
+<END>
+
+;; Operator: <OPERATOR>
+;; Make <N_SAMPLES> guesses. Note that each crafting rule can have at most two ingredient items, counting all ingredients of the same type.

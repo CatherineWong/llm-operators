@@ -4,7 +4,7 @@
 import jacinle
 import os.path as osp
 
-from llm_operators.datasets.crafting_world_gen.cw_20230204_minining_only import gen_v20230204_instance_record, problem_from_raw_record
+from llm_operators.datasets.crafting_world_gen.cw_20230204_mining_only import gen_v20230204_instance_record, problem_from_raw_record
 
 parser = jacinle.JacArgumentParser()
 parser.add_argument('--data-dir', type=str, default='data/dataset/crafting_world_v20230204_mining_only')

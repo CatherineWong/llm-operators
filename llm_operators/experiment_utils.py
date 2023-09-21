@@ -98,6 +98,8 @@ def output_iteration_summary(
                 plan_string = list(p.solved_motion_plan_results.values())[0].pddl_plan.plan_string.replace('\n', ' ')
                 print(f"  SOLVED - {p.language}")
                 print(f"  {plan_string}")
+            else:
+                print(f"  UNSOLVED - {p.language}")
     print(f"Total problems: {len(problems)}")
     print(f"Current operators: {len(problems)}")
     print('')
