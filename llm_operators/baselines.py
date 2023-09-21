@@ -2,18 +2,22 @@ import frozendict
 from llm_operators import motion_planner
 from llm_operators import pddl
 
-from llm_operators.datasets.crafting_world import CraftingWorld20230204Simulator, local_search_for_subgoal, SimpleConjunction
-
-# Import Concepts.
 import os.path as osp
 import sys
-CONCEPTS_PATH = osp.join(osp.dirname(osp.abspath(__file__)), "../concepts")
-print("Adding concepts path: {}".format(CONCEPTS_PATH))
-sys.path.insert(0, CONCEPTS_PATH)
+import argparse
+import llm_operators.codex as codex
+import llm_operators.datasets as datasets
+import llm_operators.experiment_utils as experiment_utils
+import llm_operators.datasets.crafting_world as crafting_world
+from llm_operators.datasets.crafting_world_gen.utils import pascal_to_underline
+from llm_operators.datasets.crafting_world import CraftingWorld20230204Simulator, local_search_for_subgoal, SimpleConjunction
+from llm_operators.motion_planner import MotionPlanResult
 
 import concepts.pdsketch as pds
 from concepts.pdsketch.strips.strips_grounding_onthefly import OnTheFlyGStripsProblem, ogstrips_bind_arguments
 
+crafting_world.SKIP_CRAFTING_LOCATION_CHECK = True
+print('Skipping location check in Crafting World.')
 
 def load_state_from_problem(pds_domain, problem_record, pddl_goal=None):
     pddl_problem = problem_record.ground_truth_pddl_problem
@@ -60,25 +64,38 @@ def _run_llm_propose_task_predicates_motion_planner(dataset_name, pddl_domain, p
                     llm_propose_task_predicates=args.llm_propose_task_predicates # Baseline -- we skip task proposal if so.
                 )
     else:
+        current_domain_string = pddl_domain.to_string(
+        ground_truth_operators=False,
+        current_operators=True,
+        )
+        pds_domain = pds.load_domain_string(current_domain_string)
+
         problem = problems[problem_id]
-        simulator, gt_goal = load_state_from_problem(pddl_domain, problem)
+        simulator, gt_goal = load_state_from_problem(pds_domain, problem)
         any_motion_planner_success = True
         for idx, subgoal_sequence in enumerate(problems[problem_id].proposed_pddl_task_predicates):
             print(f"Evaluating [{idx+1}/{len(problems[problem_id].proposed_pddl_task_predicates)}] LLM task plans.")
             
             print(f"Ground truth subgoal sequence is: {problem.ground_truth_subgoal_sequence}")
             print(f"LLM proposed subgoal sequence: {subgoal_sequence}")
-            for subgoal in problem.ground_truth_subgoal_sequence:
+            for subgoal in subgoal_sequence:
                 print('  Subgoal: {}'.format(subgoal))
                 rv = local_search_for_subgoal(simulator, SimpleConjunction(subgoal))
                 if rv is None:
                     print('    Failed to achieve subgoal: {}'.format(subgoal))
-                    succ = False
+                    any_motion_planner_success = False
                     break
                 simulator, _ = rv
 
             if any_motion_planner_success:
                 any_motion_planner_success = simulator.goal_satisfied(gt_goal)
+                print('Success: {}'.format(any_motion_planner_success))
+                problems[problem_id].solved_motion_plan_results[(str(gt_goal), subgoal_sequence)]  = MotionPlanResult(
+                                        pddl_plan=pddl.PDDLPlan(plan_string=""),
+                                        task_success=any_motion_planner_success,
+                                        last_failed_operator=-1,
+                                        max_satisfied_predicates=None,
+                                    )
             if any_motion_planner_success:
                 return any_motion_planner_success
 

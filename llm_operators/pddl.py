@@ -2028,6 +2028,7 @@ def preprocess_task_predicates(
         preprocessed_task_predicates = set()
         for proposed_task_predicate in problem.proposed_pddl_task_predicates:
             success, preprocessed_task_predicate_set = preprocess_task_predicate_strings(dataset_name, proposed_task_predicate, pddl_domain, problem.ground_truth_pddl_problem.ground_truth_objects_dict)
+
             if not success:
                 print("Failed to preprocess predicates")
                 print(proposed_task_predicate)
@@ -2093,8 +2094,7 @@ def preprocess_task_predicate_strings(dataset_name, proposed_task_predicate, pdd
                     return False, ()
             preprocessed_predicate_list = tuple(predicate_list)
             preprocessed_task_predicates_list.append(preprocessed_predicate_list)
-
-        return preprocessed_task_predicates_list
+        return True, tuple(preprocessed_task_predicates_list)
 
 
 

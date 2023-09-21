@@ -13,6 +13,54 @@
 
    (object-of-type ?x - object ?ot - object-type)
 )
+ (:constants
+  Key - object-type
+  WorkStation - object-type
+  Pickaxe - object-type
+  IronOreVein - object-type
+  IronOre - object-type
+  IronIngot - object-type
+  CoalOreVein - object-type
+  Coal - object-type
+  GoldOreVein - object-type
+  GoldOre - object-type
+  GoldIngot - object-type
+  CobblestoneStash - object-type
+  Cobblestone - object-type
+  Axe - object-type
+  Tree - object-type
+  Wood - object-type
+  WoodPlank - object-type
+  Stick - object-type
+  WeaponStation - object-type
+  Sword - object-type
+  Chicken - object-type
+  Feather - object-type
+  Arrow - object-type
+  ToolStation - object-type
+  Shears - object-type
+  Sheep - object-type
+  Wool - object-type
+  Bed - object-type
+  BedStation - object-type
+  BoatStation - object-type
+  Boat - object-type
+  SugarCanePlant - object-type
+  SugarCane - object-type
+  Paper - object-type
+  Furnace - object-type
+  FoodStation - object-type
+  Bowl - object-type
+  PotatoPlant - object-type
+  Potato - object-type
+  CookedPotato - object-type
+  BeetrootCrop - object-type
+  Beetroot - object-type
+  BeetrootSoup - object-type
+
+  Hypothetical - object-type
+  Trash - object-type
+ )
 
 ;; Example translations from natural language to a simplified goal name, and then a PDDL plan. A PDDL plan is a sequence of actions in JSON that specifies the preconditions and post conditions of an action. 
 ;; Notice that PDDL plans MUST only use predicates, object types, and receptacle types exactly as they appear in the domain above. People may also have been unclear about which objects and actions they were talking about, so we list multiple possible guesses for goal if there is uncertainty over what they meant.

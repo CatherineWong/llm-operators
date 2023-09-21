@@ -298,7 +298,8 @@ class CraftingWorld20230204Simulator(object):
                 if not found:
                     return False
             else:
-                raise NotImplementedError()
+                print("ERROR: UNSATISFIABLE GOAL.")
+                return False
 
         return True
 
