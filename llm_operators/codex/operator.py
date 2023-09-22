@@ -15,8 +15,6 @@ OPERATOR_START = ";; Operator: "
 OPERATOR_START_TOKEN = "(:action "
 DEFAULT_OPERATOR_TEMPERATURE = 1.0
 
-# NB(Jiayuan Mao @ 2023/09/05): the following two definitions have been deprecated. In the alfred environment, it seems that we are always using the external operator supervision mode.
-# If anyone found these useful, please move the correct definition back to OPERATOR_PROPOSAL_COT_MESSAGE and OPERATOR_PROPOSAL_COT_MAP.
 COT_OP_START = ";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator."
 COT_DICT = {
     # "GotoLocation": "The parameters are the agent, the starting location, and the ending location.",
@@ -24,25 +22,6 @@ COT_DICT = {
     # "PickupObjectNotInReceptacle": "To pickup an object not in a receptacle, we only interact with the object, which must be a parameter.",
     # "PutObjectInReceptacle": "To put an object in a receptacle, we interact with the object and the receptacle that the object will be placed in. So both must be parameters to the operator.",
     "CleanObject": "To clean an object, we interact with the object to be cleaned AND the receptacle that will clean the object (e.g. a sink). So both must be parameters to the operator.",
-}
-
-OPERATOR_PROPOSAL_ADDITIONAL_MESSAGE = {
-    'crafting-world-v20230404-teleport': (
-        ';; You are proposing PDDL operators for a minecraft-like domain. In this domain, there are different types of resources that you can find or mine in the world.'
-        'Some of the resources can be combined together to craft new types of tools or resources.'
-    )
-}
-OPERATOR_PROPOSAL_COT_MESSAGE = {
-    'crafting-world-v20230404-teleport': (
-        ';; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).'
-        'Each crafting rule requires max 2 ingredients that should be in the agent\'s inventory.'
-    )
-}
-OPERATOR_PROPOSAL_COT_MAP = {
-    'crafting-world-v20230404-teleport': {
-        'craft-wood-plank': ';; To craft a wood plank, you need 1 wood in your inventory.',
-        'craft-arrow': ';; To craft an arrow, you need 1 stick and 1 feather in your inventory.',
-    }
 }
 
 
@@ -304,7 +283,7 @@ def _propose_operator_definition(
     initial_pddl_predicates=[],
     external_operator_supervision=None,
     external_operator_sample_with_prompt=True,
-    use_cot=True,
+    use_cot=True
 ):
     """
     Proposes an operator definition for a given domain, and optionally with examples of operator usages.
@@ -334,18 +313,20 @@ def _propose_operator_definition(
             external_operator_supervision=external_operator_supervision,
             external_operator_sample_with_prompt=external_operator_sample_with_prompt,
         )
+
     else:
-        # TBD: save this entire thing as COT operator examples.
+        #### TBD: save this entire thing as COT operator examples.
         # Codex prompt header.
         codex_prompt = []
-        nl_header = ";;;; Define PDDL planning operators."
-        if current_domain.domain_name in OPERATOR_PROPOSAL_ADDITIONAL_MESSAGE:
-            nl_header += "\n" + OPERATOR_PROPOSAL_ADDITIONAL_MESSAGE[current_domain.domain_name]
-        nl_header += '\n\n'
+        nl_header = ";;;; Define PDDL planning operators.\n\n"
         codex_prompt.append({"role": "user", "content": nl_header})
 
         if len(initial_pddl_predicates) <= 0:
-            pddl_domain = ";;;; Predicates in the PDDL domain definition.\n" + current_domain.domain_definition_to_string(codex_prompt=True) + "\n\n"
+            pddl_domain = (
+                ";;;; Predicates in the PDDL domain definition.\n"
+                + current_domain.domain_definition_to_string(codex_prompt=True)
+                + "\n\n"
+            )
             translation_header = ";;;; Only use predicates and functions available in the PDDL domain.\n\n"
 
             codex_prompt.append({"role": "user", "content": pddl_domain + translation_header})
@@ -356,6 +337,7 @@ def _propose_operator_definition(
             min(len(current_domain.operators), max_operator_examples),
         )
         for o in operator_examples:
+            # if o in operator_uses: (ZS 7/28/23 - Remove to allow for more examples)
             operator_str = f"{OPERATOR_START}{o}\n"
 
             usage_examples = random.sample(
@@ -367,10 +349,9 @@ def _propose_operator_definition(
             codex_prompt.append({"role": "user", "content": operator_str})
 
             if use_cot:
-                domain_name = current_domain.domain_name
-                operator_str = f"{OPERATOR_PROPOSAL_COT_MESSAGE[domain_name]}\n"
-                if o in OPERATOR_PROPOSAL_COT_MAP[domain_name]:
-                    operator_str += f"{OPERATOR_PROPOSAL_COT_MAP[domain_name][o]}\n"
+                operator_str = f"{COT_OP_START}\n"
+                if o in COT_DICT:
+                    operator_str += f";;{COT_DICT[o]}\n"
             else:
                 operator_str = ''
 

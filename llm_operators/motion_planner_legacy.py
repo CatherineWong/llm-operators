@@ -24,7 +24,7 @@ def evaluate_motion_plans_and_costs_for_problems(
             use_mock=use_mock,
             debug_skip=debug_skip,
         )
-    elif dataset_name == "crafting_world_20230204_mining_only" or dataset_name == "crafting_world_20230829_crafting_only":
+    elif dataset_name == "crafting_world_20230204_minining_only" or dataset_name == "crafting_world_20230829_crafting_only":
         evaluate_cw_motion_plans_and_costs_for_problems(
             curr_iteration,
             pddl_domain,

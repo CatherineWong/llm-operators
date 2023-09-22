@@ -125,14 +125,10 @@ def evaluate_cw_motion_plans_and_costs_for_goal_plan(
         elif action_name == "move-to":
             simulator.move_to(int(action_args[1][1:]))
         elif action_name == "pick-up":
-            try:
-                simulator.pick_up(
-                    int(_find_string_start_with(action_args, "i", first=True)[1:]),
-                    _find_string_start_with(action_args, "o", first=True),
-                )
-            except KeyError as e:
-                print(f'  pick-up {action_args} failed. Reason: {e}')
-                pass
+            simulator.pick_up(
+                int(_find_string_start_with(action_args, "i", first=True)[1:]),
+                _find_string_start_with(action_args, "o", first=True),
+            )
         elif action_name == "place-down":
             simulator.place_down(
                 int(_find_string_start_with(action_args, "i", first=True)[1:]),

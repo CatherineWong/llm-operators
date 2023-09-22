@@ -152,8 +152,6 @@ def gen_v20230204_solution(record: Dict[str, Any], has_teleport: bool = False) -
         return None
 
     actions = list()
-    primitive_actions = list()
-    subgoal_sequence = list()
     tool_object_id = None
     current_pos = 1
     if len(target_rule['holding']) == 0:
@@ -166,21 +164,14 @@ def gen_v20230204_solution(record: Dict[str, Any], has_teleport: bool = False) -
 
         if has_teleport:
             actions.append(f'(move-to t{current_pos} t{location + 1})')
-            primitive_actions.append({'action': 'move_to', 'args': [location + 1]})
-            subgoal_sequence.append([f'agent-at t{location + 1}'])
         else:
             for i in range(location - 1):
                 actions.append('(move-right)')
-                primitive_actions.append({'action': 'move_right', 'args': []})
-            subgoal_sequence.append([f'agent-at t{location + 1}'])
         current_pos = location + 1
         actions.append(f'(pick-up i1 o{tool_object_id} t{location})')
-        primitive_actions.append({'action': 'pick_up', 'args': [1, f'o{tool_object_id}']})
-        subgoal_sequence.append([f'inventory-holding i1 o{tool_object_id}'])
         if not has_teleport:
             for i in range(location - 1):
                 actions.append('(move-left)')
-                primitive_actions.append({'action': 'move_left', 'args': []})
 
     location, loc_object_id = _find_location_on_the_map(record, target_rule['location'])
 
@@ -188,13 +179,9 @@ def gen_v20230204_solution(record: Dict[str, Any], has_teleport: bool = False) -
 
     if has_teleport:
         actions.append(f'(move-to t{current_pos} t{location + 1})')
-        primitive_actions.append({'action': 'move_to', 'args': [location + 1]})
-        subgoal_sequence.append([f'agent-at t{location + 1}'])
     else:
         for i in range(location - 1):
             actions.append('(move-right)')
-            primitive_actions.append({'action': 'move_right', 'args': []})
-        subgoal_sequence.append([f'agent-at t{location + 1}'])
 
     # (?targetinv - inventory ?x - object ?target - object ?t - tile)
     # (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
@@ -204,17 +191,13 @@ def gen_v20230204_solution(record: Dict[str, Any], has_teleport: bool = False) -
         inventory_str = 'i' + str(record['inventory_size'])
         object_str = 'o' + str(record['nr_objects'])
         actions.append(f'({action_name} {inventory_str} o{loc_object_id} {object_str} t{location})')
-        primitive_actions.append({'action': 'mine', 'args': [f"o{loc_object_id}", record['inventory_size'], f"o{record['nr_objects']}"]})
-        subgoal_sequence.append([f'inventory-holding {inventory_str} {object_str}', f'object-of-type {object_str} {underline_to_pascal(record["goal"])}'])
     else:
         action_name = target_rule['rule_name'].replace('_', '-')
         inventory_str = 'i' + str(record['inventory_size'])
         object_str = 'o' + str(record['nr_objects'])
         actions.append(f'({action_name} i1 {inventory_str} o{loc_object_id} o{tool_object_id} {object_str} t{location})')
-        primitive_actions.append({'action': 'mine', 'args': [f"o{loc_object_id}", record['inventory_size'], f"o{record['nr_objects']}", 1]})
-        subgoal_sequence.append([f'inventory-holding {inventory_str} {object_str}', f'object-of-type {object_str} {underline_to_pascal(record["goal"])}'])
 
-    return PDDLPlan(plan_string='\n'.join(actions)), primitive_actions, subgoal_sequence
+    return PDDLPlan(plan_string='\n'.join(actions))
 
 
 def _find_location_on_the_map(record: Dict[str, Any], obj: str) -> Tuple[Optional[int], Optional[int]]:
@@ -233,14 +216,11 @@ def _find_object_on_the_map(record: Dict[str, Any], obj: str) -> Tuple[Optional[
 
 
 def problem_from_raw_record(record: Dict[str, Any], has_teleport=False) -> Problem:
-    pddl_solution, primitive_solution, subgoal_sequence = gen_v20230204_solution(record, has_teleport=has_teleport)
     return Problem(
         problem_id=record['problem_id'],
         dataset_split=record['split'],
         language=record['goal_nl'],
-        ground_truth_pddl_plan=pddl_solution,
+        ground_truth_pddl_plan=gen_v20230204_solution(record, has_teleport=has_teleport),
         ground_truth_pddl_problem=PDDLProblem(record['problem_pddl']),
         goal_prefix=f'mining_{record["goal"]}',
-        ground_truth_primitive_plan=primitive_solution,
-        ground_truth_subgoal_sequence=subgoal_sequence,
     )

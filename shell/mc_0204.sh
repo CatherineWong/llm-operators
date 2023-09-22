@@ -38,7 +38,7 @@ fi
 set -x
 
 python main.py --experiment_name $EXPR_NAME \
-  --dataset_name crafting_world_20230204_mining_only --dataset_pddl_directory data/dataset/crafting_world_v20230204_mining_only \
+  --dataset_name crafting_world_20230204_minining_only --dataset_pddl_directory data/dataset/crafting_world_v20230204_mining_only \
   --pddl_domain_name crafting_world_teleport --initial_pddl_operators move-to pick-up place-down mine-iron-ore \
   --supervision_name supervision \
   --initial_goal_supervision_prefix SKIP \

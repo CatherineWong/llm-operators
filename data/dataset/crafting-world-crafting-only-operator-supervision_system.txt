@@ -1,1 +1,0 @@
-;; You are a software engineer who will be writing planning operators in the PDDL planning language.
