@@ -9,7 +9,7 @@ import json
 from llm_operators.datasets.dataset_core import register_planning_pddl_domain, register_planning_domain_problems
 from llm_operators.datasets.dataset_utils import load_pddl_file_with_operators
 from llm_operators.datasets.crafting_world_gen.utils import underline_to_pascal
-from llm_operators.datasets.crafting_world_gen.crafting_world_rules import MINING_RULES, CRAFTING_RULES
+from llm_operators.datasets.crafting_world_gen.crafting_world_rules import MINING_RULES, CRAFTING_RULES, get_all_crafting_outcomes
 
 CRAFTING_WORLD_PDDL_DOMAIN_NAME = 'crafting_world'
 CRAFTING_WORLD_PDDL_DOMAIN_FILE = 'data/domains/crafting_world/domain.pddl'
@@ -102,6 +102,30 @@ CRAFTING_WORLD_20230829_DATASET_NAME = 'crafting_world_20230829_crafting_only'
 @register_planning_domain_problems(CRAFTING_WORLD_20230829_DATASET_NAME)
 def load_crafting_world_20230829_crafting_only(dataset_pddl_directory: str, dataset_fraction: float, verbose=False):
     from llm_operators.datasets.crafting_world_gen.cw_20230829_crafting_only import problem_from_raw_record
+
+    with open(osp.join(dataset_pddl_directory, 'dataset.json')) as f:
+        dataset = json.load(f)
+
+    for split, split_problems in dataset.items():
+        dataset[split] = {
+            problem['problem_id']: problem_from_raw_record(problem)
+            for problem in split_problems[:int(len(split_problems) * dataset_fraction)]
+        }
+
+    assert len(dataset['train']) > 3
+    for problem in itertools.islice(dataset['train'].values(), 3):
+        problem.should_supervise_pddl_plan = True
+        problem.should_supervise_pddl_goal = True
+
+    return dataset
+
+
+CRAFTING_WORLD_20230913_DATASET_NAME = 'crafting_world_20230913_mixed'
+
+
+@register_planning_domain_problems(CRAFTING_WORLD_20230913_DATASET_NAME)
+def load_crafting_world_20230829_crafting_only(dataset_pddl_directory: str, dataset_fraction: float, verbose=False):
+    from llm_operators.datasets.crafting_world_gen.cw_20230913_mixed import problem_from_raw_record
 
     with open(osp.join(dataset_pddl_directory, 'dataset.json')) as f:
         dataset = json.load(f)
@@ -225,8 +249,9 @@ class CraftingWorld20230204Simulator(object):
         return False
 
     def craft(self, obj_name, inventory, hypothetical_object_name, ingredients_inventory, target_type=None):
-        if self.objects[obj_name][1] != self.agent_pos:
-            return False
+        if SKIP_CRAFTING_LOCATION_CHECK:
+            if self.objects[obj_name][1] != self.agent_pos:
+                return False
         if self.inventory[inventory] is not None:
             return False
         if hypothetical_object_name not in self.hypothetical:
@@ -236,6 +261,7 @@ class CraftingWorld20230204Simulator(object):
                  return False
 
         obj_type, _ = self.objects[obj_name]
+        # print('Checking crafting', inventory, hypothetical_object_name, target_type, ingredients_inventory)
 
         for rule in CRAFTING_RULES:
             if target_type is not None and underline_to_pascal(rule['create']) != target_type:
@@ -257,7 +283,6 @@ class CraftingWorld20230204Simulator(object):
                         new_obj_type = underline_to_pascal(rule['create'])
                         self.inventory[inventory] = (new_obj_type, hypothetical_object_name)
                         self.hypothetical.remove(hypothetical_object_name)
-                        # print('    crafting success')
                         return True
         return False
 
@@ -324,13 +349,17 @@ class CraftingWorld20230204Simulator(object):
                     for inv2 in s.inventory:
                         yield lambda s, obj_name=obj_name, inv=inv, hypothetical_object_name=hypothetical_object_name, inv2=inv2: s.mine(obj_name, inv, hypothetical_object_name, inv2)
         assert SKIP_CRAFTING_LOCATION_CHECK
-        for obj_name in s.objects:
+        for obj_name in list(s.objects)[:1]:
             for inv in s.inventory:
                 for hypothetical_object_name in s.hypothetical:
                     for inv2 in s.inventory:
-                        yield lambda s, obj_name=obj_name, inv=inv, hypothetical_object_name=hypothetical_object_name, inv2=inv2: s.craft(obj_name, inv, hypothetical_object_name, [inv2])
-                        for inv3 in s.inventory:
-                            yield lambda s, obj_name=obj_name, inv=inv, hypothetical_object_name=hypothetical_object_name, inv2=inv2, inv3=inv3: s.craft(obj_name, inv, hypothetical_object_name, [inv2, inv3])
+                        for target_type in get_all_crafting_outcomes():
+                            target_type = underline_to_pascal(target_type)
+                            yield lambda s, obj_name=obj_name, inv=inv, hypothetical_object_name=hypothetical_object_name, inv2=inv2, target_type=target_type: s.craft(obj_name, inv, hypothetical_object_name, [inv2], target_type)
+                            for inv3 in s.inventory:
+                                if inv3 == inv2:
+                                    continue
+                                yield lambda s, obj_name=obj_name, inv=inv, hypothetical_object_name=hypothetical_object_name, inv2=inv2, inv3=inv3, target_type=target_type: s.craft(obj_name, inv, hypothetical_object_name, [inv2, inv3], target_type)
 
 
 def local_search_for_subgoal(simulator: CraftingWorld20230204Simulator, conjunction: SimpleConjunction, max_steps=int(1e6)):
