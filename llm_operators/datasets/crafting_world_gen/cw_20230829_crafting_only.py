@@ -140,7 +140,6 @@ def gen_v20230829_solution(record: Dict[str, Any]) -> Optional[PDDLPlan]:
     Returns:
         a PDDLPlan object.
     """
-
     target_rule = None
     for rule in CRAFTING_RULES:
         if rule['create'] == record['goal']:
@@ -152,30 +151,45 @@ def gen_v20230829_solution(record: Dict[str, Any]) -> Optional[PDDLPlan]:
 
     current_pos = 1
     actions = list()
+    primitive_actions = list()
+    subgoal_sequence = list()
     tool_object_ids = list()
     for i, x in enumerate(target_rule['recipe']):
         location, tool_object_id = _find_object_on_the_map(record, x)
         actions.append(f'(move-to t{current_pos} t{location + 1})')
         actions.append(f'(pick-up i{i + 1} o{tool_object_id} t{location + 1})')
+        primitive_actions.append({'action': 'move_to', 'args': [location + 1]})
+        primitive_actions.append({'action': 'pick_up', 'args': [i + 1, f'o{tool_object_id}']})
+        subgoal_sequence.append([f'agent-at t{location + 1}'])
+        subgoal_sequence.append([f'inventory-holding i{i+1} o{tool_object_id}'])
         tool_object_ids.append(tool_object_id)
         current_pos = location + 1
 
     location, loc_object_id = _find_location_on_the_map(record, target_rule['location'])
     assert location is not None
     actions.append(f'(move-to t{current_pos} t{location + 1})')
+    primitive_actions.append({'action': 'move_to', 'args': [location + 1]})
+    subgoal_sequence.append([f'agent-at t{location + 1}'])
 
     if len(target_rule['recipe']) == 1:
         action_name = target_rule['rule_name'].replace('_', '-')
         inventory_str = 'i' + str(record['inventory_size'])
         object_str = 'o' + str(record['nr_objects'])
         actions.append(f'({action_name} i1 {inventory_str} o{loc_object_id} o{tool_object_ids[0]} {object_str} t{location + 1})')
+        primitive_actions.append({'action': 'craft', 'args': [
+            f"o{loc_object_id}", record['inventory_size'], object_str, [1], underline_to_pascal(record["goal"])
+        ]})
+        subgoal_sequence.append([f'inventory-holding {inventory_str} {object_str}', f'object-of-type {object_str} {underline_to_pascal(record["goal"])}'])
     elif len(target_rule['recipe']) == 2:
         action_name = target_rule['rule_name'].replace('_', '-')
         inventory_str = 'i' + str(record['inventory_size'])
         object_str = 'o' + str(record['nr_objects'])
         actions.append(f'({action_name} i1 i2 {inventory_str} o{loc_object_id} o{tool_object_ids[0]} o{tool_object_ids[1]} {object_str} t{location + 1})')
-
-    return PDDLPlan(plan_string='\n'.join(actions))
+        primitive_actions.append({'action': 'craft', 'args': [
+            f"o{loc_object_id}", record['inventory_size'], object_str, [1, 2], underline_to_pascal(record["goal"])
+        ]})
+        subgoal_sequence.append([f'inventory-holding {inventory_str} {object_str}', f'object-of-type {object_str} {underline_to_pascal(record["goal"])}'])
+    return PDDLPlan(plan_string='\n'.join(actions)), primitive_actions, subgoal_sequence
 
 
 def _find_location_on_the_map(record: Dict[str, Any], obj: str) -> Tuple[Optional[int], Optional[int]]:
@@ -194,11 +208,14 @@ def _find_object_on_the_map(record: Dict[str, Any], obj: str) -> Tuple[Optional[
 
 
 def problem_from_raw_record(record: Dict[str, Any]) -> Problem:
+    pddl_plan, primitive_actions, subgoal_sequence = gen_v20230829_solution(record)
     return Problem(
         problem_id=record['problem_id'],
         dataset_split=record['split'],
         language=record['goal_nl'],
-        ground_truth_pddl_plan=gen_v20230829_solution(record),
         ground_truth_pddl_problem=PDDLProblem(record['problem_pddl']),
+        ground_truth_pddl_plan=pddl_plan,
         goal_prefix=f'mining_{record["goal"]}',
+        ground_truth_primitive_plan=primitive_actions,
+        ground_truth_subgoal_sequence=subgoal_sequence,
     )

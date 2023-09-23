@@ -47,4 +47,4 @@ python main.py --experiment_name $EXPR_NAME \
   --n_attempts_to_plan 3 --n_goal_samples 1 --n_plan_sample 1 \
   --external_operator_supervision data/dataset/crafting-world-crafting-only-operator-supervision_ --external_operator_sample_with_prompt --external_operator_names craft-arrow craft-wood-plank \
   --planner_timeout 120 \
-  --verbose $@
+  --verbose $@ --llm_propose_task_predicates --external_task_predicates_supervision data/dataset/crafting-world-task-predicate-supervision_  

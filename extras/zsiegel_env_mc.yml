@@ -2,20 +2,20 @@ name: llm-operators-mc
 channels:
   - defaults
 dependencies:
-  - ca-certificates=2023.01.10=hca03da5_0
-  - libcxx=14.0.6=h848a8c0_0
-  - libffi=3.4.4=hca03da5_0
-  - ncurses=6.4=h313beb8_0
-  - openssl=1.1.1t=h1a28f6b_0
-  - pip=23.0.1=py38hca03da5_0
-  - python=3.8.16=hc0d8a6c_3
-  - readline=8.2=h1a28f6b_0
-  - setuptools=67.8.0=py38hca03da5_0
-  - sqlite=3.41.2=h80987f9_0
-  - tk=8.6.12=hb8d0fd4_0
-  - wheel=0.38.4=py38hca03da5_0
-  - xz=5.4.2=h80987f9_0
-  - zlib=1.2.13=h5a0b063_0
+  - ca-certificates=2023.01.10
+  - libcxx=14.0.6
+  - libffi=3.4.4
+  - ncurses=6.4
+  - openssl=1.1.1t
+  - pip=23.0.1
+  - python=3.9
+  - readline=8.2
+  - setuptools=67.8.0
+  - sqlite=3.41.2
+  - tk=8.6.12
+  - wheel=0.38.4
+  - xz=5.4.2
+  - zlib=1.2.13
   - pip:
       - absl-py==1.4.0
       - ai2thor==2.1.0
@@ -35,11 +35,13 @@ dependencies:
       - datasets==2.12.0
       - decorator==5.1.1
       - dill==0.3.6
+      - docopt==0.6.2
       - einops==0.6.1
       - executing==1.2.0
       - filelock==3.12.0
       - flask==2.1.1
       - fonttools==4.39.4
+      - frozendict==2.3.8
       - frozenlist==1.3.3
       - fsspec==2023.5.0
       - gym==0.26.2
@@ -66,6 +68,7 @@ dependencies:
       - multiprocess==0.70.14
       - networkx==3.1
       - nltk==3.8.1
+      - num2words==0.5.12
       - numpy==1.24.3
       - openai==0.27.7
       - opencv-python==4.7.0.72
@@ -115,4 +118,4 @@ dependencies:
       - xxhash==3.2.0
       - yarl==1.9.2
       - zipp==3.15.0
-prefix: /opt/homebrew/anaconda3/envs/llm-operators-38
+prefix: /Users/zyzzyva/miniconda3/envs/llm-operators-zs

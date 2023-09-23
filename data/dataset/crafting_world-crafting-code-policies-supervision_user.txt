@@ -1,0 +1,6 @@
+;; Based on those examples, write an example for the following human readable goal and initial problem specification.
+;; Problem specific initial information.
+<INIT>
+;; Human written natural language goal.
+<GOAL>
+;; Write a different code policy. Start with <START> and end with <END>. 

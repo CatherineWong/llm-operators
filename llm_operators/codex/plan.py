@@ -254,7 +254,7 @@ def propose_code_policies_for_problems(
             CODEX_OUTPUT: proposed_task_predicate_definitions,
         }
         if verbose:
-            print(f'propose_task_predicates_for_problems:: "{problem.language}":')
+            print(f'propose_code_policies_for_problems:: "{problem.language}":')
             for i, goal_string in enumerate(proposed_task_predicate_definitions):
                 print(f"[Goal {i+1}/{len(proposed_task_predicate_definitions)}]")
                 print(goal_string)
@@ -286,7 +286,8 @@ def _propose_code_policy_definition(domain, solved_problems, problem, n_samples,
     
     with open(external_task_predicates_supervision + "user.txt") as f:
         sampling_message = f.read()
-        GOAL = "<GOAL>"
+        GOAL, INIT = "<GOAL>", "<INIT>"
+        sampling_message = sampling_message.replace(INIT, problem.ground_truth_pddl_problem.ground_truth_init_string)
         sampling_message = sampling_message.replace(GOAL, problem.language)
     codex_prompt = [{"role": "system", "content": system_message}, {"role": "user", "content": sampling_message}]
 
@@ -349,6 +350,7 @@ def propose_task_predicates_for_problems(
             CODEX_PROMPT: codex_prompt,
             CODEX_OUTPUT: proposed_task_predicate_definitions,
         }
+
         if verbose:
             print(f'propose_task_predicates_for_problems:: "{problem.language}":')
             for i, goal_string in enumerate(proposed_task_predicate_definitions):
