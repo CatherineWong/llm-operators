@@ -38,7 +38,6 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
                 ground_predicate.to_json() for ground_predicate in goal_ground_truth_predicates
             ]
             proposed_goal_predicates = goal_ground_truth_predicates
-            import pdb; pdb.set_trace()
         except:
             return MotionPlanResult(
                 pddl_plan=PDDLPlan(plan_string=""),
