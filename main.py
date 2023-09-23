@@ -29,9 +29,13 @@ print("Adding jacinle path: {}".format(JACINLE_PATH))
 sys.path.insert(0, JACINLE_PATH)
 
 # Import Concepts.
-CONCEPTS_PATH = osp.join(osp.dirname(osp.abspath(__file__)), "../concepts")
-print("Adding concepts path: {}".format(CONCEPTS_PATH))
-sys.path.insert(0, CONCEPTS_PATH)
+import sys
+if sys.version_info.minor < 9:
+    print("Warning: using Python < 3.9 to run ALFRED: cannot run craftingworld typing.")
+else:
+    CONCEPTS_PATH = osp.join(osp.dirname(osp.abspath(__file__)), "../concepts")
+    print("Adding concepts path: {}".format(CONCEPTS_PATH))
+    sys.path.insert(0, CONCEPTS_PATH)
 
 import argparse
 import random

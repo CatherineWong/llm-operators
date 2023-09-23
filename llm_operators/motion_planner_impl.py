@@ -30,14 +30,22 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
     
     if llm_propose_task_predicates or llm_propose_code_policies:
         
-        operator_sequence, pruned_pddl_plan = pddl_plan, PDDLPlan.from_code_policy(code_policy=pddl_plan)
-        goal_ground_truth_predicates = PDDLPlan.get_goal_ground_truth_predicates(
-            problems[problem_id], pddl_domain,
+        try:
+            operator_sequence, pruned_pddl_plan = pddl_plan, PDDLPlan.from_code_policy(code_policy=pddl_plan)
+            goal_ground_truth_predicates = PDDLPlan.get_goal_ground_truth_predicates(
+                problems[problem_id], pddl_domain,
+            )
+            goal_ground_truth_predicates = [
+                ground_predicate.to_json() for ground_predicate in goal_ground_truth_predicates
+            ]
+            proposed_goal_predicates = goal_ground_truth_predicates
+        except:
+            return MotionPlanResult(
+                pddl_plan=PDDLPlan(plan_string=""),
+                task_success=False,
+                last_failed_operator=0,
+                max_satisfied_predicates=0,
         )
-        goal_ground_truth_predicates = [
-            ground_predicate.to_json() for ground_predicate in goal_ground_truth_predicates
-        ]
-        proposed_goal_predicates = goal_ground_truth_predicates
 
     else:
         # Convert plan to sequential plan predicates. Returns a pruned PDDL plan that does not include operators we didn't execute.

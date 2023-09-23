@@ -8,17 +8,26 @@ import argparse
 import llm_operators.codex as codex
 import llm_operators.datasets as datasets
 import llm_operators.experiment_utils as experiment_utils
-import llm_operators.datasets.crafting_world as crafting_world
-from llm_operators.datasets.crafting_world_gen.utils import pascal_to_underline
-from llm_operators.datasets.crafting_world import CraftingWorld20230204Simulator, local_search_for_subgoal, SimpleConjunction
 from llm_operators.motion_planner import MotionPlanResult
-from llm_operators.datasets.crafting_world_skill_lib import *
 
-import concepts.pdsketch as pds
-from concepts.pdsketch.strips.strips_grounding_onthefly import OnTheFlyGStripsProblem, ogstrips_bind_arguments
+import sys
+if sys.version_info.minor < 9:
+    print("Warning: using Python < 3.9 to run ALFRED: cannot run craftingworld typing.")
+else:
+    from llm_operators.datasets.crafting_world_skill_lib import *
+    import llm_operators.datasets.crafting_world as crafting_world
+    from llm_operators.datasets.crafting_world_gen.utils import pascal_to_underline
+    from llm_operators.datasets.crafting_world import CraftingWorld20230204Simulator, local_search_for_subgoal, SimpleConjunction
+    crafting_world.SKIP_CRAFTING_LOCATION_CHECK = True
+    print('Skipping location check in Crafting World.')
 
-crafting_world.SKIP_CRAFTING_LOCATION_CHECK = True
-print('Skipping location check in Crafting World.')
+import sys
+if sys.version_info.minor < 9:
+    print("Warning: using Python < 3.9 to run ALFRED: cannot run craftingworld typing.")
+else:
+    CONCEPTS_PATH = osp.join(osp.dirname(osp.abspath(__file__)), "../concepts")
+    print("Adding concepts path: {}".format(CONCEPTS_PATH))
+    sys.path.insert(0, CONCEPTS_PATH)
 
 def load_state_from_problem(pds_domain, problem_record, pddl_goal=None):
     pddl_problem = problem_record.ground_truth_pddl_problem

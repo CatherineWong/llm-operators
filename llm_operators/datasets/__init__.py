@@ -9,4 +9,10 @@ from .dataset_core import PLANNING_PROBLEMS_REGISTRY, register_planning_domain_p
 
 # Import all the planning domains.
 from . import alfred  # noqa
-from . import crafting_world  # noqa
+
+# This can't be imported on Python 3.8
+import sys
+if sys.version_info.minor < 9:
+    print("Warning: using Python < 3.9 to run ALFRED: cannot run craftingworld typing.")
+else:    
+    from . import crafting_world  # noqa
