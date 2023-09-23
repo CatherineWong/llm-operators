@@ -1,0 +1,329 @@
+;; You are a software engineer who will be writing plan definitions for a robot in the PDDL planning language.
+;; Predicates defined on this domain. Note the types for each predicate.
+(:predicates
+   (tile-up ?t1 - tile ?t2 - tile)     ;; t2 is up of t1
+   (tile-down ?t1 - tile ?t2 - tile)   ;; t2 is down of t1
+   (tile-left ?t1 - tile ?t2 - tile)   ;; t2 is left of t1
+   (tile-right ?t1 - tile ?t2 - tile)  ;; t2 is right of t1
+
+   (agent-at ?t - tile)
+   (object-at ?x - object ?t - tile)
+   (inventory-holding ?i - inventory ?x - object)
+   (inventory-empty ?i - inventory)
+
+   (object-of-type ?x - object ?ot - object-type)
+)
+ (:constants
+  Key - object-type
+  WorkStation - object-type
+  Pickaxe - object-type
+  IronOreVein - object-type
+  IronOre - object-type
+  IronIngot - object-type
+  CoalOreVein - object-type
+  Coal - object-type
+  GoldOreVein - object-type
+  GoldOre - object-type
+  GoldIngot - object-type
+  CobblestoneStash - object-type
+  Cobblestone - object-type
+  Axe - object-type
+  Tree - object-type
+  Wood - object-type
+  WoodPlank - object-type
+  Stick - object-type
+  WeaponStation - object-type
+  Sword - object-type
+  Chicken - object-type
+  Feather - object-type
+  Arrow - object-type
+  ToolStation - object-type
+  Shears - object-type
+  Sheep - object-type
+  Wool - object-type
+  Bed - object-type
+  BedStation - object-type
+  BoatStation - object-type
+  Boat - object-type
+  SugarCanePlant - object-type
+  SugarCane - object-type
+  Paper - object-type
+  Furnace - object-type
+  FoodStation - object-type
+  Bowl - object-type
+  PotatoPlant - object-type
+  Potato - object-type
+  CookedPotato - object-type
+  BeetrootCrop - object-type
+  Beetroot - object-type
+  BeetrootSoup - object-type
+
+  Hypothetical - object-type
+  Trash - object-type
+ )
+
+;; Example translations from natural language to a simplified goal name, and then a PDDL plan. A PDDL plan is a sequence of actions in JSON that specifies the preconditions and post conditions of an action. 
+;; Notice that PDDL plans MUST only use predicates, object types, and receptacle types exactly as they appear in the domain above. People may also have been unclear about which objects and actions they were talking about, so we list multiple possible guesses for goal if there is uncertainty over what they meant.
+;; PDDL plans should be based on an actual PDDL domain file.
+
+;; Human written natural language goal.
+Mine potato from the map.
+;; Problem specific initial information.
+(:init
+   (object-of-type o1 IronOreVein)
+   (object-at o1 t3)
+   (object-of-type o2 CoalOreVein)
+   (object-at o2 t15)
+   (object-of-type o3 CobblestoneStash)
+   (object-at o3 t7)
+   (object-of-type o4 Tree)
+   (object-at o4 t6)
+   (object-of-type o5 Chicken)
+   (object-at o5 t9)
+   (object-of-type o6 Sheep)
+   (object-at o6 t14)
+   (object-of-type o7 PotatoPlant)
+   (object-at o7 t4)
+   (object-of-type o8 BeetrootCrop)
+   (object-at o8 t13)
+   (object-of-type o9 GoldOreVein)
+   (object-at o9 t11)
+   (object-of-type o10 SugarCanePlant)
+   (object-at o10 t8)
+   (object-of-type o11 Pickaxe)
+   (object-at o11 t8)
+   (object-of-type o12 Axe)
+   (object-at o12 t1)
+   (object-of-type o13 Sword)
+   (object-at o13 t4)
+   (object-of-type o14 Shears)
+   (object-at o14 t14)
+   (object-of-type o15 Hypothetical)
+   (inventory-empty i1)
+   (object-of-type o16 Hypothetical)
+   (inventory-empty i2)
+   (object-of-type o17 Hypothetical)
+   (inventory-empty i3)
+   (tile-right t1 t2)
+   (tile-left t2 t1)
+   (tile-right t2 t3)
+   (tile-left t3 t2)
+   (tile-right t3 t4)
+   (tile-left t4 t3)
+   (tile-right t4 t5)
+   (tile-left t5 t4)
+   (tile-right t5 t6)
+   (tile-left t6 t5)
+   (tile-right t6 t7)
+   (tile-left t7 t6)
+   (tile-right t7 t8)
+   (tile-left t8 t7)
+   (tile-right t8 t9)
+   (tile-left t9 t8)
+   (tile-right t9 t10)
+   (tile-left t10 t9)
+   (tile-right t10 t11)
+   (tile-left t11 t10)
+   (tile-right t11 t12)
+   (tile-left t12 t11)
+   (tile-right t12 t13)
+   (tile-left t13 t12)
+   (tile-right t13 t14)
+   (tile-left t14 t13)
+   (tile-right t14 t15)
+   (tile-left t15 t14)
+   (agent-at t1)
+ )
+;; PDDL plan for "Mine potato from the map."
+<START>
+[
+    ['agent-at t4'], 
+    ['inventory-holding i3 o17', 'object-of-type o17 Potato']
+]
+<END>
+
+;; Human written natural language goal.
+Craft a stick.
+;; Problem specific initial information.
+(:init
+   (object-of-type o1 WorkStation)
+   (object-at o1 t13)
+   (object-of-type o2 WeaponStation)
+   (object-at o2 t3)
+   (object-of-type o3 ToolStation)
+   (object-at o3 t15)
+   (object-of-type o4 Furnace)
+   (object-at o4 t6)
+   (object-of-type o5 BedStation)
+   (object-at o5 t14)
+   (object-of-type o6 BoatStation)
+   (object-at o6 t1)
+   (object-of-type o7 FoodStation)
+   (object-at o7 t5)
+   (object-of-type o8 Wood)
+   (object-at o8 t7)
+   (object-of-type o9 WoodPlank)
+   (object-at o9 t11)
+   (object-of-type o10 Stick)
+   (object-at o10 t8)
+   (object-of-type o11 Feather)
+   (object-at o11 t5)
+   (object-of-type o12 IronIngot)
+   (object-at o12 t9)
+   (object-of-type o13 GoldIngot)
+   (object-at o13 t2)
+   (object-of-type o14 IronOre)
+   (object-at o14 t5)
+   (object-of-type o15 Coal)
+   (object-at o15 t15)
+   (object-of-type o16 GoldOre)
+   (object-at o16 t9)
+   (object-of-type o17 Wool)
+   (object-at o17 t13)
+   (object-of-type o18 Potato)
+   (object-at o18 t6)
+   (object-of-type o19 Beetroot)
+   (object-at o19 t10)
+   (object-of-type o20 Bowl)
+   (object-at o20 t6)
+   (object-of-type o21 SugarCane)
+   (object-at o21 t15)
+   (object-of-type o22 Hypothetical)
+   (inventory-empty i1)
+   (object-of-type o23 Hypothetical)
+   (inventory-empty i2)
+   (object-of-type o24 Hypothetical)
+   (inventory-empty i3)
+   (tile-right t1 t2)
+   (tile-left t2 t1)
+   (tile-right t2 t3)
+   (tile-left t3 t2)
+   (tile-right t3 t4)
+   (tile-left t4 t3)
+   (tile-right t4 t5)
+   (tile-left t5 t4)
+   (tile-right t5 t6)
+   (tile-left t6 t5)
+   (tile-right t6 t7)
+   (tile-left t7 t6)
+   (tile-right t7 t8)
+   (tile-left t8 t7)
+   (tile-right t8 t9)
+   (tile-left t9 t8)
+   (tile-right t9 t10)
+   (tile-left t10 t9)
+   (tile-right t10 t11)
+   (tile-left t11 t10)
+   (tile-right t11 t12)
+   (tile-left t12 t11)
+   (tile-right t12 t13)
+   (tile-left t13 t12)
+   (tile-right t13 t14)
+   (tile-left t14 t13)
+   (tile-right t14 t15)
+   (tile-left t15 t14)
+   (agent-at t1)
+ )
+ ;; PDDL plan for "Craft a stick."
+<START>
+[
+  ['agent-at t11'], 
+  ['inventory-holding i1 o9'], 
+  ['agent-at t13'], 
+  ['inventory-holding i3 o24', 'object-of-type o24 Stick']
+]
+<END>
+
+;; Human written natural language goal.
+Craft a iron ingot.
+;; Problem specific initial information.
+(:init
+   (object-of-type o1 WorkStation)
+   (object-at o1 t13)
+   (object-of-type o2 WeaponStation)
+   (object-at o2 t3)
+   (object-of-type o3 ToolStation)
+   (object-at o3 t15)
+   (object-of-type o4 Furnace)
+   (object-at o4 t6)
+   (object-of-type o5 BedStation)
+   (object-at o5 t14)
+   (object-of-type o6 BoatStation)
+   (object-at o6 t1)
+   (object-of-type o7 FoodStation)
+   (object-at o7 t5)
+   (object-of-type o8 Wood)
+   (object-at o8 t7)
+   (object-of-type o9 WoodPlank)
+   (object-at o9 t11)
+   (object-of-type o10 Stick)
+   (object-at o10 t8)
+   (object-of-type o11 Feather)
+   (object-at o11 t5)
+   (object-of-type o12 IronIngot)
+   (object-at o12 t9)
+   (object-of-type o13 GoldIngot)
+   (object-at o13 t2)
+   (object-of-type o14 IronOre)
+   (object-at o14 t5)
+   (object-of-type o15 Coal)
+   (object-at o15 t15)
+   (object-of-type o16 GoldOre)
+   (object-at o16 t9)
+   (object-of-type o17 Wool)
+   (object-at o17 t13)
+   (object-of-type o18 Potato)
+   (object-at o18 t6)
+   (object-of-type o19 Beetroot)
+   (object-at o19 t10)
+   (object-of-type o20 Bowl)
+   (object-at o20 t6)
+   (object-of-type o21 SugarCane)
+   (object-at o21 t15)
+   (object-of-type o22 Hypothetical)
+   (inventory-empty i1)
+   (object-of-type o23 Hypothetical)
+   (inventory-empty i2)
+   (object-of-type o24 Hypothetical)
+   (inventory-empty i3)
+   (tile-right t1 t2)
+   (tile-left t2 t1)
+   (tile-right t2 t3)
+   (tile-left t3 t2)
+   (tile-right t3 t4)
+   (tile-left t4 t3)
+   (tile-right t4 t5)
+   (tile-left t5 t4)
+   (tile-right t5 t6)
+   (tile-left t6 t5)
+   (tile-right t6 t7)
+   (tile-left t7 t6)
+   (tile-right t7 t8)
+   (tile-left t8 t7)
+   (tile-right t8 t9)
+   (tile-left t9 t8)
+   (tile-right t9 t10)
+   (tile-left t10 t9)
+   (tile-right t10 t11)
+   (tile-left t11 t10)
+   (tile-right t11 t12)
+   (tile-left t12 t11)
+   (tile-right t12 t13)
+   (tile-left t13 t12)
+   (tile-right t13 t14)
+   (tile-left t14 t13)
+   (tile-right t14 t15)
+   (tile-left t15 t14)
+   (agent-at t1)
+ )
+ ;; PDDL plan for "Craft a iron ingot."
+<START>
+[
+  ['agent-at t12'], 
+  ['inventory-holding i1 o14'], 
+  ['agent-at t11'], 
+  ['inventory-holding i2 o15'], 
+  ['agent-at t11'], 
+  ['inventory-holding i3 o24', 'object-of-type o24 IronIngot']
+]
+<END>

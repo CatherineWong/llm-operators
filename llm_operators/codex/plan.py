@@ -345,7 +345,6 @@ def propose_task_predicates_for_problems(
 
     for idx, problem in enumerate(unsolved_problems):
         problem.proposed_pddl_task_predicates = []
-
         codex_prompt, proposed_task_predicate_definitions = _propose_task_predicate_definition(domain, solved_problems, problem, n_samples, temperature, external_task_predicates_supervision)
         output_json[problem.problem_id] = {
             CODEX_PROMPT: codex_prompt,

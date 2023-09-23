@@ -140,7 +140,6 @@ def gen_v20230829_solution(record: Dict[str, Any]) -> Optional[PDDLPlan]:
     Returns:
         a PDDLPlan object.
     """
-
     target_rule = None
     for rule in CRAFTING_RULES:
         if rule['create'] == record['goal']:
@@ -190,7 +189,6 @@ def gen_v20230829_solution(record: Dict[str, Any]) -> Optional[PDDLPlan]:
             f"o{loc_object_id}", record['inventory_size'], object_str, [1, 2], underline_to_pascal(record["goal"])
         ]})
         subgoal_sequence.append([f'inventory-holding {inventory_str} {object_str}', f'object-of-type {object_str} {underline_to_pascal(record["goal"])}'])
-
     return PDDLPlan(plan_string='\n'.join(actions)), primitive_actions, subgoal_sequence
 
 
