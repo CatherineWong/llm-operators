@@ -87,18 +87,18 @@ def mine_wood(s: CraftingWorld20230204Simulator, inventory: int, target_object: 
     return True
 
 
-def mine_potato(s: CraftingWorld20230204Simulator, inventory: int, target_object: str, exclude_inventory: set[int] = None, exclude_object: set[str] = None):
-    """Mine potato."""
-    if exclude_inventory is None: exclude_inventory = set()
-    if exclude_object is None: exclude_object = set()
+# def mine_potato(s: CraftingWorld20230204Simulator, inventory: int, target_object: str, exclude_inventory: set[int] = None, exclude_object: set[str] = None):
+#     """Mine potato."""
+#     if exclude_inventory is None: exclude_inventory = set()
+#     if exclude_object is None: exclude_object = set()
 
-    potato_plant_object = move_to_resource(s, 'PotatoPlant')
-    if potato_plant_object is None:
-        return False
-    rv = s.mine(potato_plant_object, inventory, target_object)
-    if not rv:
-        return False
-    return True
+#     potato_plant_object = move_to_resource(s, 'PotatoPlant')
+#     if potato_plant_object is None:
+#         return False
+#     rv = s.mine(potato_plant_object, inventory, target_object)
+#     if not rv:
+#         return False
+#     return True
 
 
 def craft_wood_plank(s: CraftingWorld20230204Simulator, inventory: int, target_object: str, exclude_inventory: set[int] = None, exclude_object: set[str] = None):
@@ -128,41 +128,41 @@ def craft_wood_plank(s: CraftingWorld20230204Simulator, inventory: int, target_o
     return True
 
 
-def craft_arrow(s: CraftingWorld20230204Simulator, inventory: int, target_object: str, exclude_inventory: set[int] = None, exclude_object: set[str] = None):
-    """Craft an arrow from a stick and a feather."""
-    if exclude_inventory is None: exclude_inventory = set()
-    if exclude_object is None: exclude_object = set()
+# def craft_arrow(s: CraftingWorld20230204Simulator, inventory: int, target_object: str, exclude_inventory: set[int] = None, exclude_object: set[str] = None):
+#     """Craft an arrow from a stick and a feather."""
+#     if exclude_inventory is None: exclude_inventory = set()
+#     if exclude_object is None: exclude_object = set()
 
-    ingredient1_inventory = get_inventory_by_object_type(s, 'Stick')
-    if ingredient1_inventory is None:
-        object_id = find_object(s, 'Stick')
-        if object_id is not None:
-            ingredient1_inventory = find_empty_inventory(s, exclude_inventory | {inventory})
-            rv = pickup_object(s, ingredient1_inventory, object_id)
-            if not rv:
-                return False
-        else:
-            ingredient1_inventory = find_empty_inventory(s, exclude_inventory | {inventory})
-            ingredient1_target_object = find_hypothetical_object(s, exclude_object | {target_object})
-            ingredient1_inventory = craft_stick(s, ingredient1_inventory, ingredient1_target_object, exclude_inventory | {inventory}, exclude_object | {target_object})
+#     ingredient1_inventory = get_inventory_by_object_type(s, 'Stick')
+#     if ingredient1_inventory is None:
+#         object_id = find_object(s, 'Stick')
+#         if object_id is not None:
+#             ingredient1_inventory = find_empty_inventory(s, exclude_inventory | {inventory})
+#             rv = pickup_object(s, ingredient1_inventory, object_id)
+#             if not rv:
+#                 return False
+#         else:
+#             ingredient1_inventory = find_empty_inventory(s, exclude_inventory | {inventory})
+#             ingredient1_target_object = find_hypothetical_object(s, exclude_object | {target_object})
+#             ingredient1_inventory = craft_stick(s, ingredient1_inventory, ingredient1_target_object, exclude_inventory | {inventory}, exclude_object | {target_object})
 
-    ingredient2_inventory = get_inventory_by_object_type(s, 'Feather')
-    if ingredient2_inventory is None:
-        object_id = find_object(s, 'Feather')
-        if object_id is not None:
-            ingredient2_inventory = find_empty_inventory(s, exclude_inventory | {inventory})
-            rv = pickup_object(s, ingredient2_inventory, object_id)
-            if not rv:
-                return False
-        else:
-            ingredient2_inventory = find_empty_inventory(s, exclude_inventory | {inventory})
-            ingredient2_target_object = find_hypothetical_object(s, exclude_object | {target_object})
-            ingredient2_inventory = craft_feather(s, ingredient2_inventory, ingredient2_target_object, exclude_inventory | {inventory}, exclude_object | {target_object})
+#     ingredient2_inventory = get_inventory_by_object_type(s, 'Feather')
+#     if ingredient2_inventory is None:
+#         object_id = find_object(s, 'Feather')
+#         if object_id is not None:
+#             ingredient2_inventory = find_empty_inventory(s, exclude_inventory | {inventory})
+#             rv = pickup_object(s, ingredient2_inventory, object_id)
+#             if not rv:
+#                 return False
+#         else:
+#             ingredient2_inventory = find_empty_inventory(s, exclude_inventory | {inventory})
+#             ingredient2_target_object = find_hypothetical_object(s, exclude_object | {target_object})
+#             ingredient2_inventory = craft_feather(s, ingredient2_inventory, ingredient2_target_object, exclude_inventory | {inventory}, exclude_object | {target_object})
 
-    weapon_station = move_to_resource(s, 'WeaponStation')
-    if weapon_station is None:
-        return False
-    rv = s.craft(weapon_station, inventory, target_object, [ingredient1_inventory, ingredient2_inventory], target_type='Arrow')
-    if not rv:
-        return False
-    return True
+#     weapon_station = move_to_resource(s, 'WeaponStation')
+#     if weapon_station is None:
+#         return False
+#     rv = s.craft(weapon_station, inventory, target_object, [ingredient1_inventory, ingredient2_inventory], target_type='Arrow')
+#     if not rv:
+#         return False
+#     return True

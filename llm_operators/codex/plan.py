@@ -379,7 +379,7 @@ def _propose_task_predicate_definition(domain, solved_problems, problem, n_sampl
 
     with open(external_task_predicates_supervision + "system.txt") as f:
         system_message = f.read()
-    
+
     # We don't add examples from the problems, as we have a limited context. We have examples in the prompt.
     
     with open(external_task_predicates_supervision + "user.txt") as f:

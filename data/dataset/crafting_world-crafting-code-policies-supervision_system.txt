@@ -35,24 +35,18 @@
   Wood - object-type
   WoodPlank - object-type
   Stick - object-type
-  WeaponStation - object-type
   Sword - object-type
   Chicken - object-type
   Feather - object-type
   Arrow - object-type
-  ToolStation - object-type
   Shears - object-type
   Sheep - object-type
   Wool - object-type
   Bed - object-type
-  BedStation - object-type
-  BoatStation - object-type
   Boat - object-type
   SugarCanePlant - object-type
   SugarCane - object-type
   Paper - object-type
-  Furnace - object-type
-  FoodStation - object-type
   Bowl - object-type
   PotatoPlant - object-type
   Potato - object-type
@@ -125,44 +119,61 @@ def get_inventory_by_object_type(s: CraftingWorld20230204Simulator, object_type:
 ;; Example translations from natural language to a code policy in Python.
 ;; Notice that code MUST only use predicates, object types, and receptacle types exactly as they appear in the domain above. People may also have been unclear about which objects and actions they were talking about, so consider multiple possible guesses for goal if there is uncertainty over what they meant.
 Your plan may include multiple actions if necessary.
+;; Target objects should always be a hypothetical object.
+;; You may both DEFINE code policies and CALL code policies ('call_function')
+;; Notice, for instance, that the crafting functions generally need to define additional mining functions that are called within their body.
 
 ;; Human written natural language goal.
-Mine wood from the map.
+Craft a wood plank.
 ;; Problem specific initial information.
 (:init
-   (object-of-type o1 IronOreVein)
-   (object-at o1 t10)
-   (object-of-type o2 CoalOreVein)
+   (object-of-type o1 WorkStation)
+   (object-at o1 t12)
+   (object-of-type o2 WeaponStation)
    (object-at o2 t11)
-   (object-of-type o3 CobblestoneStash)
-   (object-at o3 t5)
-   (object-of-type o4 Tree)
-   (object-at o4 t7)
-   (object-of-type o5 Chicken)
-   (object-at o5 t14)
-   (object-of-type o6 Sheep)
-   (object-at o6 t1)
-   (object-of-type o7 PotatoPlant)
-   (object-at o7 t2)
-   (object-of-type o8 BeetrootCrop)
-   (object-at o8 t8)
-   (object-of-type o9 GoldOreVein)
-   (object-at o9 t9)
-   (object-of-type o10 SugarCanePlant)
-   (object-at o10 t13)
-   (object-of-type o11 Pickaxe)
-   (object-at o11 t7)
-   (object-of-type o12 Axe)
-   (object-at o12 t8)
-   (object-of-type o13 Sword)
-   (object-at o13 t9)
-   (object-of-type o14 Shears)
-   (object-at o14 t5)
-   (object-of-type o15 Hypothetical)
+   (object-of-type o3 ToolStation)
+   (object-at o3 t13)
+   (object-of-type o4 Furnace)
+   (object-at o4 t15)
+   (object-of-type o5 BedStation)
+   (object-at o5 t5)
+   (object-of-type o6 BoatStation)
+   (object-at o6 t3)
+   (object-of-type o7 FoodStation)
+   (object-at o7 t8)
+   (object-of-type o8 Wood)
+   (object-at o8 t4)
+   (object-of-type o9 WoodPlank)
+   (object-at o9 t7)
+   (object-of-type o10 Stick)
+   (object-at o10 t8)
+   (object-of-type o11 Feather)
+   (object-at o11 t12)
+   (object-of-type o12 IronIngot)
+   (object-at o12 t7)
+   (object-of-type o13 GoldIngot)
+   (object-at o13 t11)
+   (object-of-type o14 IronOre)
+   (object-at o14 t12)
+   (object-of-type o15 Coal)
+   (object-at o15 t12)
+   (object-of-type o16 GoldOre)
+   (object-at o16 t6)
+   (object-of-type o17 Wool)
+   (object-at o17 t2)
+   (object-of-type o18 Potato)
+   (object-at o18 t14)
+   (object-of-type o19 Beetroot)
+   (object-at o19 t5)
+   (object-of-type o20 Bowl)
+   (object-at o20 t5)
+   (object-of-type o21 SugarCane)
+   (object-at o21 t15)
+   (object-of-type o22 Hypothetical)
    (inventory-empty i1)
-   (object-of-type o16 Hypothetical)
+   (object-of-type o23 Hypothetical)
    (inventory-empty i2)
-   (object-of-type o17 Hypothetical)
+   (object-of-type o24 Hypothetical)
    (inventory-empty i3)
    (tile-right t1 t2)
    (tile-left t2 t1)
@@ -194,15 +205,17 @@ Mine wood from the map.
    (tile-left t15 t14)
    (agent-at t1)
  )
-;; Plan as code policies for "Mine wood from the map."
+;; Plan as code policies for "Craft a wood plank." Notice that we first define a mine wood function. 
 <START>
 [
 {
+    "action_type": "action_definition",
     "action": "mine_wood",
     "argument_names" : ('s', 'inventory', 'target_object'),
-    "ground_arguments" : ("env_state", "3", "'o17'"),
+    "ground_arguments" : None,
     "body" : 
 """
+    # First, define a function to mine wood.
     # Get any additional tools you may need.
     tool_inventory = get_inventory_by_object_type(s, 'Axe')
     if tool_inventory is None:
@@ -222,6 +235,48 @@ Mine wood from the map.
         return False
     return True
 """
+},
+{
+    "action_type": "action_definition",
+    "action": "craft_wood_plank",
+    "argument_names" : ('s', 'inventory', 'target_object'),
+    "ground_arguments" : None,
+    "body" : 
+"""
+    # Now, define a function to craft wood. This has previously defined a mine_wood function.
+    # We can then craft wood planks from the mined wood.
+    exclude_inventory = set()
+    exclude_object = set()
+
+    ingredient1_inventory = get_inventory_by_object_type(s, 'Wood')
+    if ingredient1_inventory is None:
+        object_id = find_object(s, 'Wood')
+        if object_id is not None:
+            ingredient1_inventory = find_empty_inventory(s, exclude_inventory | {inventory})
+            rv = pickup_object(s, ingredient1_inventory, object_id)
+            if not rv:
+                return False
+        else:
+            ingredient1_inventory = find_empty_inventory(s, exclude_inventory | {inventory})
+            ingredient1_target_object = find_hypothetical_object(s, exclude_object | {target_object})
+            # Call mine_wood if we don't already have it.
+            ingredient1_inventory = mine_wood(s, ingredient1_inventory, ingredient1_target_object)
+
+    work_station = move_to_resource(s, 'WorkStation')
+    if work_station is None:
+        return False
+    rv = s.craft(work_station, inventory, target_object, [ingredient1_inventory], target_type='WoodPlank')
+    if not rv:
+        return False
+    return True
+"""
+},
+{
+    "action_type": "call_action",
+    "action": "craft_wood_plank",
+    "argument_names" : ('s', 'inventory', 'target_object'),
+    "ground_arguments" : ("env_state", "3", "'o24'"),
+    "body" : None,
 }
 ]
 <END>

@@ -44,4 +44,4 @@ python main.py --experiment_name $EXPR_NAME \
   --initial_goal_supervision_prefix SKIP \
   --train_iterations 1 --output_directory generated \
   --goal_propose_include_codex_types --operator_propose_minimum_usage 1 --planner task_planner_pdsketch_onthefly --maximum_operator_arity 7 --n_attempts_to_plan 1 \
-  --verbose $@ --llm_propose_code_policies --external_code_policies_supervision data/dataset/crafting_world-crafting-code-policies-supervision_  --resume
+  --verbose $@ --llm_propose_code_policies --external_code_policies_supervision data/dataset/crafting_world-crafting-code-policies-supervision_ --resume

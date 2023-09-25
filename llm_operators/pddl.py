@@ -701,6 +701,9 @@ class PDDLParser:
 
 
 class PDDLPlan:
+    PDDL_ACTION_TYPE = "action_type"
+    PDDL_ACTION_DEFINITION = "action_definition"
+    PDDL_CALL_ACTION = "call_action"
     PDDL_ACTION = "action"
     PDDL_ARGUMENTS = "args"
     PDDL_OPERATOR_BODY = "operator_body"
@@ -722,7 +725,8 @@ class PDDLPlan:
             plan_dict = {
                 cls.PDDL_ACTION : code_policy_dict[cls.PDDL_ACTION],
                 cls.PDDL_ARGUMENTS : code_policy_dict["ground_arguments"],
-                cls.PDDL_OPERATOR_BODY : code_policy_dict["body"]
+                cls.PDDL_OPERATOR_BODY : code_policy_dict["body"],
+                cls.PDDL_ACTION_TYPE : code_policy_dict.get(cls.PDDL_ACTION_TYPE, cls.PDDL_CALL_ACTION)
             }
             plan_dicts.append(plan_dict)
         return PDDLPlan(plan=plan_dicts)
@@ -1880,7 +1884,7 @@ def preprocess_code_policies(
         problem.codex_raw_code_policies = problem.proposed_code_policies
         problem.proposed_code_policies = proposed_code_policies
 
-    # Now, canonicalize all of the proposed code skills.
+    # Now, canonicalize all of the proposed code skills by body.
     output_json = dict()
     logs = defaultdict(list)
     proposed_code_skills_numbered = dict()
@@ -1900,15 +1904,24 @@ def preprocess_code_policies(
     # Now, go through and mark all of the skills in the code policies according to their canonical name.
     for problem in unsolved_problems:
         renamed_proposed_code_policies = []
+
         for proposed_code_policy in problem.proposed_code_policies:
+            current_action_definitions = {} # For actions defined in the body of the policy.
             renamed_proposed_code_policy = []
             for skill in proposed_code_policy:
-                unground_action = frozendict({
-                    key : copy.copy(skill[key])
-                    for key in ['argument_names', 'body']
-                })
-                renamed_skill = {k : v for k, v in skill.items()}
-                renamed_skill['action'] = inverse_proposed_code_skills_numbered[unground_action]
+                if len(skill['body']) > 0:
+                    current_name = skill['action']
+                    unground_action = frozendict({
+                        key : copy.copy(skill[key])
+                        for key in ['argument_names', 'body']
+                    })
+                    renamed_skill = {k : v for k, v in skill.items()}
+                    renamed_skill['action'] = inverse_proposed_code_skills_numbered[unground_action]
+                    current_action_definitions[current_name] = renamed_skill['action']
+                else:
+                    current_name = skill['action']
+                    renamed_skill = {k : v for k, v in skill.items()}
+                    renamed_skill['action'] = current_action_definitions.get(current_name, current_name)
                 renamed_proposed_code_policy.append(frozendict(renamed_skill))
             renamed_proposed_code_policies.append(tuple(renamed_proposed_code_policy))
         problem.proposed_code_policies = renamed_proposed_code_policies
@@ -1971,32 +1984,42 @@ def preprocess_code_policy_strings(proposed_code_policy_string, pddl_domain):
                 "action" : "",
                 "argument_names" : (),
                 "ground_arguments" : (),
-                "body": ""
+                "body": "",
+                "action_type": PDDLPlan.PDDL_CALL_ACTION, # Assume call action by default.
             }
+            preprocessed_action[PDDLPlan.PDDL_ACTION_TYPE] = raw_action.get(PDDLPlan.PDDL_ACTION_TYPE, PDDLPlan.PDDL_CALL_ACTION)
             preprocessed_action['action'] = raw_action.get("action", "")
             # Minimal check.
             raw_argument_names, raw_ground_arguments, raw_body =  raw_action.get("argument_names", ""), raw_action.get("ground_arguments", ""), raw_action.get("body", "")
+            if raw_body is None:
+                raw_body = ""
+            if raw_ground_arguments is None:
+                raw_ground_arguments = ()
 
-            if check_valid_arguments(raw_argument_names, raw_ground_arguments, use_alfred=pddl_domain.domain_name == ALFRED_DOMAIN_FILE_NAME) and len(raw_body) > 0:
+            if check_valid_arguments(raw_argument_names, raw_ground_arguments, use_alfred=pddl_domain.domain_name == ALFRED_DOMAIN_FILE_NAME):
                 preprocessed_action["argument_names"], preprocessed_action["ground_arguments"] = tuple(raw_argument_names), tuple(raw_ground_arguments)
                 preprocessed_action["body"] = raw_body
 
                 preprocessed_action = frozendict(preprocessed_action)
                 preprocessed_action_list.append(preprocessed_action)
-                # Make a version without the ground arguments.
-                unground_action = frozendict({
-                    key : copy.copy(preprocessed_action[key])
-                    for key in ['argument_names', 'body']
-                })
-                
-                preprocessed_code_skills[preprocessed_action['action']].add(unground_action)
+
+                # Only add actions if they have a body definition.
+                if len(preprocessed_action["body"]) > 0:
+                    # Make a version without the ground arguments.
+                    unground_action = frozendict({
+                        key : copy.copy(preprocessed_action[key])
+                        for key in ['argument_names', 'body']
+                    })
+                    preprocessed_code_skills[preprocessed_action['action']].add(unground_action)
         preprocessed_action_list = tuple(preprocessed_action_list)
         return True, preprocessed_code_skills, preprocessed_action_list
     except:
         return False, preprocessed_code_skills, tuple(preprocessed_action_list)
 
 def check_valid_arguments(raw_argument_names, raw_ground_arguments, use_alfred):
-    
+    if len(raw_ground_arguments) == 0 and len(raw_argument_names) > 0:
+        # Function definition, no ground arguments
+        return True
     if not (type(raw_argument_names) == type(raw_ground_arguments) == tuple):
         return False
     if not len(raw_argument_names) == len(raw_ground_arguments):

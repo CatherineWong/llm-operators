@@ -146,7 +146,7 @@ def _run_llm_propose_code_policies_motion_planner(dataset_name, pddl_domain, pro
 
         for idx, policy_sequence in enumerate(problems[problem_id].proposed_code_policies):
             print(f"Evaluating [{idx+1}/{len(problems[problem_id].proposed_code_policies)}] LLM code policies.")
-            motion_plan_result = evaluate_crafting_world_code_policy(policy_sequence, pds_domain, problem)
+            motion_plan_result = evaluate_crafting_world_code_policy(policy_sequence, pds_domain, problem, pddl_domain)
 
             # Boiler plate to update the problem so we can keep using the old score keeper.
             new_motion_plan_key = (str(gt_goal), motion_plan_result.pddl_plan.plan_string)
@@ -170,15 +170,23 @@ def _run_llm_propose_code_policies_motion_planner(dataset_name, pddl_domain, pro
     return any_motion_planner_success
 
 
-def evaluate_crafting_world_code_policy(policy_sequence, pds_domain, problem):
+def evaluate_crafting_world_code_policy(policy_sequence, pds_domain, problem, pddl_domain):
     plan = pddl.PDDLPlan.from_code_policy(code_policy=policy_sequence)
     global env_state
     env_state, gt_goal = load_state_from_problem(pds_domain, problem)
+
+    # Action defintions
+    action_definitions = []
     for policy_idx, curr_policy in enumerate(policy_sequence):
         print(f"Now on policy: {policy_idx}/{len(policy_sequence)}: {curr_policy['action']}")
         try:
-            curr_policy_success = attempt_execute_policy(policy=curr_policy)
+            curr_policy_success = attempt_execute_policy(policy=curr_policy, action_definitions=action_definitions, pddl_domain=pddl_domain)
+
+            if curr_policy[pddl.PDDLPlan.PDDL_ACTION_TYPE] == pddl.PDDLPlan.PDDL_ACTION_DEFINITION and curr_policy_success:
+                print(f"Successful action definition, adding {curr_policy['action']} to action definitions")
+                action_definitions.append(curr_policy)
         except:
+            print("Policy unsuccessful.")
             curr_policy_success = False
         if curr_policy_success == False:
             return MotionPlanResult(
@@ -189,25 +197,62 @@ def evaluate_crafting_world_code_policy(policy_sequence, pds_domain, problem):
             )
     # Check if goal is satisfied.
     curr_policy_success = env_state.goal_satisfied(gt_goal)
+    print(f"Now evaluating goal: {curr_policy_success}.")
     return MotionPlanResult(
             pddl_plan=plan,
             task_success=curr_policy_success,
             last_failed_operator=None,
             max_satisfied_predicates=None,
     )
-    
 
-def attempt_execute_policy(policy):
+def create_function_definition(policy, pddl_domain):
+    canonical_name = pddl_domain.code_skill_canonical_name_map.get(policy['action'], policy['action'])
+    argument_string = ", ".join([f"{a_name}" for a_name in policy['argument_names']])
+    python_function = f"""def {canonical_name}({argument_string}): \n{policy['body']}\n"""
+    return python_function, canonical_name
+
+def create_new_function_definition_test_string(action_definitions, new_function, pddl_domain):
+    # Define all of the previous functions.
+    existing_functions = [create_function_definition(action_definition, pddl_domain)[0] for action_definition in action_definitions]
+    existing_functions_string = '\n'.join(existing_functions)
+    new_function_definition, new_function_name = create_function_definition(new_function, pddl_domain)
+    test_string = f"""{existing_functions_string}\n{new_function_definition}\nself.success = {new_function_name} is not None"""
+    return test_string
+
+def create_function_call_test_string(action_definitions, policy, pddl_domain):
+    canonical_name = pddl_domain.code_skill_canonical_name_map.get(policy['action'], policy['action'])
+    argument_bindings = list(zip(policy['argument_names'], policy['ground_arguments']))
+    argument_string = ", ".join([f"{a_name}={a_value}" for (a_name, a_value) in argument_bindings])
+    # Does it have a body?
+    if len(policy['body']) > 0:
+        function_call_string = f"""\ndef {canonical_name}({argument_string}): \n{policy['body']}\nself.success = {canonical_name}()"""
+    else:
+        function_call_string = f"""\nself.success = {canonical_name}({argument_string})"""
+    
+    # Create test string.
+    existing_functions = [create_function_definition(action_definition, pddl_domain)[0] for action_definition in action_definitions]
+    existing_functions_string = '\n'.join(existing_functions)
+    test_string = f"""{existing_functions_string}\n {function_call_string}"""
+    return test_string
+
+
+def attempt_execute_policy(policy, action_definitions, pddl_domain):
+    # Define all of the previous functions.
+    # Is this an action definition?
+    if policy[pddl.PDDLPlan.PDDL_ACTION_TYPE] == pddl.PDDLPlan.PDDL_ACTION_DEFINITION:
+       print(f"Attempting to DEFINE function: {policy['action']}")
+       test_string = create_new_function_definition_test_string(action_definitions, policy, pddl_domain)
+    elif policy[pddl.PDDLPlan.PDDL_ACTION_TYPE] == pddl.PDDLPlan.PDDL_CALL_ACTION:
+        print(f"Attempting to CALL function: {policy['action']}")
+        test_string = create_function_call_test_string(action_definitions, policy, pddl_domain)
+    else:
+        return False
+
     success = False
     try:
-        # Create the argument map.
-        argument_bindings = list(zip(policy['argument_names'], policy['ground_arguments']))
-        argument_string = ", ".join([f"{a_name}={a_value}" for (a_name, a_value) in argument_bindings])
-
-        # Note that this does assume that each function call itself does not depend on previously defined functions. We should check if this is true for our purposes.
         class ExecutionResult():
             def __init__(self):
-                python_function = f"""def temp_func({argument_string}): \n{policy['body']}\nself.success = temp_func()"""
+                python_function = test_string
                 exec(python_function)
         ex_result = ExecutionResult()
         print(f"Execution result: { ex_result.success}")
