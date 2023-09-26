@@ -379,7 +379,7 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
                     plan_attempt_idx=0, goal_idx=0, rng=rng, split=split)
         else:
             for plan_attempt_idx in range(args.n_attempts_to_plan):
-                for goal_idx in range(len(planning_problems['train'][problem_id].proposed_pddl_goals)):
+                for goal_idx in range(len(planning_problems[split][problem_id].proposed_pddl_goals)):
                     any_motion_plan_success = _run_task_and_motion_plan(
                         pddl_domain, problem_idx, problem_id, planning_problems,
                         args=args, curr_iteration=curr_iteration, output_directory=output_directory,
@@ -403,7 +403,7 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
     if bool(args.planner_run_second_pass) and split == "train":
         print('Running a second-pass to task and motion planning on unsolved problems.')
         for problem_idx, problem_id in enumerate(planning_problems[split]):
-            if len(planning_problems['train'][problem_id].solved_motion_plan_results) > 0:
+            if len(planning_problems[split][problem_id].solved_motion_plan_results) > 0:
                 continue
 
             for plan_attempt_idx in range(1):

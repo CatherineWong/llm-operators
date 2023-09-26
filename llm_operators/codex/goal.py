@@ -171,7 +171,7 @@ def _propose_alfred_goal_definition(domain, solved_problems, problem, n_goal_sam
 
         max_goal_examples = min(max_goal_examples, len(solved_problems))
         solved_to_prompt = random.sample(solved_problems, max_goal_examples)
-
+        
         # domains for all alfred problems should be the same.
         prompt += _get_domain_string(domain, solved_to_prompt[0])
         for solved_problem in solved_to_prompt:  # constructing the input prompt 
@@ -197,7 +197,7 @@ def _propose_goal_definition_external_supervision_sample_with_prompt(domain, sol
     solved_to_prompt = random.sample(solved_problems, max_goal_examples)
 
     for solved_problem in solved_to_prompt:  # constructing the input prompt
-         system_message += _get_solved_goal_prompt_v1(domain, problem, natural_language_goal_start="Human written natural language goal", cot_goal_start=COT_GOAL_START, pddl_goal_start=PDDL_GOAL_START)
+         system_message += _get_solved_goal_prompt_v1(domain,solved_problem, natural_language_goal_start="Human written natural language goal", cot_goal_start=COT_GOAL_START, pddl_goal_start=PDDL_GOAL_START)
 
     with open(external_goal_supervision + "user.txt") as f:
         sampling_message = f.read()
