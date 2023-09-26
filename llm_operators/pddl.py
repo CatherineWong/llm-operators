@@ -751,7 +751,7 @@ class PDDLPlan:
         if operator_name_map is not None:
             return "\n".join([f"({operator_name_map.get(a[PDDLPlan.PDDL_ACTION], a[PDDLPlan.PDDL_ACTION])} {' '.join(a[PDDLPlan.PDDL_ARGUMENTS])})" for a in self.plan])
         else:
-            return "\n".join([f"({a[PDDLPlan.PDDL_ACTION]} {' '.join(a[PDDLPlan.PDDL_ARGUMENTS])})" for a in self.plan])
+            return "\n".join([f"({a[PDDLPlan.PDDL_ACTION]} {' '.join(str(a[PDDLPlan.PDDL_ARGUMENTS]))})" for a in self.plan])
 
     def string_to_plan(self, plan_string, pddl_domain=None):
         action_strings = plan_string.strip().split("\n")
