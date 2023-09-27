@@ -25,6 +25,7 @@ GOAL_SAMPLING_END_TOKEN = "<END>"
 def propose_goals_for_problems(
     dataset_name,
     problems,
+    training_problems,
     domain,
     initial_pddl_predicates,
     supervision_pddl,
@@ -45,10 +46,15 @@ def propose_goals_for_problems(
     verbose=False,
     external_goal_supervision=None,
     external_goal_sample_with_prompt=False,
+    split="train",
 ):
     random.seed(command_args.random_seed)
 
     unsolved_problems, solved_problems = get_solved_unsolved_problems(problems, context='pddl_goal')
+
+    # For validation, we want solved training problems to prompt with.
+    unsolved_training_problems, solved_training_problems = get_solved_unsolved_problems(training_problems, context='pddl_goal')
+
     if use_gt:
         print("Using ground truth goals, skipping: propose_goals_for_problems")
         return
@@ -79,7 +85,7 @@ def propose_goals_for_problems(
         #### LCW - Temporary split between ALFRED and Minecraft behaviors to preserve exact prompting behaviors used in ICML experiments.
         if "alfred" in dataset_name:
             ### ALFRED goal prompting.
-            codex_prompt, proposed_goal_definitions = _propose_alfred_goal_definition(domain, solved_problems, problem, n_samples, temperature, include_codex_types, max_goal_examples, external_goal_supervision, external_goal_sample_with_prompt)
+            codex_prompt, proposed_goal_definitions = _propose_alfred_goal_definition(domain, solved_problems, problem, n_samples, temperature, include_codex_types, max_goal_examples, external_goal_supervision, external_goal_sample_with_prompt, solved_training_problems, split)
 
             output_json[problem.problem_id] = {
                 CODEX_PROMPT: codex_prompt,
@@ -148,7 +154,7 @@ def _get_minecraft_prompt(max_goal_examples, supervision_pddl, domain, include_c
         return prompt
 
 # Utility functions for composing the prompt for goal proposal.
-def _propose_alfred_goal_definition(domain, solved_problems, problem, n_goal_samples, temperature, include_codex_types, max_goal_examples, external_goal_supervision, external_goal_sample_with_prompt):
+def _propose_alfred_goal_definition(domain, solved_problems, problem, n_goal_samples, temperature, include_codex_types, max_goal_examples, external_goal_supervision, external_goal_sample_with_prompt, solved_training_problems, split):
     if external_goal_supervision is not None:
          # For now, we also only support sampling with the prompt.
          assert external_goal_sample_with_prompt
@@ -160,7 +166,8 @@ def _propose_alfred_goal_definition(domain, solved_problems, problem, n_goal_sam
              temperature=temperature,
              max_goal_examples=max_goal_examples,
              external_goal_supervision=external_goal_supervision,
-             external_goal_sample_with_prompt=external_goal_sample_with_prompt
+             external_goal_sample_with_prompt=external_goal_sample_with_prompt,
+             solved_training_problems=solved_training_problems, split=split
          )
 
 
@@ -186,15 +193,20 @@ def _propose_alfred_goal_definition(domain, solved_problems, problem, n_goal_sam
     return codex_prompt, goal_strings
 
 
-def _propose_goal_definition_external_supervision_sample_with_prompt(domain, solved_problems, problem, n_goal_samples, temperature, max_goal_examples, external_goal_supervision, external_goal_sample_with_prompt):
+def _propose_goal_definition_external_supervision_sample_with_prompt(domain, solved_problems, problem, n_goal_samples, temperature, max_goal_examples, external_goal_supervision, external_goal_sample_with_prompt, solved_training_problems, split):
     from num2words import num2words
+
+    if split != "train":
+        supervision_problems = solved_training_problems
+    else:
+        supervision_problems = solved_problems
 
     with open(external_goal_supervision + "system.txt") as f:
         system_message = f.read()
     
     # Add N examples from the current solved problems.
-    max_goal_examples = min(max_goal_examples, len(solved_problems))
-    solved_to_prompt = random.sample(solved_problems, max_goal_examples)
+    max_goal_examples = min(max_goal_examples, len(supervision_problems))
+    solved_to_prompt = random.sample(supervision_problems, max_goal_examples)
 
     for solved_problem in solved_to_prompt:  # constructing the input prompt
          system_message += _get_solved_goal_prompt_v1(domain,solved_problem, natural_language_goal_start="Human written natural language goal", cot_goal_start=COT_GOAL_START, pddl_goal_start=PDDL_GOAL_START)

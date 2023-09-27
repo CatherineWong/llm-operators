@@ -233,6 +233,7 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
         codex.propose_goals_for_problems(
             dataset_name=args.dataset_name,
             problems=planning_problems[split],
+            training_problems=planning_problems["train"],
             domain=pddl_domain,
             initial_pddl_predicates=args.initial_pddl_predicates,  # Currently this has no effect.
             supervision_pddl=None,  # (ZS 7/27/23) skip supervising on external datasets for now.
@@ -251,6 +252,7 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
             verbose=args.verbose,
             external_goal_supervision=args.external_goal_supervision,
             external_goal_sample_with_prompt=args.external_goal_sample_with_prompt,
+            split=split,
         )
         pddl.preprocess_goals(
             problems=planning_problems[split],
