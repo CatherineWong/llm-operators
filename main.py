@@ -69,6 +69,7 @@ parser.add_argument("--supervision_name", type=str, default="supervision", help=
 
 # Mark the fraction of the dataset that we want to reserve for validation.
 parser.add_argument("--restrict_goal_prefix_train", type=str, nargs="+", default=[ALL], help="Which initial goal types to train on.")
+parser.add_argument("--restrict_goal_prefix_val", type=str, nargs="+", default=[ALL], help="Which initial goal types to train on.")
 
 # Mark the fraction of the dataset that we want to supervise on.
 parser.add_argument("--goal_supervision_fraction", default=0.1, type=float, help="Randomly selected fraction of the dataset to supervise with ground truth PDDL goals.")
@@ -198,7 +199,8 @@ def main():
         initial_pddl_operators=args.initial_pddl_operators,
         domain=pddl_domain,
         verbose=args.verbose,
-        restrict_goal_prefix_train=args.restrict_goal_prefix_train
+        restrict_goal_prefix_train=args.restrict_goal_prefix_train,
+        restrict_goal_prefix_val=args.restrict_goal_prefix_val,
     )
 
     # Load any external supervision on PDDL domains.

@@ -309,18 +309,19 @@ def mark_goal_supervision_problems(planning_dataset, initial_goal_supervision_pr
         total_goal_supervision += num_problems_to_supervise
     print(f"Total goal supervision problems: {total_goal_supervision}")
 
-def restrict_goal_supervision_problems(planning_dataset, initial_goal_supervision_prefix):
-    if initial_goal_supervision_prefix == ["ALL"]:
-        return planning_dataset
+def restrict_goal_supervision_problems(planning_dataset, initial_goal_supervision_prefix_train, initial_goal_supervision_prefix_val):
     restricted_planning_dataset = defaultdict(lambda: defaultdict())
-
     for split in planning_dataset:
-        problem_prefix_to_problem_ids = build_problem_prefix_to_problem_ids(
-            planning_dataset, initial_goal_supervision_prefix, split=split
-        )
-        for prefix in initial_goal_supervision_prefix:
-            for problem in problem_prefix_to_problem_ids[prefix]:
-                restricted_planning_dataset[split][problem] = planning_dataset[split][problem]
+        restriction_prefix = initial_goal_supervision_prefix_train if split == "train" else initial_goal_supervision_prefix_val
+        if restriction_prefix == ['ALL']:
+            restricted_planning_dataset[split] = planning_dataset[split]
+        else:
+            problem_prefix_to_problem_ids = build_problem_prefix_to_problem_ids(
+            planning_dataset, restriction_prefix, split=split
+            )
+            for prefix in restriction_prefix:
+                for problem in problem_prefix_to_problem_ids[prefix]:
+                    restricted_planning_dataset[split][problem] = planning_dataset[split][problem]
     return restricted_planning_dataset
     
 def load_planning_problems_dataset(
@@ -335,6 +336,7 @@ def load_planning_problems_dataset(
     domain=None,
     verbose=False,
     restrict_goal_prefix_train=[ALL],
+     restrict_goal_prefix_val=[ALL]
 ):
     planning_problem_loader = PLANNING_PROBLEMS_REGISTRY[dataset_name]
     planning_problem_loader.domain = domain
@@ -345,8 +347,9 @@ def load_planning_problems_dataset(
         dataset_fraction=dataset_fraction,
         verbose=verbose,
     )
-    planning_dataset = restrict_goal_supervision_problems(planning_dataset, restrict_goal_prefix_train)
-    print(f"Restricting planning problems from goal prefix: {restrict_goal_prefix_train}")
+    planning_dataset = restrict_goal_supervision_problems(planning_dataset, restrict_goal_prefix_train, restrict_goal_prefix_val)
+    print(f"Restricting planning problems in train from goal prefix: {restrict_goal_prefix_train}")
+    print(f"Restricting planning problems in val from goal prefix: {restrict_goal_prefix_val}")
 
     print(f"Loaded initial dataset: {dataset_name}")
     print('=' * 80)
