@@ -42,6 +42,41 @@ def load_state_from_problem(pds_domain, problem_record, pddl_goal=None):
 
     return simulator, gt_goal
 
+#### Baseline: Motion plan directly on the goal.
+def _run_motion_plan_directly_on_goal(dataset_name, pddl_domain, problem_idx, problem_id, planning_problems, args, curr_iteration, output_directory, plan_pass_identifier, plan_attempt_idx, goal_idx, rng, split):
+    problems = planning_problems[split]
+    any_motion_planner_success = False
+    if not "alfred" in dataset_name:
+        # This was implemented separately for Minecraft
+        assert False
+
+    for idx, proposed_pddl_goal in enumerate(problems[problem_id].proposed_pddl_goals):
+        print(f"Evaluating directly on [{idx+1}/{len(problems[problem_id].proposed_pddl_goals)}] LLM goals.")
+        task_plans = {
+            proposed_pddl_goal : proposed_pddl_goal
+        }
+        any_motion_planner_success, new_motion_plan_keys, used_motion_mock = motion_planner.attempt_motion_plan_for_problem(
+                    pddl_domain=pddl_domain,
+                    problem_idx=problem_idx,
+                    problem_id=problem_id,
+                    problems=planning_problems[split],
+                    dataset_name=args.dataset_name,
+                    new_task_plans=task_plans,
+                    use_mock=args.debug_mock_motion_plans,
+                    command_args=args,
+                    curr_iteration=curr_iteration,
+                    output_directory=output_directory,
+                    plan_pass_identifier=plan_pass_identifier,
+                    plan_attempt_idx=plan_attempt_idx,
+                    resume=args.resume,
+                    resume_from_iteration=args.resume_from_iteration,
+                    resume_from_problem_idx=args.resume_from_problem_idx,
+                    debug_skip=args.debug_skip_motion_plans,
+                    verbose=args.verbose,
+                    motion_plan_directly_on_goal=args.motion_plan_directly_on_goal # Baseline -- we skip task proposal if so.
+                )
+
+### Baseline: 
 def _run_llm_propose_task_predicates_motion_planner(dataset_name, pddl_domain, problem_idx, problem_id, planning_problems, args, curr_iteration, output_directory, plan_pass_identifier, plan_attempt_idx, goal_idx, rng, split):
     problems = planning_problems[split]
     any_motion_planner_success = False

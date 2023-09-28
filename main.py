@@ -129,6 +129,8 @@ parser.add_argument("--external_task_predicates_supervision", type=str, default=
 parser.add_argument("--llm_propose_code_policies", action='store_true', help="Implements a baseline in which the LLM directly proposes a code policies.")
 parser.add_argument("--external_code_policies_supervision", type=str, default=None, help="If provided, file containing initial plans that will be provided as supervision.")
 
+parser.add_argument("--motion_plan_directly_on_goal", action="store_true", help="Implements a baseline in which the LLM directly proposes the goal predicates only.")
+
 ########################################
 
 parser.add_argument("--verbose", action="store_true", help="Run on verbose.")
@@ -262,7 +264,7 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
             verbose=args.verbose,
         )
 
-        if split == "train":
+        if split == "train" and not args.motion_plan_directly_on_goal:
             codex.propose_plans_operators_for_problems(
                 problems=planning_problems[split],
                 domain=pddl_domain,
@@ -365,8 +367,14 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
             args.debug_skip_problems is not None and problem_idx in args.debug_skip_problems
         ):
             continue
-
-        if args.llm_propose_task_predicates:
+        
+        if args.motion_plan_directly_on_goal:
+            any_motion_plan_success = baselines._run_motion_plan_directly_on_goal(args.dataset_name, pddl_domain, problem_idx, problem_id, planning_problems,
+                    args=args, curr_iteration=curr_iteration, output_directory=output_directory,
+                    plan_pass_identifier='first',
+                    plan_attempt_idx=0, goal_idx=0, rng=rng, split=split)
+            
+        elif args.llm_propose_task_predicates:
             # Baseline: plan directly on task predicate sequence proposed by LLM.
             any_motion_plan_success = baselines._run_llm_propose_task_predicates_motion_planner(args.dataset_name, pddl_domain, problem_idx, problem_id, planning_problems,
                     args=args, curr_iteration=curr_iteration, output_directory=output_directory,

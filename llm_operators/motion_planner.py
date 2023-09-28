@@ -63,7 +63,8 @@ def attempt_motion_plan_for_problem(
     debug_skip=False,
     verbose=False,
     llm_propose_task_predicates=False,
-    llm_propose_code_policies = False
+    llm_propose_code_policies = False,
+    motion_plan_directly_on_goal = False,
 ):
     from llm_operators.motion_planner_impl import evaluate_alfred_motion_plans_and_costs_for_goal_plan, evaluate_cw_motion_plans_and_costs_for_goal_plan
     """Attempts to motion plan for a single problem. This attempts the planner on any proposed goals, and any proposed task plans for those goals."""
@@ -104,7 +105,7 @@ def attempt_motion_plan_for_problem(
             start_time = time.time()
 
             if "alfred" in dataset_name:
-                motion_plan_result = evaluate_alfred_motion_plans_and_costs_for_goal_plan(problem_id, problems, pddl_goal, pddl_plan, pddl_domain, motionplan_search_type=command_args.motionplan_search_type, debug_skip=debug_skip, verbose=verbose, llm_propose_task_predicates=llm_propose_task_predicates, llm_propose_code_policies=llm_propose_code_policies)
+                motion_plan_result = evaluate_alfred_motion_plans_and_costs_for_goal_plan(problem_id, problems, pddl_goal, pddl_plan, pddl_domain, motionplan_search_type=command_args.motionplan_search_type, debug_skip=debug_skip, verbose=verbose, llm_propose_task_predicates=llm_propose_task_predicates, llm_propose_code_policies=llm_propose_code_policies, motion_plan_directly_on_goal=motion_plan_directly_on_goal)
             elif dataset_name == "crafting_world_20230204_minining_only" or dataset_name == "crafting_world_20230829_crafting_only":
                 motion_plan_result = evaluate_cw_motion_plans_and_costs_for_goal_plan(problem_id, problems, pddl_goal, pddl_plan, pddl_domain, debug_skip=debug_skip, verbose=verbose)
             else:
@@ -166,7 +167,13 @@ def get_mocked_motion_plan_file(output_directory, plan_pass_identifier):
 
 
 def mock_motion_plan_for_problem_single(problem_id, pddl_goal, pddl_plan, output_directory, plan_pass_identifier):
-    pddl_plan_identifier = pddl_plan.plan_string if type(pddl_plan) == PDDLPlan else str(pddl_goal)
+    if type(pddl_plan) == PDDLPlan:
+        pddl_plan_identifier = pddl_plan.plan_string
+    elif type(pddl_plan) == str:
+        pddl_plan_identifier = pddl_plan
+    else:
+        pddl_plan_identifier = str(pddl_goal)
+    
     plans = get_mocked_motion_plan_file(output_directory, plan_pass_identifier)
     identifier = (problem_id, pddl_goal, pddl_plan_identifier)
     if identifier in plans:
@@ -176,7 +183,13 @@ def mock_motion_plan_for_problem_single(problem_id, pddl_goal, pddl_plan, output
 
 def checkpoint_motion_plan_for_problem_single(problem_id, pddl_goal, pddl_plan, output_directory, plan_pass_identifier, motion_plan_result):
     filepath = os.path.join(output_directory, f"mocked_motion_plan_{plan_pass_identifier}.pkl")
-    pddl_plan_identifier = pddl_plan.plan_string if type(pddl_plan) == PDDLPlan else str(pddl_goal)
+    if type(pddl_plan) == PDDLPlan:
+        pddl_plan_identifier = pddl_plan.plan_string
+    elif type(pddl_plan) == str:
+        pddl_plan_identifier = pddl_plan
+    else:
+        pddl_plan_identifier = str(pddl_goal)
+
     plans = get_mocked_motion_plan_file(output_directory, plan_pass_identifier)
     identifier = (problem_id, pddl_goal, pddl_plan_identifier)
     plans[identifier] = motion_plan_result

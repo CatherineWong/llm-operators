@@ -714,6 +714,7 @@ class PDDLPlan:
 
     def __eq__(self, other):
         return self.plan_string == other.plan_string
+    
     @classmethod
     def from_code_policy(cls, code_policy):
         # Silly method. We use different naming schemes for code policies and operators, this canonicalizes them.
