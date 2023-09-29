@@ -7,9 +7,10 @@ import os.path as osp
 from llm_operators.datasets.crafting_world_gen.cw_20230829_crafting_only import gen_v20230829_instance_record, problem_from_raw_record
 
 parser = jacinle.JacArgumentParser()
-parser.add_argument('--data-dir', type=str, default='data/dataset/crafting_world_v20230829_crafting_only')
+parser.add_argument('--data-dir', type=str, default=None)
 parser.add_argument('--train-size', type=int, default=100)
 parser.add_argument('--valid-size', type=int, default=10)
+parser.add_argument('--use-exists', action='store_true')
 
 parser.add_argument('--seed', type=int, default=1234, help='random seed')
 parser.add_argument('--embed', action='store_true', help='enter IPython embed after running the script.')
@@ -17,16 +18,19 @@ args = parser.parse_args()
 
 
 def main():
+    if args.data_dir is None:
+        args.data_dir = 'data/dataset/crafting_world_v20230829_crafting_only' if not args.use_exists else 'data/dataset/crafting_world_v20230829_crafting_only_exists'
+
     jacinle.seed(args.seed)
     jacinle.io.set_fs_verbose()
 
     output = dict(train=[], valid=[])
     output_problems = dict(train=[], valid=[])
     for i in range(args.train_size):
-        output['train'].append(gen_v20230829_instance_record(f'train_{i}', 'train'))
+        output['train'].append(gen_v20230829_instance_record(f'train_{i}', 'train', use_exists=args.use_exists))
         output_problems['train'].append(problem_from_raw_record(output['train'][-1]))
     for i in range(args.valid_size):
-        output['valid'].append(gen_v20230829_instance_record(f'valid_{i}', 'valid'))
+        output['valid'].append(gen_v20230829_instance_record(f'valid_{i}', 'valid', use_exists=args.use_exists))
         output_problems['valid'].append(problem_from_raw_record(output['valid'][-1]))
 
     jacinle.mkdir(args.data_dir)

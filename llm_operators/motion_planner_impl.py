@@ -277,11 +277,24 @@ def evaluate_cw_motion_plans_and_costs_for_goal_plan(
         )
 
     gt_pddl_problem = problems[problem_id].ground_truth_pddl_problem
-    gt_goal = [x[1:-1] for x in gt_pddl_problem.ground_truth_goal_list]
+
+    if '(exists' in gt_pddl_problem.ground_truth_goal:
+        gt_goal = list()
+        gt_goal_conjunction_part = gt_pddl_problem.ground_truth_goal.split('(and ')[1]
+        gt_goal_conjunction_part = gt_goal_conjunction_part.strip()
+        while gt_goal_conjunction_part[0] == '(':
+            end_index = _find_first_matched_right_bracket(gt_goal_conjunction_part, 0)
+            gt_goal.append(gt_goal_conjunction_part[1:end_index])
+            gt_goal_conjunction_part = gt_goal_conjunction_part[end_index + 1:].strip()
+        gt_goal_variables = [('?i', 'inventory'), ('?o', 'object')]
+        satisfied = simulator.goal_satisfied_existential(gt_goal, gt_goal_variables)
+    else:
+        gt_goal = [x[1:-1] for x in gt_pddl_problem.ground_truth_goal_list]
+        satisfied = simulator.goal_satisfied(gt_goal)
 
     return MotionPlanResult(
         pddl_plan=pddl_plan,
-        task_success=simulator.goal_satisfied(gt_goal),
+        task_success=satisfied,
     )
 
 
@@ -293,3 +306,16 @@ def _find_string_start_with(list_of_string, start, first=False):
                 return s
             rv.append(s)
     return rv
+
+
+def _find_first_matched_right_bracket(string, start_index):
+    assert string[start_index] == '('
+    count = 1
+    for i in range(start_index + 1, len(string)):
+        if string[i] == '(':
+            count += 1
+        elif string[i] == ')':
+            count -= 1
+            if count == 0:
+                return i
+    return None

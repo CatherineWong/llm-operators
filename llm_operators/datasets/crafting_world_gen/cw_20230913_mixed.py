@@ -92,7 +92,7 @@ def gen_locations_and_objects(n: int, inventory_size: int) -> Tuple[str, str, in
     return object_str, init_str, nr_objects, map_location, map_objects
 
 
-def gen_v20230913_instance_record(problem_id: str, split: str, n: int = 25, inventory_size: int = 5) -> Dict[str, Any]:
+def gen_v20230913_instance_record(problem_id: str, split: str, n: int = 25, inventory_size: int = 5, version_number: int = 2) -> Dict[str, Any]:
     import jacinle
 
     all_outcomes = get_all_crafting_outcomes() + get_all_mining_outcomes()
@@ -104,7 +104,15 @@ def gen_v20230913_instance_record(problem_id: str, split: str, n: int = 25, inve
     init_str = obj_init_str + map_init_str
     init_str += '(agent-at t1)\n'
 
-    goal_nl = 'Mine or craft a {}.'.format(underline_to_space(goal))
+    if version_number == 1:
+        goal_nl = 'Mine or craft a {}.'.format(underline_to_space(goal))
+    elif version_number == 2:
+        if goal in get_all_crafting_outcomes():
+            goal_nl = 'Craft a {}.'.format(underline_to_space(goal))
+        else:
+            goal_nl = 'Mine a {}.'.format(underline_to_space(goal))
+    else:
+        raise ValueError('Unknown version number: {}'.format(version_number))
     goal_str = f'(inventory-holding i{inventory_size} o{nr_objects})\n(object-of-type o{nr_objects} {underline_to_pascal(goal)})\n'
 
     problem_pddl = PROBLEM_PDDL_TEMPLATE.format(

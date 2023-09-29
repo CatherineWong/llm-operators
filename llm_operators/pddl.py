@@ -1431,7 +1431,7 @@ def preprocess_goal(goal, pddl_domain, object_dict, use_ground_truth_predicates=
     preprocessed_goal = f"(and \n\t\t{predicate_string})"
 
     # Add exists.
-    for variable_name, variable_type in unground_parameters:
+    for variable_name, variable_type in reversed(unground_parameters):
         preprocessed_goal = f"(exists ({variable_name} - {variable_type})\n{preprocessed_goal})"
     # Add goal.
     preprocessed_goal = f"(:goal\n\t{preprocessed_goal}\n)"

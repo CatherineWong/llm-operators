@@ -7,7 +7,7 @@ import os.path as osp
 from llm_operators.datasets.crafting_world_gen.cw_20230913_mixed import gen_v20230913_instance_record, problem_from_raw_record
 
 parser = jacinle.JacArgumentParser()
-parser.add_argument('--data-dir', type=str, default='data/dataset/crafting_world_v20230913_mixed')
+parser.add_argument('--data-dir', type=str, default='data/dataset/crafting_world_v20230913_mixed_v2')
 parser.add_argument('--train-size', type=int, default=100)
 parser.add_argument('--valid-size', type=int, default=10)
 

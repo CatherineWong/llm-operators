@@ -1,0 +1,13 @@
+problem,nl_goal,gt_pddl_goal,gt_plan,proposed_plan
+train_73,Craft a bed.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bed)) ))
+ )","(move-to t1 t5)
+(pick-up i1 o9 t5)
+(move-to t5 t6)
+(pick-up i2 o17 t6)
+(move-to t6 t15)
+(craft-bed i1 i2 i3 o5 o9 o17 o24 t15)","(move-to t1 t8)
+(pick-up i1 o11 t8)
+(move-to t8 t15)
+(craft-bed t15 o7 i1 o11 i2 o22)
+"

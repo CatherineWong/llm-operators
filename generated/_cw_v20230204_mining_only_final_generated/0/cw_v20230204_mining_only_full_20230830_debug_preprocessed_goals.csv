@@ -1,0 +1,41 @@
+problem,nl_goal,gt_pddl_goal,codex_raw_goals,codex_preprocessed_goal,correct_pddl_goal
+train_0,Mine wood from the map.,"(:goal (and
+   (inventory-holding i3 o17)
+   (object-of-type o17 Wood)
+ ))",[],"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wood))
+)",True
+train_1,Mine wool from the map.,"(:goal (and
+   (inventory-holding i3 o17)
+   (object-of-type o17 Wool)
+ ))",[],"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wool))
+)",True
+train_2,Mine iron ore from the map.,"(:goal (and
+   (inventory-holding i3 o17)
+   (object-of-type o17 IronOre)
+ ))",[],"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 IronOre))
+)",True
+train_3,Mine potato from the map.,"(:goal (and
+   (inventory-holding i3 o17)
+   (object-of-type o17 Potato)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o17)\n   (object-of-type o17 Potato)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o17)\n   (object-of-type o17 Potato)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o17)\n   (object-of-type o17 Potato)\n ))', 'PDDL Goal: \n\n(:goal (and\n   (inventory-holding i3 o17)\n   (object-of-type o17 Potato)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Potato))
+)",True
+train_4,Mine sugar cane from the map.,"(:goal (and
+   (inventory-holding i3 o17)
+   (object-of-type o17 SugarCane)
+ ))","[';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o17)\n   (object-of-type o17 SugarCane)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o17)\n   (object-of-type o17 SugarCane)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o17)\n   (object-of-type o17 SugarCane)\n ))', ';; PDDL Goal: \n(:goal (and\n   (inventory-holding i3 o17)\n   (object-of-type o17 SugarCane)\n ))']","(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 SugarCane))
+)",True

@@ -1,0 +1,716 @@
+operator_name,gt_operator,codex_raw_operator,codex_preprocessed_operator,
+mine-wood,"(:action mine-wood
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Tree)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Axe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Wood)
+  )
+ )",";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-wood
+  :parameters (?i - inventory ?t1 - tile ?t2 - tile ?t3 - tile ?t4 - tile ?t5 - tile)
+  :precondition (and
+    (agent-at ?t1)
+    (object-at ?x ?t1)
+    (object-of-type ?x Tree)
+    (inventory-holding ?i ?tool)
+    (object-of-type ?tool Axe)
+    (not (object-at ?x ?t2))
+    (not (object-at ?x ?t3))
+    (not (object-at ?x ?t4))
+    (not (object-at ?x ?t5))
+  )
+  :effect (and
+    (object-at ?x ?t2)
+    (object-at ?x ?t3)
+    (object-at ?x ?t4)
+    (object-at ?x ?t5)
+    (not (object-at ?x ?t1))
+    (not (inventory-holding ?i ?tool))
+    (inventory-empty ?i)
+    (object-of-type ?x Wood)
+  )
+ )
+
+<END>",FAILED,
+mine-wood,"(:action mine-wood
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Tree)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Axe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Wood)
+  )
+ )",";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-wood
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Tree)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Axe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Wood)
+  )
+ )
+
+<END>","(:action mine-wood_1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Tree)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Axe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Wood)
+		)
+)",
+mine-wood,"(:action mine-wood
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Tree)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Axe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Wood)
+  )
+ )",";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-wood
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Tree)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Axe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Wood)
+  )
+ )
+
+<END>","(:action mine-wood_2
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Tree)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Axe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Wood)
+		)
+)",
+mine-wool1,"(:action mine-wool1
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Sheep)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Shears)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Wool)
+  )
+ )",";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-wool1
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Sheep)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Shears)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Wool)
+  )
+ )
+
+<END>","(:action mine-wool1_0
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Sheep)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Shears)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Wool)
+		)
+)",
+mine-wool1,"(:action mine-wool1
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Sheep)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Shears)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Wool)
+  )
+ )",";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-wool1
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Sheep)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Shears)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Wool)
+  )
+ )
+
+<END>","(:action mine-wool1_1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Sheep)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Shears)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Wool)
+		)
+)",
+mine-wool1,"(:action mine-wool1
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Sheep)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Shears)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Wool)
+  )
+ )",";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-wool1
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Sheep)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Shears)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Wool)
+  )
+ )
+
+<END>","(:action mine-wool1_2
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Sheep)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Shears)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Wool)
+		)
+)",
+move-right,,";; Parameter Reasoning: We do not need any specific objects or receptacles to execute the move-right operator, as it only involves moving the agent to a neighboring tile.
+(:action move-right
+  :parameters ()
+  :precondition (and (agent-at ?t1) (tile-right ?t1 ?t2))
+  :effect (and (agent-at ?t2) (not (agent-at ?t1)))
+ )
+
+<END>","(:action move-right_0
+        :parameters (?t1 - tile ?t2 - tile)
+
+        :precondition (and 
+		(agent-at ?t1)
+		(tile-right ?t1 ?t2)
+		)
+        :effect (and 
+		(agent-at ?t2)
+		(not (agent-at ?t1))
+		)
+)",
+move-right,,";; Parameter Reasoning: We do not need any additional parameters as moving to the right does not require any specific objects, receptacles, or tools.
+(:action move-right
+  :parameters ()
+  :precondition (agent-at ?t1)
+  :effect (and (agent-at ?t2) (not (agent-at ?t1)))
+ )
+
+<END>",FAILED,
+move-right,,";; Parameter Reasoning: We do not require any specific objects, receptacles, or tools to execute the move-right operator, so no parameters are needed.
+(:action move-right
+  :parameters ()
+  :precondition (and (agent-at ?t1) (tile-right ?t1 ?t2))
+  :effect (and (agent-at ?t2) (not (agent-at ?t1)))
+ )
+
+<END>","(:action move-right_2
+        :parameters (?t1 - tile ?t2 - tile)
+
+        :precondition (and 
+		(agent-at ?t1)
+		(tile-right ?t1 ?t2)
+		)
+        :effect (and 
+		(agent-at ?t2)
+		(not (agent-at ?t1))
+		)
+)",
+move-left,,";; Parameter Reasoning: The move-left operator does not require any parameters as it is a simple action that does not involve any objects or tools.
+(:action move-left
+  :parameters ()
+  :precondition (agent-at ?t)
+  :effect (tile-left ?t ?new-t)
+ )
+
+<END>",FAILED,
+move-left,,";; Parameter Reasoning: There are no specific parameters required for this operator as it is a simple movement action without any objects or tools.
+(:action move-left
+  :parameters ()
+  :precondition (and)
+  :effect (and)
+ )
+
+<END>",FAILED,
+move-left,,";; Parameter Reasoning: Since the move-left action does not require any specific objects, receptacles, or tools, we do not need any parameters for this operator.
+(:action move-left
+  :parameters ()
+  :precondition ()
+  :effect ()
+)
+
+<END>",FAILED,
+mine-potato,"(:action mine-potato
+  :parameters (?targetinv - inventory ?x - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x PotatoPlant)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Potato)
+  )
+ )",";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-potato
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x PotatoPlant)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Shovel)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Potato)
+  )
+ )
+
+<END>","(:action mine-potato_0
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x PotatoPlant)
+		(inventory-holding ?toolinv ?tool)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Potato)
+		)
+)",
+mine-potato,"(:action mine-potato
+  :parameters (?targetinv - inventory ?x - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x PotatoPlant)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Potato)
+  )
+ )",";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-potato
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x PotatoPlant)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Shovel)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Potato)
+  )
+ )
+
+<END>","(:action mine-potato_1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x PotatoPlant)
+		(inventory-holding ?toolinv ?tool)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Potato)
+		)
+)",
+mine-potato,"(:action mine-potato
+  :parameters (?targetinv - inventory ?x - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x PotatoPlant)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Potato)
+  )
+ )",";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-potato
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x PotatoPlant)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Shovel)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Potato)
+  )
+ )
+
+<END>","(:action mine-potato_2
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x PotatoPlant)
+		(inventory-holding ?toolinv ?tool)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Potato)
+		)
+)",
+mine-sugar-cane,"(:action mine-sugar-cane
+  :parameters (?targetinv - inventory ?x - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x SugarCanePlant)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target SugarCane)
+  )
+ )",";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-sugar-cane
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x SugarCanePlant)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Shears)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target SugarCane)
+  )
+ )
+
+<END>","(:action mine-sugar-cane_0
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x SugarCanePlant)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Shears)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target SugarCane)
+		)
+)",
+mine-sugar-cane,"(:action mine-sugar-cane
+  :parameters (?targetinv - inventory ?x - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x SugarCanePlant)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target SugarCane)
+  )
+ )",";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-sugar-cane
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x SugarCanePlant)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Axe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target SugarCane)
+  )
+ )
+
+<END>","(:action mine-sugar-cane_1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x SugarCanePlant)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Axe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target SugarCane)
+		)
+)",
+mine-sugar-cane,"(:action mine-sugar-cane
+  :parameters (?targetinv - inventory ?x - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x SugarCanePlant)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target SugarCane)
+  )
+ )",";; Parameter Reasoning: We must have ALL objects, receptacles, and tools that would be used to execute the operator as paramaters to the operator.
+(:action mine-sugar-cane
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x SugarCanePlant)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Axe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target SugarCane)
+  )
+ )
+
+<END>","(:action mine-sugar-cane_2
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x SugarCanePlant)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Axe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target SugarCane)
+		)
+)",

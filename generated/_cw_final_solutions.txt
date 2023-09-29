@@ -1,0 +1,284 @@
+composition_solution.txt
+
+-----------------  ----------------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::WoodPlank))))
+plan_length        6
+plan               action::move-to(?t1=t1, ?t2=t17)
+                   action::pick-up(?i=i1, ?x=o12, ?t=t17)
+                   action::move-to(?t1=t17, ?t2=t10)
+                   action::mine-wood_2(?t=t10, ?x=o4, ?toolinv=i1, ?tool=o12, ?targetinv=i2, ?target=o14)
+                   action::move-to(?t1=t10, ?t2=t22)
+                   action::craft-wood-plank(?ingredientinv1=i2, ?targetinv=i3, ?station=o11, ?ingredient1=o14, ?target=o15, ?t=t22)
+-----------------  ----------------------------------------------------------------------------------------------------------------------
+-----------------  ------------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::Stick))))
+plan_length        7
+plan               action::move-to(?t1=t1, ?t2=t13)
+                   action::pick-up(?i=i1, ?x=o12, ?t=t13)
+                   action::move-to(?t1=t13, ?t2=t22)
+                   action::mine-wood_2(?t=t22, ?x=o4, ?toolinv=i1, ?tool=o12, ?targetinv=i2, ?target=o14)
+                   action::move-to(?t1=t22, ?t2=t20)
+                   action::craft-wood-plank(?ingredientinv1=i2, ?targetinv=i3, ?station=o11, ?ingredient1=o14, ?target=o15, ?t=t20)
+                   action::craft-stick_0(?t=t20, ?station=o11, ?ingredientinv1=i3, ?ingredient1=o15, ?targetinv=i2, ?target=o14)
+-----------------  ------------------------------------------------------------------------------------------------------------------
+-----------------  --------------------------------------------------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::Arrow))))
+plan_length        24
+plan               action::move-to(?t1=t1, ?t2=t8)
+                   action::pick-up(?i=i1, ?x=o12, ?t=t8)
+                   action::move-to(?t1=t8, ?t2=t12)
+                   action::mine-wood_2(?t=t12, ?x=o4, ?toolinv=i1, ?tool=o12, ?targetinv=i2, ?target=o14)
+                   action::move-to(?t1=t12, ?t2=t25)
+                   action::craft-wood-plank(?ingredientinv1=i2, ?targetinv=i3, ?station=o11, ?ingredient1=o14, ?target=o15, ?t=t25)
+                   action::craft-stick_0(?t=t25, ?station=o11, ?ingredientinv1=i3, ?ingredient1=o15, ?targetinv=i2, ?target=o14)
+                   action::move-to(?t1=t25, ?t2=t24)
+                   action::pick-up(?i=i3, ?x=o13, ?t=t24)
+                   action::move-to(?t1=t24, ?t2=t13)
+                   action::mine-iron-ore(?toolinv=i3, ?targetinv=i4, ?x=o1, ?tool=o13, ?target=o15, ?t=t13)
+                   action::move-to(?t1=t13, ?t2=t3)
+                   action::mine-coal1_0(?t=t3, ?x=o2, ?toolinv=i3, ?tool=o13, ?targetinv=i5, ?target=o16)
+                   action::move-to(?t1=t3, ?t2=t25)
+                   action::craft-iron-ingot_2(?t=t25, ?station=o11, ?ingredientinv1=i4, ?ingredient1=o15, ?ingredientinv2=i5, ?ingredient2=o16, ?targetinv=i6, ?target=o17)
+                   action::craft-sword_0(?t=t25, ?station=o11, ?ingredientinv1=i2, ?ingredient1=o14, ?ingredientinv2=i6, ?ingredient2=o17, ?targetinv=i4, ?target=o15)
+                   action::move-to(?t1=t25, ?t2=t5)
+                   action::mine-feather_1(?t=t5, ?x=o5, ?toolinv=i4, ?tool=o15, ?targetinv=i2, ?target=o14)
+                   action::move-to(?t1=t5, ?t2=t12)
+                   action::mine-wood_2(?t=t12, ?x=o4, ?toolinv=i1, ?tool=o12, ?targetinv=i5, ?target=o16)
+                   action::move-to(?t1=t12, ?t2=t25)
+                   action::craft-wood-plank(?ingredientinv1=i5, ?targetinv=i6, ?station=o11, ?ingredient1=o16, ?target=o17, ?t=t25)
+                   action::craft-stick_0(?t=t25, ?station=o11, ?ingredientinv1=i6, ?ingredient1=o17, ?targetinv=i5, ?target=o16)
+                   action::craft-arrow(?ingredientinv1=i5, ?ingredientinv2=i2, ?targetinv=i6, ?station=o11, ?ingredient1=o16, ?ingredient2=o14, ?target=o17, ?t=t25)
+-----------------  --------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::Sword))))
+plan_length        15
+plan               action::move-to(?t1=t1, ?t2=t4)
+                   action::pick-up(?i=i1, ?x=o12, ?t=t4)
+                   action::mine-wood_2(?t=t4, ?x=o4, ?toolinv=i1, ?tool=o12, ?targetinv=i2, ?target=o14)
+                   action::move-to(?t1=t4, ?t2=t5)
+                   action::craft-wood-plank(?ingredientinv1=i2, ?targetinv=i3, ?station=o11, ?ingredient1=o14, ?target=o15, ?t=t5)
+                   action::craft-stick_0(?t=t5, ?station=o11, ?ingredientinv1=i3, ?ingredient1=o15, ?targetinv=i2, ?target=o14)
+                   action::move-to(?t1=t5, ?t2=t12)
+                   action::pick-up(?i=i3, ?x=o13, ?t=t12)
+                   action::move-to(?t1=t12, ?t2=t1)
+                   action::mine-iron-ore(?toolinv=i3, ?targetinv=i4, ?x=o1, ?tool=o13, ?target=o15, ?t=t1)
+                   action::move-to(?t1=t1, ?t2=t23)
+                   action::mine-coal1_0(?t=t23, ?x=o2, ?toolinv=i3, ?tool=o13, ?targetinv=i5, ?target=o16)
+                   action::move-to(?t1=t23, ?t2=t5)
+                   action::craft-iron-ingot_2(?t=t5, ?station=o11, ?ingredientinv1=i4, ?ingredient1=o15, ?ingredientinv2=i5, ?ingredient2=o16, ?targetinv=i6, ?target=o17)
+                   action::craft-sword_0(?t=t5, ?station=o11, ?ingredientinv1=i2, ?ingredient1=o14, ?ingredientinv2=i6, ?ingredient2=o17, ?targetinv=i4, ?target=o15)
+-----------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::Shears))))
+plan_length        8
+plan               action::pick-up(?i=i1, ?x=o13, ?t=t1)
+                   action::move-to(?t1=t1, ?t2=t18)
+                   action::mine-gold-ore1_2(?t=t18, ?x=o9, ?toolinv=i1, ?tool=o13, ?targetinv=i2, ?target=o14)
+                   action::move-to(?t1=t18, ?t2=t21)
+                   action::mine-coal1_0(?t=t21, ?x=o2, ?toolinv=i1, ?tool=o13, ?targetinv=i3, ?target=o15)
+                   action::move-to(?t1=t21, ?t2=t1)
+                   action::craft-gold-ingot_1(?t=t1, ?station=o11, ?ingredientinv1=i2, ?ingredient1=o14, ?ingredientinv2=i3, ?ingredient2=o15, ?targetinv=i4, ?target=o16)
+                   action::craft-shears2_2(?t=t1, ?station=o11, ?ingredientinv1=i4, ?ingredient1=o16, ?targetinv=i2, ?target=o14)
+-----------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::IronIngot))))
+plan_length        8
+plan               action::move-to(?t1=t1, ?t2=t19)
+                   action::pick-up(?i=i1, ?x=o13, ?t=t19)
+                   action::move-to(?t1=t19, ?t2=t12)
+                   action::mine-iron-ore(?toolinv=i1, ?targetinv=i2, ?x=o1, ?tool=o13, ?target=o14, ?t=t12)
+                   action::move-to(?t1=t12, ?t2=t3)
+                   action::mine-coal1_0(?t=t3, ?x=o2, ?toolinv=i1, ?tool=o13, ?targetinv=i3, ?target=o15)
+                   action::move-to(?t1=t3, ?t2=t4)
+                   action::craft-iron-ingot_2(?t=t4, ?station=o11, ?ingredientinv1=i2, ?ingredient1=o14, ?ingredientinv2=i3, ?ingredient2=o15, ?targetinv=i4, ?target=o16)
+-----------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------  --------------------------------------------------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::GoldIngot))))
+plan_length        8
+plan               action::move-to(?t1=t1, ?t2=t18)
+                   action::pick-up(?i=i1, ?x=o13, ?t=t18)
+                   action::move-to(?t1=t18, ?t2=t9)
+                   action::mine-gold-ore1_2(?t=t9, ?x=o9, ?toolinv=i1, ?tool=o13, ?targetinv=i2, ?target=o14)
+                   action::move-to(?t1=t9, ?t2=t21)
+                   action::mine-coal1_0(?t=t21, ?x=o2, ?toolinv=i1, ?tool=o13, ?targetinv=i3, ?target=o15)
+                   action::move-to(?t1=t21, ?t2=t14)
+                   action::craft-gold-ingot_1(?t=t14, ?station=o11, ?ingredientinv1=i2, ?ingredient1=o14, ?ingredientinv2=i3, ?ingredient2=o15, ?targetinv=i4, ?target=o16)
+-----------------  --------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------  --------------------------------------------------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::Bed))))
+plan_length        19
+plan               action::move-to(?t1=t1, ?t2=t7)
+                   action::pick-up(?i=i1, ?x=o12, ?t=t7)
+                   action::move-to(?t1=t7, ?t2=t18)
+                   action::mine-wood_2(?t=t18, ?x=o4, ?toolinv=i1, ?tool=o12, ?targetinv=i2, ?target=o14)
+                   action::move-to(?t1=t18, ?t2=t12)
+                   action::craft-wood-plank(?ingredientinv1=i2, ?targetinv=i3, ?station=o11, ?ingredient1=o14, ?target=o15, ?t=t12)
+                   action::move-to(?t1=t12, ?t2=t6)
+                   action::pick-up(?i=i2, ?x=o13, ?t=t6)
+                   action::move-to(?t1=t6, ?t2=t8)
+                   action::mine-gold-ore1_2(?t=t8, ?x=o9, ?toolinv=i2, ?tool=o13, ?targetinv=i4, ?target=o14)
+                   action::move-to(?t1=t8, ?t2=t2)
+                   action::mine-coal1_0(?t=t2, ?x=o2, ?toolinv=i2, ?tool=o13, ?targetinv=i5, ?target=o16)
+                   action::move-to(?t1=t2, ?t2=t12)
+                   action::craft-gold-ingot_1(?t=t12, ?station=o11, ?ingredientinv1=i4, ?ingredient1=o14, ?ingredientinv2=i5, ?ingredient2=o16, ?targetinv=i6, ?target=o17)
+                   action::craft-shears2_2(?t=t12, ?station=o11, ?ingredientinv1=i6, ?ingredient1=o17, ?targetinv=i4, ?target=o14)
+                   action::move-to(?t1=t12, ?t2=t22)
+                   action::mine-wool1_0(?t=t22, ?x=o6, ?toolinv=i4, ?tool=o14, ?targetinv=i5, ?target=o16)
+                   action::move-to(?t1=t22, ?t2=t12)
+                   action::craft-bed_1(?t=t12, ?station=o11, ?ingredientinv1=i3, ?ingredient1=o15, ?ingredientinv2=i5, ?ingredient2=o16, ?targetinv=i6, ?target=o17)
+-----------------  --------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------  -----------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::Boat))))
+plan_length        7
+plan               action::move-to(?t1=t1, ?t2=t9)
+                   action::pick-up(?i=i1, ?x=o12, ?t=t9)
+                   action::move-to(?t1=t9, ?t2=t16)
+                   action::mine-wood_2(?t=t16, ?x=o4, ?toolinv=i1, ?tool=o12, ?targetinv=i2, ?target=o14)
+                   action::move-to(?t1=t16, ?t2=t24)
+                   action::craft-wood-plank(?ingredientinv1=i2, ?targetinv=i3, ?station=o11, ?ingredient1=o14, ?target=o15, ?t=t24)
+                   action::craft-boat_0(?t=t24, ?station=o11, ?ingredientinv=i3, ?ingredient=o15, ?targetinv=i2, ?target=o14)
+-----------------  -----------------------------------------------------------------------------------------------------------------
+-----------------  --------------------------------------------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::Bowl))))
+plan_length        7
+plan               action::move-to(?t1=t1, ?t2=t5)
+                   action::pick-up(?i=i1, ?x=o12, ?t=t5)
+                   action::move-to(?t1=t5, ?t2=t6)
+                   action::mine-wood_2(?t=t6, ?x=o4, ?toolinv=i1, ?tool=o12, ?targetinv=i2, ?target=o14)
+                   action::move-to(?t1=t6, ?t2=t13)
+                   action::craft-wood-plank(?ingredientinv1=i2, ?targetinv=i3, ?station=o11, ?ingredient1=o14, ?target=o15, ?t=t13)
+                   action::craft-bowl_1(?t=t13, ?station=o11, ?ingredientinv1=i3, ?ingredient1=o15, ?ingredientinv2=i3, ?ingredient2=o15, ?targetinv=i2, ?target=o14)
+-----------------  --------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------  -----------------------------------------------------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::CookedPotato))))
+plan_length        8
+plan               action::move-to(?t1=t1, ?t2=t5)
+                   action::mine-potato_0(?t=t5, ?x=o7, ?targetinv=i1, ?target=o14)
+                   action::move-to(?t1=t5, ?t2=t8)
+                   action::pick-up(?i=i2, ?x=o13, ?t=t8)
+                   action::move-to(?t1=t8, ?t2=t22)
+                   action::mine-coal1_0(?t=t22, ?x=o2, ?toolinv=i2, ?tool=o13, ?targetinv=i3, ?target=o15)
+                   action::move-to(?t1=t22, ?t2=t11)
+                   action::craft-cooked-potato_1(?t=t11, ?station=o11, ?ingredientinv1=i1, ?ingredient1=o14, ?ingredientinv2=i3, ?ingredient2=o15, ?targetinv=i4, ?target=o16)
+-----------------  -----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------  -----------------------------------------------------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::BeetrootSoup))))
+plan_length        10
+plan               action::move-to(?t1=t1, ?t2=t8)
+                   action::mine-beetroot1_0(?t=t8, ?x=o8, ?targetinv=i1, ?target=o14)
+                   action::move-to(?t1=t8, ?t2=t6)
+                   action::pick-up(?i=i2, ?x=o12, ?t=t6)
+                   action::move-to(?t1=t6, ?t2=t22)
+                   action::mine-wood_2(?t=t22, ?x=o4, ?toolinv=i2, ?tool=o12, ?targetinv=i3, ?target=o15)
+                   action::move-to(?t1=t22, ?t2=t10)
+                   action::craft-wood-plank(?ingredientinv1=i3, ?targetinv=i4, ?station=o11, ?ingredient1=o15, ?target=o16, ?t=t10)
+                   action::craft-bowl_1(?t=t10, ?station=o11, ?ingredientinv1=i4, ?ingredient1=o16, ?ingredientinv2=i4, ?ingredient2=o16, ?targetinv=i3, ?target=o15)
+                   action::craft-beetroot-soup_0(?t=t10, ?station=o11, ?ingredientinv1=i1, ?ingredient1=o14, ?ingredientinv2=i3, ?ingredient2=o15, ?targetinv=i4, ?target=o16)
+-----------------  -----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------  ------------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::Paper))))
+plan_length        6
+plan               action::move-to(?t1=t1, ?t2=t15)
+                   action::pick-up(?i=i1, ?x=o12, ?t=t15)
+                   action::move-to(?t1=t15, ?t2=t14)
+                   action::mine-sugar-cane_2(?t=t14, ?x=o10, ?toolinv=i1, ?tool=o12, ?targetinv=i2, ?target=o14)
+                   action::move-to(?t1=t14, ?t2=t20)
+                   action::craft-paper_0(?t=t20, ?station=o11, ?ingredientinv1=i2, ?ingredient1=o14, ?targetinv=i3, ?target=o15)
+-----------------  ------------------------------------------------------------------------------------------------------------------
+-----------------  --------------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::IronOre))))
+plan_length        4
+plan               action::move-to(?t1=t1, ?t2=t13)
+                   action::pick-up(?i=i1, ?x=o13, ?t=t13)
+                   action::move-to(?t1=t13, ?t2=t8)
+                   action::mine-iron-ore(?toolinv=i1, ?targetinv=i2, ?x=o1, ?tool=o13, ?target=o14, ?t=t8)
+-----------------  --------------------------------------------------------------------------------------------------------------------
+-----------------  -----------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::Coal))))
+plan_length        4
+plan               action::move-to(?t1=t1, ?t2=t5)
+                   action::pick-up(?i=i1, ?x=o13, ?t=t5)
+                   action::move-to(?t1=t5, ?t2=t17)
+                   action::mine-coal1_0(?t=t17, ?x=o2, ?toolinv=i1, ?tool=o13, ?targetinv=i2, ?target=o14)
+-----------------  -----------------------------------------------------------------------------------------------------------------
+-----------------  ------------------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::Cobblestone))))
+plan_length        4
+plan               action::move-to(?t1=t1, ?t2=t19)
+                   action::pick-up(?i=i1, ?x=o13, ?t=t19)
+                   action::move-to(?t1=t19, ?t2=t25)
+                   action::mine-cobblestone_2(?t=t25, ?x=o3, ?toolinv=i1, ?tool=o13, ?targetinv=i2, ?target=o14)
+-----------------  ------------------------------------------------------------------------------------------------------------------------
+-----------------  -----------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::Wood))))
+plan_length        4
+plan               action::move-to(?t1=t1, ?t2=t23)
+                   action::pick-up(?i=i1, ?x=o12, ?t=t23)
+                   action::move-to(?t1=t23, ?t2=t18)
+                   action::mine-wood_2(?t=t18, ?x=o4, ?toolinv=i1, ?tool=o12, ?targetinv=i2, ?target=o14)
+-----------------  -----------------------------------------------------------------------------------------------------------------
+-----------------  --------------------------------------------------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::Feather))))
+plan_length        17
+plan               action::move-to(?t1=t1, ?t2=t21)
+                   action::pick-up(?i=i1, ?x=o12, ?t=t21)
+                   action::mine-wood_2(?t=t21, ?x=o4, ?toolinv=i1, ?tool=o12, ?targetinv=i2, ?target=o14)
+                   action::move-to(?t1=t21, ?t2=t24)
+                   action::craft-wood-plank(?ingredientinv1=i2, ?targetinv=i3, ?station=o11, ?ingredient1=o14, ?target=o15, ?t=t24)
+                   action::craft-stick_0(?t=t24, ?station=o11, ?ingredientinv1=i3, ?ingredient1=o15, ?targetinv=i2, ?target=o14)
+                   action::move-to(?t1=t24, ?t2=t4)
+                   action::pick-up(?i=i3, ?x=o13, ?t=t4)
+                   action::move-to(?t1=t4, ?t2=t12)
+                   action::mine-iron-ore(?toolinv=i3, ?targetinv=i4, ?x=o1, ?tool=o13, ?target=o15, ?t=t12)
+                   action::move-to(?t1=t12, ?t2=t8)
+                   action::mine-coal1_0(?t=t8, ?x=o2, ?toolinv=i3, ?tool=o13, ?targetinv=i5, ?target=o16)
+                   action::move-to(?t1=t8, ?t2=t24)
+                   action::craft-iron-ingot_2(?t=t24, ?station=o11, ?ingredientinv1=i4, ?ingredient1=o15, ?ingredientinv2=i5, ?ingredient2=o16, ?targetinv=i6, ?target=o17)
+                   action::craft-sword_0(?t=t24, ?station=o11, ?ingredientinv1=i2, ?ingredient1=o14, ?ingredientinv2=i6, ?ingredient2=o17, ?targetinv=i4, ?target=o15)
+                   action::move-to(?t1=t24, ?t2=t11)
+                   action::mine-feather_1(?t=t11, ?x=o5, ?toolinv=i4, ?tool=o15, ?targetinv=i2, ?target=o14)
+-----------------  --------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::Wool))))
+plan_length        11
+plan               action::move-to(?t1=t1, ?t2=t21)
+                   action::pick-up(?i=i1, ?x=o13, ?t=t21)
+                   action::move-to(?t1=t21, ?t2=t25)
+                   action::mine-gold-ore1_2(?t=t25, ?x=o9, ?toolinv=i1, ?tool=o13, ?targetinv=i2, ?target=o14)
+                   action::move-to(?t1=t25, ?t2=t22)
+                   action::mine-coal1_0(?t=t22, ?x=o2, ?toolinv=i1, ?tool=o13, ?targetinv=i3, ?target=o15)
+                   action::move-to(?t1=t22, ?t2=t3)
+                   action::craft-gold-ingot_1(?t=t3, ?station=o11, ?ingredientinv1=i2, ?ingredient1=o14, ?ingredientinv2=i3, ?ingredient2=o15, ?targetinv=i4, ?target=o16)
+                   action::craft-shears2_2(?t=t3, ?station=o11, ?ingredientinv1=i4, ?ingredient1=o16, ?targetinv=i2, ?target=o14)
+                   action::move-to(?t1=t3, ?t2=t11)
+                   action::mine-wool1_0(?t=t11, ?x=o6, ?toolinv=i2, ?tool=o14, ?targetinv=i3, ?target=o15)
+-----------------  -------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------  -------------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::Potato))))
+plan_length        2
+plan               action::move-to(?t1=t1, ?t2=t2)
+                   action::mine-potato_0(?t=t2, ?x=o7, ?targetinv=i1, ?target=o14)
+-----------------  -------------------------------------------------------------------------------------------------------------------
+-----------------  ---------------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::Beetroot))))
+plan_length        2
+plan               action::move-to(?t1=t1, ?t2=t22)
+                   action::mine-beetroot1_0(?t=t22, ?x=o8, ?targetinv=i1, ?target=o14)
+-----------------  ---------------------------------------------------------------------------------------------------------------------
+-----------------  --------------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::GoldOre))))
+plan_length        4
+plan               action::move-to(?t1=t1, ?t2=t20)
+                   action::pick-up(?i=i1, ?x=o13, ?t=t20)
+                   action::move-to(?t1=t20, ?t2=t11)
+                   action::mine-gold-ore1_2(?t=t11, ?x=o9, ?toolinv=i1, ?tool=o13, ?targetinv=i2, ?target=o14)
+-----------------  --------------------------------------------------------------------------------------------------------------------
+-----------------  ----------------------------------------------------------------------------------------------------------------------
+goal               exists(?i: inventory: exists(?o: object: and(inventory-holding(V::?i, V::?o), object-of-type(V::?o, OBJ::SugarCane))))
+plan_length        4
+plan               action::move-to(?t1=t1, ?t2=t22)
+                   action::pick-up(?i=i1, ?x=o12, ?t=t22)
+                   action::move-to(?t1=t22, ?t2=t5)
+                   action::mine-sugar-cane_2(?t=t5, ?x=o10, ?toolinv=i1, ?tool=o12, ?targetinv=i2, ?target=o14)
+-----------------  ----------------------------------------------------------------------------------------------------------------------
+Success rate: 23 / 23 = 1.0

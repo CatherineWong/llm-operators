@@ -1,0 +1,910 @@
+problem,nl_goal,gt_pddl_goal,codex_raw_goals,codex_preprocessed_goal,correct_pddl_goal
+train_0,Craft a beetroot soup.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o BeetrootSoup)) ))
+ )",[],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o BeetrootSoup))))
+)",True
+train_1,Craft a paper.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))
+ )",[],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Paper))))
+)",True
+train_2,Craft a shears.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Shears)) ))
+ )",[],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Shears))))
+)",True
+train_3,Craft a paper.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Paper))))
+)",True
+train_4,Craft a arrow.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Arrow)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Arrow)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Arrow))))
+)",True
+train_5,Craft a wood plank.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o WoodPlank)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o WoodPlank)) ))\n )\n\n<END>'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o WoodPlank))))
+)",True
+train_6,Craft a shears.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Shears)) ))
+ )",['PDDL Goal: \n\n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Shears)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Shears))))
+)",True
+train_7,Craft a beetroot soup.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o BeetrootSoup)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o1 - object) (exists (?o2 - object) (and (inventory-holding ?i ?o1) (inventory-holding ?i ?o2) (object-of-type ?o1 Beetroot) (object-of-type ?o2 Bowl)) )))\n )\n\n<END>'],"(:goal
+	(exists (?i - inventory)
+(exists (?o1 - object)
+(exists (?o2 - object)
+(and 
+		(inventory-holding ?i ?o1)
+		(inventory-holding ?i ?o2)
+		(object-of-type ?o1 Beetroot)
+		(object-of-type ?o2 Bowl)))))
+)",True
+train_8,Craft a stick.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Stick)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Stick)) ))\n )\n\n<END>'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Stick))))
+)",True
+train_9,Craft a beetroot soup.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o BeetrootSoup)) ))
+ )",['PDDL Goal:\n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o BeetrootSoup)) ))\n)'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o BeetrootSoup))))
+)",True
+train_10,Craft a paper.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Paper))))
+)",True
+train_11,Craft a arrow.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Arrow)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Arrow)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Arrow))))
+)",True
+train_12,Craft a bowl.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bowl)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bowl)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Bowl))))
+)",True
+train_13,Craft a paper.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))
+ )",['PDDL Goal:\n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))\n)'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Paper))))
+)",True
+train_14,Craft a arrow.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Arrow)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Arrow)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Arrow))))
+)",True
+train_15,Craft a beetroot soup.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o BeetrootSoup)) ))
+ )",['(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o BeetrootSoup)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o BeetrootSoup))))
+)",True
+train_16,Craft a sword.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Sword)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Sword)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Sword))))
+)",True
+train_17,Craft a bed.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bed)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bed)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Bed))))
+)",True
+train_18,Craft a sword.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Sword)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Sword)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Sword))))
+)",True
+train_19,Craft a boat.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Boat)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Boat)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Boat))))
+)",True
+train_20,Craft a arrow.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Arrow)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Arrow)) ))\n )\n\n<END>'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Arrow))))
+)",True
+train_21,Craft a bowl.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bowl)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bowl)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Bowl))))
+)",True
+train_22,Craft a arrow.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Arrow)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Arrow)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Arrow))))
+)",True
+train_23,Craft a sword.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Sword)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Sword)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Sword))))
+)",True
+train_24,Craft a sword.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Sword)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Sword)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Sword))))
+)",True
+train_25,Craft a cooked potato.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o CookedPotato)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o CookedPotato)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o CookedPotato))))
+)",True
+train_26,Craft a cooked potato.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o CookedPotato)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o CookedPotato)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o CookedPotato))))
+)",True
+train_27,Craft a iron ingot.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o IronIngot)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o IronIngot)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o IronIngot))))
+)",True
+train_28,Craft a cooked potato.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o CookedPotato)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o CookedPotato)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o CookedPotato))))
+)",True
+train_29,Craft a iron ingot.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o IronIngot)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o IronIngot)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o IronIngot))))
+)",True
+train_30,Craft a cooked potato.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o CookedPotato)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o CookedPotato)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o CookedPotato))))
+)",True
+train_31,Craft a bed.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bed)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bed)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Bed))))
+)",True
+train_32,Craft a bowl.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bowl)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bowl)) ))\n )\n<END>'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Bowl))))
+)",True
+train_33,Craft a paper.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Paper))))
+)",True
+train_34,Craft a gold ingot.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o GoldIngot)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o GoldIngot)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o GoldIngot))))
+)",True
+train_35,Craft a boat.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Boat)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Boat)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Boat))))
+)",True
+train_36,Craft a boat.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Boat)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Boat)) ))\n )\n'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Boat))))
+)",True
+train_37,Craft a stick.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Stick)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Stick)) ))\n )\n\n<END>'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Stick))))
+)",True
+train_38,Craft a beetroot soup.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o BeetrootSoup)) ))
+ )",['PDDL Goal: \n\n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o BeetrootSoup)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o BeetrootSoup))))
+)",True
+train_39,Craft a sword.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Sword)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Sword)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Sword))))
+)",True
+train_40,Craft a beetroot soup.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o BeetrootSoup)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o BeetrootSoup)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o BeetrootSoup))))
+)",True
+train_41,Craft a gold ingot.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o GoldIngot)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o GoldIngot)) ))\n )\n\n<END>'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o GoldIngot))))
+)",True
+train_42,Craft a wood plank.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o WoodPlank)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o WoodPlank)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o WoodPlank))))
+)",True
+train_43,Craft a beetroot soup.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o BeetrootSoup)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o1 - object) (exists (?o2 - object) (exists (?o3 - object) (exists (?o4 - object) (and (inventory-holding ?i ?o1) (inventory-holding ?i ?o2) (inventory-holding ?i ?o3) (inventory-holding ?i ?o4) (object-of-type ?o1 Beetroot) (object-of-type ?o2 Beetroot) (object-of-type ?o3 Beetroot) (object-of-type ?o4 Bowl) (and (object-of-type ?o3 Beetroot) (object-of-type ?o4 Bowl))))))))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o1 - object)
+(exists (?o2 - object)
+(exists (?o3 - object)
+(exists (?o4 - object)
+(and 
+		(inventory-holding ?i ?o1)
+		(inventory-holding ?i ?o2)
+		(inventory-holding ?i ?o3)
+		(inventory-holding ?i ?o4)
+		(object-of-type ?o1 Beetroot)
+		(object-of-type ?o2 Beetroot)
+		(object-of-type ?o3 Beetroot)
+		(object-of-type ?o4 Bowl)))))))
+)",True
+train_44,Craft a bowl.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bowl)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bowl)) ))\n )\n\n<END>'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Bowl))))
+)",True
+train_45,Craft a wood plank.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o WoodPlank)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o WoodPlank)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o WoodPlank))))
+)",True
+train_46,Craft a bowl.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bowl)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bowl)) ))\n )\n\n<END>'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Bowl))))
+)",True
+train_47,Craft a bed.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bed)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bed)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Bed))))
+)",True
+train_48,Craft a bowl.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bowl)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bowl)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Bowl))))
+)",True
+train_49,Craft a wood plank.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o WoodPlank)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o WoodPlank)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o WoodPlank))))
+)",True
+train_50,Craft a paper.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))
+ )",['(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))\n)'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Paper))))
+)",True
+train_51,Craft a arrow.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Arrow)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Arrow)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Arrow))))
+)",True
+train_52,Craft a boat.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Boat)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Boat)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Boat))))
+)",True
+train_53,Craft a gold ingot.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o GoldIngot)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o GoldIngot)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o GoldIngot))))
+)",True
+train_54,Craft a sword.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Sword)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Sword)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Sword))))
+)",True
+train_55,Craft a paper.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Paper))))
+)",True
+train_56,Craft a bed.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bed)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bed)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Bed))))
+)",True
+train_57,Craft a wood plank.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o WoodPlank)) ))
+ )",['<PDDL Goal>\n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o WoodPlank)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o WoodPlank))))
+)",True
+train_58,Craft a gold ingot.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o GoldIngot)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o GoldIngot)) ))\n )\n\n<END>'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o GoldIngot))))
+)",True
+train_59,Craft a cooked potato.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o CookedPotato)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o CookedPotato)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o CookedPotato))))
+)",True
+train_60,Craft a wood plank.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o WoodPlank)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o WoodPlank)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o WoodPlank))))
+)",True
+train_61,Craft a paper.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Paper))))
+)",True
+train_62,Craft a bed.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bed)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bed)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Bed))))
+)",True
+train_63,Craft a cooked potato.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o CookedPotato)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o CookedPotato)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o CookedPotato))))
+)",True
+train_64,Craft a bed.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bed)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bed)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Bed))))
+)",True
+train_65,Craft a boat.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Boat)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Boat)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Boat))))
+)",True
+train_66,Craft a arrow.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Arrow)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Arrow)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Arrow))))
+)",True
+train_67,Craft a stick.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Stick)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Stick)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Stick))))
+)",True
+train_68,Craft a paper.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Paper))))
+)",True
+train_69,Craft a beetroot soup.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o BeetrootSoup)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o BeetrootSoup)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o BeetrootSoup))))
+)",True
+train_70,Craft a stick.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Stick)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Stick)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Stick))))
+)",True
+train_71,Craft a shears.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Shears)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Shears)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Shears))))
+)",True
+train_72,Craft a wood plank.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o WoodPlank)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o WoodPlank)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o WoodPlank))))
+)",True
+train_73,Craft a bed.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bed)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bed)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Bed))))
+)",True
+train_74,Craft a iron ingot.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o IronIngot)) ))
+ )",['PDDL Goal:\n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o IronIngot)) ))\n)'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o IronIngot))))
+)",True
+train_75,Craft a beetroot soup.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o BeetrootSoup)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o BeetrootSoup)) ))\n )\n\n<END>'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o BeetrootSoup))))
+)",True
+train_76,Craft a gold ingot.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o GoldIngot)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o GoldIngot)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o GoldIngot))))
+)",True
+train_77,Craft a arrow.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Arrow)) ))
+ )",['PDDL Goal:\n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Arrow)) ))\n)'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Arrow))))
+)",True
+train_78,Craft a boat.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Boat)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Boat)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Boat))))
+)",True
+train_79,Craft a iron ingot.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o IronIngot)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o IronIngot)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o IronIngot))))
+)",True
+train_80,Craft a wood plank.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o WoodPlank)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o WoodPlank)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o WoodPlank))))
+)",True
+train_81,Craft a beetroot soup.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o BeetrootSoup)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o BeetrootSoup)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o BeetrootSoup))))
+)",True
+train_82,Craft a shears.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Shears)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Shears)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Shears))))
+)",True
+train_83,Craft a paper.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Paper))))
+)",True
+train_84,Craft a stick.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Stick)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Stick)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Stick))))
+)",True
+train_85,Craft a bowl.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bowl)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bowl)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Bowl))))
+)",True
+train_86,Craft a bed.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bed)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bed)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Bed))))
+)",True
+train_87,Craft a paper.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Paper))))
+)",True
+train_88,Craft a boat.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Boat)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Boat)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Boat))))
+)",True
+train_89,Craft a stick.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Stick)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Stick)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Stick))))
+)",True
+train_90,Craft a cooked potato.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o CookedPotato)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (and (inventory-holding ?i Potato) (inventory-holding ?i Furnace) (inventory-holding ?i Coal) ))\n )'],"(:goal
+	(and 
+		)
+)",True
+train_91,Craft a paper.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Paper))))
+)",True
+train_92,Craft a paper.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))
+ )",['(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Paper)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Paper))))
+)",True
+train_93,Craft a bowl.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bowl)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bowl)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Bowl))))
+)",True
+train_94,Craft a bed.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bed)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bed)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Bed))))
+)",True
+train_95,Craft a stick.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Stick)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Stick)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Stick))))
+)",True
+train_96,Craft a bowl.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bowl)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Bowl)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Bowl))))
+)",True
+train_97,Craft a stick.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Stick)) ))
+ )",['PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o Stick)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o Stick))))
+)",True
+train_98,Craft a cooked potato.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o CookedPotato)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o CookedPotato)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o CookedPotato))))
+)",True
+train_99,Craft a cooked potato.,"(:goal
+   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o CookedPotato)) ))
+ )",[';; PDDL Goal: \n(:goal\n   (exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o CookedPotato)) ))\n )'],"(:goal
+	(exists (?i - inventory)
+(exists (?o - object)
+(and 
+		(inventory-holding ?i ?o)
+		(object-of-type ?o CookedPotato))))
+)",True

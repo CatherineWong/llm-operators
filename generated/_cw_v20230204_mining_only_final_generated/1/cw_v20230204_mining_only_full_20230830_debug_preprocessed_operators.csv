@@ -1,0 +1,1835 @@
+operator_name,gt_operator,codex_raw_operator,codex_preprocessed_operator,
+mine-wool2,"(:action mine-wool2
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Sheep)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Sword)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Wool)
+  )
+ )",";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-wool2
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target1 - object ?target2 - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Sheep)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Shears)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target1 Hypothetical)
+    (object-of-type ?target2 Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target1)
+    (inventory-holding ?targetinv ?target2)
+    (not (object-of-type ?target1 Hypothetical))
+    (not (object-of-type ?target2 Hypothetical))
+    (object-of-type ?target1 Wool)
+    (object-of-type ?target2 Wool)
+  )
+ )
+
+<END>","(:action mine-wool2_0
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target1 - object ?target2 - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Sheep)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Shears)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target1 Hypothetical)
+		(object-of-type ?target2 Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target1)
+		(inventory-holding ?targetinv ?target2)
+		(not (object-of-type ?target1 Hypothetical))
+		(not (object-of-type ?target2 Hypothetical))
+		(object-of-type ?target1 Wool)
+		(object-of-type ?target2 Wool)
+		)
+)",
+mine-wool2,"(:action mine-wool2
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Sheep)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Sword)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Wool)
+  )
+ )",";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-wool2
+  :parameters (?i1 - inventory ?i3 - inventory ?o6 - object ?o14 - object ?o17 - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (inventory-holding ?i1 ?o6)
+    (inventory-holding ?i3 ?o14)
+    (object-of-type ?o6 Shears)
+    (object-of-type ?o14 Sheep)
+    (object-of-type ?o17 Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?i1))
+    (not (inventory-empty ?i3))
+    (not (inventory-holding ?i1 ?o6))
+    (not (inventory-holding ?i3 ?o14))
+    (not (object-of-type ?o17 Hypothetical))
+    (object-of-type ?o17 Wool)
+  )
+ )
+
+<END>","(:action mine-wool2_1
+        :parameters (?t - tile ?i1 - inventory ?o6 - object ?i3 - inventory ?o14 - object ?o17 - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(inventory-holding ?i1 ?o6)
+		(inventory-holding ?i3 ?o14)
+		(object-of-type ?o6 Shears)
+		(object-of-type ?o14 Sheep)
+		(object-of-type ?o17 Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?i1))
+		(not (inventory-empty ?i3))
+		(not (inventory-holding ?i1 ?o6))
+		(not (inventory-holding ?i3 ?o14))
+		(not (object-of-type ?o17 Hypothetical))
+		(object-of-type ?o17 Wool)
+		)
+)",
+mine-wool2,"(:action mine-wool2
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Sheep)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Sword)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Wool)
+  )
+ )",";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-wool2
+        :parameters (?toolinv - inventory ?holdinginv - inventory ?tool - object ?holding - object ?targetinv - inventory ?target - object ?t - tile)
+
+        :precondition (and 
+		(agent-at ?t)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Shears)
+		(inventory-holding ?holdinginv ?holding)
+		(object-of-type ?holding Sheep)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Wool)
+		)
+)
+
+<END>","(:action mine-wool2_2
+        :parameters (?t - tile ?toolinv - inventory ?tool - object ?holdinginv - inventory ?holding - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Shears)
+		(inventory-holding ?holdinginv ?holding)
+		(object-of-type ?holding Sheep)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Wool)
+		)
+)",
+mine-wool,,";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-wool
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Sheep)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Shears)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Wool)
+  )
+ )
+
+<END>","(:action mine-wool_0
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Sheep)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Shears)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Wool)
+		)
+)",
+mine-wool,,";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-wool
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Sheep)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Shears)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Wool)
+  )
+ )
+
+<END>","(:action mine-wool_1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Sheep)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Shears)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Wool)
+		)
+)",
+mine-wool,,";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-wool
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Sheep)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Shears)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Wool)
+  )
+ )
+
+<END>","(:action mine-wool_2
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Sheep)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Shears)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Wool)
+		)
+)",
+mine-gold-ore,"(:action mine-gold-ore
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x GoldOreVein)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target GoldOre)
+  )
+ )",";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-gold-ore
+        :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x GoldOreVein)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Pickaxe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target GoldOre)
+		)
+)
+
+<END>","(:action mine-gold-ore_0
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x GoldOreVein)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Pickaxe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target GoldOre)
+		)
+)",
+mine-gold-ore,"(:action mine-gold-ore
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x GoldOreVein)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target GoldOre)
+  )
+ )",";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-gold-ore
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x GoldOreVein)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target GoldOre)
+  )
+ )
+
+<END>","(:action mine-gold-ore_1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x GoldOreVein)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Pickaxe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target GoldOre)
+		)
+)",
+mine-gold-ore,"(:action mine-gold-ore
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x GoldOreVein)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target GoldOre)
+  )
+ )",";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-gold-ore
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x GoldOreVein)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target GoldOre)
+  )
+ )
+
+<END>
+
+","(:action mine-gold-ore_2
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x GoldOreVein)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Pickaxe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target GoldOre)
+		)
+)",
+mine-beetroot,"(:action mine-beetroot
+  :parameters (?targetinv - inventory ?x - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x BeetrootCrop)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Beetroot)
+  )
+ )",";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-beetroot
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x BeetrootCrop)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Hoe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Beetroot)
+  )
+ )
+
+<END>","(:action mine-beetroot_0
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x BeetrootCrop)
+		(inventory-holding ?toolinv ?tool)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Beetroot)
+		)
+)",
+mine-beetroot,"(:action mine-beetroot
+  :parameters (?targetinv - inventory ?x - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x BeetrootCrop)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Beetroot)
+  )
+ )",";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-beetroot
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x BeetrootCrop)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Hoe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Beetroot)
+  )
+ )
+
+<END>","(:action mine-beetroot_1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x BeetrootCrop)
+		(inventory-holding ?toolinv ?tool)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Beetroot)
+		)
+)",
+mine-beetroot,"(:action mine-beetroot
+  :parameters (?targetinv - inventory ?x - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x BeetrootCrop)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Beetroot)
+  )
+ )",";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-beetroot
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x BeetrootCrop)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Hoe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Beetroot)
+  )
+ )
+
+<END>","(:action mine-beetroot_2
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x BeetrootCrop)
+		(inventory-holding ?toolinv ?tool)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Beetroot)
+		)
+)",
+mine-feather,"(:action mine-feather
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Chicken)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Sword)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Feather)
+  )
+ )",";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-feather
+  :parameters (?i - inventory ?x - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Chicken)
+    (inventory-empty ?i)
+  )
+  :effect (and
+    (inventory-holding ?i ?x)
+    (not (object-at ?x ?t))
+    (not (inventory-empty ?i))
+  )
+ )
+
+<END>","(:action mine-feather_0
+        :parameters (?t - tile ?x - object ?i - inventory)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Chicken)
+		(inventory-empty ?i)
+		)
+        :effect (and 
+		(inventory-holding ?i ?x)
+		(not (object-at ?x ?t))
+		(not (inventory-empty ?i))
+		)
+)",
+mine-feather,"(:action mine-feather
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Chicken)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Sword)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Feather)
+  )
+ )",";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-feather
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Chicken)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Sword)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Feather)
+  )
+ )
+
+<END>","(:action mine-feather_1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Chicken)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Sword)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Feather)
+		)
+)",
+mine-feather,"(:action mine-feather
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Chicken)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Sword)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Feather)
+  )
+ )",";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-feather
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Chicken)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Shears)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Feather)
+  )
+ )
+
+<END>","(:action mine-feather_2
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Chicken)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Shears)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Feather)
+		)
+)",
+mine-coal,"(:action mine-coal
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x CoalOreVein)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Coal)
+  )
+ )",";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-coal
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x CoalOreVein)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Coal)
+  )
+ )
+
+<END>
+
+","(:action mine-coal_0
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x CoalOreVein)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Pickaxe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Coal)
+		)
+)",
+mine-coal,"(:action mine-coal
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x CoalOreVein)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Coal)
+  )
+ )",";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-coal
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x CoalOreVein)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Coal)
+  )
+ )
+
+<END>","(:action mine-coal_1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x CoalOreVein)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Pickaxe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Coal)
+		)
+)",
+mine-coal,"(:action mine-coal
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x CoalOreVein)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Coal)
+  )
+ )",";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-coal
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x CoalOreVein)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Coal)
+  )
+ )
+
+<END>","(:action mine-coal_2
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x CoalOreVein)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Pickaxe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Coal)
+		)
+)",
+mine-cobblestone,"(:action mine-cobblestone
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x CobblestoneStash)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Cobblestone)
+  )
+ )",";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-cobblestone
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x CobblestoneStash)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Cobblestone)
+  )
+ )
+
+<END>","(:action mine-cobblestone_0
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x CobblestoneStash)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Pickaxe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Cobblestone)
+		)
+)",
+mine-cobblestone,"(:action mine-cobblestone
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x CobblestoneStash)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Cobblestone)
+  )
+ )",";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-cobblestone
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x CobblestoneStash)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Cobblestone)
+  )
+ )
+
+<END>","(:action mine-cobblestone_1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x CobblestoneStash)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Pickaxe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Cobblestone)
+		)
+)",
+mine-cobblestone,"(:action mine-cobblestone
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x CobblestoneStash)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Cobblestone)
+  )
+ )",";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-cobblestone
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x CobblestoneStash)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Cobblestone)
+  )
+ )
+
+<END>","(:action mine-cobblestone_2
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x CobblestoneStash)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Pickaxe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Cobblestone)
+		)
+)",
+mine-gold-ore1,,";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-gold-ore1
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x GoldOreVein)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target GoldOre)
+  )
+ )
+
+<END>","(:action mine-gold-ore1_0
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x GoldOreVein)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Pickaxe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target GoldOre)
+		)
+)",
+mine-gold-ore1,,";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-gold-ore1
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x GoldOreVein)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target GoldOre)
+  )
+ )
+
+<END>","(:action mine-gold-ore1_1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x GoldOreVein)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Pickaxe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target GoldOre)
+		)
+)",
+mine-gold-ore1,,";; Parameter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-gold-ore1
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x GoldOreVein)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target GoldOre)
+  )
+ )
+
+<END>","(:action mine-gold-ore1_2
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x GoldOreVein)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Pickaxe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target GoldOre)
+		)
+)",
+mine-iron-ore1,,";; Parameter reasoning: Each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory). Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+
+(:action mine-iron-ore1
+  :parameters (?toolinv1 - inventory ?toolinv2 - inventory ?x1 - object ?x2 - object ?targetinv - inventory ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x1 ?t)
+    (object-of-type ?x1 IronOreVein)
+    (inventory-holding ?toolinv1 ?x2)
+    (inventory-holding ?toolinv2 ?x2)
+    (object-of-type ?x2 Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target IronOre)
+  )
+)
+
+<END>","(:action mine-iron-ore1_0
+        :parameters (?t - tile ?x1 - object ?toolinv1 - inventory ?x2 - object ?toolinv2 - inventory ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x1 ?t)
+		(object-of-type ?x1 IronOreVein)
+		(inventory-holding ?toolinv1 ?x2)
+		(inventory-holding ?toolinv2 ?x2)
+		(object-of-type ?x2 Pickaxe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target IronOre)
+		)
+)",
+mine-iron-ore1,,";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-iron-ore1
+  :parameters (?toolinv1 - inventory ?tool1 - object ?toolinv2 - inventory ?tool2 - object ?targetinv - inventory ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (inventory-holding ?toolinv1 ?tool1)
+    (object-of-type ?tool1 Pickaxe)
+    (inventory-holding ?toolinv2 ?tool2)
+    (object-of-type ?tool2 Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+    (object-at ?target ?t)
+    (object-of-type ?target IronOreVein)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target IronOre)
+  )
+ )
+
+<END>","(:action mine-iron-ore1_1
+        :parameters (?t - tile ?toolinv1 - inventory ?tool1 - object ?toolinv2 - inventory ?tool2 - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(inventory-holding ?toolinv1 ?tool1)
+		(object-of-type ?tool1 Pickaxe)
+		(inventory-holding ?toolinv2 ?tool2)
+		(object-of-type ?tool2 Pickaxe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		(object-at ?target ?t)
+		(object-of-type ?target IronOreVein)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target IronOre)
+		)
+)",
+mine-iron-ore1,,";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-iron-ore1
+  :parameters (?toolinv1 - inventory ?toolinv2 - inventory ?targetinv1 - inventory ?targetinv2 - inventory ?x1 - object ?tool1 - object ?x2 - object ?tool2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x1 ?t)
+    (object-at ?x2 ?t)
+    (object-of-type ?x1 IronOreVein)
+    (object-of-type ?x2 IronOreVein)
+    (inventory-holding ?toolinv1 ?tool1)
+    (inventory-holding ?toolinv2 ?tool2)
+    (object-of-type ?tool1 Pickaxe)
+    (object-of-type ?tool2 Pickaxe)
+    (inventory-empty ?targetinv1)
+    (inventory-empty ?targetinv2)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv1))
+    (not (inventory-empty ?targetinv2))
+    (inventory-holding ?targetinv1 ?target)
+    (inventory-holding ?targetinv2 ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target IronOre)
+  )
+)
+
+<END>",FAILED,
+mine-coal1,,";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-coal1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x CoalOreVein)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Pickaxe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Coal)
+		)
+)
+
+<END>","(:action mine-coal1_0
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x CoalOreVein)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Pickaxe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Coal)
+		)
+)",
+mine-coal1,,";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-coal1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x CoalOreVein)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Pickaxe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Coal)
+		)
+)
+
+<END>","(:action mine-coal1_1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x CoalOreVein)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Pickaxe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Coal)
+		)
+)",
+mine-coal1,,";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-coal1
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x CoalOreVein)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Pickaxe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Coal)
+  )
+ )
+
+<END>","(:action mine-coal1_2
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x CoalOreVein)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Pickaxe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Coal)
+		)
+)",
+mine-feather1,,";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-feather1
+  :parameters (?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Chicken)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Axe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Feather)
+  )
+)
+
+<END>","(:action mine-feather1_0
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Chicken)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Axe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Feather)
+		)
+)",
+mine-feather1,,";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-feather1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Chicken)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Axe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Feather)
+		)
+)
+
+<END>","(:action mine-feather1_1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Chicken)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Axe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Feather)
+		)
+)",
+mine-feather1,,";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-feather1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Chicken)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Axe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Feather)
+		)
+)
+
+<END>","(:action mine-feather1_2
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Chicken)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Axe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Feather)
+		)
+)",
+chop-wood,,";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action chop-wood
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Tree)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Axe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Wood)
+  )
+ )
+
+<END>","(:action chop-wood_0
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Tree)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Axe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Wood)
+		)
+)",
+chop-wood,,";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action chop-wood
+  :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+  :precondition (and 
+    (agent-at ?t) 
+    (object-at ?x ?t) 
+    (object-of-type ?x Tree)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Axe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and 
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Wood)
+  )
+)
+
+<END>","(:action chop-wood_1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Tree)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Axe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Wood)
+		)
+)",
+chop-wood,,";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action chop-wood
+  :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+  :precondition (and 
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x Tree)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Axe)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and 
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Wood)
+  )
+)
+
+<END>","(:action chop-wood_2
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x Tree)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Axe)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Wood)
+		)
+)",
+mine-beetroot1,,";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-beetroot1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x BeetrootCrop)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool AnyTool)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Beetroot)
+		)
+)
+
+<END>","(:action mine-beetroot1_0
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x BeetrootCrop)
+		(inventory-holding ?toolinv ?tool)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Beetroot)
+		)
+)",
+mine-beetroot1,,";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-beetroot1
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x BeetrootCrop)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Hypothetical)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?toolinv))
+    (inventory-holding ?toolinv ?tool)
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?x BeetrootCrop))
+    (object-of-type ?x Beetroot)
+    (not (object-of-type ?tool Hypothetical))
+    (not (object-of-type ?target Hypothetical))
+  )
+ )
+
+<END>","(:action mine-beetroot1_1
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x BeetrootCrop)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Hypothetical)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?toolinv))
+		(inventory-holding ?toolinv ?tool)
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?x BeetrootCrop))
+		(object-of-type ?x Beetroot)
+		(not (object-of-type ?tool Hypothetical))
+		(not (object-of-type ?target Hypothetical))
+		)
+)",
+mine-beetroot1,,";; Paramter reasoning: each mining rule requires 0 or 1 tools that the agent should be currently holding (in its inventory).Each crafting rule requires max 2 ingredients that should be in the agent's inventory.
+(:action mine-beetroot1
+  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?x ?t)
+    (object-of-type ?x BeetrootCrop)
+    (inventory-holding ?toolinv ?tool)
+    (object-of-type ?tool Hypothetical)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Beetroot)
+  )
+ )
+
+<END>","(:action mine-beetroot1_2
+        :parameters (?t - tile ?x - object ?toolinv - inventory ?tool - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?x ?t)
+		(object-of-type ?x BeetrootCrop)
+		(inventory-holding ?toolinv ?tool)
+		(object-of-type ?tool Hypothetical)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Beetroot)
+		)
+)",

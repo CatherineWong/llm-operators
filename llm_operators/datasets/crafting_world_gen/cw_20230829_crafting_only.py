@@ -21,9 +21,9 @@ PROBLEM_PDDL_TEMPLATE = """
  (:init
    {init_str}
  )
- (:goal (and
+ (:goal
    {goal_str}
- ))
+ )
 )
 """
 
@@ -52,11 +52,14 @@ def gen_linear_tile(n: int) -> Tuple[str, str]:
     return object_str, init_str
 
 
-def gen_locations_and_objects(n: int, inventory_size: int) -> Tuple[str, str, int, list, list]:
+def gen_locations_and_objects(n: int, inventory_size: int, target_object: Optional[str] = None) -> Tuple[str, str, int, list, list]:
     """Sample a linear map by randomly placing mining locations and tools on the map."""
 
     crafting_locations = get_all_crafting_locations()
     crafting_ingredients = get_all_crafting_ingradients()
+
+    if target_object is not None:
+        crafting_ingredients = [i for i in crafting_ingredients if i != target_object]
 
     nr_objects = len(crafting_locations) + len(crafting_ingredients) + inventory_size
 
@@ -91,20 +94,23 @@ def gen_locations_and_objects(n: int, inventory_size: int) -> Tuple[str, str, in
     return object_str, init_str, nr_objects, map_location, map_objects
 
 
-def gen_v20230829_instance_record(problem_id: str, split: str, n: int = 15, inventory_size: int = 3) -> Dict[str, Any]:
+def gen_v20230829_instance_record(problem_id: str, split: str, n: int = 15, inventory_size: int = 3, use_exists: bool = False) -> Dict[str, Any]:
     import jacinle
 
     crafting_outcomes = get_all_crafting_outcomes()
     goal = npr.choice(crafting_outcomes)
 
-    obj_object_str, obj_init_str, nr_objects, map_location, map_objects = gen_locations_and_objects(n, inventory_size)
+    obj_object_str, obj_init_str, nr_objects, map_location, map_objects = gen_locations_and_objects(n, inventory_size, target_object=goal)
     map_object_str, map_init_str = gen_linear_tile(n)
     object_str = obj_object_str + map_object_str
     init_str = obj_init_str + map_init_str
     init_str += '(agent-at t1)\n'
 
     goal_nl = 'Craft a {}.'.format(underline_to_space(goal))
-    goal_str = f'(inventory-holding i{inventory_size} o{nr_objects})\n(object-of-type o{nr_objects} {underline_to_pascal(goal)})\n'
+    if use_exists:
+        goal_str = f'(exists (?i - inventory) (exists (?o - object) (and (inventory-holding ?i ?o) (object-of-type ?o {underline_to_pascal(goal)})) ))'
+    else:
+        goal_str = f'(and (inventory-holding i{inventory_size} o{nr_objects})\n(object-of-type o{nr_objects} {underline_to_pascal(goal)}))\n'
 
     problem_pddl = PROBLEM_PDDL_TEMPLATE.format(
         problem_id=problem_id,
@@ -209,7 +215,7 @@ def _find_object_on_the_map(record: Dict[str, Any], obj: str) -> Tuple[Optional[
 
 def problem_from_raw_record(record: Dict[str, Any]) -> Problem:
     pddl_plan, primitive_actions, subgoal_sequence = gen_v20230829_solution(record)
-    return Problem(
+    problem = Problem(
         problem_id=record['problem_id'],
         dataset_split=record['split'],
         language=record['goal_nl'],
@@ -219,3 +225,4 @@ def problem_from_raw_record(record: Dict[str, Any]) -> Problem:
         ground_truth_primitive_plan=primitive_actions,
         ground_truth_subgoal_sequence=subgoal_sequence,
     )
+    return problem

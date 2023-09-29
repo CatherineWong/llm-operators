@@ -1,0 +1,1 @@
+{"train_73": ["(:goal\n\t(exists (?i - inventory)\n(exists (?o - object)\n(and \n\t\t(inventory-holding ?i ?o)\n\t\t(object-of-type ?o Bed))))\n)"]}

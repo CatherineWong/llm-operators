@@ -101,7 +101,7 @@ CRAFTING_WORLD_20230829_DATASET_NAME = 'crafting_world_20230829_crafting_only'
 
 @register_planning_domain_problems(CRAFTING_WORLD_20230829_DATASET_NAME)
 def load_crafting_world_20230829_crafting_only(dataset_pddl_directory: str, dataset_fraction: float, verbose=False):
-    from llm_operators.datasets.crafting_world_gen.cw_20230829_crafting_only import problem_from_raw_record
+    from llm_operators.datasets.crafting_world_gen.cw_20230913_mixed import problem_from_raw_record
 
     with open(osp.join(dataset_pddl_directory, 'dataset.json')) as f:
         dataset = json.load(f)
@@ -124,8 +124,32 @@ CRAFTING_WORLD_20230913_DATASET_NAME = 'crafting_world_20230913_mixed'
 
 
 @register_planning_domain_problems(CRAFTING_WORLD_20230913_DATASET_NAME)
-def load_crafting_world_20230829_crafting_only(dataset_pddl_directory: str, dataset_fraction: float, verbose=False):
+def load_crafting_world_20230913_mixed(dataset_pddl_directory: str, dataset_fraction: float, verbose=False):
     from llm_operators.datasets.crafting_world_gen.cw_20230913_mixed import problem_from_raw_record
+
+    with open(osp.join(dataset_pddl_directory, 'dataset.json')) as f:
+        dataset = json.load(f)
+
+    for split, split_problems in dataset.items():
+        dataset[split] = {
+            problem['problem_id']: problem_from_raw_record(problem)
+            for problem in split_problems[:int(len(split_problems) * dataset_fraction)]
+        }
+
+    assert len(dataset['train']) > 3
+    for problem in itertools.islice(dataset['train'].values(), 3):
+        problem.should_supervise_pddl_plan = True
+        problem.should_supervise_pddl_goal = True
+
+    return dataset
+
+
+CRAFTING_WORLD_20230829_EXISTS_DATASET_NAME = 'crafting_world_20230829_crafting_only_exists'
+
+
+@register_planning_domain_problems(CRAFTING_WORLD_20230829_EXISTS_DATASET_NAME)
+def load_crafting_world_20230829_crafting_only_exsists(dataset_pddl_directory: str, dataset_fraction: float, verbose=False):
+    from llm_operators.datasets.crafting_world_gen.cw_20230829_crafting_only import problem_from_raw_record
 
     with open(osp.join(dataset_pddl_directory, 'dataset.json')) as f:
         dataset = json.load(f)
@@ -284,6 +308,27 @@ class CraftingWorld20230204Simulator(object):
                         self.inventory[inventory] = (new_obj_type, hypothetical_object_name)
                         self.hypothetical.remove(hypothetical_object_name)
                         return True
+        return False
+
+    def goal_satisfied_existential(self, goals, variables):
+        variable_choices = list()
+        for var_name, var_type in variables:
+            if var_type == 'object':
+                variable_choices.append(list(self.objects.keys()) + list(x[1] for x in self.inventory.values() if x is not None))
+            elif var_type == 'inventory':
+                variable_choices.append([f'i{x}' for x in self.inventory.keys()])
+            else:
+                raise NotImplementedError()
+
+        for variable_values in itertools.product(*variable_choices):
+            variable_mapping = {var_name: var_value for (var_name, _), var_value in zip(variables, variable_values)}
+            new_goal = goals.copy()
+            for i, goal in enumerate(new_goal):
+                for var_name, var_value in variable_mapping.items():
+                    goal = goal.replace(var_name, var_value)
+                new_goal[i] = goal
+            if self.goal_satisfied(new_goal):
+                return True
         return False
 
     def goal_satisfied(self, goals):

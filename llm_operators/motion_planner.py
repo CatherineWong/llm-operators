@@ -104,8 +104,8 @@ def attempt_motion_plan_for_problem(
             start_time = time.time()
 
             if "alfred" in dataset_name:
-                motion_plan_result = evaluate_alfred_motion_plans_and_costs_for_goal_plan(problem_id, problems, pddl_goal, pddl_plan, pddl_domain, motionplan_search_type=command_args.motionplan_search_type, debug_skip=debug_skip, verbose=verbose, llm_propose_task_predicates=llm_propose_task_predicates, llm_propose_code_policies=llm_propose_code_policies)
-            elif dataset_name == "crafting_world_20230204_minining_only" or dataset_name == "crafting_world_20230829_crafting_only":
+                motion_plan_result = evaluate_alfred_motion_plans_and_costs_for_goal_plan(problem_id, problems, pddl_goal, pddl_plan, pddl_domain, motionplan_search_type=command_args.motionplan_search_type, debug_skip=debug_skip, verbose=verbose)
+            elif 'crafting_world' in dataset_name:
                 motion_plan_result = evaluate_cw_motion_plans_and_costs_for_goal_plan(problem_id, problems, pddl_goal, pddl_plan, pddl_domain, debug_skip=debug_skip, verbose=verbose)
             else:
                 raise ValueError(f'Unknown dataset_name: {dataset_name}.')

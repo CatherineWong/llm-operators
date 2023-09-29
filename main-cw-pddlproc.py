@@ -20,201 +20,6 @@ parser.add_argument("--operator_pseudocounts", type=int, default=0.1, help="Assu
 # parser.add_argument('--directory', required=True)
 args = parser.parse_args()
 
-CW_MINING_OPERATORS = r"""
-
- (:action mine-iron-ore
-  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
-  :precondition (and
-    (agent-at ?t)
-    (object-at ?x ?t)
-    (object-of-type ?x IronOreVein)
-    (inventory-holding ?toolinv ?tool)
-    (object-of-type ?tool Pickaxe)
-    (inventory-empty ?targetinv)
-    (object-of-type ?target Hypothetical)
-  )
-  :effect (and
-    (not (inventory-empty ?targetinv))
-    (inventory-holding ?targetinv ?target)
-    (not (object-of-type ?target Hypothetical))
-    (object-of-type ?target IronOre)
-  )
- )
- (:action mine-coal
-  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
-  :precondition (and
-    (agent-at ?t)
-    (object-at ?x ?t)
-    (object-of-type ?x CoalOreVein)
-    (inventory-holding ?toolinv ?tool)
-    (object-of-type ?tool Pickaxe)
-    (inventory-empty ?targetinv)
-    (object-of-type ?target Hypothetical)
-  )
-  :effect (and
-    (not (inventory-empty ?targetinv))
-    (inventory-holding ?targetinv ?target)
-    (not (object-of-type ?target Hypothetical))
-    (object-of-type ?target Coal)
-  )
- )
- (:action mine-cobblestone
-  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
-  :precondition (and
-    (agent-at ?t)
-    (object-at ?x ?t)
-    (object-of-type ?x CobblestoneStash)
-    (inventory-holding ?toolinv ?tool)
-    (object-of-type ?tool Pickaxe)
-    (inventory-empty ?targetinv)
-    (object-of-type ?target Hypothetical)
-  )
-  :effect (and
-    (not (inventory-empty ?targetinv))
-    (inventory-holding ?targetinv ?target)
-    (not (object-of-type ?target Hypothetical))
-    (object-of-type ?target Cobblestone)
-  )
- )
- (:action mine-wood
-  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
-  :precondition (and
-    (agent-at ?t)
-    (object-at ?x ?t)
-    (object-of-type ?x Tree)
-    (inventory-holding ?toolinv ?tool)
-    (object-of-type ?tool Axe)
-    (inventory-empty ?targetinv)
-    (object-of-type ?target Hypothetical)
-  )
-  :effect (and
-    (not (inventory-empty ?targetinv))
-    (inventory-holding ?targetinv ?target)
-    (not (object-of-type ?target Hypothetical))
-    (object-of-type ?target Wood)
-  )
- )
- (:action mine-feather
-  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
-  :precondition (and
-    (agent-at ?t)
-    (object-at ?x ?t)
-    (object-of-type ?x Chicken)
-    (inventory-holding ?toolinv ?tool)
-    (object-of-type ?tool Sword)
-    (inventory-empty ?targetinv)
-    (object-of-type ?target Hypothetical)
-  )
-  :effect (and
-    (not (inventory-empty ?targetinv))
-    (inventory-holding ?targetinv ?target)
-    (not (object-of-type ?target Hypothetical))
-    (object-of-type ?target Feather)
-  )
- )
- (:action mine-wool1
-  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
-  :precondition (and
-    (agent-at ?t)
-    (object-at ?x ?t)
-    (object-of-type ?x Sheep)
-    (inventory-holding ?toolinv ?tool)
-    (object-of-type ?tool Shears)
-    (inventory-empty ?targetinv)
-    (object-of-type ?target Hypothetical)
-  )
-  :effect (and
-    (not (inventory-empty ?targetinv))
-    (inventory-holding ?targetinv ?target)
-    (not (object-of-type ?target Hypothetical))
-    (object-of-type ?target Wool)
-  )
- )
- (:action mine-wool2
-  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
-  :precondition (and
-    (agent-at ?t)
-    (object-at ?x ?t)
-    (object-of-type ?x Sheep)
-    (inventory-holding ?toolinv ?tool)
-    (object-of-type ?tool Sword)
-    (inventory-empty ?targetinv)
-    (object-of-type ?target Hypothetical)
-  )
-  :effect (and
-    (not (inventory-empty ?targetinv))
-    (inventory-holding ?targetinv ?target)
-    (not (object-of-type ?target Hypothetical))
-    (object-of-type ?target Wool)
-  )
- )
- (:action mine-potato
-  :parameters (?targetinv - inventory ?x - object ?target - object ?t - tile)
-  :precondition (and
-    (agent-at ?t)
-    (object-at ?x ?t)
-    (object-of-type ?x PotatoPlant)
-    (inventory-empty ?targetinv)
-    (object-of-type ?target Hypothetical)
-  )
-  :effect (and
-    (not (inventory-empty ?targetinv))
-    (inventory-holding ?targetinv ?target)
-    (not (object-of-type ?target Hypothetical))
-    (object-of-type ?target Potato)
-  )
- )
- (:action mine-beetroot
-  :parameters (?targetinv - inventory ?x - object ?target - object ?t - tile)
-  :precondition (and
-    (agent-at ?t)
-    (object-at ?x ?t)
-    (object-of-type ?x BeetrootCrop)
-    (inventory-empty ?targetinv)
-    (object-of-type ?target Hypothetical)
-  )
-  :effect (and
-    (not (inventory-empty ?targetinv))
-    (inventory-holding ?targetinv ?target)
-    (not (object-of-type ?target Hypothetical))
-    (object-of-type ?target Beetroot)
-  )
- )
- (:action mine-gold-ore
-  :parameters (?toolinv - inventory ?targetinv - inventory ?x - object ?tool - object ?target - object ?t - tile)
-  :precondition (and
-    (agent-at ?t)
-    (object-at ?x ?t)
-    (object-of-type ?x GoldOreVein)
-    (inventory-holding ?toolinv ?tool)
-    (object-of-type ?tool Pickaxe)
-    (inventory-empty ?targetinv)
-    (object-of-type ?target Hypothetical)
-  )
-  :effect (and
-    (not (inventory-empty ?targetinv))
-    (inventory-holding ?targetinv ?target)
-    (not (object-of-type ?target Hypothetical))
-    (object-of-type ?target GoldOre)
-  )
- )
- (:action mine-sugar-cane
-  :parameters (?targetinv - inventory ?x - object ?target - object ?t - tile)
-  :precondition (and
-    (agent-at ?t)
-    (object-at ?x ?t)
-    (object-of-type ?x SugarCanePlant)
-    (inventory-empty ?targetinv)
-    (object-of-type ?target Hypothetical)
-  )
-  :effect (and
-    (not (inventory-empty ?targetinv))
-    (inventory-holding ?targetinv ?target)
-    (not (object-of-type ?target Hypothetical))
-    (object-of-type ?target SugarCane)
-  )
- )
-"""
 
 CW_BASE_REGRESSION_RULES = r"""
  (:regression move [always]
@@ -310,13 +115,133 @@ def main():
 
     # from concepts.benchmark.gridworld.crafting_world.crafting_world_teleport import get_domain_filename
     # ref_domain = pds.load_domain_file(get_domain_filename())
+    _patch_cw_regression_rules(domain)
+
+    executor = pds.PDSketchExecutor(domain)
+    problem_func = gen_v20230913_instance_record
+
+    nr_total = 0
+    nr_succ = 0
+    for i in range(23):
+        record = problem_func(f'test-{i}', 'train', goal_index=i)
+        succ = plan(executor, record)
+        nr_total += 1
+        nr_succ += int(succ)
+
+    print(f'Success rate: {nr_succ} / {nr_total} = {nr_succ / nr_total}')
+
+
+def plan(executor, record):
+    problem_pddl = record['problem_pddl']
+    initial_state, goal = pds.load_problem_string(problem_pddl, executor.domain, executor=executor)
+
+    # print(initial_state)
+    # print(goal)
+
+    start_time = time.time()
+    from concepts.pdsketch.planners.optimistic_search_bilevel_legacy import enumerate_possible_symbolic_plans_regression_c_v2
+    rv, stat = enumerate_possible_symbolic_plans_regression_c_v2(executor, initial_state, goal, enable_reordering=False, verbose=False, max_depth=10)
+
+    if len(rv) == 0:
+        print(f'!!!No plan found for goal {goal}.')
+        return False
+
+    table = list()
+    plan = rv[0][0]
+    table.append(('goal', str(goal)))
+    table.append(('plan_length', len(plan)))
+    table.append(('plan', '\n'.join([str(a) for a in plan])))
+    table.append(('time', f'{time.time() - start_time:.3f}s'))
+    table.extend(stat.items())
+    print(jacinle.tabulate(table, tablefmt='simple'))
+    return True
+
+
+CW_BASE_REGRESSION_RULES = r"""
+ (:regression move [always]
+  :parameters ((forall ?t1 - tile) ?t2 - tile)
+  :goal (agent-at ?t2)
+  :precondition (and (agent-at ?t1))
+  :rule (then
+    (move-to ?t1 ?t2)
+  )
+ )
+ (:regression pick-up [always]
+  :parameters (?target-type - object-type (forall ?target-inventory - inventory) (forall ?target - object) (forall ?t - tile))
+  :goal (exists (?i - inventory) (exists (?x - object) (and (inventory-holding ?i ?x) (object-of-type ?x ?target-type))))
+  :precondition (and (object-at ?target ?t) (object-of-type ?target ?target-type) (inventory-empty ?target-inventory))
+  :rule (then
+    (achieve (agent-at ?t))
+    (pick-up ?target-inventory ?target ?t)
+  )
+ )
+"""
+
+CW_REGRESSION_RULE_0 = r"""
+ (:regression {action_name}-1 [always]
+  :parameters ((forall ?target-inventory - inventory) (forall ?target - object) (forall ?target-resource - object) (forall ?t - tile))
+  :goal (exists (?i - inventory) (exists (?x - object) (and (inventory-holding ?i ?x) (object-of-type ?x {target_type}))))
+  :precondition (and (object-at ?target-resource ?t) (object-of-type ?target-resource {station_type}) (inventory-empty ?target-inventory) (object-of-type ?target Hypothetical))
+  :rule (then
+    (achieve (agent-at ?t))
+    ({action_name} {param_string})
+  )
+ )
+"""
+
+CW_REGRESSION_RULE_1 = r"""
+ (:regression {action_name}-1 [always]
+  :parameters ((forall ?target-inventory - inventory) (forall ?target - object) (forall ?target-resource - object) (forall ?t - tile) (forall ?ing1 - object) (forall ?ing1-inventory - inventory))
+  :goal (exists (?i - inventory) (exists (?x - object) (and (inventory-holding ?i ?x) (object-of-type ?x {target_type}))))
+  :precondition (and
+    (object-at ?target-resource ?t) (object-of-type ?target-resource {station_type}) (inventory-empty ?target-inventory) (object-of-type ?target Hypothetical)
+    (inventory-holding ?ing1-inventory ?ing1) (object-of-type ?ing1 {ing1_type})
+  )
+  :rule (then
+    (achieve (agent-at ?t))
+    ({action_name} {param_string})
+  )
+ )
+ (:regression {action_name}-2 [always]
+  :goal (exists (?i - inventory) (exists (?x - object) (and (inventory-holding ?i ?x) (object-of-type ?x {target_type}))))
+  :rule (then
+    (achieve (exists (?i - inventory) (exists (?x - object) (and (inventory-holding ?i ?x) (object-of-type ?x {ing1_type})))))
+    (achieve (exists (?i - inventory) (exists (?x - object) (and (inventory-holding ?i ?x) (object-of-type ?x {target_type})))))
+  )
+ )
+"""
+
+CW_REGRESSION_RULE_2 = r"""
+ (:regression {rule_name}-1 [always]
+  :parameters ((forall ?target-inventory - inventory) (forall ?target - object) (forall ?target-resource - object) (forall ?t - tile) (forall ?ing1 - object) (forall ?ing1-inventory - inventory) (forall ?ing2 - object) (forall ?ing2-inventory - inventory))
+  :goal (exists (?i - inventory) (exists (?x - object) (and (inventory-holding ?i ?x) (object-of-type ?x {target_type}))))
+  :precondition (and
+    (object-at ?target-resource ?t) (object-of-type ?target-resource {station_type}) (inventory-empty ?target-inventory) (object-of-type ?target Hypothetical)
+    (inventory-holding ?ing1-inventory ?ing1) (object-of-type ?ing1 {ing1_type})
+    (inventory-holding ?ing2-inventory ?ing2) (object-of-type ?ing2 {ing2_type})
+  )
+  :rule (then
+    (achieve (agent-at ?t))
+    ({action_name} {param_string})
+  )
+ )
+ (:regression {rule_name}-2 [always]
+  :goal (exists (?i - inventory) (exists (?x - object) (and (inventory-holding ?i ?x) (object-of-type ?x {target_type}))))
+  :rule (then
+    (achieve (exists (?i - inventory) (exists (?x - object) (and (inventory-holding ?i ?x) (object-of-type ?x {ing1_type})))))
+    (achieve (exists (?i - inventory) (exists (?x - object) (and (inventory-holding ?i ?x) (object-of-type ?x {ing2_type})))))
+    (achieve (exists (?i - inventory) (exists (?x - object) (and (inventory-holding ?i ?x) (object-of-type ?x {target_type})))))
+  )
+ )
+ """
+
+
+def _patch_cw_regression_rules(domain, verbose=False):
+    import concepts.dsl.expression as E
 
     domain.incremental_define(CW_BASE_REGRESSION_RULES)
-    if args.mode == 'load':
-        domain.incremental_define(CW_MINING_OPERATORS)
-
     for op_name, op in domain.operators.items():
-        if op_name in ['move', 'pick-up']:
+        if op_name in ['move', 'pick-up', 'place-down']:
             continue
 
         inventory_varnames = [v.name for v in op.arguments if v.dtype.typename == 'inventory']
@@ -334,10 +259,11 @@ def main():
         object_to_type = {v: None for v in object_varnames}
         is_location_object = {v: False for v in object_varnames}
 
-        print(op_name)
-        print('  inventory_varnames:', inventory_varnames)
-        print('  object_varnames:', object_varnames)
-        print('  tile_varnames:', tile_varnames)
+        if verbose:
+            print(op_name)
+            print('  inventory_varnames:', inventory_varnames)
+            print('  object_varnames:', object_varnames)
+            print('  tile_varnames:', tile_varnames)
 
         for pre in op.preconditions:
             if isinstance(pre.bool_expr, E.FunctionApplicationExpression):
@@ -394,12 +320,13 @@ def main():
             ):
                 object_to_inventory[hypothetical_object] = effect.assign_expr.predicate.arguments[0].name
 
-        print('  location_object:', location_object)
-        print('  hypothetical_object:', hypothetical_object)
-        print('  ingredient_objects:', ingredient_objects)
-        print('  target_type:', target_type)
-        print('  object_to_inventory:', object_to_inventory)
-        print('  object_to_type', object_to_type)
+        if verbose:
+            print('  location_object:', location_object)
+            print('  hypothetical_object:', hypothetical_object)
+            print('  ingredient_objects:', ingredient_objects)
+            print('  target_type:', target_type)
+            print('  object_to_inventory:', object_to_inventory)
+            print('  object_to_type', object_to_type)
 
         if target_type is None:
             continue
@@ -412,6 +339,9 @@ def main():
             continue
         if None in object_to_type.values():
             continue
+
+        if verbose:
+            print(' !!Start definition')
 
         try:
             if len(ingredient_objects) == 0:
@@ -499,40 +429,9 @@ def main():
             print('Error: {}'.format(e))
             continue
 
+        # print(rule)
         domain.incremental_define(rule)
 
-    executor = pds.PDSketchExecutor(domain)
-    problem_func = gen_v20230913_instance_record
-
-    for i in range(23):
-        record = problem_func(f'test-{i}', 'train', goal_index=i)
-        plan(executor, record)
-    from IPython import embed; embed()
-
-
-def plan(executor, record):
-    problem_pddl = record['problem_pddl']
-    initial_state, goal = pds.load_problem_string(problem_pddl, executor.domain, executor=executor)
-
-    # print(initial_state)
-    # print(goal)
-
-    start_time = time.time()
-    from concepts.pdsketch.planners.optimistic_search_bilevel_legacy import enumerate_possible_symbolic_plans_regression_c_v2
-    rv, stat = enumerate_possible_symbolic_plans_regression_c_v2(executor, initial_state, goal, enable_reordering=False, verbose=False)
-
-    if len(rv) == 0:
-        print(f'!!!No plan found for goal {goal}.')
-        return
-
-    table = list()
-    plan = rv[0][0]
-    table.append(('goal', str(goal)))
-    table.append(('plan_length', len(plan)))
-    table.append(('plan', '\n'.join([str(a) for a in plan])))
-    table.append(('time', f'{time.time() - start_time:.3f}s'))
-    table.extend(stat.items())
-    print(jacinle.tabulate(table, tablefmt='simple'))
 
 
 if __name__ == '__main__':

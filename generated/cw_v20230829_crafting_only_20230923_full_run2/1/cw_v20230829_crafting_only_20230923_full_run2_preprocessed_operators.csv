@@ -1,0 +1,1533 @@
+operator_name,gt_operator,codex_raw_operator,codex_preprocessed_operator,
+craft-sword,"(:action craft-sword
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?station ?t)
+    (object-of-type ?station WeaponStation)
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 Stick)
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 IronIngot)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Sword)
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 Stick))
+    (object-of-type ?ingredient1 Hypothetical)
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 IronIngot))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )","
+;; Guess number 1
+;; To craft a sword, you need 1 stick and 2 iron ingots in your inventory.
+(:action craft-sword
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a WeaponStation
+    (object-at ?station ?t)
+    (object-of-type ?station WeaponStation)
+    ;; the first ingredient is a Stick
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 Stick)
+    ;; the second ingredient is an IronIngot
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 IronIngot)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become a Sword
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Sword)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 Stick))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the second ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 IronIngot))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )
+","(:action craft-sword_0
+        :parameters (?t - tile ?station - object ?ingredientinv1 - inventory ?ingredient1 - object ?ingredientinv2 - inventory ?ingredient2 - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?station ?t)
+		(object-of-type ?station WeaponStation)
+		(inventory-holding ?ingredientinv1 ?ingredient1)
+		(object-of-type ?ingredient1 Stick)
+		(inventory-holding ?ingredientinv2 ?ingredient2)
+		(object-of-type ?ingredient2 IronIngot)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Sword)
+		(not (inventory-holding ?ingredientinv1 ?ingredient1))
+		(inventory-empty ?ingredientinv1)
+		(not (object-of-type ?ingredient1 Stick))
+		(object-of-type ?ingredient1 Hypothetical)
+		(not (inventory-holding ?ingredientinv2 ?ingredient2))
+		(inventory-empty ?ingredientinv2)
+		(not (object-of-type ?ingredient2 IronIngot))
+		(object-of-type ?ingredient2 Hypothetical)
+		)
+)",
+craft-sword,"(:action craft-sword
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?station ?t)
+    (object-of-type ?station WeaponStation)
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 Stick)
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 IronIngot)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Sword)
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 Stick))
+    (object-of-type ?ingredient1 Hypothetical)
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 IronIngot))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )","
+;; Guess number 2
+;; To craft a sword, you need 1 stick and 1 diamond in your inventory.
+(:action craft-sword
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a WeaponStation
+    (object-at ?station ?t)
+    (object-of-type ?station WeaponStation)
+    ;; the first ingredient is a Stick
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 Stick)
+    ;; the second ingredient is a Diamond
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 Diamond)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become a Sword
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Sword)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 Stick))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the second ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 Diamond))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )
+","(:action craft-sword_1
+        :parameters (?t - tile ?station - object ?ingredientinv1 - inventory ?ingredient1 - object ?ingredientinv2 - inventory ?ingredient2 - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?station ?t)
+		(object-of-type ?station WeaponStation)
+		(inventory-holding ?ingredientinv1 ?ingredient1)
+		(object-of-type ?ingredient1 Stick)
+		(inventory-holding ?ingredientinv2 ?ingredient2)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Sword)
+		(not (inventory-holding ?ingredientinv1 ?ingredient1))
+		(inventory-empty ?ingredientinv1)
+		(not (object-of-type ?ingredient1 Stick))
+		(object-of-type ?ingredient1 Hypothetical)
+		(not (inventory-holding ?ingredientinv2 ?ingredient2))
+		(inventory-empty ?ingredientinv2)
+		(object-of-type ?ingredient2 Hypothetical)
+		)
+)",
+craft-sword,"(:action craft-sword
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?station ?t)
+    (object-of-type ?station WeaponStation)
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 Stick)
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 IronIngot)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Sword)
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 Stick))
+    (object-of-type ?ingredient1 Hypothetical)
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 IronIngot))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )","
+;; Guess number 3
+;; To craft a sword, you need 2 sticks and 1 diamond in your inventory.
+(:action craft-sword
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a WeaponStation
+    (object-at ?station ?t)
+    (object-of-type ?station WeaponStation)
+    ;; the first ingredient is a Stick
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 Stick)
+    ;; the second ingredient is a Stick
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 Stick)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become a Sword
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Sword)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 Stick))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the second ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 Stick))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )
+","(:action craft-sword_2
+        :parameters (?t - tile ?station - object ?ingredientinv1 - inventory ?ingredient1 - object ?ingredientinv2 - inventory ?ingredient2 - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?station ?t)
+		(object-of-type ?station WeaponStation)
+		(inventory-holding ?ingredientinv1 ?ingredient1)
+		(object-of-type ?ingredient1 Stick)
+		(inventory-holding ?ingredientinv2 ?ingredient2)
+		(object-of-type ?ingredient2 Stick)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Sword)
+		(not (inventory-holding ?ingredientinv1 ?ingredient1))
+		(inventory-empty ?ingredientinv1)
+		(not (object-of-type ?ingredient1 Stick))
+		(object-of-type ?ingredient1 Hypothetical)
+		(not (inventory-holding ?ingredientinv2 ?ingredient2))
+		(inventory-empty ?ingredientinv2)
+		(not (object-of-type ?ingredient2 Stick))
+		(object-of-type ?ingredient2 Hypothetical)
+		)
+)",
+craft-bed1,,"
+;; Guess number 1
+;; To craft a bed, you need 3 wood planks and 3 wools in your inventory.
+(:action craft-bed1
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?ingredientinv3 - inventory ?ingredientinv4 - inventory ?ingredientinv5 - inventory ?ingredientinv6 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?ingredient3 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a BedStation
+    (object-at ?station ?t)
+    (object-of-type ?station BedStation)
+    ;; the first ingredient is a WoodPlank
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 WoodPlank)
+    ;; the second ingredient is a WoodPlank
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 WoodPlank)
+    ;; the third ingredient is a WoodPlank
+    (inventory-holding ?ingredientinv3 ?ingredient3)
+    (object-of-type ?ingredient3 WoodPlank)
+    ;; the fourth ingredient is a Wool
+    (inventory-holding ?ingredientinv4 ?ingredient4)
+    (object-of-type ?ingredient4 Wool)
+    ;; the fifth ingredient is a Wool
+    (inventory-holding ?ingredientinv5 ?ingredient5)
+    (object-of-type ?ingredient5 Wool)
+    ;; the sixth ingredient is a Wool
+    (inventory-holding ?ingredientinv6 ?ingredient6)
+    (object-of-type ?ingredient6 Wool)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become a Bed
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Bed)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 WoodPlank))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the second ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 WoodPlank))
+    (object-of-type ?ingredient2 Hypothetical)
+    ;; the third ingredient will be removed
+    (not (inventory-holding ?ingredientinv3 ?ingredient3))
+    (inventory-empty ?ingredientinv3)
+    (not (object-of-type ?ingredient3 WoodPlank))
+    (object-of-type ?ingredient3 Hypothetical)
+    ;; the fourth ingredient will be removed
+    (not (inventory-holding ?ingredientinv4 ?ingredient4))
+    (inventory-empty ?ingredientinv4)
+    (not (object-of-type ?ingredient4 Wool))
+    (object-of-type ?ingredient4 Hypothetical)
+    ;; the fifth ingredient will be removed
+    (not (inventory-holding ?ingredientinv5 ?ingredient5))
+    (inventory-empty ?ingredientinv5)
+    (not (object-of-type ?ingredient5 Wool))
+    (object-of-type ?ingredient5 Hypothetical)
+    ;; the sixth ingredient will be removed
+    (not (inventory-holding ?ingredientinv6 ?ingredient6))
+    (inventory-empty ?ingredientinv6)
+    (not (object-of-type ?ingredient6 Wool))
+    (object-of-type ?ingredient6 Hypothetical)
+  )
+ )
+",FAILED,
+craft-bed1,,"
+;; Guess number 2
+;; To craft a bed, you need 2 wood planks and 2 wools in your inventory.
+(:action craft-bed1
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?ingredientinv3 - inventory ?ingredientinv4 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?ingredient3 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a BedStation
+    (object-at ?station ?t)
+    (object-of-type ?station BedStation)
+    ;; the first ingredient is a WoodPlank
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 WoodPlank)
+    ;; the second ingredient is a WoodPlank
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 WoodPlank)
+    ;; the third ingredient is a Wool
+    (inventory-holding ?ingredientinv3 ?ingredient3)
+    (object-of-type ?ingredient3 Wool)
+    ;; the fourth ingredient is a Wool
+    (inventory-holding ?ingredientinv4 ?ingredient4)
+    (object-of-type ?ingredient4 Wool)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become a Bed
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Bed)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 WoodPlank))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the second ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 WoodPlank))
+    (object-of-type ?ingredient2 Hypothetical)
+    ;; the third ingredient will be removed
+    (not (inventory-holding ?ingredientinv3 ?ingredient3))
+    (inventory-empty ?ingredientinv3)
+    (not (object-of-type ?ingredient3 Wool))
+    (object-of-type ?ingredient3 Hypothetical)
+    ;; the fourth ingredient will be removed
+    (not (inventory-holding ?ingredientinv4 ?ingredient4))
+    (inventory-empty ?ingredientinv4)
+    (not (object-of-type ?ingredient4 Wool))
+    (object-of-type ?ingredient4 Hypothetical)
+  )
+ )
+",FAILED,
+craft-bed1,,"
+;; Guess number 3
+;; To craft a bed, you need 3 wood planks and 2 wools in your inventory.
+(:action craft-bed1
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?ingredientinv3 - inventory ?ingredientinv4 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?ingredient3 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a BedStation
+    (object-at ?station ?t)
+    (object-of-type ?station BedStation)
+    ;; the first ingredient is a WoodPlank
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 WoodPlank)
+    ;; the second ingredient is a WoodPlank
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 WoodPlank)
+    ;; the third ingredient is a WoodPlank
+    (inventory-holding ?ingredientinv3 ?ingredient3)
+    (object-of-type ?ingredient3 WoodPlank)
+    ;; the fourth ingredient is a Wool
+    (inventory-holding ?ingredientinv4 ?ingredient4)
+    (object-of-type ?ingredient4 Wool)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become a Bed
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Bed)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 WoodPlank))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the second ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 WoodPlank))
+    (object-of-type ?ingredient2 Hypothetical)
+    ;; the third ingredient will be removed
+    (not (inventory-holding ?ingredientinv3 ?ingredient3))
+    (inventory-empty ?ingredientinv3)
+    (not (object-of-type ?ingredient3 WoodPlank))
+    (object-of-type ?ingredient3 Hypothetical)
+    ;; the fourth ingredient will be removed
+    (not (inventory-holding ?ingredientinv4 ?ingredient4))
+    (inventory-empty ?ingredientinv4)
+    (not (object-of-type ?ingredient4 Wool))
+    (object-of-type ?ingredient4 Hypothetical)
+  )
+ )
+",FAILED,
+craft-bed,"(:action craft-bed
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?station ?t)
+    (object-of-type ?station BedStation)
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 WoodPlank)
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 Wool)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Bed)
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 WoodPlank))
+    (object-of-type ?ingredient1 Hypothetical)
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 Wool))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )","
+;; Guess number 1
+;; To craft a bed, you need 3 wood planks and 3 wool.
+(:action craft-bed
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a BedStation
+    (object-at ?station ?t)
+    (object-of-type ?station BedStation)
+    ;; the first ingredient is a WoodPlank
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 WoodPlank)
+    ;; the second ingredient is a Wool
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 Wool)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become a Bed
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Bed)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 WoodPlank))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the second ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 Wool))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )
+","(:action craft-bed_0
+        :parameters (?t - tile ?station - object ?ingredientinv1 - inventory ?ingredient1 - object ?ingredientinv2 - inventory ?ingredient2 - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?station ?t)
+		(object-of-type ?station BedStation)
+		(inventory-holding ?ingredientinv1 ?ingredient1)
+		(object-of-type ?ingredient1 WoodPlank)
+		(inventory-holding ?ingredientinv2 ?ingredient2)
+		(object-of-type ?ingredient2 Wool)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Bed)
+		(not (inventory-holding ?ingredientinv1 ?ingredient1))
+		(inventory-empty ?ingredientinv1)
+		(not (object-of-type ?ingredient1 WoodPlank))
+		(object-of-type ?ingredient1 Hypothetical)
+		(not (inventory-holding ?ingredientinv2 ?ingredient2))
+		(inventory-empty ?ingredientinv2)
+		(not (object-of-type ?ingredient2 Wool))
+		(object-of-type ?ingredient2 Hypothetical)
+		)
+)",
+craft-bed,"(:action craft-bed
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?station ?t)
+    (object-of-type ?station BedStation)
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 WoodPlank)
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 Wool)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Bed)
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 WoodPlank))
+    (object-of-type ?ingredient1 Hypothetical)
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 Wool))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )","
+;; Guess number 2
+;; To craft a bed, you need 4 wood planks and 2 wool.
+(:action craft-bed
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a BedStation
+    (object-at ?station ?t)
+    (object-of-type ?station BedStation)
+    ;; the first ingredient is a WoodPlank
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 WoodPlank)
+    ;; the second ingredient is a Wool
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 Wool)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become a Bed
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Bed)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 WoodPlank))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the second ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 Wool))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )
+","(:action craft-bed_1
+        :parameters (?t - tile ?station - object ?ingredientinv1 - inventory ?ingredient1 - object ?ingredientinv2 - inventory ?ingredient2 - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?station ?t)
+		(object-of-type ?station BedStation)
+		(inventory-holding ?ingredientinv1 ?ingredient1)
+		(object-of-type ?ingredient1 WoodPlank)
+		(inventory-holding ?ingredientinv2 ?ingredient2)
+		(object-of-type ?ingredient2 Wool)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Bed)
+		(not (inventory-holding ?ingredientinv1 ?ingredient1))
+		(inventory-empty ?ingredientinv1)
+		(not (object-of-type ?ingredient1 WoodPlank))
+		(object-of-type ?ingredient1 Hypothetical)
+		(not (inventory-holding ?ingredientinv2 ?ingredient2))
+		(inventory-empty ?ingredientinv2)
+		(not (object-of-type ?ingredient2 Wool))
+		(object-of-type ?ingredient2 Hypothetical)
+		)
+)",
+craft-bed,"(:action craft-bed
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?station ?t)
+    (object-of-type ?station BedStation)
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 WoodPlank)
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 Wool)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Bed)
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 WoodPlank))
+    (object-of-type ?ingredient1 Hypothetical)
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 Wool))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )","
+;; Guess number 3
+;; To craft a bed, you need 5 wood planks and 1 wool.
+(:action craft-bed
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a BedStation
+    (object-at ?station ?t)
+    (object-of-type ?station BedStation)
+    ;; the first ingredient is a WoodPlank
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 WoodPlank)
+    ;; the second ingredient is a Wool
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 Wool)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become a Bed
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target Bed)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 WoodPlank))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the second ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 Wool))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )
+","(:action craft-bed_2
+        :parameters (?t - tile ?station - object ?ingredientinv1 - inventory ?ingredient1 - object ?ingredientinv2 - inventory ?ingredient2 - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?station ?t)
+		(object-of-type ?station BedStation)
+		(inventory-holding ?ingredientinv1 ?ingredient1)
+		(object-of-type ?ingredient1 WoodPlank)
+		(inventory-holding ?ingredientinv2 ?ingredient2)
+		(object-of-type ?ingredient2 Wool)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target Bed)
+		(not (inventory-holding ?ingredientinv1 ?ingredient1))
+		(inventory-empty ?ingredientinv1)
+		(not (object-of-type ?ingredient1 WoodPlank))
+		(object-of-type ?ingredient1 Hypothetical)
+		(not (inventory-holding ?ingredientinv2 ?ingredient2))
+		(inventory-empty ?ingredientinv2)
+		(not (object-of-type ?ingredient2 Wool))
+		(object-of-type ?ingredient2 Hypothetical)
+		)
+)",
+smelt-iron-ore,,"
+;; Guess number 1
+;; To smelt iron ore, you need 1 iron ore in your inventory and be near a furnace.
+(:action smelt-iron-ore
+  :parameters (?ingredientinv - inventory ?targetinv - inventory ?station - object ?ingredient - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a Furnace
+    (object-at ?station ?t)
+    (object-of-type ?station Furnace)
+    ;; the ingredient is IronOre
+    (inventory-holding ?ingredientinv ?ingredient)
+    (object-of-type ?ingredient IronOre)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become an IronIngot
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target IronIngot)
+    ;; the ingredient will be removed
+    (not (inventory-holding ?ingredientinv ?ingredient))
+    (inventory-empty ?ingredientinv)
+    (not (object-of-type ?ingredient IronOre))
+    (object-of-type ?ingredient Hypothetical)
+  )
+ )
+","(:action smelt-iron-ore_0
+        :parameters (?t - tile ?station - object ?ingredientinv - inventory ?ingredient - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?station ?t)
+		(object-of-type ?station Furnace)
+		(inventory-holding ?ingredientinv ?ingredient)
+		(object-of-type ?ingredient IronOre)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target IronIngot)
+		(not (inventory-holding ?ingredientinv ?ingredient))
+		(inventory-empty ?ingredientinv)
+		(not (object-of-type ?ingredient IronOre))
+		(object-of-type ?ingredient Hypothetical)
+		)
+)",
+smelt-iron-ore,,"
+;; Guess number 2
+;; To smelt iron ore, you need 1 iron ore and 1 coal in your inventory and be near a furnace.
+(:action smelt-iron-ore
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a Furnace
+    (object-at ?station ?t)
+    (object-of-type ?station Furnace)
+    ;; the first ingredient is IronOre
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 IronOre)
+    ;; the second ingredient is Coal
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 Coal)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become an IronIngot
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target IronIngot)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 IronOre))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the second ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 Coal))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+)
+","(:action smelt-iron-ore_1
+        :parameters (?t - tile ?station - object ?ingredientinv1 - inventory ?ingredient1 - object ?ingredientinv2 - inventory ?ingredient2 - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?station ?t)
+		(object-of-type ?station Furnace)
+		(inventory-holding ?ingredientinv1 ?ingredient1)
+		(object-of-type ?ingredient1 IronOre)
+		(inventory-holding ?ingredientinv2 ?ingredient2)
+		(object-of-type ?ingredient2 Coal)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target IronIngot)
+		(not (inventory-holding ?ingredientinv1 ?ingredient1))
+		(inventory-empty ?ingredientinv1)
+		(not (object-of-type ?ingredient1 IronOre))
+		(object-of-type ?ingredient1 Hypothetical)
+		(not (inventory-holding ?ingredientinv2 ?ingredient2))
+		(inventory-empty ?ingredientinv2)
+		(not (object-of-type ?ingredient2 Coal))
+		(object-of-type ?ingredient2 Hypothetical)
+		)
+)",
+smelt-iron-ore,,"
+;; Guess number 3
+;; To smelt iron ore, you need 1 iron ore and 1 gold ore in your inventory and be near a furnace.
+(:action smelt-iron-ore
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a Furnace
+    (object-at ?station ?t)
+    (object-of-type ?station Furnace)
+    ;; the first ingredient is IronOre
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 IronOre)
+    ;; the second ingredient is GoldOre
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 GoldOre)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become an IronIngot
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target IronIngot)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 IronOre))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the second ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 GoldOre))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+)
+","(:action smelt-iron-ore_2
+        :parameters (?t - tile ?station - object ?ingredientinv1 - inventory ?ingredient1 - object ?ingredientinv2 - inventory ?ingredient2 - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?station ?t)
+		(object-of-type ?station Furnace)
+		(inventory-holding ?ingredientinv1 ?ingredient1)
+		(object-of-type ?ingredient1 IronOre)
+		(inventory-holding ?ingredientinv2 ?ingredient2)
+		(object-of-type ?ingredient2 GoldOre)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target IronIngot)
+		(not (inventory-holding ?ingredientinv1 ?ingredient1))
+		(inventory-empty ?ingredientinv1)
+		(not (object-of-type ?ingredient1 IronOre))
+		(object-of-type ?ingredient1 Hypothetical)
+		(not (inventory-holding ?ingredientinv2 ?ingredient2))
+		(inventory-empty ?ingredientinv2)
+		(not (object-of-type ?ingredient2 GoldOre))
+		(object-of-type ?ingredient2 Hypothetical)
+		)
+)",
+craft-iron-ingot,"(:action craft-iron-ingot
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?station ?t)
+    (object-of-type ?station Furnace)
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 IronOre)
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 Coal)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target IronIngot)
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 IronOre))
+    (object-of-type ?ingredient1 Hypothetical)
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 Coal))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )","
+;; Guess number 1
+;; To craft an iron ingot, you need 1 iron ore in your inventory.
+(:action craft-iron-ingot
+  :parameters (?ingredientinv1 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a Furnace
+    (object-at ?station ?t)
+    (object-of-type ?station Furnace)
+    ;; the first ingredient is an IronOre
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 IronOre)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become an IronIngot
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target IronIngot)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 IronOre))
+    (object-of-type ?ingredient1 Hypothetical)
+  )
+ )
+","(:action craft-iron-ingot_0
+        :parameters (?t - tile ?station - object ?ingredientinv1 - inventory ?ingredient1 - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?station ?t)
+		(object-of-type ?station Furnace)
+		(inventory-holding ?ingredientinv1 ?ingredient1)
+		(object-of-type ?ingredient1 IronOre)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target IronIngot)
+		(not (inventory-holding ?ingredientinv1 ?ingredient1))
+		(inventory-empty ?ingredientinv1)
+		(not (object-of-type ?ingredient1 IronOre))
+		(object-of-type ?ingredient1 Hypothetical)
+		)
+)",
+craft-iron-ingot,"(:action craft-iron-ingot
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?station ?t)
+    (object-of-type ?station Furnace)
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 IronOre)
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 Coal)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target IronIngot)
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 IronOre))
+    (object-of-type ?ingredient1 Hypothetical)
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 Coal))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )","
+;; Guess number 2
+;; To craft an iron ingot, you need 1 gold ore in your inventory.
+(:action craft-iron-ingot
+  :parameters (?ingredientinv1 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a Furnace
+    (object-at ?station ?t)
+    (object-of-type ?station Furnace)
+    ;; the first ingredient is a GoldOre
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 GoldOre)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become an IronIngot
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target IronIngot)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 GoldOre))
+    (object-of-type ?ingredient1 Hypothetical)
+  )
+ )
+","(:action craft-iron-ingot_1
+        :parameters (?t - tile ?station - object ?ingredientinv1 - inventory ?ingredient1 - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?station ?t)
+		(object-of-type ?station Furnace)
+		(inventory-holding ?ingredientinv1 ?ingredient1)
+		(object-of-type ?ingredient1 GoldOre)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target IronIngot)
+		(not (inventory-holding ?ingredientinv1 ?ingredient1))
+		(inventory-empty ?ingredientinv1)
+		(not (object-of-type ?ingredient1 GoldOre))
+		(object-of-type ?ingredient1 Hypothetical)
+		)
+)",
+craft-iron-ingot,"(:action craft-iron-ingot
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    (object-at ?station ?t)
+    (object-of-type ?station Furnace)
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 IronOre)
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 Coal)
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target IronIngot)
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 IronOre))
+    (object-of-type ?ingredient1 Hypothetical)
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 Coal))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )","
+;; Guess number 3
+;; To craft an iron ingot, you need 1 iron ore and 1 coal in your inventory.
+(:action craft-iron-ingot
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a Furnace
+    (object-at ?station ?t)
+    (object-of-type ?station Furnace)
+    ;; the first ingredient is an IronOre
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 IronOre)
+    ;; the second ingredient is a Coal
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 Coal)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become an IronIngot
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target IronIngot)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 IronOre))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the second ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 Coal))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )
+","(:action craft-iron-ingot_2
+        :parameters (?t - tile ?station - object ?ingredientinv1 - inventory ?ingredient1 - object ?ingredientinv2 - inventory ?ingredient2 - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?station ?t)
+		(object-of-type ?station Furnace)
+		(inventory-holding ?ingredientinv1 ?ingredient1)
+		(object-of-type ?ingredient1 IronOre)
+		(inventory-holding ?ingredientinv2 ?ingredient2)
+		(object-of-type ?ingredient2 Coal)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target IronIngot)
+		(not (inventory-holding ?ingredientinv1 ?ingredient1))
+		(inventory-empty ?ingredientinv1)
+		(not (object-of-type ?ingredient1 IronOre))
+		(object-of-type ?ingredient1 Hypothetical)
+		(not (inventory-holding ?ingredientinv2 ?ingredient2))
+		(inventory-empty ?ingredientinv2)
+		(not (object-of-type ?ingredient2 Coal))
+		(object-of-type ?ingredient2 Hypothetical)
+		)
+)",
+smelt-iron,,"
+;; Guess number 1
+;; To smelt iron, you need 1 iron ore in your inventory.
+(:action smelt-iron
+  :parameters (?ingredientinv1 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a furnace
+    (object-at ?station ?t)
+    (object-of-type ?station Furnace)
+    ;; the first ingredient is an IronOre
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 IronOre)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become an IronIngot
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target IronIngot)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 IronOre))
+    (object-of-type ?ingredient1 Hypothetical)
+  )
+ )
+","(:action smelt-iron_0
+        :parameters (?t - tile ?station - object ?ingredientinv1 - inventory ?ingredient1 - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?station ?t)
+		(object-of-type ?station Furnace)
+		(inventory-holding ?ingredientinv1 ?ingredient1)
+		(object-of-type ?ingredient1 IronOre)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target IronIngot)
+		(not (inventory-holding ?ingredientinv1 ?ingredient1))
+		(inventory-empty ?ingredientinv1)
+		(not (object-of-type ?ingredient1 IronOre))
+		(object-of-type ?ingredient1 Hypothetical)
+		)
+)",
+smelt-iron,,"
+;; Guess number 2
+;; To smelt iron, you need 2 iron ores in your inventory.
+(:action smelt-iron
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a furnace
+    (object-at ?station ?t)
+    (object-of-type ?station Furnace)
+    ;; the first ingredient is an IronOre
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 IronOre)
+    ;; the second ingredient is an IronOre
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 IronOre)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become an IronIngot
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target IronIngot)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 IronOre))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the second ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 IronOre))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )
+","(:action smelt-iron_1
+        :parameters (?t - tile ?station - object ?ingredientinv1 - inventory ?ingredient1 - object ?ingredientinv2 - inventory ?ingredient2 - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?station ?t)
+		(object-of-type ?station Furnace)
+		(inventory-holding ?ingredientinv1 ?ingredient1)
+		(object-of-type ?ingredient1 IronOre)
+		(inventory-holding ?ingredientinv2 ?ingredient2)
+		(object-of-type ?ingredient2 IronOre)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target IronIngot)
+		(not (inventory-holding ?ingredientinv1 ?ingredient1))
+		(inventory-empty ?ingredientinv1)
+		(not (object-of-type ?ingredient1 IronOre))
+		(object-of-type ?ingredient1 Hypothetical)
+		(not (inventory-holding ?ingredientinv2 ?ingredient2))
+		(inventory-empty ?ingredientinv2)
+		(not (object-of-type ?ingredient2 IronOre))
+		(object-of-type ?ingredient2 Hypothetical)
+		)
+)",
+smelt-iron,,"
+;; Guess number 3
+;; To smelt iron, you need 1 iron ore and 1 coal in your inventory.
+(:action smelt-iron
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a furnace
+    (object-at ?station ?t)
+    (object-of-type ?station Furnace)
+    ;; the first ingredient is an IronOre
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 IronOre)
+    ;; the second ingredient is a Coal
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 Coal)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become an IronIngot
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target IronIngot)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 IronOre))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the second ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 Coal))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )
+","(:action smelt-iron_2
+        :parameters (?t - tile ?station - object ?ingredientinv1 - inventory ?ingredient1 - object ?ingredientinv2 - inventory ?ingredient2 - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?station ?t)
+		(object-of-type ?station Furnace)
+		(inventory-holding ?ingredientinv1 ?ingredient1)
+		(object-of-type ?ingredient1 IronOre)
+		(inventory-holding ?ingredientinv2 ?ingredient2)
+		(object-of-type ?ingredient2 Coal)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target IronIngot)
+		(not (inventory-holding ?ingredientinv1 ?ingredient1))
+		(inventory-empty ?ingredientinv1)
+		(not (object-of-type ?ingredient1 IronOre))
+		(object-of-type ?ingredient1 Hypothetical)
+		(not (inventory-holding ?ingredientinv2 ?ingredient2))
+		(inventory-empty ?ingredientinv2)
+		(not (object-of-type ?ingredient2 Coal))
+		(object-of-type ?ingredient2 Hypothetical)
+		)
+)",
+melt-iron-ore,,"
+;; Guess number 1
+;; To melt iron ore, you need 1 coal and 1 iron ore in your inventory.
+(:action melt-iron-ore
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a Furnace
+    (object-at ?station ?t)
+    (object-of-type ?station Furnace)
+    ;; the first ingredient is a Coal
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 Coal)
+    ;; the second ingredient is an IronOre
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 IronOre)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become an IronIngot
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target IronIngot)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 Coal))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the second ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 IronOre))
+    (object-of-type ?ingredient2 Hypothetical)
+  )
+ )
+","(:action melt-iron-ore_0
+        :parameters (?t - tile ?station - object ?ingredientinv1 - inventory ?ingredient1 - object ?ingredientinv2 - inventory ?ingredient2 - object ?targetinv - inventory ?target - object)
+
+        :precondition (and 
+		(agent-at ?t)
+		(object-at ?station ?t)
+		(object-of-type ?station Furnace)
+		(inventory-holding ?ingredientinv1 ?ingredient1)
+		(object-of-type ?ingredient1 Coal)
+		(inventory-holding ?ingredientinv2 ?ingredient2)
+		(object-of-type ?ingredient2 IronOre)
+		(inventory-empty ?targetinv)
+		(object-of-type ?target Hypothetical)
+		)
+        :effect (and 
+		(not (inventory-empty ?targetinv))
+		(inventory-holding ?targetinv ?target)
+		(not (object-of-type ?target Hypothetical))
+		(object-of-type ?target IronIngot)
+		(not (inventory-holding ?ingredientinv1 ?ingredient1))
+		(inventory-empty ?ingredientinv1)
+		(not (object-of-type ?ingredient1 Coal))
+		(object-of-type ?ingredient1 Hypothetical)
+		(not (inventory-holding ?ingredientinv2 ?ingredient2))
+		(inventory-empty ?ingredientinv2)
+		(not (object-of-type ?ingredient2 IronOre))
+		(object-of-type ?ingredient2 Hypothetical)
+		)
+)",
+melt-iron-ore,,"
+;; Guess number 2
+;; To melt iron ore, you need 2 coal and 1 iron ore in your inventory.
+(:action melt-iron-ore
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?ingredientinv3 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?ingredient3 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a Furnace
+    (object-at ?station ?t)
+    (object-of-type ?station Furnace)
+    ;; the first ingredient is a Coal
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 Coal)
+    ;; the second ingredient is a Coal
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 Coal)
+    ;; the third ingredient is an IronOre
+    (inventory-holding ?ingredientinv3 ?ingredient3)
+    (object-of-type ?ingredient3 IronOre)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become an IronIngot
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target IronIngot)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 Coal))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the second ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 Coal))
+    (object-of-type ?ingredient2 Hypothetical)
+    ;; the third ingredient will be removed
+    (not (inventory-holding ?ingredientinv3 ?ingredient3))
+    (inventory-empty ?ingredientinv3)
+    (not (object-of-type ?ingredient3 IronOre))
+    (object-of-type ?ingredient3 Hypothetical)
+  )
+ )
+",FAILED,
+melt-iron-ore,,"
+;; Guess number 3
+;; To melt iron ore, you need 1 coal and 2 iron ore in your inventory.
+(:action melt-iron-ore
+  :parameters (?ingredientinv1 - inventory ?ingredientinv2 - inventory ?ingredientinv3 - inventory ?targetinv - inventory ?station - object ?ingredient1 - object ?ingredient2 - object ?ingredient3 - object ?target - object ?t - tile)
+  :precondition (and
+    (agent-at ?t)
+    ;; you are currently at a Furnace
+    (object-at ?station ?t)
+    (object-of-type ?station Furnace)
+    ;; the first ingredient is a Coal
+    (inventory-holding ?ingredientinv1 ?ingredient1)
+    (object-of-type ?ingredient1 Coal)
+    ;; the second ingredient is an IronOre
+    (inventory-holding ?ingredientinv2 ?ingredient2)
+    (object-of-type ?ingredient2 IronOre)
+    ;; the third ingredient is an IronOre
+    (inventory-holding ?ingredientinv3 ?ingredient3)
+    (object-of-type ?ingredient3 IronOre)
+    ;; the target inventory is empty
+    (inventory-empty ?targetinv)
+    (object-of-type ?target Hypothetical)
+  )
+  :effect (and
+    ;; the target inventory will become an IronIngot
+    (not (inventory-empty ?targetinv))
+    (inventory-holding ?targetinv ?target)
+    (not (object-of-type ?target Hypothetical))
+    (object-of-type ?target IronIngot)
+    ;; the first ingredient will be removed
+    (not (inventory-holding ?ingredientinv1 ?ingredient1))
+    (inventory-empty ?ingredientinv1)
+    (not (object-of-type ?ingredient1 Coal))
+    (object-of-type ?ingredient1 Hypothetical)
+    ;; the second ingredient will be removed
+    (not (inventory-holding ?ingredientinv2 ?ingredient2))
+    (inventory-empty ?ingredientinv2)
+    (not (object-of-type ?ingredient2 IronOre))
+    (object-of-type ?ingredient2 Hypothetical)
+    ;; the third ingredient will be removed
+    (not (inventory-holding ?ingredientinv3 ?ingredient3))
+    (inventory-empty ?ingredientinv3)
+    (not (object-of-type ?ingredient3 IronOre))
+    (object-of-type ?ingredient3 Hypothetical)
+  )
+ )
+",FAILED,

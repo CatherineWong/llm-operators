@@ -13,7 +13,7 @@ import functools
 from typing import Optional, Sequence
 
 from llm_operators.pddl import PDDLPlan
-from llm_operators.task_planner_impl import fd_plan_from_strings, pdsketch_onthefly_plan_from_strings
+from llm_operators.task_planner_impl import fd_plan_from_strings, pdsketch_onthefly_plan_from_strings, pdsketch_regression_plan_from_strings
 from llm_operators.datasets.dataset_core import Problem
 from llm_operators.experiment_utils import run_ipdb
 
@@ -21,6 +21,7 @@ TASK_PLANNER_FD = "task_planner_fd"
 TASK_PLANNER_PDSKETCH_ONTHEFLY = "task_planner_pdsketch_onthefly"
 TASK_PLANNER_PDSKETCH_ONTHEFLY_HMAX = "task_planner_pdsketch_onthefly_hmax"
 TASK_PLANNER_PDSKETCH_ONTHEFLY_HFF = "task_planner_pdsketch_onthefly_hff"
+TASK_PLANNER_PDSKETCH_REGRESSION = "task_planner_pdsketch_regression"
 
 
 def attempt_task_plan_for_problem(
@@ -53,7 +54,7 @@ def attempt_task_plan_for_problem(
 
 
     if verbose:
-        print(f"task_planner.attempt_task_plan_for_problem: attempt {problem_idx} / {len(problems)} ID={problem_id} AttemptIdx={plan_attempt_idx} GoalIdx={goal_idx}")
+        print(f"task_planner.attempt_task_plan_for_problem: {problem_idx} / {len(problems)} ID={problem_id} AttemptIdx={plan_attempt_idx} GoalIdx={goal_idx}")
     if debug_skip:
         if verbose:
             print("  ...debug_skip.")
@@ -441,6 +442,11 @@ def run_planner(
                 domain_str=current_domain_string,
                 problem_str=current_problem_string,
                 heuristic="hff",
+            )
+        elif planner_type == TASK_PLANNER_PDSKETCH_REGRESSION:
+            success, plan_string = pdsketch_regression_plan_from_strings(
+                domain_str=current_domain_string,
+                problem_str=current_problem_string
             )
         else:
             raise ValueError(f"Unknown planner type: {planner_type}")

@@ -1,0 +1,816 @@
+problem_id,attempt_id,minimum_n_operators,goal,success,plan,sampled_operators
+train_0,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wood))
+)",True,"(move-to t1 t8)
+(pick-up i1 o12 t8)
+(move-to t8 t7)
+(mine-wood_2 t7 o4 i1 o12 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-feather1_0', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_1,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wool))
+)",True,"(move-to t1 t9)
+(pick-up i1 o14 t9)
+(mine-wool1_0 t9 o6 i1 o14 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-feather1_0', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_2,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 IronOre))
+)",True,"(move-to t1 t14)
+(pick-up i1 o11 t14)
+(move-to t14 t12)
+(mine-iron-ore i1 i3 o1 o11 o17 t12)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-feather1_0', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_3,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Potato))
+)",True,"(move-to t1 t4)
+(pick-up i1 o13 t4)
+(mine-potato_0 t4 o7 i1 o13 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-feather1_0', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_4,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 SugarCane))
+)",True,"(move-to t1 t5)
+(pick-up i1 o12 t5)
+(move-to t5 t11)
+(mine-sugar-cane_2 t11 o10 i1 o12 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-feather1_0', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_5,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Potato))
+)",True,"(pick-up i1 o4 t1)
+(move-to t1 t6)
+(mine-potato_0 t6 o7 i1 o4 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-feather1_0', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_6,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 SugarCane))
+)",True,"(move-to t1 t9)
+(pick-up i1 o12 t9)
+(move-to t9 t12)
+(mine-sugar-cane_2 t12 o10 i1 o12 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-feather1_0', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_7,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wool))
+)",True,"(move-to t1 t2)
+(pick-up i1 o14 t2)
+(move-to t2 t3)
+(mine-wool1_0 t3 o6 i1 o14 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-feather1_0', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_8,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 SugarCane))
+)",True,"(move-to t1 t6)
+(pick-up i1 o12 t6)
+(move-to t6 t4)
+(mine-sugar-cane_2 t4 o10 i1 o12 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-feather1_0', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_9,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 GoldOre))
+)",True,"(move-to t1 t14)
+(pick-up i1 o11 t14)
+(move-to t14 t3)
+(mine-gold-ore1_2 t3 o9 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-feather1_0', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_10,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Beetroot))
+)",True,"(pick-up i1 o7 t1)
+(move-to t1 t5)
+(mine-beetroot1_0 t5 o8 i1 o7 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-feather1_0', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_11,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 GoldOre))
+)",True,"(move-to t1 t4)
+(pick-up i1 o11 t4)
+(move-to t4 t2)
+(mine-gold-ore1_2 t2 o9 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-feather1_0', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_12,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Feather))
+)",True,"(move-to t1 t8)
+(pick-up i1 o12 t8)
+(move-to t8 t12)
+(mine-feather1_0 t12 o5 i1 o12 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-feather1_0', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_13,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Coal))
+)",True,"(move-to t1 t15)
+(pick-up i1 o11 t15)
+(move-to t15 t10)
+(mine-coal1_0 t10 o2 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_14,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Beetroot))
+)",True,"(move-to t1 t9)
+(pick-up i1 o14 t9)
+(mine-beetroot1_0 t9 o8 i1 o14 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_15,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 GoldOre))
+)",True,"(move-to t1 t10)
+(pick-up i1 o11 t10)
+(move-to t10 t3)
+(mine-gold-ore1_2 t3 o9 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_16,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 IronOre))
+)",True,"(move-to t1 t15)
+(pick-up i1 o11 t15)
+(move-to t15 t5)
+(mine-iron-ore i1 i3 o1 o11 o17 t5)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_17,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 IronOre))
+)",True,"(move-to t1 t12)
+(pick-up i1 o11 t12)
+(move-to t12 t15)
+(mine-iron-ore i1 i3 o1 o11 o17 t15)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_18,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 IronOre))
+)",True,"(move-to t1 t5)
+(pick-up i1 o11 t5)
+(move-to t5 t10)
+(mine-iron-ore i1 i3 o1 o11 o17 t10)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_19,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 GoldOre))
+)",True,"(move-to t1 t8)
+(pick-up i1 o11 t8)
+(move-to t8 t11)
+(mine-gold-ore1_2 t11 o9 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_20,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Beetroot))
+)",True,"(pick-up i1 o1 t1)
+(move-to t1 t4)
+(mine-beetroot1_0 t4 o8 i1 o1 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_21,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 GoldOre))
+)",True,"(move-to t1 t7)
+(pick-up i1 o11 t7)
+(move-to t7 t2)
+(mine-gold-ore1_2 t2 o9 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_22,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wood))
+)",True,"(move-to t1 t9)
+(pick-up i1 o12 t9)
+(move-to t9 t2)
+(mine-wood_2 t2 o4 i1 o12 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_23,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wool))
+)",True,"(move-to t1 t9)
+(pick-up i1 o14 t9)
+(move-to t9 t3)
+(mine-wool1_0 t3 o6 i1 o14 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_24,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Cobblestone))
+)",True,"(pick-up i1 o11 t1)
+(move-to t1 t3)
+(mine-cobblestone_2 t3 o3 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_25,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Feather))
+)",True,"(pick-up i1 o14 t1)
+(move-to t1 t15)
+(mine-feather_2 t15 o5 i1 o14 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_26,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Feather))
+)",True,"(move-to t1 t14)
+(pick-up i1 o12 t14)
+(move-to t14 t7)
+(mine-feather1_2 t7 o5 i1 o12 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_27,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Coal))
+)",True,"(move-to t1 t15)
+(pick-up i1 o11 t15)
+(move-to t15 t7)
+(mine-coal1_0 t7 o2 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_28,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Feather))
+)",True,"(move-to t1 t10)
+(pick-up i1 o12 t10)
+(move-to t10 t6)
+(mine-feather1_1 t6 o5 i1 o12 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_29,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 SugarCane))
+)",True,"(move-to t1 t12)
+(pick-up i1 o12 t12)
+(move-to t12 t9)
+(mine-sugar-cane_2 t9 o10 i1 o12 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_30,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Coal))
+)",True,"(move-to t1 t13)
+(pick-up i1 o11 t13)
+(move-to t13 t8)
+(mine-coal1_0 t8 o2 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-feather1_0', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_31,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Coal))
+)",True,"(move-to t1 t12)
+(pick-up i1 o11 t12)
+(move-to t12 t5)
+(mine-coal1_0 t5 o2 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_32,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wood))
+)",True,"(move-to t1 t4)
+(pick-up i1 o12 t4)
+(move-to t4 t15)
+(mine-wood_2 t15 o4 i1 o12 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_33,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wool))
+)",True,"(move-to t1 t11)
+(pick-up i1 o14 t11)
+(move-to t11 t13)
+(mine-wool1_0 t13 o6 i1 o14 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_34,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Potato))
+)",True,"(move-to t1 t2)
+(pick-up i1 o3 t2)
+(move-to t2 t4)
+(mine-potato_0 t4 o7 i1 o3 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_35,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 IronOre))
+)",True,"(move-to t1 t3)
+(pick-up i1 o11 t3)
+(move-to t3 t11)
+(mine-iron-ore i1 i3 o1 o11 o17 t11)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_36,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 GoldOre))
+)",True,"(move-to t1 t15)
+(pick-up i1 o11 t15)
+(move-to t15 t4)
+(mine-gold-ore1_2 t4 o9 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-feather1_0', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_37,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wool))
+)",True,"(move-to t1 t6)
+(pick-up i1 o14 t6)
+(move-to t6 t11)
+(mine-wool1_0 t11 o6 i1 o14 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_38,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Feather))
+)",True,"(move-to t1 t2)
+(pick-up i1 o13 t2)
+(mine-feather_1 t2 o5 i1 o13 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_39,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 SugarCane))
+)",True,"(move-to t1 t11)
+(pick-up i1 o12 t11)
+(move-to t11 t6)
+(mine-sugar-cane_2 t6 o10 i1 o12 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_40,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Coal))
+)",True,"(move-to t1 t13)
+(pick-up i1 o11 t13)
+(move-to t13 t10)
+(mine-coal1_0 t10 o2 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_41,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wool))
+)",True,"(move-to t1 t12)
+(pick-up i1 o14 t12)
+(mine-wool1_0 t12 o6 i1 o14 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_42,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 IronOre))
+)",True,"(move-to t1 t2)
+(pick-up i1 o11 t2)
+(move-to t2 t1)
+(mine-iron-ore i1 i3 o1 o11 o17 t1)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-feather1_0', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_43,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Coal))
+)",True,"(move-to t1 t3)
+(pick-up i1 o11 t3)
+(mine-coal1_0 t3 o2 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_44,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 GoldOre))
+)",True,"(move-to t1 t6)
+(pick-up i1 o11 t6)
+(move-to t6 t8)
+(mine-gold-ore1_2 t8 o9 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_45,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wool))
+)",True,"(move-to t1 t12)
+(pick-up i1 o14 t12)
+(move-to t12 t2)
+(mine-wool1_0 t2 o6 i1 o14 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_46,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 IronOre))
+)",True,"(move-to t1 t8)
+(pick-up i1 o11 t8)
+(move-to t8 t4)
+(mine-iron-ore i1 i3 o1 o11 o17 t4)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_47,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Coal))
+)",True,"(move-to t1 t9)
+(pick-up i1 o11 t9)
+(move-to t9 t5)
+(mine-coal1_0 t5 o2 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_48,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Potato))
+)",True,"(pick-up i1 o13 t1)
+(move-to t1 t14)
+(mine-potato_0 t14 o7 i1 o13 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_49,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 SugarCane))
+)",True,"(move-to t1 t5)
+(pick-up i1 o12 t5)
+(move-to t5 t12)
+(mine-sugar-cane_2 t12 o10 i1 o12 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_50,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wool))
+)",True,"(move-to t1 t7)
+(pick-up i1 o14 t7)
+(move-to t7 t1)
+(mine-wool1_0 t1 o6 i1 o14 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_51,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Feather))
+)",True,"(move-to t1 t15)
+(pick-up i1 o13 t15)
+(move-to t15 t7)
+(mine-feather_1 t7 o5 i1 o13 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_52,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wool))
+)",True,"(move-to t1 t10)
+(pick-up i1 o14 t10)
+(move-to t10 t4)
+(mine-wool1_0 t4 o6 i1 o14 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_53,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Beetroot))
+)",True,"(pick-up i1 o14 t1)
+(move-to t1 t4)
+(mine-beetroot_1 t4 o8 i1 o14 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_54,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wool))
+)",True,"(move-to t1 t3)
+(pick-up i1 o14 t3)
+(move-to t3 t1)
+(mine-wool1_0 t1 o6 i1 o14 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_55,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 GoldOre))
+)",True,"(move-to t1 t4)
+(pick-up i1 o11 t4)
+(move-to t4 t13)
+(mine-gold-ore1_2 t13 o9 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_56,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wool))
+)",True,"(move-to t1 t5)
+(pick-up i1 o14 t5)
+(move-to t5 t13)
+(mine-wool1_0 t13 o6 i1 o14 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_57,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Feather))
+)",True,"(move-to t1 t3)
+(pick-up i1 o12 t3)
+(move-to t3 t1)
+(mine-feather1_0 t1 o5 i1 o12 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-feather1_0', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_58,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Potato))
+)",True,"(pick-up i1 o9 t1)
+(move-to t1 t7)
+(mine-potato_0 t7 o7 i1 o9 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_59,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Potato))
+)",True,"(pick-up i1 o4 t1)
+(move-to t1 t14)
+(mine-potato_0 t14 o7 i1 o4 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_60,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Beetroot))
+)",True,"(pick-up i1 o3 t1)
+(move-to t1 t3)
+(mine-beetroot_1 t3 o8 i1 o3 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_61,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Potato))
+)",True,"(pick-up i1 o2 t1)
+(move-to t1 t11)
+(mine-potato_0 t11 o7 i1 o2 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_62,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Coal))
+)",True,"(move-to t1 t14)
+(pick-up i1 o11 t14)
+(move-to t14 t6)
+(mine-coal1_0 t6 o2 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_63,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wool))
+)",True,"(move-to t1 t5)
+(pick-up i1 o14 t5)
+(move-to t5 t1)
+(mine-wool1_0 t1 o6 i1 o14 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_64,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wood))
+)",True,"(move-to t1 t13)
+(pick-up i1 o12 t13)
+(move-to t13 t8)
+(mine-wood_2 t8 o4 i1 o12 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_65,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Cobblestone))
+)",True,"(move-to t1 t4)
+(pick-up i1 o11 t4)
+(move-to t4 t2)
+(mine-cobblestone_2 t2 o3 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_66,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 IronOre))
+)",True,"(move-to t1 t14)
+(pick-up i1 o11 t14)
+(move-to t14 t3)
+(mine-iron-ore i1 i3 o1 o11 o17 t3)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_67,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Coal))
+)",True,"(move-to t1 t12)
+(pick-up i1 o11 t12)
+(move-to t12 t8)
+(mine-coal1_0 t8 o2 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-feather1_0', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_68,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 IronOre))
+)",True,"(move-to t1 t12)
+(pick-up i1 o11 t12)
+(move-to t12 t10)
+(mine-iron-ore i1 i3 o1 o11 o17 t10)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_69,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Potato))
+)",True,"(move-to t1 t10)
+(pick-up i1 o13 t10)
+(mine-potato_0 t10 o7 i1 o13 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_70,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 SugarCane))
+)",True,"(move-to t1 t14)
+(pick-up i1 o12 t14)
+(move-to t14 t10)
+(mine-sugar-cane_2 t10 o10 i1 o12 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_71,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Feather))
+)",True,"(move-to t1 t12)
+(pick-up i1 o13 t12)
+(move-to t12 t14)
+(mine-feather_1 t14 o5 i1 o13 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_72,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Potato))
+)",True,"(pick-up i1 o14 t1)
+(move-to t1 t14)
+(mine-potato_0 t14 o7 i1 o14 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_73,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wood))
+)",True,"(move-to t1 t6)
+(pick-up i1 o12 t6)
+(move-to t6 t7)
+(mine-wood_2 t7 o4 i1 o12 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_74,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Feather))
+)",True,"(move-to t1 t13)
+(pick-up i1 o13 t13)
+(move-to t13 t1)
+(mine-feather_1 t1 o5 i1 o13 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_75,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Feather))
+)",True,"(move-to t1 t8)
+(pick-up i1 o13 t8)
+(move-to t8 t3)
+(mine-feather_1 t3 o5 i1 o13 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_76,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Beetroot))
+)",True,"(move-to t1 t2)
+(pick-up i1 o6 t2)
+(move-to t2 t11)
+(mine-beetroot_1 t11 o8 i1 o6 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_77,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Coal))
+)",True,"(move-to t1 t11)
+(pick-up i1 o11 t11)
+(move-to t11 t4)
+(mine-coal1_0 t4 o2 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_78,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Potato))
+)",True,"(pick-up i1 o4 t1)
+(move-to t1 t3)
+(mine-potato_0 t3 o7 i1 o4 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_79,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 GoldOre))
+)",True,"(move-to t1 t8)
+(pick-up i1 o11 t8)
+(move-to t8 t3)
+(mine-gold-ore1_2 t3 o9 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_80,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Potato))
+)",True,"(pick-up i1 o4 t1)
+(move-to t1 t13)
+(mine-potato_0 t13 o7 i1 o4 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-beetroot1_0', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-feather1_1']"
+train_81,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 IronOre))
+)",True,"(move-to t1 t10)
+(pick-up i1 o11 t10)
+(move-to t10 t5)
+(mine-iron-ore i1 i3 o1 o11 o17 t5)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_82,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wood))
+)",True,"(move-to t1 t4)
+(pick-up i1 o12 t4)
+(move-to t4 t10)
+(mine-wood_2 t10 o4 i1 o12 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-feather_2', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_83,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 IronOre))
+)",True,"(move-to t1 t8)
+(pick-up i1 o11 t8)
+(move-to t8 t6)
+(mine-iron-ore i1 i3 o1 o11 o17 t6)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_84,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Coal))
+)",True,"(move-to t1 t6)
+(pick-up i1 o11 t6)
+(move-to t6 t4)
+(mine-coal1_0 t4 o2 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-feather1_2', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_85,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wool))
+)",True,"(move-to t1 t5)
+(pick-up i1 o14 t5)
+(move-to t5 t14)
+(mine-wool1_0 t14 o6 i1 o14 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_86,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 IronOre))
+)",True,"(move-to t1 t12)
+(pick-up i1 o11 t12)
+(move-to t12 t3)
+(mine-iron-ore i1 i3 o1 o11 o17 t3)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_87,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Feather))
+)",True,"(move-to t1 t7)
+(pick-up i1 o13 t7)
+(move-to t7 t12)
+(mine-feather_1 t12 o5 i1 o13 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_88,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wood))
+)",True,"(move-to t1 t9)
+(pick-up i1 o12 t9)
+(move-to t9 t4)
+(mine-wood_2 t4 o4 i1 o12 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_89,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Beetroot))
+)",True,"(move-to t1 t4)
+(pick-up i1 o7 t4)
+(move-to t4 t14)
+(mine-beetroot_1 t14 o8 i1 o7 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_90,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 IronOre))
+)",True,"(move-to t1 t11)
+(pick-up i1 o11 t11)
+(move-to t11 t7)
+(mine-iron-ore i1 i3 o1 o11 o17 t7)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_91,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Feather))
+)",True,"(move-to t1 t3)
+(pick-up i1 o13 t3)
+(move-to t3 t9)
+(mine-feather_1 t9 o5 i1 o13 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_92,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Beetroot))
+)",True,"(pick-up i1 o6 t1)
+(move-to t1 t7)
+(mine-beetroot_1 t7 o8 i1 o6 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_93,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Beetroot))
+)",True,"(pick-up i1 o9 t1)
+(move-to t1 t6)
+(mine-beetroot_1 t6 o8 i1 o9 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_94,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Potato))
+)",True,"(pick-up i1 o9 t1)
+(move-to t1 t2)
+(mine-potato_0 t2 o7 i1 o9 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_95,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 GoldOre))
+)",True,"(move-to t1 t10)
+(pick-up i1 o11 t10)
+(move-to t10 t5)
+(mine-gold-ore1_2 t5 o9 i1 o11 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_96,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 SugarCane))
+)",True,"(move-to t1 t9)
+(pick-up i1 o12 t9)
+(move-to t9 t6)
+(mine-sugar-cane_2 t6 o10 i1 o12 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_97,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Wood))
+)",True,"(move-to t1 t7)
+(pick-up i1 o12 t7)
+(move-to t7 t11)
+(mine-wood_2 t11 o4 i1 o12 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_98,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Potato))
+)",True,"(pick-up i1 o1 t1)
+(move-to t1 t5)
+(mine-potato_0 t5 o7 i1 o1 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_99,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Feather))
+)",True,"(move-to t1 t7)
+(pick-up i1 o13 t7)
+(move-to t7 t15)
+(mine-feather_1 t15 o5 i1 o13 i3 o17)","['mine-cobblestone_2', 'mine-coal1_0', 'mine-gold-ore1_2', 'chop-wood_2', 'mine-iron-ore1_0', 'mine-coal1_2', 'mine-coal1_1', 'mine-iron-ore1_1', 'mine-feather_1', 'mine-wool2_0', 'mine-wool_0', 'mine-coal_0', 'mine-beetroot1_2', 'mine-coal_1', 'mine-gold-ore_2', 'mine-gold-ore1_1', 'mine-beetroot_1', 'mine-cobblestone_0', 'mine-coal_2', 'mine-cobblestone_1', 'mine-wool_1', 'mine-gold-ore1_0', 'mine-wool2_1', 'chop-wood_0', 'mine-wool2_2', 'mine-beetroot1_1', 'chop-wood_1', 'mine-gold-ore_1', 'mine-wool_2', 'mine-beetroot_2', 'mine-beetroot_0', 'mine-gold-ore_0', 'mine-feather_0', 'mine-beetroot1_0']"
+train_12,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Feather))
+)",True,"(move-to t1 t10)
+(pick-up i1 o13 t10)
+(move-to t10 t12)
+(mine-feather_1 t12 o5 i1 o13 i3 o17)",[]
+train_25,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Feather))
+)",True,"(move-to t1 t4)
+(pick-up i1 o13 t4)
+(move-to t4 t15)
+(mine-feather_1 t15 o5 i1 o13 i3 o17)",[]
+train_26,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Feather))
+)",True,"(move-to t1 t14)
+(pick-up i1 o13 t14)
+(move-to t14 t7)
+(mine-feather_1 t7 o5 i1 o13 i3 o17)",[]
+train_28,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Feather))
+)",True,"(move-to t1 t11)
+(pick-up i1 o13 t11)
+(move-to t11 t6)
+(mine-feather_1 t6 o5 i1 o13 i3 o17)",[]
+train_57,0,10,"(:goal
+	(and 
+		(inventory-holding i3 o17)
+		(object-of-type o17 Feather))
+)",True,"(move-to t1 t10)
+(pick-up i1 o13 t10)
+(move-to t10 t1)
+(mine-feather_1 t1 o5 i1 o13 i3 o17)",[]
