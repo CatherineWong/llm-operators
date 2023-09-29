@@ -5,6 +5,7 @@ import pathlib
 import contextlib
 import time
 import datetime
+from llm_operators import pddl
 
 # TODO(Jiayuan Mao @ 2023/02/04): use a principled way to control the random seed.
 RANDOM_SEED = 0
@@ -132,3 +133,25 @@ def output_experiment_parameters(command_args):
         with open(filename, "w") as f:
             f.write(' '.join(sys.argv))
             f.write(command_args_string)
+
+from ast import literal_eval
+def resume_from_last_scored_operators(experiment_name, pddl_domain, previous_output_directory,  operator_acceptance_threshold,
+    operator_pseudocounts):
+    experiment_tag = "" if len(experiment_name) < 1 else f"{experiment_name}_"
+    output_filepath = f"{experiment_tag}scored_operators.json"
+    with open(os.path.join(previous_output_directory, output_filepath), "r") as f:
+            operators_to_scores = json.load(f)
+    for str_o_name_body in operators_to_scores:
+        scores = operators_to_scores[str_o_name_body]
+        o_name, o_body = literal_eval(str_o_name_body)
+        pddl_domain.operators_to_scores[(o_name, o_body)] = scores
+    
+    # Set operators with final scores.
+    for o_name, o_body in pddl_domain.operators_to_scores:
+        (o_success, o_attempts) = pddl_domain.operators_to_scores[(o_name, o_body)]
+        p_success = float(o_success / o_attempts)
+        if (
+            p_success > operator_acceptance_threshold and o_attempts > operator_pseudocounts
+        ):  # And we've used it at least once beyond the pseduocounts.
+            pddl_domain.add_operator(operator_name=o_name, operator_pddl=o_body)
+    print(f"Final operators after iteration: {pddl_domain.operators.keys()}")

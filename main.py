@@ -122,6 +122,8 @@ parser.add_argument("--checkpoint_every_n_problem_plans", type=int, default=2, h
 parser.add_argument('--resume', action='store_true', help='resume from whatever was last saved')
 parser.add_argument("--resume_from_iteration", type=int, default=0, help="Resume from checkpoint at this iteration")
 parser.add_argument("--resume_from_problem_idx", type=int, default=0, help="Resume from checkpoint at this problem")
+parser.add_argument('--resume_from_last_scored_operators', action='store_true', help='Hard resume for val only from last scored operator iteration')
+parser.add_argument("--val_only", action='store_true', help="Resume from checkpoint at this problem")
 
 # Baselines.
 parser.add_argument("--llm_propose_task_predicates", action='store_true', help="Implements a baseline in which the LLM directly proposes the task predicates.")
@@ -217,17 +219,23 @@ def main():
     print('=' * 80)
     print('')
 
-    for curr_iteration in range(args.train_iterations):
-        output_directory = experiment_utils.get_output_directory(curr_iteration=curr_iteration, command_args=args, experiment_name_to_load=args.experiment_name)
-        stop = run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_iteration, output_directory, rng)
+    if not args.val_only:
+        for curr_iteration in range(args.train_iterations):
+            output_directory = experiment_utils.get_output_directory(curr_iteration=curr_iteration, command_args=args, experiment_name_to_load=args.experiment_name)
+            stop = run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_iteration, output_directory, rng)
 
-        if stop:
-            print('Stop the experiment.')
-            break
+            if stop:
+                print('Stop the experiment.')
+                break
     # Run the validation set.
     print("======Running validation=======")
     curr_iteration = args.train_iterations + 1
     output_directory = experiment_utils.get_output_directory(curr_iteration=curr_iteration, command_args=args, experiment_name_to_load=args.experiment_name)
+
+    if args.resume_from_last_scored_operators:
+        previous_output_directory = experiment_utils.get_output_directory(curr_iteration=curr_iteration - 1, command_args=args, experiment_name_to_load=args.experiment_name)
+        experiment_utils.resume_from_last_scored_operators(args.experiment_name, pddl_domain, previous_output_directory,  operator_acceptance_threshold=args.operator_acceptance_threshold,
+        operator_pseudocounts=args.operator_pseudocounts,)
     stop = run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_iteration, output_directory, rng, split=args.val_split)
 
 
