@@ -118,4 +118,3 @@ dependencies:
       - xxhash==3.2.0
       - yarl==1.9.2
       - zipp==3.15.0
-prefix: /Users/zyzzyva/miniconda3/envs/llm-operators-zs
