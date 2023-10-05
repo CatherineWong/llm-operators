@@ -1,0 +1,259 @@
+;; You will be a software engineer who will be writing a plan for a robot acting in a video game environment based on Minecraft. Your plan will be written as a sequence of imperative functions, each which defines a single action in this environment to achieve a natural language goal. These functions should be written in Python, with respect to the following code API.
+
+;; Underlying PDDL predicates for querying the environment state.
+(:predicates
+   (tile-up ?t1 - tile ?t2 - tile)     ;; t2 is up of t1
+   (tile-down ?t1 - tile ?t2 - tile)   ;; t2 is down of t1
+   (tile-left ?t1 - tile ?t2 - tile)   ;; t2 is left of t1
+   (tile-right ?t1 - tile ?t2 - tile)  ;; t2 is right of t1
+
+   (agent-at ?t - tile)
+   (object-at ?x - object ?t - tile)
+   (inventory-holding ?i - inventory ?x - object)
+   (inventory-empty ?i - inventory)
+
+   (object-of-type ?x - object ?ot - object-type)
+ )
+
+ ;; Underlying objects in the environment state.
+ (:constants
+  Key - object-type
+  WorkStation - object-type
+  Pickaxe - object-type
+  IronOreVein - object-type
+  IronOre - object-type
+  IronIngot - object-type
+  CoalOreVein - object-type
+  Coal - object-type
+  GoldOreVein - object-type
+  GoldOre - object-type
+  GoldIngot - object-type
+  CobblestoneStash - object-type
+  Cobblestone - object-type
+  Axe - object-type
+  Tree - object-type
+  Wood - object-type
+  WoodPlank - object-type
+  Stick - object-type
+  Sword - object-type
+  Chicken - object-type
+  Feather - object-type
+  Arrow - object-type
+  Shears - object-type
+  Sheep - object-type
+  Wool - object-type
+  Bed - object-type
+  Boat - object-type
+  SugarCanePlant - object-type
+  SugarCane - object-type
+  Paper - object-type
+  Bowl - object-type
+  PotatoPlant - object-type
+  Potato - object-type
+  CookedPotato - object-type
+  BeetrootCrop - object-type
+  Beetroot - object-type
+  BeetrootSoup - object-type
+
+  Hypothetical - object-type
+  Trash - object-type
+ )
+
+;; Actions that can be taken in the environment state.
+def move_to_resource(s: CraftingWorld20230204Simulator, resource_name: str):
+    """Move to the nearest resource."""
+
+    for o, (t, x) in s.objects.items():
+        if t == resource_name:
+            s.move_to(x)
+            return o
+
+
+def find_object(s: CraftingWorld20230204Simulator, object_type_name: str):
+    """Find the nearest object of the target type"""
+
+    for o, (t, x) in s.objects.items():
+        if t == object_type_name:
+            return o
+
+
+def pickup_object(s: CraftingWorld20230204Simulator, inventory: int, object_name: str):
+    """Pick up the object."""
+    assert object_name in s.objects
+    rv = s.move_to(s.objects[object_name][1])
+    if not rv:
+        return False
+    rv = s.pick_up(inventory, object_name)
+    if not rv:
+        return False
+    return True
+
+
+def find_empty_inventory(s: CraftingWorld20230204Simulator, other_than: set[int]):
+    """Find a empty inventory."""
+    for i, content in s.inventory.items():
+        if content is None:
+            if i not in other_than:
+                return i
+
+
+def find_hypothetical_object(s: CraftingWorld20230204Simulator, other_than: set[str]):
+    """Find a hypothetical object"""
+
+    for x in list(s.hypothetical):
+        if x not in other_than:
+            return x
+
+
+def get_inventory_by_object_type(s: CraftingWorld20230204Simulator, object_type: str):
+    """Get the object in the inventory."""
+
+    for i, content in s.inventory.items():
+        if content is None:
+            continue
+        t, object_id = content
+        if t == object_type:
+            return i
+
+
+;; Example translations from natural language to a code policy in Python.
+;; Notice that code MUST only use predicates, object types, and receptacle types exactly as they appear in the domain above. People may also have been unclear about which objects and actions they were talking about, so consider multiple possible guesses for goal if there is uncertainty over what they meant.
+Your plan may include multiple actions if necessary.
+;; Target objects should always be a hypothetical object.
+;; You may both DEFINE code policies and CALL code policies ('call_function')
+;; Notice, for instance, that the crafting functions generally need to define additional mining functions that are called within their body.
+
+;; Human written natural language goal.
+Mine a potato.
+;; Problem specific initial information.
+(:init
+   (object-of-type o1 IronOreVein)
+   (object-at o1 t21)
+   (object-of-type o2 CoalOreVein)
+   (object-at o2 t9)
+   (object-of-type o3 CobblestoneStash)
+   (object-at o3 t19)
+   (object-of-type o4 Tree)
+   (object-at o4 t18)
+   (object-of-type o5 Chicken)
+   (object-at o5 t15)
+   (object-of-type o6 Sheep)
+   (object-at o6 t25)
+   (object-of-type o7 PotatoPlant)
+   (object-at o7 t5)
+   (object-of-type o8 BeetrootCrop)
+   (object-at o8 t23)
+   (object-of-type o9 GoldOreVein)
+   (object-at o9 t20)
+   (object-of-type o10 SugarCanePlant)
+   (object-at o10 t13)
+   (object-of-type o11 WorkStation)
+   (object-at o11 t16)
+   (object-of-type o12 WeaponStation)
+   (object-at o12 t3)
+   (object-of-type o13 ToolStation)
+   (object-at o13 t11)
+   (object-of-type o14 Furnace)
+   (object-at o14 t14)
+   (object-of-type o15 BedStation)
+   (object-at o15 t1)
+   (object-of-type o16 BoatStation)
+   (object-at o16 t17)
+   (object-of-type o17 FoodStation)
+   (object-at o17 t6)
+   (object-of-type o18 Axe)
+   (object-at o18 t6)
+   (object-of-type o19 Pickaxe)
+   (object-at o19 t2)
+   (object-of-type o20 Hypothetical)
+   (inventory-empty i1)
+   (object-of-type o21 Hypothetical)
+   (inventory-empty i2)
+   (object-of-type o22 Hypothetical)
+   (inventory-empty i3)
+   (object-of-type o23 Hypothetical)
+   (inventory-empty i4)
+   (object-of-type o24 Hypothetical)
+   (inventory-empty i5)
+   (tile-right t1 t2)
+   (tile-left t2 t1)
+   (tile-right t2 t3)
+   (tile-left t3 t2)
+   (tile-right t3 t4)
+   (tile-left t4 t3)
+   (tile-right t4 t5)
+   (tile-left t5 t4)
+   (tile-right t5 t6)
+   (tile-left t6 t5)
+   (tile-right t6 t7)
+   (tile-left t7 t6)
+   (tile-right t7 t8)
+   (tile-left t8 t7)
+   (tile-right t8 t9)
+   (tile-left t9 t8)
+   (tile-right t9 t10)
+   (tile-left t10 t9)
+   (tile-right t10 t11)
+   (tile-left t11 t10)
+   (tile-right t11 t12)
+   (tile-left t12 t11)
+   (tile-right t12 t13)
+   (tile-left t13 t12)
+   (tile-right t13 t14)
+   (tile-left t14 t13)
+   (tile-right t14 t15)
+   (tile-left t15 t14)
+   (tile-right t15 t16)
+   (tile-left t16 t15)
+   (tile-right t16 t17)
+   (tile-left t17 t16)
+   (tile-right t17 t18)
+   (tile-left t18 t17)
+   (tile-right t18 t19)
+   (tile-left t19 t18)
+   (tile-right t19 t20)
+   (tile-left t20 t19)
+   (tile-right t20 t21)
+   (tile-left t21 t20)
+   (tile-right t21 t22)
+   (tile-left t22 t21)
+   (tile-right t22 t23)
+   (tile-left t23 t22)
+   (tile-right t23 t24)
+   (tile-left t24 t23)
+   (tile-right t24 t25)
+   (tile-left t25 t24)
+   (agent-at t1)
+ )
+;; Plan as code policies for "Mine a potato."
+<START>
+[
+{
+    "action_type": "action_definition",
+    "action": "mine_potato",
+    "argument_names" : ('s', 'inventory', 'target_object'),
+    "ground_arguments" : None,
+    "body" : 
+"""
+    # First, define a function to mine wood.
+    # Get any additional tools you may need.
+    # We don't need anything to mine a potato.
+
+    potato_plant_object = move_to_resource(s, 'PotatoPlant')
+    if potato_plant_object is None:
+        return False
+    rv = s.mine(potato_plant_object, inventory, target_object)
+    if not rv:
+        return False
+    return True
+"""
+},
+{
+    "action_type": "call_action",
+    "action": "mine_potato",
+    "argument_names" : ('s', 'inventory', 'target_object'),
+    "ground_arguments" : ("env_state", "5", "'o24'"),
+    "body" : None,
+}
+]
+<END>

@@ -253,6 +253,8 @@ def attempt_execute_policy(policy, action_definitions, pddl_domain):
         class ExecutionResult():
             def __init__(self):
                 python_function = test_string
+                # if(policy[pddl.PDDLPlan.PDDL_ACTION_TYPE] == pddl.PDDLPlan.PDDL_CALL_ACTION):
+                #     import pdb; pdb.set_trace()
                 exec(python_function)
         ex_result = ExecutionResult()
         print(f"Execution result: { ex_result.success}")

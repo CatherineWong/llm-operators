@@ -60,31 +60,31 @@ def get_inventory_by_object_type(s: CraftingWorld20230204Simulator, object_type:
             return i
 
 
-def mine_wood(s: CraftingWorld20230204Simulator, inventory: int, target_object: str, exclude_inventory: set[int] = None, exclude_object: set[str] = None):
-    """Mine wood."""
-    if exclude_inventory is None: exclude_inventory = set()
-    if exclude_object is None: exclude_object = set()
+# def mine_wood(s: CraftingWorld20230204Simulator, inventory: int, target_object: str, exclude_inventory: set[int] = None, exclude_object: set[str] = None):
+#     """Mine wood."""
+#     if exclude_inventory is None: exclude_inventory = set()
+#     if exclude_object is None: exclude_object = set()
 
-    tool_inventory = get_inventory_by_object_type(s, 'Axe')
-    if tool_inventory is None:
-        object_id = find_object(s, 'Axe')
-        if object_id is not None:
-            tool_inventory = find_empty_inventory(s, exclude_inventory | {inventory})
-            rv = pickup_object(s, tool_inventory, object_id)
-            if not rv:
-                return False
-        else:
-            tool_inventory = find_empty_inventory(s, exclude_inventory | {inventory})
-            tool_target_object = find_hypothetical_object(s, exclude_object | {target_object})
-            tool_inventory = craft_axe(s, tool_inventory, tool_target_object, exclude_inventory | {inventory}, exclude_object | {target_object})
+#     tool_inventory = get_inventory_by_object_type(s, 'Axe')
+#     if tool_inventory is None:
+#         object_id = find_object(s, 'Axe')
+#         if object_id is not None:
+#             tool_inventory = find_empty_inventory(s, exclude_inventory | {inventory})
+#             rv = pickup_object(s, tool_inventory, object_id)
+#             if not rv:
+#                 return False
+#         else:
+#             tool_inventory = find_empty_inventory(s, exclude_inventory | {inventory})
+#             tool_target_object = find_hypothetical_object(s, exclude_object | {target_object})
+#             tool_inventory = craft_axe(s, tool_inventory, tool_target_object, exclude_inventory | {inventory}, exclude_object | {target_object})
 
-    tree_object = move_to_resource(s, 'Tree')
-    if tree_object is None:
-        return False
-    rv = s.mine(tree_object, inventory, target_object, tool_inventory)
-    if not rv:
-        return False
-    return True
+#     tree_object = move_to_resource(s, 'Tree')
+#     if tree_object is None:
+#         return False
+#     rv = s.mine(tree_object, inventory, target_object, tool_inventory)
+#     if not rv:
+#         return False
+#     return True
 
 
 # def mine_potato(s: CraftingWorld20230204Simulator, inventory: int, target_object: str, exclude_inventory: set[int] = None, exclude_object: set[str] = None):
@@ -101,31 +101,31 @@ def mine_wood(s: CraftingWorld20230204Simulator, inventory: int, target_object: 
 #     return True
 
 
-def craft_wood_plank(s: CraftingWorld20230204Simulator, inventory: int, target_object: str, exclude_inventory: set[int] = None, exclude_object: set[str] = None):
-    """Craft wood plank from a wood."""
-    if exclude_inventory is None: exclude_inventory = set()
-    if exclude_object is None: exclude_object = set()
+# def craft_wood_plank(s: CraftingWorld20230204Simulator, inventory: int, target_object: str, exclude_inventory: set[int] = None, exclude_object: set[str] = None):
+#     """Craft wood plank from a wood."""
+#     if exclude_inventory is None: exclude_inventory = set()
+#     if exclude_object is None: exclude_object = set()
 
-    ingredient1_inventory = get_inventory_by_object_type(s, 'Wood')
-    if ingredient1_inventory is None:
-        object_id = find_object(s, 'Wood')
-        if object_id is not None:
-            ingredient1_inventory = find_empty_inventory(s, exclude_inventory | {inventory})
-            rv = pickup_object(s, ingredient1_inventory, object_id)
-            if not rv:
-                return False
-        else:
-            ingredient1_inventory = find_empty_inventory(s, exclude_inventory | {inventory})
-            ingredient1_target_object = find_hypothetical_object(s, exclude_object | {target_object})
-            ingredient1_inventory = mine_wood(s, ingredient1_inventory, ingredient1_target_object, exclude_inventory | {inventory}, exclude_object | {target_object})
+#     ingredient1_inventory = get_inventory_by_object_type(s, 'Wood')
+#     if ingredient1_inventory is None:
+#         object_id = find_object(s, 'Wood')
+#         if object_id is not None:
+#             ingredient1_inventory = find_empty_inventory(s, exclude_inventory | {inventory})
+#             rv = pickup_object(s, ingredient1_inventory, object_id)
+#             if not rv:
+#                 return False
+#         else:
+#             ingredient1_inventory = find_empty_inventory(s, exclude_inventory | {inventory})
+#             ingredient1_target_object = find_hypothetical_object(s, exclude_object | {target_object})
+#             ingredient1_inventory = mine_wood(s, ingredient1_inventory, ingredient1_target_object, exclude_inventory | {inventory}, exclude_object | {target_object})
 
-    work_station = move_to_resource(s, 'WorkStation')
-    if work_station is None:
-        return False
-    rv = s.craft(work_station, inventory, target_object, [ingredient1_inventory], target_type='WoodPlank')
-    if not rv:
-        return False
-    return True
+#     work_station = move_to_resource(s, 'WorkStation')
+#     if work_station is None:
+#         return False
+#     rv = s.craft(work_station, inventory, target_object, [ingredient1_inventory], target_type='WoodPlank')
+#     if not rv:
+#         return False
+#     return True
 
 
 # def craft_arrow(s: CraftingWorld20230204Simulator, inventory: int, target_object: str, exclude_inventory: set[int] = None, exclude_object: set[str] = None):
