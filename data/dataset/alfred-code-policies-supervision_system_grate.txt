@@ -1,9 +1,8 @@
 ;; You will be a software engineer who will be writing a plan for a robot acting in a household environment. Your plan will be written as a sequence of imperative functions, each which defines a single action in this environment to achieve a natural language goal. These functions should be written in Python, with respect to the following code API.
 
 ;; Possible objects and receptacles types. 
-OBJECT_TYPES = ['grater', 'candle', 'showerglass', 'cd', 'tomato', 'mirror', 'scrubbrush', 'mug', 'toaster', 'painting', 'cellphone', 'ladle', 'bread', 'pot', 'book', 'tennisracket', 'butterknife', 'showerdoor', 'keychain', 'baseballbat', 'egg', 'pen', 'fork', 'whisk', 'vase', 'cloth', 'window', 'pencil', 'statue', 'lightswitch', 'watch', 'spatula', 'papertowelroll', 'floorlamp', 'kettle', 'soapbottle', 'boots', 'towel', 'pillow', 'alarmclock', 'potato', 'chair', 'plunger', 'spraybottle', 'handtowel', 'bathtub', 'remotecontrol', 'peppershaker', 'plate', 'basketball', 'desklamp', 'footstool', 'glassbottle', 'papertowel', 'creditcard', 'pan', 'toiletpaper', 'saltshaker', 'poster', 'toiletpaperroll', 'lettuce', 'winebottle', 'knife', 'laundryhamperlid', 'spoon', 'tissuebox', 'bowl', 'box', 'soapbar', 'houseplant', 'newspaper', 'cup', 'dishsponge', 'laptop', 'television', 'stoveknob', 'curtains', 'blinds', 'teddybear', 'apple', 'wateringcan', 'sink, 'grater']
+OBJECT_TYPES = ['grater', 'candle', 'showerglass', 'cd', 'tomato', 'mirror', 'scrubbrush', 'mug', 'toaster', 'painting', 'cellphone', 'ladle', 'bread', 'pot', 'book', 'tennisracket', 'butterknife', 'showerdoor', 'keychain', 'baseballbat', 'egg', 'pen', 'fork', 'whisk', 'vase', 'cloth', 'window', 'pencil', 'statue', 'lightswitch', 'watch', 'spatula', 'papertowelroll', 'floorlamp', 'kettle', 'soapbottle', 'boots', 'towel', 'pillow', 'alarmclock', 'potato', 'chair', 'plunger', 'spraybottle', 'handtowel', 'bathtub', 'remotecontrol', 'peppershaker', 'plate', 'basketball', 'desklamp', 'footstool', 'glassbottle', 'papertowel', 'creditcard', 'pan', 'toiletpaper', 'saltshaker', 'poster', 'toiletpaperroll', 'lettuce', 'winebottle', 'knife', 'laundryhamperlid', 'spoon', 'tissuebox', 'bowl', 'box', 'soapbar', 'houseplant', 'newspaper', 'cup', 'dishsponge', 'laptop', 'television', 'stoveknob', 'curtains', 'blinds', 'teddybear', 'apple', 'wateringcan', 'sink']
 
-;; These are the ONLY possible receptacles.
 RECEPTACLE_TYPES = ['armchair', 'bed', 'bathtubbasin', 'dresser', 'safe', 'diningtable', 'sofa', 'handtowelholder', 'stoveburner', 'cart', 'desk', 'coffeemachine', 'microwave', 'toilet', 'countertop', 'garbagecan', 'coffeetable', 'cabinet', 'sinkbasin', 'ottoman', 'toiletpaperhanger', 'towelholder', 'fridge', 'drawer', 'sidetable', 'shelf', 'laundryhamper']
 
 ;; Predicates for querying the environment state.
@@ -70,18 +69,95 @@ GrateObject = alfred_action_factory(
 )
 
 ;; Example translations from natural language to a code policy in Python.
-;; Notice that code MUST only use predicates, object types, and receptacle types exactly as they appear in the domain above. People may also have been unclear about which objects and actions they were talking about, so consider multiple possible guesses for goal if there is uncertainty over what they meant. Notice that for many actions, you will need to consider what intermediate, low-level actions you will need to take.
+;; Notice that code MUST only use predicates, object types, and receptacle types exactly as they appear in the domain above. People may also have been unclear about which objects and actions they were talking about, so consider multiple possible guesses for goal if there is uncertainty over what they meant. Notice that for many actions, you will 
+
 
 ;; Human written natural language goal.
-bring the cabbage to the cabinet.
-;; Plan as code policies for "bring the cabbage to the cabinet."
-;; Reasoning: there is no 'cabbage' object, but there are multiple possible guesses for 'cabbage' in OBJECT_TYPES. This time, we will guess it means 'lettuce'. There is a 'cabinet' receptacle, but there are also multiple possible guesses for 'cabinet' in RECEPTACLE_TYPES. This time, we will guess it just means 'cabinet'.
+put grated cheese on the countertop.
+;; Plan as code policies for "put grated cheese on the countertop."
 <START>
 [
 {
     "action": "PickupObject",
     "argument_names" : ('env_state', 'env', 'object_id'),
-    "ground_arguments" : ("env_state", "env", "lettuce"),
+    "ground_arguments" : ("env_state", "env", "grater"),
+    "body" : 
+"""
+    # Preconditions: None.
+
+    # Low-level actions: pick up the object.
+    try:
+        action = PickupObject(args={'object_id':object_id})
+        success = act(env=env, action=action)
+        print("Successfully picked up an object!")
+    except:
+        print("Execution failure...")
+        return False
+
+    # Postconditions: holding the object.
+    final_env_state = perceive(env)
+    return (final_env_state.holds(object_id)), final_env_state
+"""
+},
+{
+"action": "GrateObject",
+"argument_names" : ('env_state', 'env', 'object_id', 'tool_object_id'),
+"ground_arguments" : ("env_state", "env", "cheese", "grater"),
+"body" : """
+    # Preconditions: holding the tool object.
+    if (not env_state.holds(tool_object_id)):
+        print("Failure, not holding tool.")
+        return False, env_state
+    # Precondition: object is sliceable.
+    if (not env_state.sliceable(object_id)):
+        print("Failure, object is not sliceable.")
+        return False, env_state
+
+    # Low-level actions: grate the object if you're holding the tool.
+    try:
+        action = GrateObject(args={'object_id':object_id})
+        success = act(env=env, action=action)
+        print("Successfully sliced up an object!")
+    except:
+        print("Execution failure...")
+        return False
+
+    # Postconditions: the object is grated.
+    final_env_state = perceive(env)
+    return (final_env_state.isGrated(object_id)), final_env_state
+"""
+        }
+{
+    "action": "PutObjectInReceptacle",
+    "argument_names" : ('env_state', 'env', 'object_id', 'receptacle_object_id'),
+    "ground_arguments" : ("env_state", "env", "grater", "sidetable"),
+    "body" : 
+"""
+    # Preconditions: we should be holding the object.
+    if (not env_state.holds(object_id)):
+        print("Failure, not holding object.")
+        return False, env_state
+
+    # Low-level actions: put the object in the receptacle.
+    try:
+        print("Trying to put in receptacle.")
+        action = PutObject(args={'object_id':object_id, 'receptacle_object_id':receptacle_object_id})
+        success = act(env=env, action=action)
+        print("Result of PutObject is: {success}")
+    except:
+        print("Failure, could not place in receptacle.")
+        return False, env_state
+
+    # Postconditions: not holding the object and the object is in the receptacle.
+    final_env_state = perceive(env)
+    if (not final_env_state.holds(object_id)) and (final_env_state.inReceptacle(object_id, receptacle_object_id)):
+        return True, final_env_state
+"""
+},
+{
+    "action": "PickupObject",
+    "argument_names" : ('env_state', 'env', 'object_id'),
+    "ground_arguments" : ("env_state", "env", "cheese"),
     "body" : 
 """
     # Preconditions: None.
@@ -103,7 +179,7 @@ bring the cabbage to the cabinet.
 {
     "action": "PutObjectInReceptacle",
     "argument_names" : ('env_state', 'env', 'object_id', 'receptacle_object_id'),
-    "ground_arguments" : ("env_state", "env", "lettuce", "cabinet"),
+    "ground_arguments" : ("env_state", "env", "cheese", "countertop"),
     "body" : 
 """
     # Preconditions: we should be holding the object.
@@ -131,15 +207,14 @@ bring the cabbage to the cabinet.
 <END>
 
 ;; Human written natural language goal.
-put a chilled potato on the tiny table.
-;; Plan as code policies for "put a chilled potato on the tiny table."
-;; Reasoning: there is no 'tinytable' receptacle, but there are multiple possible guesses for 'tiny table' in RECEPTACLE_TYPES. This time, we will guess it means 'sidetable'. Therefore, we will call with the argument to use 'sidetable' when putting the object down in the final step. There is no 'Chilled' predicate, but there are multiple possible guesses for an action that can make something chilled. We will guess this means making it 'isCool' using a fridge, and guess how the fridge should be used to accomplish this.
+place a baked, grated apple on top of the dining table.
+;; Plan as code policies for "place a baked, grated apple on top of the dining table."
 <START>
 [
 {
     "action": "PickupObject",
     "argument_names" : ('env_state', 'env', 'object_id'),
-    "ground_arguments" : ("env_state", "env", "potato"),
+    "ground_arguments" : ("env_state", "env", "grater"),
     "body" : 
 """
     # Preconditions: None.
@@ -159,9 +234,86 @@ put a chilled potato on the tiny table.
 """
 },
 {
-"action": "CoolObject",
+"action": "GrateObject",
+"argument_names" : ('env_state', 'env', 'object_id', 'tool_object_id'),
+"ground_arguments" : ("env_state", "env", "apple", "grater"),
+"body" : """
+    # Preconditions: holding the tool object.
+    if (not env_state.holds(tool_object_id)):
+        print("Failure, not holding tool.")
+        return False, env_state
+    # Precondition: object is sliceable.
+    if (not env_state.sliceable(object_id)):
+        print("Failure, object is not sliceable.")
+        return False, env_state
+
+    # Low-level actions: grate the object if you're holding the tool.
+    try:
+        action = GrateObject(args={'object_id':object_id})
+        success = act(env=env, action=action)
+        print("Successfully sliced up an object!")
+    except:
+        print("Execution failure...")
+        return False
+
+    # Postconditions: the object is grated.
+    final_env_state = perceive(env)
+    return (final_env_state.isGrated(object_id)), final_env_state
+"""
+        }
+{
+    "action": "PutObjectInReceptacle",
+    "argument_names" : ('env_state', 'env', 'object_id', 'receptacle_object_id'),
+    "ground_arguments" : ("env_state", "env", "grater", "diningtable"),
+    "body" : 
+"""
+    # Preconditions: we should be holding the object.
+    if (not env_state.holds(object_id)):
+        print("Failure, not holding object.")
+        return False, env_state
+
+    # Low-level actions: put the object in the receptacle.
+    try:
+        print("Trying to put in receptacle.")
+        action = PutObject(args={'object_id':object_id, 'receptacle_object_id':receptacle_object_id})
+        success = act(env=env, action=action)
+        print("Result of PutObject is: {success}")
+    except:
+        print("Failure, could not place in receptacle.")
+        return False, env_state
+
+    # Postconditions: not holding the object and the object is in the receptacle.
+    final_env_state = perceive(env)
+    if (not final_env_state.holds(object_id)) and (final_env_state.inReceptacle(object_id, receptacle_object_id)):
+        return True, final_env_state
+"""
+},
+{
+    "action": "PickupObject",
+    "argument_names" : ('env_state', 'env', 'object_id'),
+    "ground_arguments" : ("env_state", "env", "apple"),
+    "body" : 
+"""
+    # Preconditions: None.
+
+    # Low-level actions: pick up the object.
+    try:
+        action = PickupObject(args={'object_id':object_id})
+        success = act(env=env, action=action)
+        print("Successfully picked up an object!")
+    except:
+        print("Execution failure...")
+        return False
+
+    # Postconditions: holding the object.
+    final_env_state = perceive(env)
+    return (final_env_state.holds(object_id)), final_env_state
+"""
+},
+{
+"action": "BakeObject",
 "argument_names" : ('env_state', 'env', 'object_id', 'receptacle_object_id'),
-"ground_arguments" : ("env_state", "env", "potato", "fridge"),
+"ground_arguments" : ("env_state", "env", "apple", "oven"),
 "body" : """
     # Preconditions: we should be holding the object.
     if (not env_state.holds(object_id)):
@@ -188,7 +340,7 @@ put a chilled potato on the tiny table.
         print("Failure, could not place in receptacle.")
         return False, env_state
 
-    # Low-level actions: close the receptacle to allow the object to cool down.
+    # Low-level actions: close the receptacle
     try:
         action = CloseObject(args={'object_id':receptacle_object_id})
         success = act(env=env, action=action)
@@ -208,37 +360,15 @@ put a chilled potato on the tiny table.
             return False
 
 
-    # Postconditions: object is cool.
+    # Postconditions: object is hot.
     final_env_state = perceive(env)
-    return (final_env_state.isCool(object_id)), final_env_state
-"""
-},
-{
-    "action": "PickupObject",
-    "argument_names" : ('env_state', 'env', 'object_id'),
-    "ground_arguments" : ("env_state", "env", "potato"),
-    "body" : 
-"""
-    # Preconditions: None.
-
-    # Low-level actions: pick up the object.
-    try:
-        action = PickupObject(args={'object_id':object_id})
-        success = act(env=env, action=action)
-        print("Successfully picked up an object!")
-    except:
-        print("Execution failure...")
-        return False
-
-    # Postconditions: holding the object.
-    final_env_state = perceive(env)
-    return (final_env_state.holds(object_id)), final_env_state
+    return (final_env_state.isHot(object_id)), final_env_state
 """
 },
 {
     "action": "PutObjectInReceptacle",
     "argument_names" : ('env_state', 'env', 'object_id', 'receptacle_object_id'),
-    "ground_arguments" : ("env_state", "env", "potato", "sidetable"),
+    "ground_arguments" : ("env_state", "env", "apple", "diningtable"),
     "body" : 
 """
     # Preconditions: we should be holding the object.

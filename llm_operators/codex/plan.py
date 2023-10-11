@@ -246,7 +246,7 @@ def propose_code_policies_for_problems(
     if verbose:
         print(f"propose_code_policies_for_problems: proposing for {len(unsolved_problems)} unsolved problems.")
 
-    for idx, problem in enumerate(unsolved_problems):
+    for idx, problem in enumerate(unsolved_problems): 
         problem.proposed_code_policies = []
         codex_prompt, proposed_task_predicate_definitions = _propose_code_policy_definition(domain, solved_problems, problem, n_samples, temperature, external_code_policies_supervision)
         output_json[problem.problem_id] = {

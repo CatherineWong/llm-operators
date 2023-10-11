@@ -7,7 +7,7 @@
 	agent location receptacle object rtype otype
 )
 
-;; otype - ObjectTypes. These are the ONLY possible objects. 
+;; otype: object types.
 (:otype
         CandleType - otype
         ShowerGlassType - otype
@@ -151,119 +151,76 @@
 ;; Example translations from natural language to a simplified goal name, and then a PDDL goal. Notice that PDDL goals MUST only use predicates, object types, and receptacle types exactly as they appear in the domain above. People may also have been unclear about which stimulus they were talking about, so we list multiple possible guesses for goal if there is uncertainty over what they meant.
 
 ;; Human written natural language goal.
-put a soup spoon on a tiny table.
+put a soup spoon on a table.
 
 <START>
-;; PDDL guess 1 for "put a soup spoon on a tiny table."
-;; Reasoning: There is no 'soup spoon' object in the otype list, but there are multiple possible guesses in the otype list. We most likely guess that it means 'LadleType'. There is no 'tiny table' receptacle in the rtype list. This time, we will guess that it means 'SideTableType'.
-;; Official goal name: pick_and_place_simple-LadleType-None-SideTable
-(:goal
-        (exists (?r - receptacle)
-        (exists (?o - object)
-            (and 
-                (objectType ?o LadleType) 
-                (receptacleType ?r SideTableType)
-                (inReceptacle ?o ?r) 
-            )
-)))
-<END>
-
-<START>
-;; PDDL guess 2 for "put a soup spoon on a tiny table."
-;; Reasoning: There is no 'soup spoon' object in the otype list, but there are multiple possible guesses in the otype list. We will again guess that it means 'LadleType'. There is no 'tiny table' receptacle in the rtype list. This time, we will guess that it means 'DeskType'.
-;; Official goal name: pick_and_place_simple-Ladle-None-Desk
-(:goal
-        (exists (?r - receptacle)
-        (exists (?o - object)
-            (and 
-                (objectType ?o LadleType) 
-                (receptacleType ?r DeskType)
-                (inReceptacle ?o ?r) 
-            )
-)))
-<END>
-
-<START>
-;; PDDL guess 3 for "put a soup spoon on a tiny table."
-;; Reasoning: There is no 'soup spoon' object in the otype list, but there are multiple possible guesses in the otype list. This time we will guess that it means 'SpoonType'. There is no 'tiny table' receptacle in the rtype list. This time, we will guess that it means 'SideTableType'.
-;; Official goal name: pick_and_place_simple-Spoon-None-SideTable
+;; PDDL guess 1 for "put a soup spoon on a table."
+;; Official goal name: pick_and_place_simple-Spoon-None-DiningTableType
 (:goal
         (exists (?r - receptacle)
         (exists (?o - object)
             (and 
                 (objectType ?o SpoonType) 
-                (receptacleType ?r SideTableType)
-                (inReceptacle ?o ?r) 
-            )
-)))
-<END>
-
-<START>
-;; PDDL guess 4 for "put a soup spoon on a tiny table."
-;; Reasoning: There is no 'soup spoon' object in the otype list, but there are multiple possible guesses in the otype list. This time we will guess that it means 'SpoonType'. There is no 'tiny table' receptacle in the rtype list. This time, we will guess that it means 'DeskType'.
-;; Official goal name: pick_and_place_simple-Spoon-None-Desk
-(:goal
-        (exists (?r - receptacle)
-        (exists (?o - object)
-            (and 
-                (objectType ?o SpoonType) 
-                (receptacleType ?r DeskType)
-                (inReceptacle ?o ?r) 
-            )
-)))
-<END>
-
-;; Human written natural language goal.
-put a warmed up slice of cabbage on the table.
-
-<START>
-;; PDDL guess 1 for "put a warmed up slice of cabbage on the table."
-;; Reasoning: There is no 'cabbage' object in the otype list, but there are multiple possible guesses in the otype list. The most likely seems to be 'lettuce'. There is no 'table' receptacle in the rtype list. This time, we will guess that it means 'DiningTableType'. The descriptions of 'warm' and 'slice' likely correspond to 'isHot' and 'isSliced'.
-;; Official goal name: pick_heat_then_place_in_recep-LettuceSliced-None-DiningTable
-(:goal
-        (exists (?r - receptacle)
-        (exists (?o - object)
-            (and 
-                (objectType ?o LettuceType) 
                 (receptacleType ?r DiningTableType)
-                (inReceptacle ?o ?r)
-                (heatable ?o)
-                (isHot ?o)
-                (sliceable ?o)
-                (isSliced ?o)  
+                (inReceptacle ?o ?r) 
             )
-    )))
+)))
 <END>
 
 <START>
-;; PDDL guess 2 for "put a warmed up slice of cabbage on the table."
-;; Reasoning: There is no 'cabbage' object in the otype list, but there are multiple possible guesses in the otype list. The most likely seems to be 'lettuce'. There is no 'table' receptacle in the rtype list. This time, we will guess that it means 'SideTableType'. The descriptions of 'warm' and 'slice' likely correspond to 'isHot' and 'isSliced'.
-;; Official goal name: pick_heat_then_place_in_recep-LettuceSliced-None-SideTable
+;; PDDL guess 2 for "put a soup spoon on a table."
+;; Official goal name: pick_and_place_simple-Ladle-None-DiningTableType
 (:goal
         (exists (?r - receptacle)
         (exists (?o - object)
             (and 
-                (objectType ?o LettuceType) 
-                (receptacleType ?r SideTableType)
-                (inReceptacle ?o ?r)
-                (heatable ?o)
-                (isHot ?o)
-                (sliceable ?o)
-                (isSliced ?o)  
+                (objectType ?o LadleType) 
+                (receptacleType ?r DiningTableType)
+                (inReceptacle ?o ?r) 
             )
-    )))
+)))
 <END>
 
 <START>
-;; PDDL guess 3 for "put a warmed up slice of cabbage on the table."
-;; Reasoning: There is no 'cabbage' object in the otype list, but there are multiple possible guesses in the otype list. The most likely seems to be 'lettuce'. There is no 'table' receptacle in the rtype list. This time, we will guess that it means 'DeskType'. The descriptions of 'warm' and 'slice' likely correspond to 'isHot' and 'isSliced'.
-;; Official goal name: pick_heat_then_place_in_recep-LettuceSliced-None-Desk
+;; PDDL guess 3 for "put a soup spoon on a table."
+;; Official goal name: pick_and_place_simple-Ladle-None-DeskType
 (:goal
         (exists (?r - receptacle)
         (exists (?o - object)
             (and 
-                (objectType ?o LettuceType) 
+                (objectType ?o LadleType) 
                 (receptacleType ?r DeskType)
+                (inReceptacle ?o ?r) 
+            )
+)))
+<END>
+
+<START>
+;; PDDL guess 4 for "put a soup spoon on a table."
+;; Official goal name: pick_and_place_simple-ForkType-None-SideTableType
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o ForkTypeType) 
+                (receptacleType ?r SideTableType)
+                (inReceptacle ?o ?r) 
+            )
+)))
+<END>
+
+;; Human written natural language goal.
+put a warmed up slice of pear in the cabinet.
+
+<START>
+;; PDDL guess 1 for "put a warmed up slice of pear in the cabinet."
+;; Official goal name: pick_heat_then_place_in_recep-AppleSliced-None-Cabinet
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o AppleType) 
+                (receptacleType ?r CabinetType)
                 (inReceptacle ?o ?r)
                 (heatable ?o)
                 (isHot ?o)
@@ -274,15 +231,50 @@ put a warmed up slice of cabbage on the table.
 <END>
 
 <START>
-;; PDDL guess 4 for "put a warmed up slice of cabbage on the table."
-;; Reasoning: There is no 'cabbage' object in the otype list, but there are multiple possible guesses in the otype list. The most likely seems to be 'lettuce'. There is no 'table' receptacle in the rtype list. This time, we will guess that it means 'CoffeeTableType'. The descriptions of 'warm' and 'slice' likely correspond to 'isHot' and 'isSliced'.
-;; Official goal name: pick_heat_then_place_in_recep-LettuceSliced-None-CoffeeTable
+;; PDDL guess 2 for "put a warmed up slice of pear in the cabinet."
+;; Official goal name: pick_heat_then_place_in_recep-TomatoSliced-None-Cabinet
 (:goal
         (exists (?r - receptacle)
         (exists (?o - object)
             (and 
-                (objectType ?o LettuceType) 
-                (receptacleType ?r CoffeeTableType)
+                (objectType ?o TomatoType) 
+                (receptacleType ?r CabinetType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o)
+                (sliceable ?o)
+                (isSliced ?o)  
+            )
+    )))
+<END>
+
+<START>
+;; PDDL guess 3 for "put a warmed up slice of pear in the cabinet."
+;; Official goal name: pick_heat_then_place_in_recep-AppleSliced-None-Cupboard
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o AppleType) 
+                (receptacleType ?r CupboardType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o)
+                (sliceable ?o)
+                (isSliced ?o)  
+            )
+    )))
+<END>
+
+<START>
+;; PDDL guess 4 for "put a warmed up slice of pear in the cabinet."
+;; Official goal name: pick_heat_then_place_in_recep-TomatoSliced-None-Cupboard
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o TomatoType) 
+                (receptacleType ?r CupboardType)
                 (inReceptacle ?o ?r)
                 (heatable ?o)
                 (isHot ?o)
@@ -293,50 +285,11 @@ put a warmed up slice of cabbage on the table.
 <END>
 
 ;; Human written natural language goal.
-take a mug, chill it, and throw it away.
-
+put a hot potato in the refrigerator.
 <START>
-;; PDDL guess 1 for "take a mug, chill it, and throw it away."
-;; Reasoning: There is a 'mug' in the otype list, so this is the most likely guess. 'Chill' most likely corresponds to 'isCool'. 'Throw it away' most likely means the final destination is the 'GarbageCanType' in the rtype list.
-;; Official goal name: pick_cool_then_place_in_recep-Mug-None-GarbageCan
-(:goal
-        (exists (?r - receptacle)
-        (exists (?o - object)
-            (and 
-                (objectType ?o MugType) 
-                (receptacleType ?r GarbageCanType)
-                (inReceptacle ?o ?r)
-                (coolable ?o)
-                (isCool ?o)
-            )
-    )))
-<END>
-
-<START>
-;; PDDL guess 2 for "take a mug, chill it, and throw it away."
-;; Reasoning: There is a 'mug' in the otype list, but this time we will guess that it could refer to the 'CupType'. 'Chill' most likely corresponds to 'isCool'. 'Throw it away' most likely means the final destination is the 'GarbageCanType' in the rtype list.
-;; Official goal name: pick_cool_then_place_in_recep-Cup-None-GarbageCan
-(:goal
-        (exists (?r - receptacle)
-        (exists (?o - object)
-            (and 
-                (objectType ?o CupType) 
-                (receptacleType ?r GarbageCanType)
-                (inReceptacle ?o ?r)
-                (coolable ?o)
-                (isCool ?o)
-            )
-    )))
-<END>
-
-
-;; Human written natural language goal.
-Take a potato out of the sink, cook it, and put it into the fridge.
-<START>
-;; PDDL guess 1 for "Take a potato out of the sink, cook it, and put it into the fridge."
-;; Reasoning: There is a 'potato' object in the otype list. Goals specify only final locations, and there is a 'fridge' object in the rtype list.  The description of 'cook' likely corresponds to 'isHot'.
+;; PDDL guess 1 for "put a hot potato in the refrigerator."
 ;; Official goal name:
-pick_heat_then_place_in_recep-Potato-None-Fridge
+pick_heat_then_place_in_recep-Potato-None-Fridge-12
 (:goal
         (exists (?r - receptacle)
         (exists (?o - object)
@@ -349,7 +302,52 @@ pick_heat_then_place_in_recep-Potato-None-Fridge
             )
     )))
 <END>
-
-
-
+<START>
+;; PDDL guess 2 for "put a hot potato in the refrigerator."
+;; Official goal name:
+pick_heat_then_place_in_recep-Potato-None-Fridge-12
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o PotatoType) 
+                (receptacleType ?r FridgeType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o) 
+            )
+    )))
+<END>
+<START>
+;; PDDL guess 3 for "put a hot potato in the refrigerator."
+;; Official goal name:
+pick_heat_then_place_in_recep-Potato-None-Fridge-12
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o PotatoType) 
+                (receptacleType ?r FridgeType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o) 
+            )
+    )))
+<END>
+<START>
+;; PDDL guess 4 for "put a hot potato in the refrigerator."
+;; Official goal name:
+pick_heat_then_place_in_recep-Potato-None-Fridge-12
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o PotatoType) 
+                (receptacleType ?r FridgeType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o) 
+            )
+    )))
+<END>
 

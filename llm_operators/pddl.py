@@ -1859,7 +1859,7 @@ def preprocess_code_policies(
     unsolved_problems = [
         problems[p]
         for p in problems
-        if len(problems[p].solved_motion_plan_results) < 1 and not problems[p].should_supervise_pddl_goal
+        if len(problems[p].solved_motion_plan_results) < 1
     ]
     output_json = dict()
     if verbose:

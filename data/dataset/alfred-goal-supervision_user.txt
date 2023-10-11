@@ -1,2 +1,2 @@
-;; Now write <N_SAMPLES> guesses for the following human written natural language goal. Delimit each guess with <START> and <END>.
+;; Now write <N_SAMPLES> guesses for the following human written natural language goal. Include reasoning. Delimit each guess with <START> and <END>.
 ;; Human written natural language goal.
