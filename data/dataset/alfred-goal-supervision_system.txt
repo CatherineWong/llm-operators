@@ -150,12 +150,17 @@
 
 ;; Example translations from natural language to a simplified goal name, and then a PDDL goal. Notice that PDDL goals MUST only use predicates, object types, and receptacle types exactly as they appear in the domain above. People may also have been unclear about which stimulus they were talking about, so we list multiple possible guesses for goal if there is uncertainty over what they meant.
 
+;; All goals always correspond to goals that involve picking up some specific item from otype, optionally applying one or more state transformations, and then putting the object in a goal destination in rtypes.
+
 ;; Human written natural language goal.
-put a soup spoon on a tiny table.
+bring a soup spoon from the sofa to a tiny table.
 
 <START>
-;; PDDL guess 1 for "put a soup spoon on a tiny table."
-;; Reasoning: There is no 'soup spoon' object in the otype list, but there are multiple possible guesses in the otype list. We most likely guess that it means 'LadleType'. There is no 'tiny table' receptacle in the rtype list. This time, we will guess that it means 'SideTableType'.
+;; PDDL guess 1 for "bring a soup spoon from the sofa to a tiny table."
+;; Reasoning: 
+1. The goal object is the 'soup spoon'. There is no 'soup spoon' object in the otype list, but there are multiple possible guesses in the otype list. We most likely guess that it means 'LadleType'. 
+2. The goal destination is the 'tiny table'. There is no 'tiny table' receptacle in the rtype list. One likely guess is that this actually refers to  'SideTableType'.
+3. There are no additional cues suggesting a state transformation. 
 ;; Official goal name: pick_and_place_simple-LadleType-None-SideTable
 (:goal
         (exists (?r - receptacle)
@@ -169,8 +174,12 @@ put a soup spoon on a tiny table.
 <END>
 
 <START>
-;; PDDL guess 2 for "put a soup spoon on a tiny table."
-;; Reasoning: There is no 'soup spoon' object in the otype list, but there are multiple possible guesses in the otype list. We will again guess that it means 'LadleType'. There is no 'tiny table' receptacle in the rtype list. This time, we will guess that it means 'DeskType'.
+;; PDDL guess 2 for "bring a soup spoon from the sofa to a tiny table."
+;; Reasoning:
+1. The goal object is the 'soup spoon'. There is no 'soup spoon' object in the otype list, but there are multiple possible guesses in the otype list. We most likely guess that it means 'LadleType'. 
+2. The goal destination is the 'tiny table'. There is no 'tiny table' receptacle in the rtype list. One likely guess is that this actually refers to  'DeskType'.
+3. There are no additional cues suggesting a state transformation. 
+;; Official goal name: pick_and_place_simple-LadleType-None-SideTable
 ;; Official goal name: pick_and_place_simple-Ladle-None-Desk
 (:goal
         (exists (?r - receptacle)
@@ -184,8 +193,11 @@ put a soup spoon on a tiny table.
 <END>
 
 <START>
-;; PDDL guess 3 for "put a soup spoon on a tiny table."
-;; Reasoning: There is no 'soup spoon' object in the otype list, but there are multiple possible guesses in the otype list. This time we will guess that it means 'SpoonType'. There is no 'tiny table' receptacle in the rtype list. This time, we will guess that it means 'SideTableType'.
+;; PDDL guess 3 for "bring a soup spoon from the sofa to a tiny table."
+;; Reasoning:
+1. The goal object is the 'soup spoon'. There is no 'soup spoon' object in the otype list, but there are multiple possible guesses in the otype list. We most likely guess that it means 'SpoonType'. 
+2. The goal destination is the 'tiny table'. There is no 'tiny table' receptacle in the rtype list. One likely guess is that this actually refers to  'DeskType'.
+3. There are no additional cues suggesting a state transformation. 
 ;; Official goal name: pick_and_place_simple-Spoon-None-SideTable
 (:goal
         (exists (?r - receptacle)
@@ -199,8 +211,11 @@ put a soup spoon on a tiny table.
 <END>
 
 <START>
-;; PDDL guess 4 for "put a soup spoon on a tiny table."
-;; Reasoning: There is no 'soup spoon' object in the otype list, but there are multiple possible guesses in the otype list. This time we will guess that it means 'SpoonType'. There is no 'tiny table' receptacle in the rtype list. This time, we will guess that it means 'DeskType'.
+;; PDDL guess 4 for "bring a soup spoon from the sofa to a tiny table."
+;; Reasoning:
+1. The goal object is the 'soup spoon'. There is no 'soup spoon' object in the otype list, but there are multiple possible guesses in the otype list. We most likely guess that it means 'LadleType'. 
+2. The goal destination is the 'tiny table'. There is no 'tiny table' receptacle in the rtype list. One likely guess is that this actually refers to  'DeskType'.
+3. There are no additional cues suggesting a state transformation. 
 ;; Official goal name: pick_and_place_simple-Spoon-None-Desk
 (:goal
         (exists (?r - receptacle)
@@ -214,11 +229,139 @@ put a soup spoon on a tiny table.
 <END>
 
 ;; Human written natural language goal.
-put a warmed up slice of cabbage on the table.
+bring a warm pot from the desk to the sink.
 
 <START>
-;; PDDL guess 1 for "put a warmed up slice of cabbage on the table."
-;; Reasoning: There is no 'cabbage' object in the otype list, but there are multiple possible guesses in the otype list. The most likely seems to be 'lettuce'. There is no 'table' receptacle in the rtype list. This time, we will guess that it means 'DiningTableType'. The descriptions of 'warm' and 'slice' likely correspond to 'isHot' and 'isSliced'.
+;; PDDL guess 1 for "bring a warm pot from the desk to the sink."
+;; Reasoning: 
+1. The goal object is the 'pot'. This most likely corresponds to the 'PotType' in the otype list.
+2. The goal destination is the 'sink'. There is no 'sink' receptacle in the rtype list. One likely guess is that this actually refers to  'SinkBasinType'.
+3. The additional description 'warm' suggests an isHot state transformation.
+;; Official goal name: pick_heat_then_place_in_recep-Pot-None-SinkBasinType
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o PotType) 
+                (receptacleType ?r SinkBasinType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o) 
+            )
+    )))
+<END>
+
+<START>
+;; PDDL guess 2 for "bring a warm pot from the desk to the sink."
+;; Reasoning: 
+1. The goal object is the 'pot'. A second guess could be that this in fact referred to a PanType, and the speaker was mistaken.
+2. The goal destination is the 'sink'. There is no 'sink' receptacle in the rtype list. One likely guess is that this actually refers to  'SinkBasinType'.
+3. The additional description 'warm' suggests an isHot state transformation.
+;; Official goal name: pick_heat_then_place_in_recep-Pan-None-SinkBasinType
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o PanType) 
+                (receptacleType ?r SinkBasinType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o) 
+            )
+    )))
+<END>
+
+;; Human written natural language goal.
+put a chilled bottle away into the cupboard.
+
+<START>
+;; PDDL guess 1 for "put a chilled bottle away into the cupboard."
+;; Reasoning: 
+1. The goal object is the 'bottle'. This could correspond to the 'WineBottleType' in the list.
+2. The goal destination is the 'cupboard'. There is no 'cupboard' receptacle in the rtype list. One likely guess is that this actually refers to  'CabinetType'.
+3. The additional description 'chilled' suggests an isCool state transformation.
+;; Official goal name: pick_cool_then_place_in_recep-WineBottle-None-CabinetType
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o WineBottleType) 
+                (receptacleType ?r CabinetType)
+                (inReceptacle ?o ?r)
+                (coolable ?o)
+                (isCool?o) 
+            )
+    )))
+<END>
+
+<START>
+;; PDDL guess 2 for "put a chilled bottle away into the cupboard."
+;; Reasoning: 
+1. The goal object is the 'bottle'. This could correspond to the 'WineBottleType' in the list.
+2. The goal destination is the 'cupboard'. There is no 'cupboard' receptacle in the rtype list. One likely guess is that this actually refers to  'ShelfType'.
+3. The additional description 'chilled' suggests an isCool state transformation.
+;; Official goal name: pick_cool_then_place_in_recep-WineBottle-None-ShelfType
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o WineBottleType) 
+                (receptacleType ?r ShelfType)
+                (inReceptacle ?o ?r)
+                (coolable ?o)
+                (isCool?o) 
+            )
+    )))
+<END>
+
+<START>
+;; PDDL guess 3 for "put a chilled bottle away into the cupboard."
+;; Reasoning: 
+1. The goal object is the 'bottle'. This could correspond to the 'GlassBottleType' in the list.
+2. The goal destination is the 'cupboard'. There is no 'cupboard' receptacle in the rtype list. One likely guess is that this actually refers to  'CabinetType'.
+3. The additional description 'chilled' suggests an isCool state transformation.
+;; Official goal name: pick_cool_then_place_in_recep-GlassBottle-None-CabinetType
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o GlassBottleType) 
+                (receptacleType ?r CabinetType)
+                (inReceptacle ?o ?r)
+                (coolable ?o)
+                (isCool?o) 
+            )
+    )))
+<END>
+
+<START>
+;; PDDL guess 4 for "put a chunk of apple sliced withbottle away into the cupboard."
+;; Reasoning: 
+1. The goal object is the 'bottle'. This could correspond to the 'GlassBottleType' in the list.
+2. The goal destination is the 'cupboard'. There is no 'cupboard' receptacle in the rtype list. One likely guess is that this actually refers to  'ShelfType'.
+3. The additional description 'chilled' suggests an isCool state transformation.
+;; Official goal name: pick_cool_then_place_in_recep-GlassBottle-None-ShelfType
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o GlassBottleType) 
+                (receptacleType ?r ShelfType)
+                (inReceptacle ?o ?r)
+                (coolable ?o)
+                (isCool?o) 
+            )
+    )))
+<END>
+
+;; Human written natural language goal.
+put a cooked piece of a cabbage on the table.
+
+<START>
+;; PDDL guess 1 for "put a cooked piece of a cabbage on the table."
+1. The goal object is the 'cabbage'. There is no 'cabbage', but this could correspond to the 'LettuceType' in the list.
+2. The goal destination is the 'table'. One likely guess is that this actually refers to  'DiningTableType'.
+3. The additional description 'hot' suggests an isHot state transformation. The additional description 'piece of' suggests an isSliced state transformation.
 ;; Official goal name: pick_heat_then_place_in_recep-LettuceSliced-None-DiningTable
 (:goal
         (exists (?r - receptacle)
@@ -236,8 +379,10 @@ put a warmed up slice of cabbage on the table.
 <END>
 
 <START>
-;; PDDL guess 2 for "put a warmed up slice of cabbage on the table."
-;; Reasoning: There is no 'cabbage' object in the otype list, but there are multiple possible guesses in the otype list. The most likely seems to be 'lettuce'. There is no 'table' receptacle in the rtype list. This time, we will guess that it means 'SideTableType'. The descriptions of 'warm' and 'slice' likely correspond to 'isHot' and 'isSliced'.
+;; PDDL guess 2 for "put a cooked piece of a cabbage on the table."
+1. The goal object is the 'cabbage'. There is no 'cabbage', but this could correspond to the 'LettuceType' in the list.
+2. The goal destination is the 'table'. One likely guess is that this actually refers to  'SideTableType'.
+3. The additional description 'cooked' suggests an isHot state transformation. The additional description 'piece of' suggests an isSliced state transformation.
 ;; Official goal name: pick_heat_then_place_in_recep-LettuceSliced-None-SideTable
 (:goal
         (exists (?r - receptacle)
@@ -255,8 +400,10 @@ put a warmed up slice of cabbage on the table.
 <END>
 
 <START>
-;; PDDL guess 3 for "put a warmed up slice of cabbage on the table."
-;; Reasoning: There is no 'cabbage' object in the otype list, but there are multiple possible guesses in the otype list. The most likely seems to be 'lettuce'. There is no 'table' receptacle in the rtype list. This time, we will guess that it means 'DeskType'. The descriptions of 'warm' and 'slice' likely correspond to 'isHot' and 'isSliced'.
+;; PDDL guess 3 for "put a cooked piece of a cabbage on the table."
+1. The goal object is the 'cabbage'. There is no 'cabbage', but this could correspond to the 'LettuceType' in the list.
+2. The goal destination is the 'table'. One likely guess is that this actually refers to  'DeskType'.
+3. The additional description 'cooked' suggests an isHot state transformation. The additional description 'piece of' suggests an isSliced state transformation.
 ;; Official goal name: pick_heat_then_place_in_recep-LettuceSliced-None-Desk
 (:goal
         (exists (?r - receptacle)
@@ -274,8 +421,97 @@ put a warmed up slice of cabbage on the table.
 <END>
 
 <START>
-;; PDDL guess 4 for "put a warmed up slice of cabbage on the table."
-;; Reasoning: There is no 'cabbage' object in the otype list, but there are multiple possible guesses in the otype list. The most likely seems to be 'lettuce'. There is no 'table' receptacle in the rtype list. This time, we will guess that it means 'CoffeeTableType'. The descriptions of 'warm' and 'slice' likely correspond to 'isHot' and 'isSliced'.
+;; PDDL guess 4 for "put a hot piece of a cabbage on the table."
+1. The goal object is the 'cabbage'. There is no 'cabbage', but this could correspond to the 'LettuceType' in the list.
+2. The goal destination is the 'table'. One likely guess is that this actually refers to  'CoffeeTableType'.
+3. The additional description 'hot' suggests an isHot state transformation. The additional description 'piece of' suggests an isSliced state transformation.
+;; Official goal name: pick_heat_then_place_in_recep-LettuceSliced-None-CoffeeTable
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o LettuceType) 
+                (receptacleType ?r CoffeeTableType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o)
+                (sliceable ?o)
+                (isSliced ?o)  
+            )
+    )))
+<END>
+
+;; Human written natural language goal.
+put a cooked piece of a cabbage on the table.
+
+<START>
+;; PDDL guess 1 for "put a cooked piece of a cabbage on the table."
+1. The goal object is the 'cabbage'. There is no 'cabbage', but this could correspond to the 'LettuceType' in the list.
+2. The goal destination is the 'table'. One likely guess is that this actually refers to  'DiningTableType'.
+3. The additional description 'hot' suggests an isHot state transformation. The additional description 'piece of' suggests an isSliced state transformation.
+;; Official goal name: pick_heat_then_place_in_recep-LettuceSliced-None-DiningTable
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o LettuceType) 
+                (receptacleType ?r DiningTableType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o)
+                (sliceable ?o)
+                (isSliced ?o)  
+            )
+    )))
+<END>
+
+<START>
+;; PDDL guess 2 for "put a cooked piece of a cabbage on the table."
+1. The goal object is the 'cabbage'. There is no 'cabbage', but this could correspond to the 'LettuceType' in the list.
+2. The goal destination is the 'table'. One likely guess is that this actually refers to  'SideTableType'.
+3. The additional description 'cooked' suggests an isHot state transformation. The additional description 'piece of' suggests an isSliced state transformation.
+;; Official goal name: pick_heat_then_place_in_recep-LettuceSliced-None-SideTable
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o LettuceType) 
+                (receptacleType ?r SideTableType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o)
+                (sliceable ?o)
+                (isSliced ?o)  
+            )
+    )))
+<END>
+
+<START>
+;; PDDL guess 3 for "put a cooked piece of a cabbage on the table."
+1. The goal object is the 'cabbage'. There is no 'cabbage', but this could correspond to the 'LettuceType' in the list.
+2. The goal destination is the 'table'. One likely guess is that this actually refers to  'DeskType'.
+3. The additional description 'cooked' suggests an isHot state transformation. The additional description 'piece of' suggests an isSliced state transformation.
+;; Official goal name: pick_heat_then_place_in_recep-LettuceSliced-None-Desk
+(:goal
+        (exists (?r - receptacle)
+        (exists (?o - object)
+            (and 
+                (objectType ?o LettuceType) 
+                (receptacleType ?r DeskType)
+                (inReceptacle ?o ?r)
+                (heatable ?o)
+                (isHot ?o)
+                (sliceable ?o)
+                (isSliced ?o)  
+            )
+    )))
+<END>
+
+<START>
+;; PDDL guess 4 for "put a hot piece of a cabbage on the table."
+1. The goal object is the 'cabbage'. There is no 'cabbage', but this could correspond to the 'LettuceType' in the list.
+2. The goal destination is the 'table'. One likely guess is that this actually refers to  'CoffeeTableType'.
+3. The additional description 'hot' suggests an isHot state transformation. The additional description 'piece of' suggests an isSliced state transformation.
 ;; Official goal name: pick_heat_then_place_in_recep-LettuceSliced-None-CoffeeTable
 (:goal
         (exists (?r - receptacle)
