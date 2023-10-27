@@ -1,0 +1,285 @@
+operator_name,gt_operator,operator_body,n_operator_successes,n_operator_attempts,score,
+WashObject_2,,"(:action WashObject_2
+        :parameters (?a - agent ?l - location ?o - object ?toolreceptacle - receptacle)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		(cleanable ?o)
+		(receptacleType ?toolreceptacle SinkBasinType)
+		(receptacleAtLocation ?toolreceptacle ?l)
+		)
+        :effect (and 
+		(isClean ?o)
+		)
+)",34.05,34.5,0.9869565217391304,
+TurnOnLight_0,,"(:action TurnOnLight_0
+        :parameters (?a - agent ?l - location ?o - object)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		(toggleable ?o)
+		(not (isToggled ?o))
+		)
+        :effect (and 
+		(isToggled ?o)
+		)
+)",31.05,31.5,0.9857142857142858,
+PickupObjectNotInReceptacle,"(:action PickupObjectNotInReceptacle
+        :parameters (?a - agent ?l - location ?o - object)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (not (holdsAny ?a))
+            (forall
+                (?re - receptacle)
+                (not (inReceptacle ?o ?re))
+            )
+        )
+        :effect (and
+            (not (objectAtLocation ?o ?l))
+            (holds ?a ?o)
+            (holdsAny ?a)
+        )
+    )","(:action PickupObjectNotInReceptacle
+        :parameters (?a - agent ?l - location ?o - object)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (not (holdsAny ?a))
+            (forall
+                (?re - receptacle)
+                (not (inReceptacle ?o ?re))
+            )
+        )
+        :effect (and
+            (not (objectAtLocation ?o ?l))
+            (holds ?a ?o)
+            (holdsAny ?a)
+        )
+    )",12.05,12.5,0.9640000000000001,
+UseObject_1,,"(:action UseObject_1
+        :parameters (?toolreceptacle - receptacle ?a - agent ?l - location ?o - object)
+
+        :precondition (and 
+		(receptacleType ?toolreceptacle FridgeType)
+		(atLocation ?a ?l)
+		(receptacleAtLocation ?toolreceptacle ?l)
+		(holds ?a ?o)
+		)
+        :effect (and 
+		(isCool ?o)
+		)
+)",64.05,66.5,0.9631578947368421,
+PickupObjectInReceptacle,"(:action PickupObjectInReceptacle
+        :parameters (?a - agent ?l - location ?o - object ?r - receptacle)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (inReceptacle ?o ?r)
+            (not (holdsAny ?a))
+        )
+        :effect (and
+            (not (objectAtLocation ?o ?l))
+            (not (inReceptacle ?o ?r))
+            (holds ?a ?o)
+            (holdsAny ?a)
+        )
+    )","(:action PickupObjectInReceptacle
+        :parameters (?a - agent ?l - location ?o - object ?r - receptacle)
+        :precondition (and
+            (atLocation ?a ?l)
+            (objectAtLocation ?o ?l)
+            (inReceptacle ?o ?r)
+            (not (holdsAny ?a))
+        )
+        :effect (and
+            (not (objectAtLocation ?o ?l))
+            (not (inReceptacle ?o ?r))
+            (holds ?a ?o)
+            (holdsAny ?a)
+        )
+    )",353.05,370.5,0.9529014844804319,
+ChopObject_1,,"(:action ChopObject_1
+        :parameters (?toolobject - object ?a - agent ?l - location ?o - object)
+
+        :precondition (and 
+		(objectType ?toolobject ButterKnifeType)
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		(sliceable ?o)
+		(holds ?a ?toolobject)
+		)
+        :effect (and 
+		(isSliced ?o)
+		)
+)",69.05,74.5,0.9268456375838926,
+PutObjectInReceptacle,"(:action PutObjectInReceptacle
+        :parameters (?a - agent ?l - location ?ot - otype ?o - object ?r - receptacle)
+        :precondition (and
+            (atLocation ?a ?l)
+            (receptacleAtLocation ?r ?l)
+            (objectType ?o ?ot)
+            (holds ?a ?o)
+            (not (holdsAnyReceptacleObject ?a))
+        )
+        :effect (and
+            (inReceptacle ?o ?r)
+            (not (holds ?a ?o))
+            (not (holdsAny ?a))
+            (objectAtLocation ?o ?l)
+        )
+    )","(:action PutObjectInReceptacle
+        :parameters (?a - agent ?l - location ?ot - otype ?o - object ?r - receptacle)
+        :precondition (and
+            (atLocation ?a ?l)
+            (receptacleAtLocation ?r ?l)
+            (objectType ?o ?ot)
+            (holds ?a ?o)
+            (not (holdsAnyReceptacleObject ?a))
+        )
+        :effect (and
+            (inReceptacle ?o ?r)
+            (not (holds ?a ?o))
+            (not (holdsAny ?a))
+            (objectAtLocation ?o ?l)
+        )
+    )",266.05,294.5,0.90339558573854,
+CookObject_1,,"(:action CookObject_1
+        :parameters (?toolreceptacle - receptacle ?a - agent ?l - location ?o - object)
+
+        :precondition (and 
+		(receptacleType ?toolreceptacle MicrowaveType)
+		(atLocation ?a ?l)
+		(receptacleAtLocation ?toolreceptacle ?l)
+		(holds ?a ?o)
+		)
+        :effect (and 
+		(isHot ?o)
+		)
+)",63.05,72.5,0.8696551724137931,
+CutObject_0,,"(:action CutObject_0
+        :parameters (?toolobject - object ?a - agent ?l - location ?o - object)
+
+        :precondition (and 
+		(objectType ?toolobject KnifeType)
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		(sliceable ?o)
+		(holds ?a ?toolobject)
+		)
+        :effect (and 
+		(isSliced ?o)
+		)
+)",1.05,2.5,0.42000000000000004,
+SliceObject_2,"(:action SliceObject
+        :parameters (?a - agent ?l - location ?co - object ?ko - object)
+        :precondition (and
+            (objectType ?ko KnifeType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?co ?l)
+            (sliceable ?co)
+            (holds ?a ?ko)
+        )
+        :effect (and
+            (isSliced ?co)
+        )
+    )","(:action SliceObject_2
+        :parameters (?a - agent ?l - location ?o - object ?toolreceptacle - object)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		(sliceable ?o)
+		(holds ?a ?toolreceptacle)
+		)
+        :effect (and 
+		(isSliced ?o)
+		)
+)",1.05,2.5,0.42000000000000004,
+WipeObject_2,,"(:action WipeObject_2
+        :parameters (?a - agent ?l - location ?o - object)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		(cleanable ?o)
+		)
+        :effect (and 
+		(isClean ?o)
+		)
+)",0.05,1.5,0.03333333333333333,
+HeatObject_1,"(:action HeatObject
+        :parameters (?a - agent ?l - location ?r - receptacle ?o - object)
+        :precondition (and
+            (receptacleType ?r MicrowaveType)
+            (atLocation ?a ?l)
+            (receptacleAtLocation ?r ?l)
+            (holds ?a ?o)
+        )
+        :effect (and
+            (isHot ?o)
+        )
+    )","(:action HeatObject_1
+        :parameters (?a - agent ?l - location ?o - object ?toolobject - object)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		(heatable ?o)
+		(holds ?a ?toolobject)
+		)
+        :effect (and 
+		(isHot ?o)
+		)
+)",0.05,1.5,0.03333333333333333,
+SliceObject_1,"(:action SliceObject
+        :parameters (?a - agent ?l - location ?co - object ?ko - object)
+        :precondition (and
+            (objectType ?ko KnifeType)
+            (atLocation ?a ?l)
+            (objectAtLocation ?co ?l)
+            (sliceable ?co)
+            (holds ?a ?ko)
+        )
+        :effect (and
+            (isSliced ?co)
+        )
+    )","(:action SliceObject_1
+        :parameters (?a - agent ?l - location ?o - object ?cuttingBoardObject - object)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		(sliceable ?o)
+		(holds ?a ?cuttingBoardObject)
+		)
+        :effect (and 
+		(isSliced ?o)
+		)
+)",0.05,1.5,0.03333333333333333,
+WashObject_0,,"(:action WashObject_0
+        :parameters (?a - agent ?l - location ?o - object)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		(cleanable ?o)
+		)
+        :effect (and 
+		(isClean ?o)
+		)
+)",0.05,1.5,0.03333333333333333,
+CutObject_2,,"(:action CutObject_2
+        :parameters (?a - agent ?l - location ?o - object)
+
+        :precondition (and 
+		(atLocation ?a ?l)
+		(objectAtLocation ?o ?l)
+		(sliceable ?o)
+		)
+        :effect (and 
+		(isSliced ?o)
+		)
+)",0.05,1.5,0.03333333333333333,
