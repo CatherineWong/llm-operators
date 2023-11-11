@@ -47,6 +47,7 @@ def propose_goals_for_problems(
     external_goal_supervision=None,
     external_goal_sample_with_prompt=False,
     split="train",
+    llm_model=None,
 ):
     random.seed(command_args.random_seed)
 
@@ -85,7 +86,7 @@ def propose_goals_for_problems(
         #### LCW - Temporary split between ALFRED and Minecraft behaviors to preserve exact prompting behaviors used in ICML experiments.
         if "alfred" in dataset_name:
             ### ALFRED goal prompting.
-            codex_prompt, proposed_goal_definitions = _propose_alfred_goal_definition(domain, solved_problems, problem, n_samples, temperature, include_codex_types, max_goal_examples, external_goal_supervision, external_goal_sample_with_prompt, solved_training_problems, split)
+            codex_prompt, proposed_goal_definitions = _propose_alfred_goal_definition(domain, solved_problems, problem, n_samples, temperature, include_codex_types, max_goal_examples, external_goal_supervision, external_goal_sample_with_prompt, solved_training_problems, split, llm_model)
 
             output_json[problem.problem_id] = {
                 CODEX_PROMPT: codex_prompt,
@@ -154,7 +155,7 @@ def _get_minecraft_prompt(max_goal_examples, supervision_pddl, domain, include_c
         return prompt
 
 # Utility functions for composing the prompt for goal proposal.
-def _propose_alfred_goal_definition(domain, solved_problems, problem, n_goal_samples, temperature, include_codex_types, max_goal_examples, external_goal_supervision, external_goal_sample_with_prompt, solved_training_problems, split):
+def _propose_alfred_goal_definition(domain, solved_problems, problem, n_goal_samples, temperature, include_codex_types, max_goal_examples, external_goal_supervision, external_goal_sample_with_prompt, solved_training_problems, split, llm_model):
     if external_goal_supervision is not None:
          # For now, we also only support sampling with the prompt.
          assert external_goal_sample_with_prompt
@@ -167,7 +168,8 @@ def _propose_alfred_goal_definition(domain, solved_problems, problem, n_goal_sam
              max_goal_examples=max_goal_examples,
              external_goal_supervision=external_goal_supervision,
              external_goal_sample_with_prompt=external_goal_sample_with_prompt,
-             solved_training_problems=solved_training_problems, split=split
+             solved_training_problems=solved_training_problems, split=split,
+             llm_model=llm_model
          )
 
 
@@ -189,11 +191,11 @@ def _propose_alfred_goal_definition(domain, solved_problems, problem, n_goal_sam
     goal_strings = []
     for i in range(n_goal_samples):
         codex_prompt = get_prompt()
-        goal_strings.append(get_completions(codex_prompt, temperature=temperature, stop=STOP_TOKEN, n_samples=1)[0])
+        goal_strings.append(get_completions(codex_prompt, temperature=temperature, stop=STOP_TOKEN, n_samples=1, engine=llm_model)[0])
     return codex_prompt, goal_strings
 
 
-def _propose_goal_definition_external_supervision_sample_with_prompt(domain, solved_problems, problem, n_goal_samples, temperature, max_goal_examples, external_goal_supervision, external_goal_sample_with_prompt, solved_training_problems, split):
+def _propose_goal_definition_external_supervision_sample_with_prompt(domain, solved_problems, problem, n_goal_samples, temperature, max_goal_examples, external_goal_supervision, external_goal_sample_with_prompt, solved_training_problems, split, llm_model):
     from num2words import num2words
 
     if split != "train":
@@ -224,6 +226,7 @@ def _propose_goal_definition_external_supervision_sample_with_prompt(domain, sol
             temperature=temperature,
             n_samples=1,
             max_tokens=1500,
+            enginel=llm_model
         )[0]
         if not external_goal_sample_with_prompt:
             assert False

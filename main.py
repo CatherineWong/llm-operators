@@ -79,6 +79,7 @@ parser.add_argument("--initial_plans_prefix", type=str, nargs="+", default=[ALL]
 
 
 # Codex proposal parameters.
+parser.add_argument("--llm_model", type=str, default="gpt-3.5-turbo-16k")
 parser.add_argument("--initial_pddl_predicates", type=str, nargs="+", default=[], help="Which initial PDDL predicates to run with.  Used to seed the Codex proposals.")
 parser.add_argument("--initial_pddl_operators", type=str, nargs="+", help="Which initial PDDL operators to run with.  Used to seed the Codex proposals.")
 parser.add_argument("--operator_propose_minimum_usage", type=int, default=2, help="Minimum number of times an operator must be used to be considered for proposal.")
@@ -265,6 +266,7 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
             external_goal_supervision=args.external_goal_supervision,
             external_goal_sample_with_prompt=args.external_goal_sample_with_prompt,
             split=split,
+            llm_model=args.llm_model
         )
         pddl.preprocess_goals(
             problems=planning_problems[split],
@@ -297,6 +299,7 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
                 debug_skip_propose_operators_after=args.debug_skip_propose_operators_after,
                 debug_skip_propose_plans_after=args.debug_skip_propose_plans_after,
                 verbose=args.verbose,
+                llm_model=args.llm_model
             )
             pddl.preprocess_operators(
                 pddl_domain,
@@ -315,7 +318,8 @@ def run_iteration(args, planning_problems, pddl_domain, supervision_pddl, curr_i
             output_directory=output_directory,
             resume=args.resume,
             verbose=args.verbose,
-            external_code_policies_supervision=args.external_code_policies_supervision
+            external_code_policies_supervision=args.external_code_policies_supervision,
+            llm_model=args.llm_model
         )
         pddl.preprocess_code_policies(
             problems=planning_problems[split],

@@ -27,6 +27,7 @@ def propose_plans_operators_for_problems(
     debug_skip_propose_operators_after=None,
     debug_skip_propose_plans_after=None,
     verbose=False,
+    llm_model=None
 ):
     unsolved_problems, solved_problems = get_solved_unsolved_problems(problems, context='pddl_plan')
     if use_gt:
@@ -51,6 +52,7 @@ def propose_plans_operators_for_problems(
         resume_from_problem_idx=resume_from_problem_idx,
         debug_skip_propose_plans_after=debug_skip_propose_plans_after,
         verbose=verbose,
+        llm_model=llm_model,
     )
     # Condition on: new operator names. Propose: PDDL operator definitions.
     propose_operators_for_problems(
@@ -74,4 +76,5 @@ def propose_plans_operators_for_problems(
         resume_from_problem_idx=resume_from_problem_idx,
         debug_skip_propose_operators_after=debug_skip_propose_operators_after,
         verbose=verbose,
+        llm_model=llm_model,
     )

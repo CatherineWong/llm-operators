@@ -29,6 +29,7 @@ def propose_plans_for_problems(
     resume_from_problem_idx=None,
     debug_skip_propose_plans_after=None,
     verbose=False,
+    llm_model=None
 ):
     """
     Proposes PDDL plans given NL goals.
@@ -85,7 +86,7 @@ def propose_plans_for_problems(
         plan_strings = []
         for _ in range(n_samples):
             codex_prompt = _build_plan_prompt(unsolved_problem, solved_problems, external_plan_supervision, current_domain, max_solved_problem_examples=max_solved_problem_examples)
-            plan_strings.append(get_completions(codex_prompt, temperature=temperature, stop=STOP_TOKEN, n_samples=1)[0])
+            plan_strings.append(get_completions(codex_prompt, temperature=temperature, stop=STOP_TOKEN, n_samples=1, engine=llm_model)[0])
 
         for i, plan_string in enumerate(plan_strings):
             try:
@@ -231,7 +232,8 @@ def propose_code_policies_for_problems(
         output_directory=None,
         verbose=False,
         external_code_policies_supervision=None,
-        command_args=None
+        command_args=None,
+        llm_model=None
 ):
     experiment_name = command_args.experiment_name
     unsolved_problems, solved_problems = get_solved_unsolved_problems(problems, context='pddl_plan')
@@ -248,7 +250,7 @@ def propose_code_policies_for_problems(
 
     for idx, problem in enumerate(unsolved_problems): 
         problem.proposed_code_policies = []
-        codex_prompt, proposed_task_predicate_definitions = _propose_code_policy_definition(domain, solved_problems, problem, n_samples, temperature, external_code_policies_supervision)
+        codex_prompt, proposed_task_predicate_definitions = _propose_code_policy_definition(domain, solved_problems, problem, n_samples, temperature, external_code_policies_supervision, llm_model=llm_model)
         output_json[problem.problem_id] = {
             CODEX_PROMPT: codex_prompt,
             CODEX_OUTPUT: proposed_task_predicate_definitions,
@@ -276,7 +278,7 @@ def mock_propose_code_policies_for_problems(output_filepath, unsolved_problems, 
     )
     return
 
-def _propose_code_policy_definition(domain, solved_problems, problem, n_samples, temperature, external_task_predicates_supervision, max_examples=1):
+def _propose_code_policy_definition(domain, solved_problems, problem, n_samples, temperature, external_task_predicates_supervision, max_examples=1, llm_model=None):
     from num2words import num2words
 
     with open(external_task_predicates_supervision + "system.txt") as f:
@@ -301,6 +303,7 @@ def _propose_code_policy_definition(domain, solved_problems, problem, n_samples,
             temperature=temperature,
             n_samples=n_samples,
             max_tokens=1500,
+            engine=llm_model
         )
         for completion in completions:
             # Parse the tokens out of the completion.

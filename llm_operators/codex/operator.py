@@ -81,6 +81,7 @@ def propose_operators_for_problems(
     resume_from_problem_idx=None,
     debug_skip_propose_operators_after=None,
     verbose=False,
+    llm_model=None
 ):
     if debug_skip_propose_operators_after >= curr_iteration:
         print(f"debug_skip_propose_operators_after after current iteration, skipping: {curr_iteration}")
@@ -139,6 +140,7 @@ def propose_operators_for_problems(
             external_operator_supervision=external_operator_supervision,
             external_operator_sample_with_prompt=external_operator_sample_with_prompt,
             use_cot=use_cot,
+            llm_model=llm_model
         )
         current_domain.proposed_operators[o] += proposed_operator_definitions
         output_json[o] = {
@@ -242,6 +244,7 @@ def _propose_operator_definition_external_supervision(
     verbose=False,
     external_operator_supervision=None,
     external_operator_sample_with_prompt=True,
+    llm_model=None
 ):
     from num2words import num2words
 
@@ -270,6 +273,7 @@ def _propose_operator_definition_external_supervision(
             temperature=temperature,
             n_samples=1,
             max_tokens=1500,
+            engine=llm_model
         )[0]
         if not external_operator_sample_with_prompt:
             assert False
@@ -305,6 +309,7 @@ def _propose_operator_definition(
     external_operator_supervision=None,
     external_operator_sample_with_prompt=True,
     use_cot=True,
+    llm_model=None
 ):
     """
     Proposes an operator definition for a given domain, and optionally with examples of operator usages.
@@ -333,6 +338,7 @@ def _propose_operator_definition(
             verbose=verbose,
             external_operator_supervision=external_operator_supervision,
             external_operator_sample_with_prompt=external_operator_sample_with_prompt,
+            llm_model=llm_model
         )
     else:
         # TBD: save this entire thing as COT operator examples.
@@ -396,6 +402,7 @@ def _propose_operator_definition(
                 temperature=temperature,
                 stop=STOP_TOKEN,
                 n_samples=n_samples,
+                engine=llm_model
             )
             if verbose:
                 print(f"propose_operator_definition:: completion for {operator_name_to_define}")
