@@ -80,6 +80,7 @@ def get_completions(
                 or engine == "gpt-3.5-turbo-16k"
                 or engine == "gpt-4-32k"
                 or engine == "gpt-4"
+                or engine == "gpt-4-1106-preview"
             ):
                 if type(prompt) != list:
                     prompt = [{"role": "user", "content": prompt}]
