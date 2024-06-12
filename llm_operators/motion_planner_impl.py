@@ -1,5 +1,4 @@
 import os
-import alfred.alfredplanner as alfredplanner
 
 from llm_operators.pddl import PDDLPlan
 from llm_operators.experiment_utils import RANDOM_SEED
@@ -16,6 +15,8 @@ def evaluate_alfred_motion_plans_and_costs_for_goal_plan(
     debug_skip=False,
     motionplan_search_type="bfs",
 ):
+    import alfred.alfredplanner as alfredplanner
+
     if verbose:
         print(f"Motion planning for: {problem_id}")
         print(f"Proposed goal is: ")

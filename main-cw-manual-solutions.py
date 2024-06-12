@@ -77,15 +77,41 @@ def main():
     )
     pds_domain = pds.load_domain_string(current_domain_string)
 
+    tot_step_count, tot_problems = 0, 0
+    for planning_problem in planning_problems['train'].values():
+        tot_problems += 1
+        tot_step_count += count_step(planning_problem.ground_truth_primitive_plan)
+    print('Average step count: {}'.format(tot_step_count / tot_problems))
+
     # Baseline 0: LLM(nl_goal) -> pddl_goal; motion_planner(pddl_goal) -> primitive_plan
     # run_brute_force_search(pds_domain, planning_problems['train'])
     # Baseline 1: LLM(nl_goal) -> primitive_plan
     # run_manual_solution_primitive(pds_domain, planning_problems['train'])
-    run_manual_solution_primitive_visualize(pds_domain, planning_problems['train'])
+    # run_manual_solution_primitive_visualize(pds_domain, planning_problems['train'])
     # Baseline 2: LLM(nl_goal) -> subgoal_sequence; motion_planner(subgoal_sequence) -> primitive_plan
     # run_manual_solution_subgoal(pds_domain, planning_problems['train'])
     # Baseline 3 (Voyager): LLM(nl_goal) -> high_level_policy; LLM(high_level_policy) -> low_level_policy
     # run_policy(pds_domain, planning_problems['train'])
+
+
+def compute_distance(i, j):
+    xi, yi = i % 5, i // 5
+    xj, yj = j % 5, j // 5
+    return abs(xi - xj) + abs(yi - yj)
+
+
+def count_step(primitive_sequence):
+    count = 0
+    current_pos = 0
+    for action in primitive_sequence:
+        if action['action'] == 'move_to':
+            target = action['args'][0]
+            count += compute_distance(current_pos, target)
+            print('Move from {} to {} with distance {}'.format(current_pos, target, compute_distance(current_pos, target)))
+            current_pos = target
+        else:
+            count += 1
+    return count
 
 
 def load_state_from_problem(pds_domain, problem_record, pddl_goal=None):

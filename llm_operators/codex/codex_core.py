@@ -33,7 +33,8 @@ def get_completions(
     n_samples: int = 1,
     temperature: float = 0.1,
     max_tokens: int = 256,  # Max tokens for completion only.
-    engine: str = "gpt-3.5-turbo-16k",  # Add gpt-3.5-turbo-16k, gpt-4-32k, etc
+    # engine: str = "gpt-3.5-turbo-16k",  # Add gpt-3.5-turbo-16k, gpt-4-32k, etc
+    engine: str = "gpt-4",  # Add gpt-3.5-turbo-16k, gpt-4-32k, etc
     stop: str = STOP_TOKEN,
     top_p=1,
     logprobs=None,
@@ -80,6 +81,7 @@ def get_completions(
                 or engine == "gpt-3.5-turbo-16k"
                 or engine == "gpt-4-32k"
                 or engine == "gpt-4"
+                or engine == "gpt-4-1106-preview"
             ):
                 if type(prompt) != list:
                     prompt = [{"role": "user", "content": prompt}]

@@ -1,8 +1,5 @@
 from tempfile import NamedTemporaryFile
 
-from pddlgym_planners.fd import FD
-from pddlgym_planners.planner import PlanningFailure, PlanningTimeout
-
 TASK_PLANNER_FD_DEFAULT_TIMEOUT = 10
 TASK_PLANNER_PDSKETCH_ONTHEFLY_DEFAULT_TIMEOUT = 10
 TASK_PLANNER_PDSKETCH_REGRESSION_DEFAULT_TIMEOUT = 10
@@ -24,6 +21,9 @@ def fd_plan_from_strings(domain_str, problem_str, timeout=None, verbose=False):
 def fd_plan_from_file(domain_fname, problem_fname, timeout=None):
     if timeout is None:
         timeout = TASK_PLANNER_FD_DEFAULT_TIMEOUT
+
+    from pddlgym_planners.fd import FD
+    from pddlgym_planners.planner import PlanningFailure, PlanningTimeout
 
     # TBD: don't use PDDL gym planner, use original FD.
     fd_planner = FD(alias_flag='--alias "lama-first"')

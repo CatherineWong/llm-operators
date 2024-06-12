@@ -122,13 +122,18 @@ def main():
 
     nr_total = 0
     nr_succ = 0
+    nr_total_low_level_length = 0
     for i in range(23):
         record = problem_func(f'test-{i}', 'train', goal_index=i)
-        succ = plan(executor, record)
+        succ, stats = plan(executor, record)
         nr_total += 1
         nr_succ += int(succ)
 
+        if succ:
+            nr_total_low_level_length += stats['low-level-length']
+
     print(f'Success rate: {nr_succ} / {nr_total} = {nr_succ / nr_total}')
+    print(f'Average low-level length: {nr_total_low_level_length / nr_succ}')
 
 
 def plan(executor, record):
@@ -144,7 +149,7 @@ def plan(executor, record):
 
     if len(rv) == 0:
         print(f'!!!No plan found for goal {goal}.')
-        return False
+        return False, {}
 
     table = list()
     plan = rv[0][0]
@@ -154,7 +159,27 @@ def plan(executor, record):
     table.append(('time', f'{time.time() - start_time:.3f}s'))
     table.extend(stat.items())
     print(jacinle.tabulate(table, tablefmt='simple'))
-    return True
+
+    stats = {'high-level-length': len(plan), 'low-level-length': compute_low_level_plan_length(rv[0][0])}
+    return True, stats
+
+
+def compute_distance(i, j):
+    xi, yi = i % 5, i // 5
+    xj, yj = j % 5, j // 5
+    return abs(xi - xj) + abs(yi - yj)
+
+
+def compute_low_level_plan_length(plan):
+    length = 0
+    for action in plan:
+        if action.name == 'move-to':
+            current_pos = int(action.arguments[0][1:]) - 1
+            target_pos = int(action.arguments[1][1:]) - 1
+            length += compute_distance(current_pos, target_pos)
+        else:
+            length += 1
+    return length
 
 
 CW_BASE_REGRESSION_RULES = r"""

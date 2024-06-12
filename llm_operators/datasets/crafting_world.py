@@ -101,7 +101,7 @@ CRAFTING_WORLD_20230829_DATASET_NAME = 'crafting_world_20230829_crafting_only'
 
 @register_planning_domain_problems(CRAFTING_WORLD_20230829_DATASET_NAME)
 def load_crafting_world_20230829_crafting_only(dataset_pddl_directory: str, dataset_fraction: float, verbose=False):
-    from llm_operators.datasets.crafting_world_gen.cw_20230913_mixed import problem_from_raw_record
+    from llm_operators.datasets.crafting_world_gen.cw_20230829_crafting_only import problem_from_raw_record
 
     with open(osp.join(dataset_pddl_directory, 'dataset.json')) as f:
         dataset = json.load(f)
